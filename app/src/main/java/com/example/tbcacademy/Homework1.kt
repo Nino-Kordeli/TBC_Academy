@@ -1,16 +1,30 @@
 package com.example.tbcacademy
 
 fun main() {
+    println("-USG & USJ-")
     println(usg(12, 24))
-    println(usj(125, 5))
     println(usg(114, 12))
+    println(usj(125, 5))
     println(usj(468, 22))
+    println()
 
+    println("-Symbol Checker-")
     containsSymbol("hii$")
     containsSymbol("Hello")
+    println()
 
+    println("-Sum of Even Numbers-")
     println("Sum of even numbers is ${sumOfEvenNums()}")
+    println()
 
+    println("-Number Reverser-")
+    println(reverseNumber(1200))
+    println(reverseNumber(7584900))
+    println()
+
+    println("-Palindrome Checker-")
+    println(isPalindrome("Racecar"))
+    println(isPalindrome("Cake"))
 }
 
 fun usg(firstNum: Int, secondNum: Int): Int {
@@ -50,7 +64,7 @@ fun containsSymbol(word: String) {
     }
 }
 
-fun sumOfEvenNums():Int {
+fun sumOfEvenNums(): Int {
     var sum = 0
     for (i in 1..100) {
         if (i % 2 == 0) {
@@ -60,3 +74,24 @@ fun sumOfEvenNums():Int {
     return sum
 }
 
+fun reverseNumber(number: Int): Int {
+    var num = number
+    var reversedNum = 0
+    var remainderDigit: Int
+    while (num != 0) {
+        remainderDigit = num % 10
+        reversedNum = reversedNum * 10 + remainderDigit
+        num /= 10
+    }
+    return reversedNum
+}
+
+fun isPalindrome(word: String): String {
+    val lowerCaseWord = word.lowercase()
+    val length = lowerCaseWord.length
+    for (i in 0 until length / 2) {
+        if (lowerCaseWord[i] != lowerCaseWord[length - 1 - i])
+            return "\"$word\" is not a palindrome"
+    }
+    return "\"$word\" is a palindrome"
+}
