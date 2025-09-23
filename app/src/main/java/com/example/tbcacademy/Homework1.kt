@@ -5,22 +5,20 @@ fun main() {
     println(usg(12, 24))
     println(usg(114, 12))
     println(usj(125, 5))
-    println(usj(468, 22))
-    println()
+    println("${usj(468, 22)}\n")
+
 
     println("-Symbol Checker-")
-    println(containsSymbol("hii$"))
-    println(containsSymbol("Hello"))
-    println()
+    println(containsDollarSymbol("hii$"))
+    println("${containsDollarSymbol("Hello")}\n")
 
     println("-Sum of Even Numbers-")
-    println("Sum of even numbers is ${sumOfEvenNums()}")
-    println()
+    println("${sumEvenNums(100)}\n")
 
     println("-Number Reverser-")
     println(reverseNumber(1200))
-    println(reverseNumber(7584900))
-    println()
+    println("${reverseNumber(7584900)}\n")
+
 
     println("-Palindrome Checker-")
     println(isPalindrome("Racecar"))
@@ -45,7 +43,7 @@ fun usj(firstNum: Int, secondNum: Int): Int {
     return usj
 }
 
-fun containsSymbol(word: String): String {
+fun containsDollarSymbol(word: String): String {
     val symbol = '$'
     var found = false
     for (i in word) {
@@ -54,21 +52,20 @@ fun containsSymbol(word: String): String {
             break
         }
     }
-    if (found) {
-        return "The word \"$word\" contains the symbol $symbol"
+    return if (found) {
+        "The word \"$word\" contains the symbol $symbol"
     } else {
-        return "The word \"$word\" does not contain the symbol $symbol"
+        "The word \"$word\" does not contain the symbol $symbol"
     }
 }
 
-fun sumOfEvenNums(): Int {
-    var sum = 0
-    for (i in 1..100) {
-        if (i % 2 == 0) {
-            sum += i
-        }
+fun sumEvenNums(num: Int): Int {
+    if (num <= 0) return 0
+    return if (num % 2 == 0) {
+        num + sumEvenNums(num - 2)// roca num luwia vaxtebit orit
+    } else {
+        sumEvenNums(num - 1)
     }
-    return sum
 }
 
 fun reverseNumber(number: Int): Int {
