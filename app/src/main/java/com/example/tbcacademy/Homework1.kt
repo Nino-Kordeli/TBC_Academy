@@ -64,7 +64,7 @@ fun sumEvenNums(num: Int): Int {
     return if (num % 2 == 0) {
         num + sumEvenNums(num - 2)// roca num luwia vaxtebit orit
     } else {
-        sumEvenNums(num - 1)
+        sumEvenNums(num - 1)//es kenti ertit
     }
 }
 
@@ -75,7 +75,7 @@ fun reverseNumber(number: Int): Int {
     while (num != 0) {
         remainderDigit = num % 10
         reversedNum = reversedNum * 10 + remainderDigit
-        num /= 10
+        num /= 10//sheyvanil ricxvs vachrit bolo cifrs
     }
     return reversedNum
 }
