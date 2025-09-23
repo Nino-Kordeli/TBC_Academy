@@ -9,8 +9,8 @@ fun main() {
     println()
 
     println("-Symbol Checker-")
-    containsSymbol("hii$")
-    containsSymbol("Hello")
+    println(containsSymbol("hii$"))
+    println(containsSymbol("Hello"))
     println()
 
     println("-Sum of Even Numbers-")
@@ -30,10 +30,9 @@ fun main() {
 fun usg(firstNum: Int, secondNum: Int): Int {
     var a = firstNum
     var b = secondNum
-    var remainder: Int
     if (a == 0 && b == 0) return 0
     while (b != 0) {
-        remainder = a % b
+        val remainder = a % b
         a = b
         b = remainder
     }
@@ -41,14 +40,12 @@ fun usg(firstNum: Int, secondNum: Int): Int {
 }
 
 fun usj(firstNum: Int, secondNum: Int): Int {
-    val a = firstNum
-    val b = secondNum
-    if (a == 0 || b == 0) return 0
-    val usj = (a * b) / usg(a, b)
+    if (firstNum == 0 || secondNum == 0) return 0
+    val usj = (firstNum * secondNum) / usg(firstNum, secondNum)
     return usj
 }
 
-fun containsSymbol(word: String) {
+fun containsSymbol(word: String): String {
     val symbol = '$'
     var found = false
     for (i in word) {
@@ -58,9 +55,9 @@ fun containsSymbol(word: String) {
         }
     }
     if (found) {
-        println("The word $word contains the symbol $")
+        return "The word \"$word\" contains the symbol $symbol"
     } else {
-        println("The word $word does not contain the symbol $")
+        return "The word \"$word\" does not contain the symbol $symbol"
     }
 }
 
