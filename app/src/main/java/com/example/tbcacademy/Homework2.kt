@@ -8,10 +8,19 @@ fun main() {
     println("Enter operation type")
     val operation = readln()
 
-    var numbersOnly = ""
+
+    var numbersOnly1 = ""
+    var numbersOnly2 = ""
     for (i in x) {
         if (i.isDigit()) {
-            numbersOnly += i
+            numbersOnly1 += i
         }
     }
+    println(numbersOnly1)
+    for (j in y) {
+        if (j.isDigit()) {
+            numbersOnly2 += j
+        }
+    }
+    println(numbersOnly2)
 }
