@@ -23,4 +23,25 @@ fun main() {
         }
     }
     println(numbersOnly2)
+
+    val num1 = numbersOnly1.toInt()
+    val num2 = numbersOnly2.toInt()
+
+    var result = 0
+    when (operation) {
+        "+" -> result = num1 + num2
+        "/" -> result = num1 / num2
+        "*" -> result = num1 * num2
+        "%" -> result = num1 % num2
+        "!" -> result = factorial(num1 / num2)
+
+    }
+}
+
+fun factorial(n: Int): Int {
+    var factor = 1
+    for (i in 1..n) {
+        factor *= i
+    }
+    return factor
 }
