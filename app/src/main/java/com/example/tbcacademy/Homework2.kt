@@ -26,6 +26,7 @@ fun main() {
 
     val num1 = numbersOnly1.toInt()
     val num2 = numbersOnly2.toInt()
+    val division = num1 / num2
 
     var result = 0
     when (operation) {
@@ -33,9 +34,10 @@ fun main() {
         "/" -> result = num1 / num2
         "*" -> result = num1 * num2
         "%" -> result = num1 % num2
-        "!" -> result = factorial(num1 / num2)
-
+        "!" -> result = factorial(division)
+        else -> println("")
     }
+    println(result)
 }
 
 fun factorial(n: Int): Int {
