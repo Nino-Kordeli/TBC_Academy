@@ -17,13 +17,15 @@ fun main() {
                 numbersOnly1 += i
             }
         }
+        if (numbersOnly1.isEmpty()) numbersOnly1 = (-127..129).random().toString()
         println("First number: $numbersOnly1")
         for (j in y) {
             if (j.isDigit()) {
                 numbersOnly2 += j
             }
         }
-        println("Second number: ${numbersOnly2}")
+        if (numbersOnly2.isEmpty()) numbersOnly2 = (-127..129).random().toString()
+        println("Second number: $numbersOnly2")
 
         val num1 = numbersOnly1.toInt()
         val num2 = numbersOnly2.toInt()
@@ -40,14 +42,14 @@ fun main() {
                 "Factorial of $num1 and $num2 division is ${factorial(division)}"
             }
 
-            else -> "Invalid Operator"
+            else -> "Invalid operator"
         }
         println(result)
         println("Do you want to restart the program <Y/N>?")
         val userInput = readln()
         programStart = userInput.equals("Y", ignoreCase = true)
     }
-    println("Program Terminated")
+    println("Program terminated")
 }
 
 fun factorial(n: Int): Int {
