@@ -1,11 +1,11 @@
 package com.example.tbcacademy
 
 fun main() {
-    println("Enter the first sequence")
+    println("Enter the first sequence: ")
     val x = readln()
-    println("Enter the second sequence")
+    println("Enter the second sequence: ")
     val y = readln()
-    println("Enter operation type")
+    println("Enter operation type: ")
     val operation = readln()
 
 
@@ -16,26 +16,30 @@ fun main() {
             numbersOnly1 += i
         }
     }
-    println(numbersOnly1)
+    println("First number: $numbersOnly1")
     for (j in y) {
         if (j.isDigit()) {
             numbersOnly2 += j
         }
     }
-    println(numbersOnly2)
+    println("Second number: ${numbersOnly2}")
 
     val num1 = numbersOnly1.toInt()
     val num2 = numbersOnly2.toInt()
-    val division = num1 / num2
 
-    var result = 0
-    when (operation) {
-        "+" -> result = num1 + num2
-        "/" -> result = num1 / num2
-        "*" -> result = num1 * num2
-        "%" -> result = num1 % num2
-        "!" -> result = factorial(division)
-        else -> println("")
+    val result = when (operation) {
+        "+" -> "The sum of $num1 and $num2 is ${num1 + num2}"
+        "/" -> if (num2 == 0) "Can not divide by zero" else "$num1 divided by $num2 is ${num1 / num2}"
+        "*" -> "$num1 multiplied by $num2 is ${num1 * num2}"
+        "%" -> "After division of $num1 and $num2 the remainder is ${num1 % num2}"
+        "!" -> if (num2 == 0) {
+            "Can not divide by zero"
+        } else {
+            val division = num1 / num2
+            "Factorial of $num1 and $num2 division is ${factorial(division)}"
+        }
+
+        else -> "Invalid Operator"
     }
     println(result)
 }
