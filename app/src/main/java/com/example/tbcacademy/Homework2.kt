@@ -32,6 +32,7 @@ fun main() {
 
         val result = when (operation) {
             "+" -> "The sum of $num1 and $num2 is ${num1 + num2}"
+            "-" -> "$num1 minus $num2 is ${num1 - num2} "
             "/" -> if (num2 == 0) "Can not divide by zero" else "$num1 divided by $num2 is ${num1.toDouble() / num2.toDouble()}"
             "*" -> "$num1 multiplied by $num2 is ${num1 * num2}"
             "%" -> "After division of $num1 and $num2 the remainder is ${num1 % num2}"
@@ -52,8 +53,10 @@ fun main() {
     println("Program terminated")
 }
 
-fun factorial(n: Int): Int {
-    var factor = 1
+fun factorial(n: Int): Long {
+    require(n > 0) { "Can't compute factorial of a negative number" }
+    require(n <= 20) { "Factorial is too large" }
+    var factor = 1L
     for (i in 1..n) {
         factor *= i
     }
