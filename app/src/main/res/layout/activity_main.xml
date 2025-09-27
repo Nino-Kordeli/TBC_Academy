@@ -5,16 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beige"
+    android:background="@color/lightPink"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:text="@string/numbers_to_words"
-        android:textColor="@color/darkBrown"
+        android:textColor="@color/darkRed"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:gravity="center"
-        android:textColor="@color/darkBrown"
+        android:textColor="@color/darkRed"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/button"
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/english_georgian"
-        android:textColor="@color/darkBrown"
+        android:textColor="#4E3739"
         app:layout_constraintBottom_toBottomOf="@id/languageSwitch"
         app:layout_constraintEnd_toStartOf="@id/languageSwitch"
         app:layout_constraintTop_toTopOf="@id/languageSwitch" />
