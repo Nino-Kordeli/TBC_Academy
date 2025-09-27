@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TBC Academy</string>
+    <string name="enter_your_number">Enter your number</string>
+    <string name="calculate">Calculate</string>
+    <string name="english_georgian">English/Georgian</string>
+    <string name="numbers_to_words">Numbers To Words</string>
 </resources>

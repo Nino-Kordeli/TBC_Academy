@@ -5,15 +5,77 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/beige"
     tools:context=".MainActivity">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="100dp"
+        android:text="@string/numbers_to_words"
+        android:textColor="@color/darkBrown"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/textInput"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/rounded_corners"
+        android:hint="@string/enter_your_number"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleText" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="160dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/button_design"
+        android:text="@string/calculate"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@id/textInput"
+        app:layout_constraintStart_toStartOf="@id/textInput"
+        app:layout_constraintTop_toBottomOf="@id/textInput" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:gravity="center"
+        android:textColor="@color/darkBrown"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/button"
+        app:layout_constraintStart_toStartOf="@id/button"
+        app:layout_constraintTop_toBottomOf="@id/button"
+        tools:text="five hundred twenty seven" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/languageSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/languageSwitchText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/english_georgian"
+        android:textColor="@color/darkBrown"
+        app:layout_constraintBottom_toBottomOf="@id/languageSwitch"
+        app:layout_constraintEnd_toStartOf="@id/languageSwitch"
+        app:layout_constraintTop_toTopOf="@id/languageSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
