@@ -126,15 +126,15 @@ fun numbersToWordsGeorgian(number: Int): String {
             "ცხრაასი"
         )
 
-    val hundredDigit = number / 100
-    val lastTwoDigits = number % 100
-    val tenDigits = lastTwoDigits / 10
-    val singleDigit = number % 10
+    val firstDigit = number / 100 //300 - - - 3
+    val lastTwoDigits = number % 100 //345 --- 45
+    val secondDigit = lastTwoDigits / 10 //345 --- 4
+    val lastDigit = number % 10 //345 ---5
 
     val strBuilder = StringBuilder()
 
-    if (hundredDigit > 0) {
-        var hundredWord = hundreds[hundredDigit]
+    if (firstDigit > 0) {
+        var hundredWord = hundreds[firstDigit]
         if (lastTwoDigits > 0) hundredWord = hundredWord.dropLast(1)
         strBuilder.append(hundredWord)
         strBuilder.append(" ")
@@ -144,30 +144,30 @@ fun numbersToWordsGeorgian(number: Int): String {
         strBuilder.append(tensWithSingles[lastTwoDigits - 10])
         strBuilder.append(" ")
     } else {
-        if (tenDigits > 0) {
-            var tensWord = tensOnly[tenDigits]
-            if (singleDigit > 0) {
+        if (secondDigit > 0) {
+            var tensWord = tensOnly[secondDigit]
+            if (lastDigit > 0) {
                 tensWord = when {
                     tensWord.endsWith("ათი") -> tensWord.dropLast(3)
                     tensWord.endsWith("ი") -> tensWord.dropLast(1)
                     else -> tensWord
                 }
-                if (tenDigits % 2 == 0) tensWord += "და"
+                if (secondDigit % 2 == 0) tensWord += "და"
                 strBuilder.append(tensWord)
                 strBuilder.append(" ")
-                if (tenDigits in arrayOf(3, 5, 7, 9) && singleDigit in 1..9) {
-                    strBuilder.append(tensWithSingles[singleDigit])
+                if (secondDigit in arrayOf(3, 5, 7, 9) && lastDigit in 1..9) {
+                    strBuilder.append(tensWithSingles[lastDigit])
                     strBuilder.append(" ")
                 } else {
-                    strBuilder.append(singleDigits[singleDigit])
+                    strBuilder.append(singleDigits[lastDigit])
                     strBuilder.append(" ")
                 }
             } else {
                 strBuilder.append(tensWord)
             }
         } else {
-            if (singleDigit > 0)
-                strBuilder.append(singleDigits[singleDigit])
+            if (lastDigit > 0)
+                strBuilder.append(singleDigits[lastDigit])
             strBuilder.append(" ")
         }
     }
