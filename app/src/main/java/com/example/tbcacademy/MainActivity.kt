@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -21,25 +22,44 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val languageSwitch: SwitchCompat = findViewById(R.id.languageSwitch)
+        val titleText: TextView = findViewById(R.id.titleText)
         val button: Button = findViewById(R.id.buttonCalculate)
         val textInput: EditText = findViewById(R.id.textInput)
         val textResult: TextView = findViewById(R.id.resultText)
 
+        languageSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                titleText.text = "Enter a number"
+            } else {
+                titleText.text = "შეიყვანეთ რიცხვი"
+            }
+        }
+
         button.setOnClickListener {
             val userInput = textInput.text.toString().trim()
+            val isEnglish = languageSwitch.isChecked
 
             if (userInput.isEmpty()) {
-                textResult.text = "გთხოვთ შეიყვანოთ რიცხვითი მნიშვნელობა"
+                textResult.text =
+                    if (isEnglish) "Please ender a valid number"
+                    else "გთხოვთ შეიყვანოთ ვალიდური რიცხვითი მნიშვნელობა"
             } else if (userInput.all { it.isDigit() }) {
                 val number = userInput.toInt()
                 if (number in 0..1000) {
-                    val words = numbersToWordsGeorgian(number)
+                    val words =
+                        if (isEnglish) numbersToWordsEnglish(number)
+                        else numbersToWordsGeorgian(number)
                     textResult.text = words
                 } else {
-                    textResult.text = "შეიყვანეთ რიცხვი 0-დან 1000-მდე"
+                    textResult.text =
+                        if (isEnglish) "Enter a number from 0 to 1000 "
+                        else "შეიყვანეთ რიცხვი 0-დან 1000-მდე"
                 }
             } else {
-                textResult.text = "გთხოვთ შეიყვანოთ მხოლოდ რიცხვითი მნიშვნელობა"
+                textResult.text = if (isEnglish) "Please enter only numbers"
+                else "გთხოვთ შეიყვანოთ მხოლოდ რიცხვითი მნიშვნელობა"
 
             }
         }
@@ -174,7 +194,7 @@ fun numbersToWordsEnglish(number: Int): String {
             "eight",
             "nine"
         )
-    val tensWithSingles =
+    val tensWithSinglesEN =
         arrayOf(
             "",
             "eleven",
@@ -200,16 +220,11 @@ fun numbersToWordsEnglish(number: Int): String {
             "eighty",
             "ninety"
         )
-    val hundredEn =
-        arrayOf(
-            "",
-            "hundred"
-        )
 
     val hundredDigitEN = number / 100
     val lastTwoDigitsEN = number % 100
     val tenDigitsEN = (number % 100) / 10
-    val singleDigitEn = number % 10
+    val singleDigitEN = number % 10
 
     val strBuilderEN = StringBuilder()
 
@@ -220,7 +235,15 @@ fun numbersToWordsEnglish(number: Int): String {
     }
 
     if (lastTwoDigitsEN in 10..19) {
-
+        strBuilderEN.append(tensWithSinglesEN[lastTwoDigitsEN - 11])
+    } else {
+        if (tenDigitsEN > 1) {
+            strBuilderEN.append(tensEN[tenDigitsEN])
+            if (singleDigitEN > 0) strBuilderEN.append(" ")
+        }
+        if (singleDigitEN > 0) {
+            strBuilderEN.append(singleDigitsEN[singleDigitEN])
+        }
     }
-
+    return strBuilderEN.toString()
 }
