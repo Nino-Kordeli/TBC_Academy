@@ -1,5 +1,6 @@
 package com.example.tbcacademy
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -10,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,13 +26,21 @@ class MainActivity : AppCompatActivity() {
         val textResult: TextView = findViewById(R.id.resultText)
 
         button.setOnClickListener {
-            val userInput = textInput.text.toString()
-            if (userInput.isNotEmpty()) {
-                val number = userInput.toInt()
-                val words = numbersToWordsGeorgian(number)
-                textResult.text = words
-            } else {
+            val userInput = textInput.text.toString().trim()
+
+            if (userInput.isEmpty()) {
                 textResult.text = "გთხოვთ შეიყვანოთ რიცხვითი მნიშვნელობა"
+            } else if (userInput.all { it.isDigit() }) {
+                val number = userInput.toInt()
+                if (number in 0..1000) {
+                    val words = numbersToWordsGeorgian(number)
+                    textResult.text = words
+                } else {
+                    textResult.text = "შეიყვანეთ რიცხვი 0-დან 1000-მდე"
+                }
+            } else {
+                textResult.text = "გთხოვთ შეიყვანოთ მხოლოდ რიცხვითი მნიშვნელობა"
+
             }
         }
     }
@@ -91,9 +101,66 @@ fun numbersToWordsGeorgian(number: Int): String {
             "ექვსასი",
             "შვიდასი",
             "რვაასი",
-            "ცხრაასი,"
-
+            "ცხრაასი"
         )
 
+    val hundredDigit = number / 100
+    val lastTwoDigits = number % 100
+    val tenDigits = (number % 100) / 10
+    val singleDigit = number % 10
 
+    val strBuilder = StringBuilder()
+
+
+    if (hundredDigit > 0) {
+        var hundredWord = hundreds[hundredDigit]
+        if (lastTwoDigits > 0) hundredWord = hundredWord.dropLast(1)
+        strBuilder.append(hundredWord)
+        strBuilder.append(" ")
+    }
+
+
+    if (lastTwoDigits in 11..19) {
+        strBuilder.append(tensWithSingles[lastTwoDigits - 10])
+        strBuilder.append(" ")
+    } else {
+        if (tenDigits > 0) {
+            var tensWord = tensOnly[tenDigits]
+            if (singleDigit > 0) {
+                tensWord = when {
+                    tensWord.endsWith("ათი") -> tensWord.dropLast(3)
+                    tensWord.endsWith("ი") -> tensWord.dropLast(1)
+                    else -> tensWord
+                }
+                if (tenDigits % 2 == 0) tensWord += "და"
+                strBuilder.append(tensWord)
+                strBuilder.append(" ")
+
+                if (tenDigits in arrayOf(3, 5, 7, 9) && singleDigit in 1..9) {
+                    strBuilder.append(tensWithSingles[singleDigit])
+                    strBuilder.append(" ")
+                } else {
+                    strBuilder.append(singleDigits[singleDigit])
+                    strBuilder.append(" ")
+                }
+            } else {
+                strBuilder.append(tensWord)
+            }
+        } else {
+            if (singleDigit > 0)
+                strBuilder.append(singleDigits[singleDigit])
+            strBuilder.append(" ")
+
+        }
+    }
+
+    return strBuilder.toString()
+}
+
+fun numbersToWordsEnglish(number: Int): String {
+    if (number == 0) return "Zero"
+    if (number == 1000) return "Thousand"
+
+    val singleDigitsEN =
+        arrayOf()
 }
