@@ -126,18 +126,18 @@ fun numbersToWordsGeorgian(number: Int): String {
             "ცხრაასი"
         )
 
-    val firstDigit = number / 100 //300 - - - 3
+    val firstDigit = number / 100 //345 --- 3
     val lastTwoDigits = number % 100 //345 --- 45
     val secondDigit = lastTwoDigits / 10 //345 --- 4
-    val lastDigit = number % 10 //345 ---5
+    val lastDigit = number % 10 //345 --- 5
 
     val strBuilder = StringBuilder()
 
-    if (firstDigit > 0) {
+    if (firstDigit > 0) { //ესეიგი სამ ციფრიანია
         var hundredWord = hundreds[firstDigit]
-        if (lastTwoDigits > 0) hundredWord = hundredWord.dropLast(1)
+        if (lastTwoDigits > 0) hundredWord = hundredWord.dropLast(1)//ასეულს ვაჭრით ბოლო ასოს
         strBuilder.append(hundredWord)
-        strBuilder.append(" ")
+        strBuilder.append(" ")//ვუმატებთ ბოლოში გამოტოვებას
     }
 
     if (lastTwoDigits in 11..19) {
@@ -145,29 +145,29 @@ fun numbersToWordsGeorgian(number: Int): String {
         strBuilder.append(" ")
     } else {
         if (secondDigit > 0) {
-            var tensWord = tensOnly[secondDigit]
-            if (lastDigit > 0) {
+            var tensWord = tensOnly[secondDigit]//ვიღებთ ათეულებს
+            if (lastDigit > 0) {//თუ არ ბოლოვდება ნულით
                 tensWord = when {
-                    tensWord.endsWith("ათი") -> tensWord.dropLast(3)
-                    tensWord.endsWith("ი") -> tensWord.dropLast(1)
+                    tensWord.endsWith("ათი") -> tensWord.dropLast(3)//ვაკლებთ "ათი" - ს
+                    tensWord.endsWith("ი") -> tensWord.dropLast(1)//ვაკლებთ "ი" - ს
                     else -> tensWord
                 }
-                if (secondDigit % 2 == 0) tensWord += "და"
+                if (secondDigit % 2 == 0) tensWord += "და" //
                 strBuilder.append(tensWord)
                 strBuilder.append(" ")
                 if (secondDigit in arrayOf(3, 5, 7, 9) && lastDigit in 1..9) {
                     strBuilder.append(tensWithSingles[lastDigit])
                     strBuilder.append(" ")
                 } else {
-                    strBuilder.append(singleDigits[lastDigit])
+                    strBuilder.append(singleDigits[lastDigit])//არამხოლოდ ათეულები --- 47
                     strBuilder.append(" ")
                 }
             } else {
-                strBuilder.append(tensWord)
+                strBuilder.append(tensWord)//მხოლოდ ათეულები
             }
         } else {
             if (lastDigit > 0)
-                strBuilder.append(singleDigits[lastDigit])
+                strBuilder.append(singleDigits[lastDigit])//მხოლოდ ერთეულები
             strBuilder.append(" ")
         }
     }
@@ -218,28 +218,28 @@ fun numbersToWordsEnglish(number: Int): String {
             "ninety"
         )
 
-    val hundredDigitEN = number / 100
-    val lastTwoDigitsEN = number % 100
-    val tenDigitsEN = (number % 100) / 10
-    val singleDigitEN = number % 10
+    val firstDigitEN = number / 100 // 345 --- 3
+    val lastTwoDigitsEN = number % 100 //345 --- 45
+    val secondDigitEN = (number % 100) / 10 // 345 --- 4
+    val lastDigitEN = number % 10 // 345 --- 5
 
     val strBuilderEN = StringBuilder()
 
-    if (hundredDigitEN > 0) {
-        strBuilderEN.append(singleDigitsEN[hundredDigitEN])
+    if (firstDigitEN > 0) {
+        strBuilderEN.append(singleDigitsEN[firstDigitEN])//ვამატებთ ერთეულ სიტყვას "one","two"..
         strBuilderEN.append(" hundred")
-        if (lastTwoDigitsEN > 0) strBuilderEN.append(" ")
+        if (lastTwoDigitsEN > 0) strBuilderEN.append(" ")//ვამატებთ გამოტოვებას
     }
 
     if (lastTwoDigitsEN in 10..19) {
-        strBuilderEN.append(tensWithSinglesEN[lastTwoDigitsEN - 10])
-    } else {
-        if (tenDigitsEN > 1) {
-            strBuilderEN.append(tensEN[tenDigitsEN])
-            if (singleDigitEN > 0) strBuilderEN.append(" ")
+        strBuilderEN.append(tensWithSinglesEN[lastTwoDigitsEN - 10])//ვამატებთ 11-19 რიცხვებს
+    } else {//მხოლოდ 20-99
+        if (secondDigitEN > 1) {//მხოლოდ ორი და მეტი ათეული
+            strBuilderEN.append(tensEN[secondDigitEN])
+            if (lastDigitEN > 0) strBuilderEN.append(" ")//თუ არ ბოლოვდება ნულით ვყოფთ ადგილს
         }
-        if (singleDigitEN > 0) {
-            strBuilderEN.append(singleDigitsEN[singleDigitEN])
+        if (lastDigitEN > 0) {
+            strBuilderEN.append(singleDigitsEN[lastDigitEN])
         }
     }
     return strBuilderEN.toString()
