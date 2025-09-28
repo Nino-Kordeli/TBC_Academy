@@ -32,8 +32,10 @@ class MainActivity : AppCompatActivity() {
         languageSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 titleText.text = "Enter a number"
+                button.text = "Calculate"
             } else {
                 titleText.text = "შეიყვანეთ რიცხვი"
+                button.text = "გამოთვლა"
             }
         }
 
@@ -126,11 +128,10 @@ fun numbersToWordsGeorgian(number: Int): String {
 
     val hundredDigit = number / 100
     val lastTwoDigits = number % 100
-    val tenDigits = (number % 100) / 10
+    val tenDigits = lastTwoDigits / 10
     val singleDigit = number % 10
 
     val strBuilder = StringBuilder()
-
 
     if (hundredDigit > 0) {
         var hundredWord = hundreds[hundredDigit]
@@ -138,7 +139,6 @@ fun numbersToWordsGeorgian(number: Int): String {
         strBuilder.append(hundredWord)
         strBuilder.append(" ")
     }
-
 
     if (lastTwoDigits in 11..19) {
         strBuilder.append(tensWithSingles[lastTwoDigits - 10])
@@ -155,7 +155,6 @@ fun numbersToWordsGeorgian(number: Int): String {
                 if (tenDigits % 2 == 0) tensWord += "და"
                 strBuilder.append(tensWord)
                 strBuilder.append(" ")
-
                 if (tenDigits in arrayOf(3, 5, 7, 9) && singleDigit in 1..9) {
                     strBuilder.append(tensWithSingles[singleDigit])
                     strBuilder.append(" ")
@@ -170,10 +169,8 @@ fun numbersToWordsGeorgian(number: Int): String {
             if (singleDigit > 0)
                 strBuilder.append(singleDigits[singleDigit])
             strBuilder.append(" ")
-
         }
     }
-
     return strBuilder.toString()
 }
 
@@ -235,7 +232,7 @@ fun numbersToWordsEnglish(number: Int): String {
     }
 
     if (lastTwoDigitsEN in 10..19) {
-        strBuilderEN.append(tensWithSinglesEN[lastTwoDigitsEN - 11])
+        strBuilderEN.append(tensWithSinglesEN[lastTwoDigitsEN - 10])
     } else {
         if (tenDigitsEN > 1) {
             strBuilderEN.append(tensEN[tenDigitsEN])
