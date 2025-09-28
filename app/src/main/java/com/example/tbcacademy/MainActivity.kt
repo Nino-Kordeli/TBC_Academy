@@ -162,5 +162,65 @@ fun numbersToWordsEnglish(number: Int): String {
     if (number == 1000) return "Thousand"
 
     val singleDigitsEN =
-        arrayOf()
+        arrayOf(
+            "",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine"
+        )
+    val tensWithSingles =
+        arrayOf(
+            "",
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen"
+        )
+    val tensEN =
+        arrayOf(
+            "",
+            "ten",
+            "twenty",
+            "thirty",
+            "forty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety"
+        )
+    val hundredEn =
+        arrayOf(
+            "",
+            "hundred"
+        )
+
+    val hundredDigitEN = number / 100
+    val lastTwoDigitsEN = number % 100
+    val tenDigitsEN = (number % 100) / 10
+    val singleDigitEn = number % 10
+
+    val strBuilderEN = StringBuilder()
+
+    if (hundredDigitEN > 0) {
+        strBuilderEN.append(singleDigitsEN[hundredDigitEN])
+        strBuilderEN.append(" hundred")
+        if (lastTwoDigitsEN > 0) strBuilderEN.append(" ")
+    }
+
+    if (lastTwoDigitsEN in 10..19) {
+
+    }
+
 }
