@@ -184,7 +184,7 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/rounded_corners"
             android:clipToOutline="true"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/default_image"
             app:layout_constraintEnd_toEndOf="@id/profileInfoText"
             app:layout_constraintStart_toStartOf="@id/profileInfoText"
             app:layout_constraintTop_toBottomOf="@id/profileInfoText" />
@@ -200,7 +200,7 @@
             app:layout_constraintEnd_toEndOf="@id/userIcon"
             app:layout_constraintStart_toStartOf="@id/userIcon"
             app:layout_constraintTop_toBottomOf="@id/userNameResult"
-            tools:text="Nino Kordeli" />
+            tools:text="name lastname" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/userNameResult"
@@ -218,7 +218,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@id/userIcon"
             app:layout_constraintStart_toStartOf="@id/userIcon"
@@ -230,7 +230,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="@id/nameResult"
             app:layout_constraintStart_toStartOf="@id/nameResult"

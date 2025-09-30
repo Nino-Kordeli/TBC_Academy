@@ -1,6 +1,7 @@
 package com.example.tbcacademy
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             isUsernameValid()
             isEmailValid()
             isAgeValid()
+            printUserCredentials()
         }
         binding.clearButton.setOnLongClickListener {
             clearAllFields()
@@ -92,14 +94,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun isEmailValid(): Boolean {
         val email = binding.emailField.text
-        var found = false
-
-        email?.forEach { char ->
-            if (char == '@') {
-                found = true
-            }
-        }
-        return if (!found) {
+        return if ((!Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
             Toast.makeText(this@MainActivity, "Invalid Email", Toast.LENGTH_SHORT).show()
             false
         } else true
@@ -119,5 +114,17 @@ class MainActivity : AppCompatActivity() {
     private fun clearAllFields() = with(binding) {
         listOf(emailField, usernameField, firstNameField, lastNameField, ageField)
             .forEach { it.text?.clear() }
+    }
+
+    private fun printUserCredentials() = with(binding) {
+        val firstName = firstNameField.text.toString()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+        val lastName = lastNameField.text.toString()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+        val fullName = "$firstName $lastName"
+        nameResult.text = fullName
+        userNameResult.text = usernameField.text
+        emailResult.text = emailField.text
+        ageResult.text = getString(R.string.age) + ": ${ageField.text}"
     }
 }
