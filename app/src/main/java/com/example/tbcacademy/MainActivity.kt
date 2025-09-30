@@ -80,8 +80,7 @@ class MainActivity : AppCompatActivity() {
         if (usernameField.text.toString().length < 10) {
             makeToast("Username too short")
             false
-        }
-        return true
+        } else true
     }
 
     private fun isEmailValid(): Boolean = with(binding) {
