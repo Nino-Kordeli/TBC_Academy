@@ -63,8 +63,8 @@
             android:background="@drawable/field_design"
             android:hint="@string/username"
             android:inputType="text"
-            android:padding="18dp"
-            android:visibility="visible" />
+            android:maxLength="15"
+            android:padding="18dp" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -92,6 +92,7 @@
                     android:background="@drawable/field_design"
                     android:hint="@string/first_name"
                     android:inputType="text"
+                    android:maxLength="13"
                     android:padding="18dp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -119,6 +120,7 @@
                     android:background="@drawable/field_design"
                     android:hint="@string/last_name"
                     android:inputType="text"
+                    android:maxLength="13"
                     android:padding="18dp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -139,8 +141,7 @@
             android:background="@drawable/field_design"
             android:hint="@string/age"
             android:inputType="number"
-            android:padding="18dp"
-            android:visibility="visible" />
+            android:padding="18dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"
@@ -151,8 +152,7 @@
             android:text="@string/save"
             android:textAllCaps="false"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:visibility="visible" />
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/clearButton"
@@ -164,8 +164,7 @@
             android:text="@string/clear"
             android:textAllCaps="false"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:visibility="visible" />
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -207,7 +206,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="50sp"
+            android:layout_marginTop="10dp"
+            android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="@id/userIcon"
             app:layout_constraintStart_toStartOf="@id/userIcon"
             app:layout_constraintTop_toBottomOf="@id/emailResult"
@@ -218,7 +218,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@id/userIcon"
             app:layout_constraintStart_toStartOf="@id/userIcon"

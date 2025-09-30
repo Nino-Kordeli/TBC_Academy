@@ -82,12 +82,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
             false
-        } else if (binding.usernameField.text.toString().length > 14) {
-            Toast.makeText(
-                this@MainActivity,
-                "Username too long",
-                Toast.LENGTH_SHORT
-            ).show()
         }
         return true
     }
