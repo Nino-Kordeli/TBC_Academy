@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_purple"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -61,42 +62,67 @@
             android:layout_height="60dp"
             android:background="@drawable/field_design"
             android:hint="@string/username"
+            android:inputType="text"
             android:padding="18dp"
             android:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="4dp"
-            android:text="@string/enter_your_first_name"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/firstNameField"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/field_design"
-            android:hint="@string/first_name"
-            android:padding="18dp"
-            android:visibility="visible" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="4dp"
-            android:text="@string/enter_your_last_name"
-            android:textSize="16sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/enter_your_first_name"
+                    android:textSize="16sp" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/lastNameField"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/field_design"
-            android:hint="@string/last_name"
-            android:padding="18dp"
-            android:visibility="visible" />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/firstNameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/field_design"
+                    android:hint="@string/first_name"
+                    android:inputType="text"
+                    android:padding="18dp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/enter_your_last_name"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/lastNameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/field_design"
+                    android:hint="@string/last_name"
+                    android:inputType="text"
+                    android:padding="18dp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -112,6 +138,7 @@
             android:layout_height="60dp"
             android:background="@drawable/field_design"
             android:hint="@string/age"
+            android:inputType="number"
             android:padding="18dp"
             android:visibility="visible" />
 
@@ -132,10 +159,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/button_design"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_design_second"
             android:text="@string/clear"
             android:textAllCaps="false"
-            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             android:visibility="visible" />
@@ -184,7 +211,7 @@
             app:layout_constraintEnd_toEndOf="@id/userIcon"
             app:layout_constraintStart_toStartOf="@id/userIcon"
             app:layout_constraintTop_toBottomOf="@id/emailResult"
-            tools:text="Skoooma421" />
+            tools:text="username123" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/emailResult"
@@ -196,7 +223,7 @@
             app:layout_constraintEnd_toEndOf="@id/userIcon"
             app:layout_constraintStart_toStartOf="@id/userIcon"
             app:layout_constraintTop_toBottomOf="@id/userIcon"
-            tools:text="nino.kordeli@gmail.com" />
+            tools:text="userMail@gmail.com" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ageResult"
