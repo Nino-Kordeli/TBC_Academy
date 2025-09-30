@@ -53,14 +53,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isFieldEmpty(): Boolean {
-        val fieldName =
+        val fieldName = with(binding) {
             listOf(
-                binding.emailField to "Email",
-                binding.usernameField to "Username",
-                binding.firstNameField to "First Name",
-                binding.lastNameField to "Last Name",
-                binding.ageField to "Age"
+                emailField to "Email",
+                usernameField to "Username",
+                firstNameField to "First Name",
+                lastNameField to "Last Name",
+                ageField to "Age"
             )
+        }
         var isEmpty = false
         fieldName.forEach { (field, name) ->
             if (field.text.isNullOrBlank()) {
@@ -73,10 +74,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun isUsernameValid(): Boolean {
         if (binding.usernameField.text.toString().length < 10) {
-            Toast.makeText(this@MainActivity, "Username too short", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@MainActivity,
+                "Username too short",
+                Toast.LENGTH_SHORT
+            ).show()
             false
         } else if (binding.usernameField.text.toString().length > 14) {
-            Toast.makeText(this@MainActivity, "Username too long", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@MainActivity,
+                "Username too long",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         return true
     }
@@ -107,14 +116,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clearAllFields() {
-        listOf(
-            binding.emailField,
-            binding.usernameField,
-            binding.firstNameField,
-            binding.lastNameField,
-            binding.ageField
-        )
+    private fun clearAllFields() = with(binding) {
+        listOf(emailField, usernameField, firstNameField, lastNameField, ageField)
             .forEach { it.text?.clear() }
     }
 }
