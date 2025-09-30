@@ -45,6 +45,7 @@
             android:background="@drawable/field_design"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
+            android:maxLength="30"
             android:padding="18dp"
             android:visibility="visible" />
 
@@ -141,6 +142,7 @@
             android:background="@drawable/field_design"
             android:hint="@string/age"
             android:inputType="number"
+            android:maxLength="3"
             android:padding="18dp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -219,6 +221,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:gravity="center"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@id/userIcon"
             app:layout_constraintStart_toStartOf="@id/userIcon"

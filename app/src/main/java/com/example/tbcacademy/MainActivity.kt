@@ -19,51 +19,53 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
             insets
         }
 
-        binding.saveButton.setOnClickListener {
-            if (!isFieldEmpty()) {
-                if (isUsernameValid() && isEmailValid() && isAgeValid()) {
-                    binding.firstPage.visibility = View.GONE
-                    binding.secondPage.visibility = View.VISIBLE
-                    printUserCredentials()
+        with(binding) {
+            saveButton.setOnClickListener {
+                if (!isFieldEmpty()) {
+                    if (isUsernameValid() && isEmailValid() && isAgeValid()) {
+                        firstPage.visibility = View.GONE
+                        secondPage.visibility = View.VISIBLE
+                        printUserCredentials()
+                    }
                 }
+                if (isFieldEmpty()) {
+                    makeToast("All fields should be filled out")
+                }
+                isUsernameValid()
+                isEmailValid()
+                isAgeValid()
             }
-            if (isFieldEmpty()) {
-                Toast.makeText(
-                    this@MainActivity,
-                    "All fields should be filled out",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            isUsernameValid()
-            isEmailValid()
-            isAgeValid()
-        }
-        binding.clearButton.setOnLongClickListener {
-            clearAllFields()
-            true//ანუ ნორმალ კლიკი აღარ დატრიგერდება
-        }
 
-        binding.againButton.setOnClickListener {
-            binding.secondPage.visibility = View.GONE
-            binding.firstPage.visibility = View.VISIBLE
-            clearAllFields()
+            clearButton.setOnLongClickListener {
+                clearAllFields()
+                true
+            }
+
+            againButton.setOnClickListener {
+                secondPage.visibility = View.GONE
+                firstPage.visibility = View.VISIBLE
+                clearAllFields()
+            }
         }
     }
 
-    private fun isFieldEmpty(): Boolean {
-        val fieldName = with(binding) {
-            listOf(
-                emailField to "Email",
-                usernameField to "Username",
-                firstNameField to "First Name",
-                lastNameField to "Last Name",
-                ageField to "Age"
-            )
-        }
+    private fun isFieldEmpty(): Boolean = with(binding) {
+        val fieldName = listOf(
+            emailField to "Email",
+            usernameField to "Username",
+            firstNameField to "First Name",
+            lastNameField to "Last Name",
+            ageField to "Age"
+        )
         var isEmpty = false
         fieldName.forEach { (field, name) ->
             if (field.text.isNullOrBlank()) {
@@ -74,31 +76,27 @@ class MainActivity : AppCompatActivity() {
         return isEmpty
     }
 
-    private fun isUsernameValid(): Boolean {
-        if (binding.usernameField.text.toString().length < 10) {
-            Toast.makeText(
-                this@MainActivity,
-                "Username too short",
-                Toast.LENGTH_SHORT
-            ).show()
+    private fun isUsernameValid(): Boolean = with(binding) {
+        if (usernameField.text.toString().length < 10) {
+            makeToast("Username too short")
             false
         }
         return true
     }
 
-    private fun isEmailValid(): Boolean {
-        val email = binding.emailField.text.toString()
+    private fun isEmailValid(): Boolean = with(binding) {
+        val email = emailField.text.toString()
         return if ((!Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
-            Toast.makeText(this@MainActivity, "Invalid Email", Toast.LENGTH_SHORT).show()
+            makeToast("Invalid Email")
             false
         } else true
     }
 
-    private fun isAgeValid(): Boolean {
-        val ageText = binding.ageField.text.toString()
+    private fun isAgeValid(): Boolean = with(binding) {
+        val ageText = ageField.text.toString()
         val age = ageText.toIntOrNull()
         return if (age == null || age <= 0) {
-            binding.ageField.error = "Age must be above zero"
+            ageField.error = "Age must be above zero"
             false
         } else {
             true
@@ -113,12 +111,18 @@ class MainActivity : AppCompatActivity() {
     private fun printUserCredentials() = with(binding) {
         val firstName = firstNameField.text.toString()
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+
         val lastName = lastNameField.text.toString()
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+
         val fullName = "$firstName $lastName"
         nameResult.text = fullName
         userNameResult.text = usernameField.text
         emailResult.text = emailField.text
         ageResult.text = getString(R.string.age) + ": ${ageField.text}"
+    }
+
+    private fun makeToast(text: String) {
+        Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
     }
 }
