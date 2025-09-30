@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         enableEdgeToEdge()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             if (!isFieldEmpty()) {
                 if (isUsernameValid() && isEmailValid() && isAgeValid()) {
                     binding.firstPage.visibility = View.GONE
-                    binding.secondPage.visibility
+                    binding.secondPage.visibility = View.VISIBLE
                 }
             }
             if (isFieldEmpty()) {
@@ -42,13 +41,19 @@ class MainActivity : AppCompatActivity() {
             isAgeValid()
         }
         binding.clearButton.setOnLongClickListener {
-
+            clearAllFields()
             true//ანუ ნორმალ კლიკი აღარ დატრიგერდება
+        }
+
+        binding.againButton.setOnClickListener {
+            binding.secondPage.visibility = View.GONE
+            binding.firstPage.visibility = View.VISIBLE
+            clearAllFields()
         }
     }
 
     private fun isFieldEmpty(): Boolean {
-        var fieldName =
+        val fieldName =
             listOf(
                 binding.emailField to "Email",
                 binding.usernameField to "Username",
@@ -100,5 +105,16 @@ class MainActivity : AppCompatActivity() {
         } else {
             true
         }
+    }
+
+    private fun clearAllFields() {
+        listOf(
+            binding.emailField,
+            binding.usernameField,
+            binding.firstNameField,
+            binding.lastNameField,
+            binding.ageField
+        )
+            .forEach { it.text?.clear() }
     }
 }
