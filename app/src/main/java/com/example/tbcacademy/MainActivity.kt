@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
                 if (isUsernameValid() && isEmailValid() && isAgeValid()) {
                     binding.firstPage.visibility = View.GONE
                     binding.secondPage.visibility = View.VISIBLE
+                    printUserCredentials()
                 }
             }
             if (isFieldEmpty()) {
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             isUsernameValid()
             isEmailValid()
             isAgeValid()
-            printUserCredentials()
         }
         binding.clearButton.setOnLongClickListener {
             clearAllFields()
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isEmailValid(): Boolean {
-        val email = binding.emailField.text
+        val email = binding.emailField.text.toString()
         return if ((!Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
             Toast.makeText(this@MainActivity, "Invalid Email", Toast.LENGTH_SHORT).show()
             false
