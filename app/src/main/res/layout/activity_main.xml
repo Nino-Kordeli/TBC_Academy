@@ -1,12 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/firstPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_full_name"
+            android:textSize="25sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nameField"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/field_design"
+            android:hint="@string/full_name"
+            android:padding="20dp"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/enter_email"
+            android:textSize="25sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/emailField"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/field_design"
+            android:hint="@string/email"
+            android:padding="20dp"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="180dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_design"
+            android:text="@string/add_user"
+            android:textAllCaps="false"
+            android:textSize="22sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="180dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_design"
+            android:backgroundTint="@color/white"
+            android:text="@string/get_user_info"
+            android:textAllCaps="false"
+            android:textSize="22sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:gravity="bottom"
+            android:text="@string/users_0"
+            android:textSize="25sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:textSize="30sp"
+            tools:text="User Name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:textSize="30sp"
+            tools:text="user123@gmail.com" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:text="@string/user_not_found"
+            android:textSize="45sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

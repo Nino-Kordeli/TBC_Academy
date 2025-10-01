@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="salmon_pink">#EFCFCF</color>
+    <color name="pink_outline">#E9C3C3</color>
 </resources>

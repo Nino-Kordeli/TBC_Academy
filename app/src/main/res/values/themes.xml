@@ -3,6 +3,7 @@
     <style name="Base.Theme.TBCAcademy" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="fontFamily">@font/lexend_light</item>
     </style>
 
     <style name="Theme.TBCAcademy" parent="Base.Theme.TBCAcademy" />
