@@ -29,12 +29,20 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
             addUserButton.setOnClickListener {
-                if (isEmailValid()) {
-                    inputValidation(
+                if (areFieldsEmpty(
                         name = nameField.getInputText(),
                         email = emailField.getInputText()
                     )
+                ) {
+                    return@setOnClickListener
                 }
+                if (!isEmailValid()) {
+                    return@setOnClickListener
+                }
+                inputValidation(
+                    name = nameField.getInputText(),
+                    email = emailField.getInputText()
+                )
             }
             getUserInfoButton.setOnClickListener {
                 getUserInfo(
@@ -48,15 +56,20 @@ class MainActivity : AppCompatActivity() {
         if (users.containsKey(email)) {
             makeToast("This email is taken")
             return@with
-        }
-        if (name.isEmpty() || email.isEmpty()) {
-            makeToast("Fill out all the fields")
-            return@with
         } else {
             users[email] = User(name, email)
             userCountText.text = "Users -> ${users.size}"
             nameField.text?.clear()
             emailField.text?.clear()
+        }
+    }
+
+    private fun areFieldsEmpty(name: String, email: String): Boolean = with(binding) {
+        if (name.isEmpty() || email.isEmpty()) {
+            makeToast("Fill out all the fields")
+            true
+        } else {
+            false
         }
     }
 
