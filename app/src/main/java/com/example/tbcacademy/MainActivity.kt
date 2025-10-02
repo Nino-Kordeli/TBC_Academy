@@ -45,10 +45,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun inputValidation(name: String, email: String) = with(binding) {
-        if (users.containsKey(email)) makeToast("This email is taken")
-
+        if (users.containsKey(email)) {
+            makeToast("This email is taken")
+            return@with
+        }
         if (name.isEmpty() || email.isEmpty()) {
             makeToast("Fill out all the fields")
+            return@with
         } else {
             users[email] = User(name, email)
             userCountText.text = "Users -> ${users.size}"
