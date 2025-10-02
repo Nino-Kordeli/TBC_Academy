@@ -22,7 +22,7 @@
             android:text="@string/enter_full_name"
             android:textSize="25sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/nameField"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -38,7 +38,7 @@
             android:text="@string/enter_email"
             android:textSize="25sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -71,7 +71,7 @@
             android:textSize="22sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/userCount"
+            android:id="@+id/userCountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:textSize="30sp"
+            android:textSize="22sp"
             tools:text="User Name" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:textSize="30sp"
+            android:textSize="23sp"
             tools:text="user123@gmail.com" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -103,9 +103,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:layout_marginTop="35dp"
             android:text="@string/user_not_found"
-            android:textSize="45sp"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
