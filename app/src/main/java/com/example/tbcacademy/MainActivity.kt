@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isEmailValid(): Boolean = with(binding) {
-        val email = emailField.text.toString()
+        val email = emailField.getInputText()
         return if ((!Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
             makeToast("Invalid Email")
             false
