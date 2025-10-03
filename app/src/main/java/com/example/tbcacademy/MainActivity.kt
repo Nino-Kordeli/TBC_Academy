@@ -106,7 +106,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         bluetoothButton.setOnClickListener {
-            makeToast("I tried. . .")
+            if (!bluetoothAdapter.isEnabled) {
+                makeToast("Bluetooth is disabled")
+                return@setOnClickListener
+            }
         }
     }
 
