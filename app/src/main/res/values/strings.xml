@@ -4,4 +4,10 @@
     <string name="save">Save</string>
     <string name="output">Output</string>
     <string name="clear">Clear</string>
+    <string name="no_words_saved">no words saved</string>
+    <string name="word_already_on_the_list">Word already on the list</string>
+    <string name="you_must_enter_a_word">You must enter a word</string>
+    <string name="saved">Saved: \"%1$s\"</string>
+    <string name="connect_and_transfer">Connect and Transfer</string>
+
 </resources>

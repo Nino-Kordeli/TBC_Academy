@@ -47,20 +47,20 @@ class MainActivity : AppCompatActivity() {
             val text = anagramTextInput.getInputText()
             if (text.isNotEmpty()) {
                 if (container.contains(text)) {
-                    makeToast("Word already on the list")
+                    makeToast(getString(R.string.word_already_on_the_list))
                 } else {
                     container.add(text)
                     anagramTextInput.text?.clear()
-                    makeToast("Saved: \"$text\"")
+                    makeToast(getString(R.string.saved, text))
                 }
             } else {
-                makeToast("You must enter a word")
+                makeToast(getString(R.string.you_must_enter_a_word))
             }
         }
 
         outputButton.setOnClickListener {
             if (container.isEmpty()) {
-                anagramsListOutput.text = "no words saved"
+                anagramsListOutput.text = getString(R.string.no_words_saved)
                 return@setOnClickListener
             }
             val groups = groupAnagrams(container)
@@ -75,6 +75,10 @@ class MainActivity : AppCompatActivity() {
             container.clear()
             anagramsListOutput.text = ""
             anagramTextInput.text?.clear()
+        }
+
+        bluetoothButton.setOnClickListener {
+            makeToast("I tried. . .")
         }
     }
 
