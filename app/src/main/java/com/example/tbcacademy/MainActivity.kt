@@ -1,5 +1,9 @@
 package com.example.tbcacademy
 
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothGatt
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
@@ -12,6 +16,15 @@ import com.example.tbcacademy.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val container = mutableListOf<String>()
+
+    private lateinit var bluetoothAdapter: BluetoothAdapter
+    private var bluetoothGatt: BluetoothGatt? = null
+
+    private val LOCATION_PERMISSIONS = arrayOf(
+        android.Manifest.permission.ACCESS_FINE_LOCATION,
+        android.Manifest.permission.ACCESS_COARSE_LOCATION
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -22,7 +35,22 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val bluetoothManager =
+            getSystemService(Context.BLUETOOTH_SERVICE) as android.bluetooth.BluetoothManager
+        bluetoothAdapter = bluetoothManager.adapter
+
+        checkLocationPermissions()
         setListeners()
+    }
+
+    private fun checkLocationPermissions() {
+        val missing = LOCATION_PERMISSIONS.filter {
+            checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED
+        }
+        if (missing.isNotEmpty()) {
+            requestPermissions(missing.toTypedArray(), 1001)
+        }
     }
 
     private fun groupAnagrams(list: List<String>): List<List<String>> {
