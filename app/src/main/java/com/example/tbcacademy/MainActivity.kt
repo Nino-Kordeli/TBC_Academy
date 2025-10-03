@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 makeToast("You must enter a word")
             }
         }
+
         outputButton.setOnClickListener {
             if (container.isEmpty()) {
                 anagramsListOutput.text = "no words saved"
@@ -68,6 +69,12 @@ class MainActivity : AppCompatActivity() {
                 strBuilder.append("[${groups.joinToString(", ")}]\n")
             }
             anagramsListOutput.text = strBuilder.toString().trim()
+        }
+
+        clearButton.setOnClickListener {
+            container.clear()
+            anagramsListOutput.text = ""
+            anagramTextInput.text?.clear()
         }
     }
 

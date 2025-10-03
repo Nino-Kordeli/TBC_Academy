@@ -48,11 +48,14 @@
         tools:text="[anagrams]" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/clearButton"
         android:layout_width="120dp"
         android:layout_height="60dp"
-
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:text="@string/clear"
+        android:textAllCaps="false" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
