@@ -1,6 +1,8 @@
 package com.example.tbcacademy
 
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,9 +23,23 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.saveButton.setOnClickListener {
-            val text = binding.anagramTextInput.text.toString().trim()
+        with(binding) {
+            saveButton.setOnClickListener {
+                val text = anagramTextInput.getInputText()
+                if (text.isNotEmpty()) {
+                    container.add(text)
+                    anagramTextInput.text?.clear()
+                    makeToast("Saved: \"$text\"")
+                } else {
+                    makeToast("You must enter a word")
+                }
+            }
         }
-
     }
+
+    private fun makeToast(text: String) {
+        Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun EditText.getInputText() = this.text.toString().trim()
 }
