@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tbcacademy.databinding.ActivityMainBinding
-import kotlin.text.clear
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,9 +22,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         setListeners()
-
     }
 
     private fun groupAnagrams(list: List<String>): List<List<String>> {
@@ -49,9 +46,13 @@ class MainActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             val text = anagramTextInput.getInputText()
             if (text.isNotEmpty()) {
-                container.add(text)
-                anagramTextInput.text?.clear()
-                makeToast("Saved: \"$text\"")
+                if (container.contains(text)) {
+                    makeToast("Word already on the list")
+                } else {
+                    container.add(text)
+                    anagramTextInput.text?.clear()
+                    makeToast("Saved: \"$text\"")
+                }
             } else {
                 makeToast("You must enter a word")
             }
@@ -64,12 +65,11 @@ class MainActivity : AppCompatActivity() {
             val groups = groupAnagrams(container)
             val strBuilder = StringBuilder()
             groups.forEach { groups ->
-                strBuilder.append("[${groups.joinToString { ", " }}]")
+                strBuilder.append("[${groups.joinToString(", ")}]\n")
             }
             anagramsListOutput.text = strBuilder.toString().trim()
         }
     }
-
 
     private fun makeToast(text: String) {
         Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
