@@ -35,6 +35,38 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        with(binding) {
+            outputButton.setOnClickListener {
+                if (container.isEmpty()) {
+                    anagramsListOutput.text = "no words saved"
+                    return@setOnClickListener
+                }
+                val groups = groupAnagrams(container)
+                val strBuilder = StringBuilder()
+                groups.forEach { groups ->
+                    strBuilder.append("[${groups.joinToString { ", " }}]")
+                }
+                anagramsListOutput.text = strBuilder.toString().trim()
+            }
+        }
+    }
+
+    private fun groupAnagrams(list: List<String>): List<List<String>> {
+        if (list.isEmpty()) return emptyList()
+        val map = mutableMapOf<String, MutableList<String>>()
+        for (word in list) {
+            val chars = word.lowercase().toCharArray()
+            chars.sort()
+            val key = String(chars)
+
+            if (map.containsKey(key)) {
+                map[key]?.add(word)
+            } else {
+                map[key] = mutableListOf(word)
+            }
+        }
+        return map.values.toList()
     }
 
     private fun makeToast(text: String) {
