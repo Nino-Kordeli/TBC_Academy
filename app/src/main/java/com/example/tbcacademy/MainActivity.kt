@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tbcacademy.databinding.ActivityMainBinding
+import kotlin.text.clear
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,33 +24,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        with(binding) {
-            saveButton.setOnClickListener {
-                val text = anagramTextInput.getInputText()
-                if (text.isNotEmpty()) {
-                    container.add(text)
-                    anagramTextInput.text?.clear()
-                    makeToast("Saved: \"$text\"")
-                } else {
-                    makeToast("You must enter a word")
-                }
-            }
-        }
+        setListeners()
 
-        with(binding) {
-            outputButton.setOnClickListener {
-                if (container.isEmpty()) {
-                    anagramsListOutput.text = "no words saved"
-                    return@setOnClickListener
-                }
-                val groups = groupAnagrams(container)
-                val strBuilder = StringBuilder()
-                groups.forEach { groups ->
-                    strBuilder.append("[${groups.joinToString { ", " }}]")
-                }
-                anagramsListOutput.text = strBuilder.toString().trim()
-            }
-        }
     }
 
     private fun groupAnagrams(list: List<String>): List<List<String>> {
@@ -68,6 +44,32 @@ class MainActivity : AppCompatActivity() {
         }
         return map.values.toList()
     }
+
+    private fun setListeners() = with(binding) {
+        saveButton.setOnClickListener {
+            val text = anagramTextInput.getInputText()
+            if (text.isNotEmpty()) {
+                container.add(text)
+                anagramTextInput.text?.clear()
+                makeToast("Saved: \"$text\"")
+            } else {
+                makeToast("You must enter a word")
+            }
+        }
+        outputButton.setOnClickListener {
+            if (container.isEmpty()) {
+                anagramsListOutput.text = "no words saved"
+                return@setOnClickListener
+            }
+            val groups = groupAnagrams(container)
+            val strBuilder = StringBuilder()
+            groups.forEach { groups ->
+                strBuilder.append("[${groups.joinToString { ", " }}]")
+            }
+            anagramsListOutput.text = strBuilder.toString().trim()
+        }
+    }
+
 
     private fun makeToast(text: String) {
         Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
