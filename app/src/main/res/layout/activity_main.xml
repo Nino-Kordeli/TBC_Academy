@@ -1,140 +1,314 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="28dp"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
 
-    <FrameLayout
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
-        android:layout_height="460dp">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="460dp"
-            android:background="@drawable/rounded_corners"
-            android:clipToOutline="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/background_image" />
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="18dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:background="@drawable/circle_shape"
-                android:backgroundTint="#1D1D1D66" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="5dp"
-                android:layout_height="12dp"
-                android:layout_gravity="center"
-                android:src="@drawable/arrow" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_gravity="end"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="19dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:background="@drawable/circle_shape"
-                android:backgroundTint="#1D1D1D66" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/bookmark" />
-        </FrameLayout>
+        android:layout_height="460dp"
+        android:layout_margin="28dp"
+        android:background="@drawable/rounded_corners"
+        android:clipToOutline="true"
+        android:elevation="19dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_image"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="104dp"
-            android:layout_gravity="bottom"
-            android:layout_marginHorizontal="22dp"
-            android:layout_marginBottom="29dp">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/backButton"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="#B2667D94"
+        android:elevation="20dp"
+        app:layout_constraintStart_toStartOf="@id/backgroundImage"
+        app:layout_constraintTop_toTopOf="@id/backgroundImage" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="104dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/rounded_corners_text_box"
-                android:backgroundTint="#1D1D1D4D" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="18dp"
-                android:textColor="@color/white"
-                android:textFontWeight="600"
-                android:textSize="24sp"
-                tools:text="Andes Mountain" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_gravity="start|bottom"
-                android:layout_marginStart="14dp"
-                android:layout_marginBottom="18dp"
-                android:src="@drawable/location_logo" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="42dp"
-                android:layout_marginBottom="18dp"
-                android:textColor="#CAC8C8"
-                android:textSize="18sp"
-                app:fontFamily="@font/roboto_regular"
-                tools:text="South, America" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|top"
-                android:layout_marginTop="26dp"
-                android:layout_marginEnd="22dp"
-                android:textColor="#CAC8C8"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                app:fontFamily="@font/roboto_regular"
-                tools:text="Price" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_marginEnd="21dp"
-                android:layout_marginBottom="16dp"
-                android:textColor="#CAC8C8"
-                android:textFontWeight="500"
-                android:textSize="20sp"
-                app:fontFamily="@font/roboto_regular"
-                tools:text="$230"
-
-                />
-
-        </FrameLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="8dp"
+        android:layout_height="12dp"
+        android:layout_gravity="center"
+        android:elevation="20dp"
+        android:src="@drawable/arrow_icon"
+        app:layout_constraintBottom_toBottomOf="@id/backButton"
+        app:layout_constraintEnd_toEndOf="@id/backButton"
+        app:layout_constraintStart_toStartOf="@id/backButton"
+        app:layout_constraintTop_toTopOf="@id/backButton" />
 
 
-    </FrameLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bookmarkButton"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="21dp"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="#B2667D94"
+        android:elevation="20dp"
+        app:layout_constraintEnd_toEndOf="@id/backgroundImage"
+        app:layout_constraintTop_toTopOf="@id/backgroundImage" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="27dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:elevation="20dp"
+        android:src="@drawable/bookmark_icon"
+        app:layout_constraintBottom_toBottomOf="@id/bookmarkButton"
+        app:layout_constraintEnd_toEndOf="@id/bookmarkButton"
+        app:layout_constraintStart_toStartOf="@id/bookmarkButton"
+        app:layout_constraintTop_toTopOf="@id/bookmarkButton" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/textBox"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="29dp"
+        android:background="@drawable/rounded_corners_text_box"
+        android:elevation="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/backgroundImage"
+        app:layout_constraintEnd_toEndOf="@id/backgroundImage"
+        app:layout_constraintStart_toStartOf="@id/backgroundImage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="18dp"
+        android:elevation="20dp"
+        android:textColor="@color/white"
+        android:textFontWeight="600"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/textBox"
+        app:layout_constraintTop_toTopOf="@id/textBox"
+        tools:text="Andes Mountain" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/locationIcon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="18dp"
+        android:elevation="20dp"
+        android:src="@drawable/location_pin_icon"
+        app:layout_constraintBottom_toBottomOf="@id/textBox"
+        app:layout_constraintStart_toStartOf="@id/textBox" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/locationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="6dp"
+        android:elevation="20dp"
+        android:textColor="#CAC8C8"
+        android:textSize="18sp"
+        app:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/locationIcon"
+        app:layout_constraintStart_toEndOf="@id/locationIcon"
+        app:layout_constraintTop_toTopOf="@id/locationIcon"
+        tools:text="South, America" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/priceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:elevation="20dp"
+        android:textColor="#CAC8C8"
+        android:textFontWeight="400"
+        android:textSize="16sp"
+        app:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/titleText"
+        app:layout_constraintEnd_toEndOf="@id/textBox"
+        app:layout_constraintTop_toTopOf="@id/titleText"
+        tools:text="Price" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="20dp"
+        android:textColor="#CAC8C8"
+        android:textFontWeight="500"
+        android:textSize="20sp"
+        app:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/textBox"
+        app:layout_constraintEnd_toEndOf="@id/textBox"
+        tools:text="$230" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/overviewText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textColor="#1B1B1B"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@id/backgroundImage"
+        app:layout_constraintTop_toBottomOf="@id/backgroundImage"
+        tools:text="Overview" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="32dp"
+        android:textColor="#9E000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/overviewText"
+        app:layout_constraintStart_toEndOf="@id/overviewText"
+        app:layout_constraintTop_toTopOf="@id/overviewText"
+        tools:text="Details" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iconTime"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/small_icon_corners"
+        app:layout_constraintStart_toStartOf="@id/overviewText"
+        app:layout_constraintTop_toBottomOf="@id/overviewText" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/clock_icon"
+        app:layout_constraintBottom_toBottomOf="@id/iconTime"
+        app:layout_constraintEnd_toEndOf="@id/iconTime"
+        app:layout_constraintStart_toStartOf="@id/iconTime"
+        app:layout_constraintTop_toTopOf="@id/iconTime" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/hoursText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/iconTime"
+        app:layout_constraintStart_toEndOf="@id/iconTime"
+        app:layout_constraintTop_toTopOf="@id/iconTime"
+        tools:text="8 hours" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iconWeather"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/small_icon_corners"
+        app:layout_constraintStart_toEndOf="@id/hoursText"
+        app:layout_constraintTop_toBottomOf="@id/overviewText" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/weather_icon"
+        app:layout_constraintBottom_toBottomOf="@id/iconWeather"
+        app:layout_constraintEnd_toEndOf="@id/iconWeather"
+        app:layout_constraintStart_toStartOf="@id/iconWeather"
+        app:layout_constraintTop_toTopOf="@id/iconWeather" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/weatherText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/iconWeather"
+        app:layout_constraintStart_toEndOf="@id/iconWeather"
+        app:layout_constraintTop_toTopOf="@id/iconWeather"
+        tools:text="16 C" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iconStarRating"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/small_icon_corners"
+        app:layout_constraintEnd_toStartOf="@id/starRatingText"
+        app:layout_constraintTop_toBottomOf="@id/overviewText" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/starRatingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/iconStarRating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iconStarRating"
+        tools:text="4.5" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:src="@drawable/star_rating_icon"
+        app:layout_constraintBottom_toBottomOf="@id/iconStarRating"
+        app:layout_constraintEnd_toEndOf="@id/iconStarRating"
+        app:layout_constraintStart_toStartOf="@id/iconStarRating"
+        app:layout_constraintTop_toTopOf="@id/iconStarRating" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginTop="34dp"
+        android:lineHeight="27dp"
+        android:textColor="#A5A5A5"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/iconWeather"
+        tools:text="@string/large_text" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/fade_to_white"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bookNowButton"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/button_design"
+        android:paddingStart="0dp"
+        android:paddingEnd="50dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Book Now" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="23dp"
+        android:elevation="12dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="120dp"
+        android:src="@drawable/button_icon"
+        app:layout_constraintBottom_toBottomOf="@id/bookNowButton"
+        app:layout_constraintEnd_toEndOf="@id/bookNowButton"
+        app:layout_constraintTop_toTopOf="@id/bookNowButton" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
