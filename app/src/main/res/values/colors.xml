@@ -3,9 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="medium_grey">#A5A5A5</color>
-    <color name="light_gray">#EDEDED</color>
+    <color name="light_grey">#EDEDED</color>
     <color name="light_black">#9E000000</color>
     <color name="text_black">#1B1B1B</color>
     <color name="dark_grey">#434343</color>
     <color name="grey">#CAC8C8</color>
+    <color name="text_grey">#7E7E7E</color>
+    <color name="light_grey_2">#E1E1E1</color>
 </resources>
