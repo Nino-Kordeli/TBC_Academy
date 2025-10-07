@@ -8,20 +8,17 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="460dp"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="28dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corners"
         android:clipToOutline="true"
         android:elevation="19dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/background_image"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/backButton"
@@ -36,16 +33,14 @@
         app:layout_constraintTop_toTopOf="@id/backgroundImage" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/backButtonIcon"
         android:layout_width="8dp"
         android:layout_height="12dp"
-        android:layout_gravity="center"
         android:elevation="20dp"
-        android:src="@drawable/arrow_icon"
         app:layout_constraintBottom_toBottomOf="@id/backButton"
         app:layout_constraintEnd_toEndOf="@id/backButton"
         app:layout_constraintStart_toStartOf="@id/backButton"
         app:layout_constraintTop_toTopOf="@id/backButton" />
-
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/bookmarkButton"
@@ -60,11 +55,15 @@
         app:layout_constraintTop_toTopOf="@id/backgroundImage" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="27dp"
-        android:layout_height="24dp"
+        android:id="@+id/bookmarkButtonIcon"
+        android:layout_width="17dp"
+        android:layout_height="20dp"
         android:layout_gravity="center"
+        android:adjustViewBounds="true"
         android:elevation="20dp"
-        android:src="@drawable/bookmark_icon"
+        android:maxWidth="24dp"
+        android:maxHeight="24dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@id/bookmarkButton"
         app:layout_constraintEnd_toEndOf="@id/bookmarkButton"
         app:layout_constraintStart_toStartOf="@id/bookmarkButton"
@@ -152,7 +151,19 @@
         app:fontFamily="@font/roboto_regular"
         app:layout_constraintBottom_toBottomOf="@id/textBox"
         app:layout_constraintEnd_toEndOf="@id/textBox"
-        tools:text="$230" />
+        tools:text="230" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dollarSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="20dp"
+        android:textColor="#434343"
+        android:textSize="16sp"
+        app:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/price"
+        app:layout_constraintEnd_toStartOf="@id/price"
+        tools:text="$" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/overviewText"
@@ -166,6 +177,7 @@
         tools:text="Overview" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/detailsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -187,9 +199,9 @@
         app:layout_constraintTop_toBottomOf="@id/overviewText" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/clockIcon"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:src="@drawable/clock_icon"
         app:layout_constraintBottom_toBottomOf="@id/iconTime"
         app:layout_constraintEnd_toEndOf="@id/iconTime"
         app:layout_constraintStart_toStartOf="@id/iconTime"
@@ -217,9 +229,9 @@
         app:layout_constraintTop_toBottomOf="@id/overviewText" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/weatherIcon"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:src="@drawable/weather_icon"
         app:layout_constraintBottom_toBottomOf="@id/iconWeather"
         app:layout_constraintEnd_toEndOf="@id/iconWeather"
         app:layout_constraintStart_toStartOf="@id/iconWeather"
@@ -234,7 +246,7 @@
         app:layout_constraintBottom_toBottomOf="@id/iconWeather"
         app:layout_constraintStart_toEndOf="@id/iconWeather"
         app:layout_constraintTop_toTopOf="@id/iconWeather"
-        tools:text="16 C" />
+        tools:text="16°C" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iconStarRating"
@@ -258,15 +270,16 @@
         tools:text="4.5" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/starIcon"
         android:layout_width="17dp"
         android:layout_height="17dp"
-        android:src="@drawable/star_rating_icon"
         app:layout_constraintBottom_toBottomOf="@id/iconStarRating"
         app:layout_constraintEnd_toEndOf="@id/iconStarRating"
         app:layout_constraintStart_toStartOf="@id/iconStarRating"
         app:layout_constraintTop_toTopOf="@id/iconStarRating" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/descriptionText"
         android:layout_width="match_parent"
         android:layout_height="135dp"
         android:layout_marginHorizontal="28dp"
@@ -301,11 +314,11 @@
         tools:text="Book Now" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bookButtonIcon"
         android:layout_width="23dp"
-        android:elevation="12dp"
         android:layout_height="23dp"
         android:layout_marginEnd="120dp"
-        android:src="@drawable/button_icon"
+        android:elevation="12dp"
         app:layout_constraintBottom_toBottomOf="@id/bookNowButton"
         app:layout_constraintEnd_toEndOf="@id/bookNowButton"
         app:layout_constraintTop_toTopOf="@id/bookNowButton" />
