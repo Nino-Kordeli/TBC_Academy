@@ -1,11 +1,7 @@
 package com.example.tbcacademy
 
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -27,7 +23,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
-
 
     private fun setResources() = with(binding) {
         backgroundImage.setImageResource(R.drawable.background_image)

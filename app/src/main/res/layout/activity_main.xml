@@ -27,7 +27,7 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="18dp"
         android:background="@drawable/circle_shape"
-        android:backgroundTint="#B2667D94"
+        android:backgroundTint="@color/light_blue"
         android:elevation="20dp"
         app:layout_constraintStart_toStartOf="@id/backgroundImage"
         app:layout_constraintTop_toTopOf="@id/backgroundImage" />
@@ -50,7 +50,7 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="21dp"
         android:background="@drawable/circle_shape"
-        android:backgroundTint="#B2667D94"
+        android:backgroundTint="@color/light_blue"
         android:elevation="20dp"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="@id/backgroundImage"
