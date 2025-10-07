@@ -251,15 +251,6 @@
         tools:text="16°C" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/starIcon"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
-        app:layout_constraintBottom_toBottomOf="@id/iconStarRating"
-        app:layout_constraintEnd_toEndOf="@id/iconStarRating"
-        app:layout_constraintStart_toStartOf="@id/iconStarRating"
-        app:layout_constraintTop_toTopOf="@id/iconStarRating" />
-
-    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iconStarRating"
         android:layout_width="34dp"
         android:layout_height="34dp"
@@ -280,6 +271,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/iconStarRating"
         tools:text="4.5" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/starIcon"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        app:layout_constraintBottom_toBottomOf="@id/iconStarRating"
+        app:layout_constraintEnd_toEndOf="@id/iconStarRating"
+        app:layout_constraintStart_toStartOf="@id/iconStarRating"
+        app:layout_constraintTop_toTopOf="@id/iconStarRating" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/descriptionText"
