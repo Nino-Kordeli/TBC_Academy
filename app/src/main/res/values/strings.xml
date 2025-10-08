@@ -2,5 +2,7 @@
     <string name="app_name">TBC Academy</string>
     <string name="photo">photo</string>
     <string name="log_in">LOG IN</string>
-    <string name="register">REGISTER</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="next">Next</string>
 </resources>
