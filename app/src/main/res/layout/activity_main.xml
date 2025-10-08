@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="142dp"
         android:layout_marginTop="307dp"
+        android:elevation="1dp"
         android:text="@string/photo"
         android:textColor="@color/black"
         android:textSize="48sp"
@@ -24,6 +25,7 @@
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:layout_marginEnd="20dp"
+        android:elevation="1dp"
         android:src="@drawable/ic_icon_logged_out"
         app:layout_constraintBottom_toBottomOf="@id/twTitleText"
         app:layout_constraintEnd_toStartOf="@id/twTitleText"
@@ -35,6 +37,10 @@
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="33dp"
+        android:background="@drawable/login_button_design"
+        android:text="@string/log_in"
+        android:textSize="15sp"
+        app:fontFamily="@font/roboto_semi_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -44,7 +50,26 @@
         android:layout_height="52dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="33dp"
+        android:background="@drawable/register_button_design"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:fontFamily="@font/roboto_semi_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-28dp"
+        android:src="@mipmap/background_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/whiteBorder"
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
