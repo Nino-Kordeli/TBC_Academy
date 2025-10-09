@@ -15,4 +15,5 @@
     <string name="registration_failed">Registration failed</string>
     <string name="enter_a_valid_email">Enter a valid email</string>
     <string name="log_out">Log out</string>
+    <string name="please_enter_a_username">Please enter a username</string>
 </resources>
