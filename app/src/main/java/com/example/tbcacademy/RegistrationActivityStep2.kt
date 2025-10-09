@@ -39,7 +39,6 @@ class RegistrationActivityStep2 : AppCompatActivity() {
                 this@RegistrationActivityStep2,
                 RegistrationCompleteActivity::class.java
             )
-            completeIntent.putExtra("username", username)
             completeIntent.putExtra("email", email)
             startActivity(completeIntent)
         }

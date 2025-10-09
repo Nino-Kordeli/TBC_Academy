@@ -33,9 +33,7 @@ class RegistrationCompleteActivity : AppCompatActivity() {
     }
 
     private fun displatUserInfo() = with(binding) {
-        val username = intent.getStringExtra("username") ?: ""
         val email = intent.getStringExtra("email") ?: ""
-        twUserName.text = username
         twEmail.text = email
     }
 }
