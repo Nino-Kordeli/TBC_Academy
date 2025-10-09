@@ -12,13 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TBCAcademy">
         <activity
+            android:name=".RegistrationCompleteActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegistrationActivityStep2"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".RegistrationActivity"
             android:exported="false" />
         <activity
             android:name=".LoggedOutActivity"
