@@ -7,4 +7,12 @@
     <string name="next">Next</string>
     <string name="sign_up">Sign Up</string>
     <string name="tos_text">By signing up, you agree to Photo’s <u>Terms of Service</u> and <u>Privacy Policy</u>.</string>
+    <string name="username">Username</string>
+    <string name="fill_out_all_the_fields">Fill out all the fields</string>
+    <string name="account_created_successfully">Account created successfully</string>
+    <string name="invalid_password_message">Password must be at least 6 characters long and contain an uppercase letter</string>
+    <string name="password">Password</string>
+    <string name="registration_failed">Registration failed</string>
+    <string name="enter_a_valid_email">Enter a valid email</string>
+    <string name="log_out">Log out</string>
 </resources>
