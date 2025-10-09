@@ -31,19 +31,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etEmailFieldRegPartTwo"
+        android:id="@+id/etUserNameField"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/fields_design"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
+        android:hint="@string/username"
         android:padding="15dp"
         android:textStyle="bold"
         app:fontFamily="@font/roboto_light"
         app:layout_constraintTop_toBottomOf="@id/twRegisterTextPartTwo"
-        tools:text="user@gmail.com" />
+        tools:text="username" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignUp"
@@ -56,7 +55,7 @@
         android:textColor="@color/white"
         android:textSize="13sp"
         app:fontFamily="@font/roboto_black"
-        app:layout_constraintTop_toBottomOf="@id/etEmailFieldRegPartTwo" />
+        app:layout_constraintTop_toBottomOf="@id/etUserNameField" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTermsOfService"
