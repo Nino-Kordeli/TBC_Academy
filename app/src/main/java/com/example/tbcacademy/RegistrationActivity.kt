@@ -3,12 +3,12 @@ package com.example.tbcacademy
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tbcacademy.databinding.ActivityRegistrationStep1Binding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class RegistrationActivity : AppCompatActivity() {
@@ -36,11 +36,11 @@ class RegistrationActivity : AppCompatActivity() {
 
             if (areFieldsEmpty(email, password)) return@setOnClickListener
             if (!isEmailValid(email)) {
-                makeToast(getString(R.string.enter_a_valid_email))
+                showSnackbar(getString(R.string.enter_a_valid_email))
                 return@setOnClickListener
             }
             if (!isPasswordValid(password)) {
-                makeToast(getString(R.string.invalid_password_message))
+                showSnackbar(getString(R.string.invalid_password_message))
                 return@setOnClickListener
             }
             registerUser(email, password)
@@ -53,7 +53,7 @@ class RegistrationActivity : AppCompatActivity() {
 
     private fun areFieldsEmpty(email: String, password: String): Boolean = with(binding) {
         if (email.isEmpty() || password.isEmpty()) {
-            makeToast(getString(R.string.fill_out_all_the_fields))
+            showSnackbar(getString(R.string.fill_out_all_the_fields))
             return true
         } else {
             false
@@ -64,13 +64,13 @@ class RegistrationActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    makeToast(getString(R.string.account_created_successfully))
+                    showSnackbar(getString(R.string.account_created_successfully))
                     val intent = Intent(this, RegistrationActivityStep2::class.java)
                     intent.putExtra("email", email)
                     startActivity(intent)
                 } else {
                     val message = task.exception?.message ?: getString(R.string.registration_failed)
-                    makeToast(message)
+                    showSnackbar(message)
                 }
             }
     }
@@ -81,8 +81,8 @@ class RegistrationActivity : AppCompatActivity() {
         return true
     }
 
-    private fun makeToast(text: String) {
-        Toast.makeText(this@RegistrationActivity, text, Toast.LENGTH_SHORT).show()
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun EditText.getString() = this.text.toString().trim()
