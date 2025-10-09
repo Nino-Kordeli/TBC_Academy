@@ -66,6 +66,7 @@ class RegistrationActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     makeToast(getString(R.string.account_created_successfully))
                     val intent = Intent(this, RegistrationActivityStep2::class.java)
+                    intent.putExtra("email", email)
                     startActivity(intent)
                 } else {
                     val message = task.exception?.message ?: getString(R.string.registration_failed)
