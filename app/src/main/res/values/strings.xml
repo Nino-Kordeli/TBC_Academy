@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">TBC Academy</string>
     <string name="photo">photo</string>
-    <string name="log_in">LOG IN</string>
+    <string name="log_in">Log in</string>
     <string name="register">Register</string>
     <string name="email">Email</string>
     <string name="next">Next</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="tos_text">By signing up, you agree to Photo’s <u>Terms of Service</u> and <u>Privacy Policy</u>.</string>
 </resources>

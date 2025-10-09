@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/twTitleText"
+        android:id="@+id/tvTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="142dp"
@@ -27,9 +27,9 @@
         android:layout_marginEnd="20dp"
         android:elevation="1dp"
         android:src="@drawable/ic_icon_logged_out"
-        app:layout_constraintBottom_toBottomOf="@id/twTitleText"
-        app:layout_constraintEnd_toStartOf="@id/twTitleText"
-        app:layout_constraintTop_toTopOf="@id/twTitleText" />
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleText"
+        app:layout_constraintEnd_toStartOf="@id/tvTitleText"
+        app:layout_constraintTop_toTopOf="@id/tvTitleText" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogIn"
@@ -40,7 +40,7 @@
         android:background="@drawable/login_button_design"
         android:text="@string/log_in"
         android:textSize="15sp"
-        app:fontFamily="@font/roboto_semi_bold"
+        app:fontFamily="@font/roboto_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -54,7 +54,7 @@
         android:text="@string/register"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:fontFamily="@font/roboto_semi_bold"
+        app:fontFamily="@font/roboto_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
