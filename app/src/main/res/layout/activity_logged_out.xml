@@ -61,7 +61,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-28dp"
+        android:scaleType="centerCrop"
         android:src="@mipmap/background_image"
         app:layout_constraintTop_toTopOf="parent" />
 
