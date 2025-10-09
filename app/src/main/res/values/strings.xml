@@ -16,4 +16,5 @@
     <string name="enter_a_valid_email">Enter a valid email</string>
     <string name="log_out">Log out</string>
     <string name="please_enter_a_username">Please enter a username</string>
+    <string name="please_fill_out_all_the_fields">Please fill out all the fields</string>
 </resources>
