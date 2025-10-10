@@ -2,9 +2,14 @@ package com.example.tbcacademy.utils
 
 import android.widget.EditText
 
-fun EditText.textValue() = this.text.toString()
+/**
+ * Gets the text from EditText as a String.
+ */
+fun EditText.textValue() = text.toString()
 
-fun EditText.trimmedTextValue() = this.text.toString().trim()
-
-
-
+/**
+ * Gets the text from EditText as a trimmed String.
+ *
+ * Trimming removes spaces at the start and end.
+ */
+fun EditText.trimmedTextValue() = text.toString().trim()
