@@ -1,4 +1,4 @@
-package com.example.tbcacademy.utils
+package com.example.tbcacademy.utils.ui
 
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
