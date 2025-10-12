@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="12dp"
         android:background="@drawable/field_design"
         android:hint="@string/name"
@@ -30,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/field_design"
         android:hint="@string/lastname"
@@ -108,11 +108,34 @@
         android:id="@+id/twResultMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="@id/btnUpdateUser"
         app:layout_constraintStart_toStartOf="@id/btnUpdateUser"
         app:layout_constraintTop_toBottomOf="@id/btnUpdateUser"
         tools:text="Success" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/twActiveUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="65dp"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/twDeletedUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="60dp"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/twActiveUsers" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
