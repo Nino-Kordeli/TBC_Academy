@@ -4,15 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etNameField"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/field_design"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toStartOf="@+id/etLastnameField"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etLastnameField"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/field_design"
+        android:hint="@string/lastname"
+        android:padding="10dp"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/etNameField"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etEmailField"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/field_design"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/etLastnameField" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etAgeField"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/field_design"
+        android:hint="@string/age"
+        android:inputType="number"
+        android:maxLength="3"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/etEmailField" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddUser"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="110dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_design"
+        android:text="@string/add_user"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/etAgeField"
+        app:layout_constraintTop_toBottomOf="@id/etAgeField" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRemoveUser"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="110dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_design"
+        android:text="@string/remove_user"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/etAgeField"
+        app:layout_constraintTop_toBottomOf="@id/btnAddUser" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdateUser"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="110dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_design"
+        android:text="@string/update_user"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/etAgeField"
+        app:layout_constraintTop_toBottomOf="@id/btnRemoveUser" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/twResultMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="@id/btnUpdateUser"
+        app:layout_constraintStart_toStartOf="@id/btnUpdateUser"
+        app:layout_constraintTop_toBottomOf="@id/btnUpdateUser"
+        tools:text="Success" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
