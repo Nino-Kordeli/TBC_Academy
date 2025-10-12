@@ -86,7 +86,8 @@ class MainActivity : AppCompatActivity() {
                 deletedUsers[email] = deletedUser
                 twResultMessage.text = getString(R.string.user_deleted_successfully)
                 twResultMessage.setTextColor(Color.GREEN)
-                twDeletedUsers.text = getString(R.string.deleted_users, deletedUsers.size.toString())
+                twDeletedUsers.text =
+                    getString(R.string.deleted_users, deletedUsers.size.toString())
                 clearFields()
             } else {
                 twResultMessage.text = getString(R.string.user_doesn_t_exist)
