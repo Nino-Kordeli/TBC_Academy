@@ -1,15 +1,16 @@
 package com.example.tbcacademy
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tbcacademy.databinding.ActivityMainBinding
-import com.example.tbcacademy.utils.trimmedTextValue
+import com.example.tbcacademy.utils.ui.hideKeyboard
+import com.example.tbcacademy.utils.ui.trimmedTextValue
+import com.example.tbcacademy.utils.validation.isValidEmail
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,14 +27,20 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         setListeners()
     }
 
-    private fun setListeners() = with(binding) {
+    private fun setListeners() {
+        setAddButtonClickListener()
+        setRemoveButtonListener()
+        setUpdateUserListener()
+    }
+
+    private fun setAddButtonClickListener() = with(binding) {
         btnAddUser.setOnClickListener { view ->
             if (areFieldsEmpty()) {
-                twResultMessage.text = getString(R.string.please_fill_out_all_the_fields)
-                twResultMessage.setTextColor(Color.RED)
+                handleError(R.string.please_fill_out_all_the_fields)
                 return@setOnClickListener
             }
 
@@ -44,39 +51,36 @@ class MainActivity : AppCompatActivity() {
 
             age?.let {
                 if (it <= 0) {
-                    twResultMessage.text = getString(R.string.invalid_age)
-                    twResultMessage.setTextColor(Color.RED)
+                    handleError(R.string.invalid_age)
                     return@setOnClickListener
                 }
             } ?: return@setOnClickListener
 
-            if (!isEmailValid(email)) {
-                twResultMessage.text = getString(R.string.invalid_email)
-                twResultMessage.setTextColor(Color.RED)
+            if (!email.isValidEmail()) {
+                handleError(R.string.invalid_email)
                 return@setOnClickListener
             }
-            if (userMap.containsKey(email)) {
-                twResultMessage.text = getString(R.string.user_already_exists)
-                twResultMessage.setTextColor(Color.RED)
-                clearFields()
 
+            if (userMap.containsKey(email)) {
+                handleError(R.string.user_already_exists)
+                clearFields()
             } else {
                 userMap[email] = User(firstName, lastName, age)
-                twResultMessage.text = getString(R.string.user_added_successfully)
-                twResultMessage.setTextColor(Color.GREEN)
+                handleSuccess(R.string.user_added_successfully)
                 clearFields()
             }
+
             twActiveUsers.text = getString(R.string.active_users, userMap.size)
-            hideKeyboard(view)
+            view.hideKeyboard()
         }
+    }
 
+    private fun setRemoveButtonListener() = with(binding) {
         btnRemoveUser.setOnClickListener { view ->
-
             val email = etEmailField.trimmedTextValue()
 
             if (email.isEmpty()) {
-                binding.twResultMessage.text = getString(R.string.please_fill_out_all_the_fields)
-                binding.twResultMessage.setTextColor(Color.RED)
+                handleError(R.string.please_fill_out_all_the_fields)
                 return@setOnClickListener
             }
 
@@ -84,19 +88,20 @@ class MainActivity : AppCompatActivity() {
 
             if (deletedUser != null) {
                 deletedUsers[email] = deletedUser
-                twResultMessage.text = getString(R.string.user_deleted_successfully)
-                twResultMessage.setTextColor(Color.GREEN)
+                handleSuccess(R.string.user_deleted_successfully)
                 twDeletedUsers.text =
                     getString(R.string.deleted_users, deletedUsers.size.toString())
                 clearFields()
             } else {
-                twResultMessage.text = getString(R.string.user_doesn_t_exist)
-                twResultMessage.setTextColor(Color.RED)
+                handleError(R.string.user_doesn_t_exist)
             }
-            twActiveUsers.text = getString(R.string.active_users, userMap.size)
-            hideKeyboard(view)
-        }
 
+            twActiveUsers.text = getString(R.string.active_users, userMap.size)
+            view.hideKeyboard()
+        }
+    }
+
+    private fun setUpdateUserListener() = with(binding) {
         btnUpdateUser.setOnClickListener { view ->
             val email = etEmailField.trimmedTextValue()
             val firstName = etNameField.trimmedTextValue()
@@ -104,26 +109,21 @@ class MainActivity : AppCompatActivity() {
             val age = etAgeField.trimmedTextValue().toIntOrNull()
 
             if (areFieldsEmpty() || age == null) {
-                twResultMessage.text = getString(R.string.please_fill_out_all_the_fields)
-                twResultMessage.setTextColor(Color.RED)
+                handleError(R.string.please_fill_out_all_the_fields)
                 return@setOnClickListener
             }
+
             if (userMap.containsKey(email)) {
                 userMap[email] = User(firstName, lastName, age)
-                twResultMessage.text = getString(R.string.user_updated_successfully)
-                twResultMessage.setTextColor(Color.GREEN)
+                handleSuccess(R.string.user_updated_successfully)
             } else {
-                twResultMessage.text = getString(R.string.user_doesn_t_exist)
-                twResultMessage.setTextColor(Color.RED)
+                handleError(R.string.user_doesn_t_exist)
             }
+
             twActiveUsers.text = getString(R.string.active_users, userMap.size)
             clearFields()
-            hideKeyboard(view)
+            view.hideKeyboard()
         }
-    }
-
-    private fun isEmailValid(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun areFieldsEmpty(): Boolean = with(binding) {
@@ -145,9 +145,13 @@ class MainActivity : AppCompatActivity() {
         ).forEach { it.text?.clear() }
     }
 
-    private fun hideKeyboard(view: android.view.View) {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
-        view.clearFocus()
+    private fun handleSuccess(@StringRes resId: Int) = with(binding) {
+        twResultMessage.text = getString(resId)
+        twResultMessage.setTextColor(Color.GREEN)
+    }
+
+    private fun handleError(@StringRes resId: Int) = with(binding) {
+        twResultMessage.text = getString(resId)
+        twResultMessage.setTextColor(Color.RED)
     }
 }
