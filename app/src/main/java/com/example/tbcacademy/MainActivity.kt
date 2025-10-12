@@ -86,15 +86,13 @@ class MainActivity : AppCompatActivity() {
 
             val deletedUser = userMap.remove(email)
 
-            if (deletedUser != null) {
-                deletedUsers[email] = deletedUser
+            deletedUser?.let {
+                deletedUsers[email] = it
                 handleSuccess(R.string.user_deleted_successfully)
                 twDeletedUsers.text =
                     getString(R.string.deleted_users, deletedUsers.size.toString())
                 clearFields()
-            } else {
-                handleError(R.string.user_doesn_t_exist)
-            }
+            } ?: handleError(R.string.user_doesn_t_exist)
 
             twActiveUsers.text = getString(R.string.active_users, userMap.size)
             view.hideKeyboard()
