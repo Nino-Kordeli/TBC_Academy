@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tbcacademy.databinding.ActivityMainBinding
-import com.example.tbcacademy.utils.showSnackBar
 import com.example.tbcacademy.utils.trimmedTextValue
 
 class MainActivity : AppCompatActivity() {
@@ -53,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
             if (!isEmailValid(email)) {
                 twResultMessage.text = getString(R.string.invalid_email)
+                twResultMessage.setTextColor(Color.RED)
                 return@setOnClickListener
             }
             if (userMap.containsKey(email)) {
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                 deletedUsers[email] = deletedUser
                 twResultMessage.text = getString(R.string.user_deleted_successfully)
                 twResultMessage.setTextColor(Color.GREEN)
-                twDeletedUsers.text = getString(R.string.deleted_users, deletedUsers.count().toString())
+                twDeletedUsers.text = getString(R.string.deleted_users, deletedUsers.size.toString())
                 clearFields()
             } else {
                 twResultMessage.text = getString(R.string.user_doesn_t_exist)
