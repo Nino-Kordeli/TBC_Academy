@@ -1,4 +1,4 @@
-package com.example.tbcacademy
+package com.example.tbcacademy.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

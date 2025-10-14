@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TBCAcademy">
         <activity
-            android:name=".UserDashboardActivity"
+            android:name=".screens.UserDashboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserFormActivity"
+            android:name=".screens.UserFormActivity"
             android:exported="false" />
     </application>
 

@@ -1,14 +1,16 @@
-package com.example.tbcacademy
+package com.example.tbcacademy.screens
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.tbcacademy.R
 import com.example.tbcacademy.databinding.ActivityUserFormBinding
+import com.example.tbcacademy.model.OperationType
+import com.example.tbcacademy.model.User
 import com.example.tbcacademy.utils.ui.hide
 import com.example.tbcacademy.utils.ui.hideKeyboard
 import com.example.tbcacademy.utils.ui.show
@@ -17,7 +19,7 @@ import com.example.tbcacademy.utils.validation.isValidEmail
 
 class UserFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserFormBinding
-    private var mode: String = "add"
+    private var operationType = OperationType.ADD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,25 +32,31 @@ class UserFormActivity : AppCompatActivity() {
             insets
         }
 
-        mode = intent.getStringExtra("mode") ?: "add"
+        operationType = intent.getParcelableExtra(
+            UserDashboardActivity.OPERATION_TYPE,
+            OperationType::class.java
+        ) ?: OperationType.ADD
 
         configureUI()
         setListeners()
     }
 
     private fun configureUI() = with(binding) {
-        when (mode) {
-            "add" -> {
+        when (operationType) {
+            OperationType.ADD -> {
                 btnAddUser.show()
                 btnUpdateUser.hide()
                 btnRemoveUser.hide()
             }
 
-            "update" -> {
+            else -> {
                 btnAddUser.hide()
                 btnUpdateUser.show()
                 btnRemoveUser.show()
-                val user = intent.getParcelableExtra("user", User::class.java)
+                val user = intent.getParcelableExtra(
+                    UserDashboardActivity.USER,
+                    User::class.java
+                )
                 user?.let { fillUserData(it) }
             }
         }
@@ -59,13 +67,13 @@ class UserFormActivity : AppCompatActivity() {
         etEmailField.isEnabled = false
         etNameField.setText(user.firstName)
         etLastnameField.setText(user.lastName)
-        etAgeField.setText(user.age)
+        etAgeField.setText(user.age.toString())
     }
 
     private fun setListeners() {
         setAddButtonClickListener()
-        /*setRemoveButtonListener()
-        setUpdateUserListener()*/
+        setRemoveButtonListener()
+        setUpdateUserListener()
     }
 
     private fun setAddButtonClickListener() = with(binding) {
@@ -101,8 +109,8 @@ class UserFormActivity : AppCompatActivity() {
             )
 
             val resultIntent = Intent().apply {
-                putExtra("action", "add")
-                putExtra("user", user)
+                putExtra(UserDashboardActivity.OPERATION_TYPE, OperationType.ADD)
+                putExtra(UserDashboardActivity.USER, user)
             }
             setResult(RESULT_OK, resultIntent)
 
@@ -110,54 +118,74 @@ class UserFormActivity : AppCompatActivity() {
         }
     }
 
-    /*private fun setRemoveButtonListener() = with(binding) {
+    private fun setRemoveButtonListener() = with(binding) {
         btnRemoveUser.setOnClickListener { view ->
-            val email = etEmailField.trimmedTextValue()
-
-            if (email.isEmpty()) {
-                handleError(R.string.please_fill_out_all_the_fields)
-                return@setOnClickListener
-            }
-
-            val deletedUser = userMap.remove(email)
-
-            deletedUser?.let {
-                deletedUsers[email] = it
-                handleSuccess(R.string.user_deleted_successfully)
-                twDeletedUsers.text =
-                    getString(R.string.deleted_users, deletedUsers.size.toString())
-                clearFields()
-            } ?: handleError(R.string.user_doesn_t_exist)
-
-            twActiveUsers.text = getString(R.string.active_users, userMap.size)
             view.hideKeyboard()
-        }
-    }*/
 
-    /*private fun setUpdateUserListener() = with(binding) {
-        btnUpdateUser.setOnClickListener { view ->
             val email = etEmailField.trimmedTextValue()
             val firstName = etNameField.trimmedTextValue()
             val lastName = etLastnameField.trimmedTextValue()
             val age = etAgeField.trimmedTextValue().toIntOrNull()
 
-            if (areFieldsEmpty() || age == null) {
+            age?.let {
+                if (it <= 0) {
+                    handleError(R.string.invalid_age)
+                    return@setOnClickListener
+                }
+            } ?: return@setOnClickListener
+
+            val user = User(
+                firstName = firstName,
+                lastName = lastName,
+                age = age,
+                email = email
+            )
+
+            val resultIntent = Intent().apply {
+                putExtra(UserDashboardActivity.OPERATION_TYPE, OperationType.REMOVE)
+                putExtra(UserDashboardActivity.USER, user)
+            }
+            setResult(RESULT_OK, resultIntent)
+
+            finish()
+        }
+    }
+
+    private fun setUpdateUserListener() = with(binding) {
+        btnUpdateUser.setOnClickListener { view ->
+            view.hideKeyboard()
+            val email = etEmailField.trimmedTextValue()
+            val firstName = etNameField.trimmedTextValue()
+            val lastName = etLastnameField.trimmedTextValue()
+            val age = etAgeField.trimmedTextValue().toIntOrNull()
+
+            if (areFieldsEmpty()) {
                 handleError(R.string.please_fill_out_all_the_fields)
                 return@setOnClickListener
             }
+            age?.let {
+                if (it <= 0) {
+                    handleError(R.string.invalid_age)
+                    return@setOnClickListener
+                }
+            } ?: return@setOnClickListener
 
-            if (userMap.containsKey(email)) {
-                userMap[email] = User(firstName, lastName, age)
-                handleSuccess(R.string.user_updated_successfully)
-            } else {
-                handleError(R.string.user_doesn_t_exist)
+            val user = User(
+                firstName = firstName,
+                lastName = lastName,
+                age = age,
+                email = email
+            )
+
+            val resultIntent = Intent().apply {
+                putExtra(UserDashboardActivity.OPERATION_TYPE, OperationType.UPDATE)
+                putExtra(UserDashboardActivity.USER, user)
             }
+            setResult(RESULT_OK, resultIntent)
 
-            twActiveUsers.text = getString(R.string.active_users, userMap.size)
-            clearFields()
-            view.hideKeyboard()
+            finish()
         }
-    }*/
+    }
 
     private fun areFieldsEmpty(): Boolean = with(binding) {
         val inputs = listOf(
@@ -169,23 +197,7 @@ class UserFormActivity : AppCompatActivity() {
         return inputs.any { it.isEmpty() }
     }
 
-    private fun clearFields() = with(binding) {
-        listOf(
-            etNameField,
-            etLastnameField,
-            etEmailField,
-            etAgeField
-        ).forEach { it.text?.clear() }
-    }
-
-    private fun handleSuccess(@StringRes resId: Int) = with(binding) {
-        twResultMessage.text = getString(resId)
-        twResultMessage.setTextColor(Color.GREEN)
-    }
-
     private fun handleError(@StringRes resId: Int) = with(binding) {
-        twResultMessage.text = getString(resId)
-        twResultMessage.setTextColor(Color.RED)
+        twErrorMessage.text = getString(resId)
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.tbcacademy
+package com.example.tbcacademy.screens
 
 import android.content.Intent
 import android.graphics.Color
@@ -9,24 +9,27 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.tbcacademy.R
 import com.example.tbcacademy.databinding.ActivityUserDashboardBinding
-import kotlin.collections.containsKey
+import com.example.tbcacademy.model.OperationType
+import com.example.tbcacademy.model.User
 
 class UserDashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserDashboardBinding
     private val userMap = mutableMapOf<String, User>()
-    private val deletedUsers = mutableMapOf<String, User>()
+    private val deletedUsers = mutableListOf<User>()
 
     private val formResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         val data = result.data ?: return@registerForActivityResult
-        val action = data.getStringExtra("action") ?: return@registerForActivityResult
-        val user = data.getParcelableExtra("user", User::class.java)
+        val operationType = data.getParcelableExtra(OPERATION_TYPE, OperationType::class.java)
+            ?: return@registerForActivityResult
+        val user = data.getParcelableExtra(USER, User::class.java)
 
         user?.let {
-            when (action) {
-                "add" -> {
+            when (operationType) {
+                OperationType.ADD -> {
                     if (userMap.containsKey(it.email)) {
                         handleError(R.string.user_already_exists)
                     } else {
@@ -36,18 +39,18 @@ class UserDashboardActivity : AppCompatActivity() {
                     showActiveUsers()
                 }
 
-                "update" -> {
-                    userMap[it.email] = it
-                    showActiveUsers()
-                    showMessage("User updated successfully")
-                }
-
-                "remove" -> {
+                OperationType.REMOVE -> {
                     userMap.remove(it.email)
-                    deletedUsers[it.email] = it
+                    deletedUsers.add(it)
                     showActiveUsers()
                     showDeletedUsers()
-                    showMessage("User removed successfully")
+                    handleSuccess(R.string.user_removed)
+                }
+
+                OperationType.UPDATE -> {
+                    userMap[it.email] = it
+                    showActiveUsers()
+                    handleSuccess(R.string.user_updated_successfully)
                 }
             }
         }
@@ -64,6 +67,8 @@ class UserDashboardActivity : AppCompatActivity() {
             insets
         }
 
+        showActiveUsers()
+        showDeletedUsers()
         setListeners()
     }
 
@@ -75,7 +80,7 @@ class UserDashboardActivity : AppCompatActivity() {
     private fun setAddButtonClickListener() = with(binding) {
         btnAddUser.setOnClickListener {
             val intent = Intent(this@UserDashboardActivity, UserFormActivity::class.java)
-            intent.putExtra("mode", "add")
+            intent.putExtra(OPERATION_TYPE, OperationType.ADD)
             formResultLauncher.launch(intent)
         }
     }
@@ -83,13 +88,13 @@ class UserDashboardActivity : AppCompatActivity() {
     private fun setUpdateUserClickListener() = with(binding) {
         btnUpdateUser.setOnClickListener {
             if (userMap.isEmpty()) {
-                showMessage(getString(R.string.user_list_is_empty))
+                handleError(R.string.user_list_is_empty)
                 return@setOnClickListener
             }
             val randomUser = userMap.values.random()
             val intent = Intent(this@UserDashboardActivity, UserFormActivity::class.java)
-            intent.putExtra("mode", "update")
-            intent.putExtra("user", randomUser)
+            intent.putExtra(OPERATION_TYPE, OperationType.UPDATE)
+            intent.putExtra(USER, randomUser)
             formResultLauncher.launch(intent)
         }
     }
@@ -102,18 +107,18 @@ class UserDashboardActivity : AppCompatActivity() {
         twDeletedUsers.text = getString(R.string.deleted_users, deletedUsers.size)
     }
 
-    private fun showMessage(message: String) = with(binding) {
-        twResultMessage.text = message
-    }
-
     private fun handleSuccess(@StringRes resId: Int) = with(binding) {
-        twResultMessage.text = getString(resId)
-        twResultMessage.setTextColor(Color.GREEN)
+        twStatusMessage.text = getString(resId)
+        twStatusMessage.setTextColor(Color.GREEN)
     }
 
     private fun handleError(@StringRes resId: Int) = with(binding) {
-        twResultMessage.text = getString(resId)
-        twResultMessage.setTextColor(Color.RED)
+        twStatusMessage.text = getString(resId)
+        twStatusMessage.setTextColor(Color.RED)
     }
 
+    companion object {
+        const val OPERATION_TYPE = "operation_type"
+        const val USER = "user"
+    }
 }
