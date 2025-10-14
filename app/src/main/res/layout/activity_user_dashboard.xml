@@ -74,4 +74,14 @@
         app:layout_constraintStart_toEndOf="@id/btnAddUser"
         app:layout_constraintTop_toBottomOf="@id/twDeletedUsers" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/twResultMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnUpdateUser" />
 </androidx.constraintlayout.widget.ConstraintLayout>

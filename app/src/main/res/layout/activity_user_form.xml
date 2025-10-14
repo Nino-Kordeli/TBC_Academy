@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".UserFormActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/backgroundImage"
@@ -77,7 +77,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddUser"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_margin="20dp"
         android:layout_marginTop="20dp"
@@ -85,15 +85,15 @@
         android:text="@string/add_user"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toStartOf="@id/btnRemoveUser"
-        app:layout_constraintHorizontalChainStyle="spread"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etAgeField" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRemoveUser"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_margin="20dp"
         android:layout_marginTop="20dp"
@@ -101,9 +101,9 @@
         android:text="@string/remove_user"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@id/btnAddUser"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etAgeField" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -116,6 +116,7 @@
         android:text="@string/update_user"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/etAgeField"
         app:layout_constraintTop_toBottomOf="@id/btnRemoveUser" />
 
@@ -123,33 +124,11 @@
         android:id="@+id/twResultMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="100dp"
         android:gravity="center_horizontal"
         android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="@id/btnUpdateUser"
-        app:layout_constraintStart_toStartOf="@id/btnUpdateUser"
-        app:layout_constraintTop_toBottomOf="@id/btnUpdateUser" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/twActiveUsers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="90dp"
-        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/twDeletedUsers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="60dp"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/twActiveUsers" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

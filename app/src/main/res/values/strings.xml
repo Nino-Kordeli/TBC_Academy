@@ -17,10 +17,11 @@
     <string name="user_deleted_successfully">User Deleted Successfully</string>
     <string name="user_doesn_t_exist">User does not exist</string>
     <string name="user_not_found">User not found</string>
-    <string name="active_users">Active users: %1$d</string>
+    <string name="active_users">Active Users: %1$d</string>
     <string name="user_updated_successfully">User updated successfully</string>
     <string name="user_updated">User updated</string>
     <string name="user_already_exists">User already exists</string>
     <string name="invalid_email">Invalid email</string>
-    <string name="deleted_users">Deleted users: %1$s</string>
+    <string name="deleted_users">Deleted Users: %1$d</string>
+    <string name="user_list_is_empty">User list is empty</string>
 </resources>
