@@ -20,7 +20,13 @@ class UserSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserSearchBinding
 
     private val users = mutableListOf(
-        User(1, "გრიშა", "ონიანი", 1724647601641, "სტალინის სახლმუზეუმი", "grisha@mail.ru"),
+        User(
+            1, "გრიშა",
+            "ონიანი",
+            1724647601641,
+            "სტალინის სახლმუზეუმი",
+            "grisha@mail.ru"
+        ),
         User(
             2,
             "Jemal",
@@ -29,9 +35,29 @@ class UserSearchActivity : AppCompatActivity() {
             "თბილისი, ლილოს მიტოვებული ქარხანა",
             "jemal@gmail.com"
         ),
-        User(2, "Omger", "Kakauridze", 1724647701641, "თბილისი, ასათიანი 18", "omger@gmail.com"),
-        User(32, "ბორის", "გარუჩავა", 1714947701641, "თბილისი, იაშვილი 14", ""),
-        User(1, "აბთო", "სიხარულიძე", 1711947701641, "ფოთი", "tebzi@gmail.com", null)
+        User(
+            2,
+            "Omger",
+            "Kakauridze",
+            1724647701641,
+            "თბილისი, ასათიანი 18",
+            "omger@gmail.com"
+        ),
+        User(
+            32, "ბორის",
+            "გარუჩავა",
+            1714947701641,
+            "თბილისი, იაშვილი 14",
+            ""
+        ),
+        User(
+            1, "აბთო",
+            "სიხარულიძე",
+            1711947701641,
+            "ფოთი",
+            "tebzi@gmail.com",
+            null
+        )
     )
 
     private val launcher = registerForActivityResult(
@@ -89,15 +115,17 @@ class UserSearchActivity : AppCompatActivity() {
     }
 
     private fun searchUser(query: String): User? {
+        val terms = query.trim().lowercase(Locale.getDefault()).split(" ")
         return users.find { user ->
-            listOf(
-                user.firstName,
-                user.lastName,
-                user.email,
-                formatBirthday(user.birthday),
-                user.address,
-                user.desc
-            ).any { it?.contains(query, ignoreCase = true) == true }
+            val userFields = listOf(
+                user.firstName.lowercase(),
+                user.lastName.lowercase(),
+                user.email.lowercase(),
+                formatBirthday(user.birthday).lowercase(),
+                user.address.lowercase(),
+                user.desc?.lowercase() ?: ""
+            )
+            terms.all { term -> userFields.any { it.contains(term) } }
         }
     }
 
