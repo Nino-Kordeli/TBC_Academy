@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:background="@color/white"
         android:hint="@string/firstname"
         android:inputType="text"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:hint="@string/lastname"
         android:inputType="text"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:hint="@string/birthday"
         android:inputType="text"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:hint="@string/address"
         android:inputType="text"
@@ -60,22 +60,45 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:hint="@string/email"
         android:inputType="text"
         android:padding="15dp"
         app:layout_constraintTop_toBottomOf="@id/etAddressField" />
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etDesc"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:hint="@string/desc"
+        android:inputType="text"
+        android:padding="15dp"
+        app:layout_constraintTop_toBottomOf="@id/etEmailField" />
+
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFieldButtonAdd"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginHorizontal="110dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:text="@string/add_user"
         android:textAllCaps="false"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/etEmailField" />
+        app:layout_constraintTop_toBottomOf="@id/etDesc" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFieldButtonCancel"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="110dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/btnFieldButtonAdd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

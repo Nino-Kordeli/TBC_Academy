@@ -8,4 +8,9 @@
     <string name="birthday">Birthday</string>
     <string name="address">Address</string>
     <string name="email">Email</string>
+    <string name="user_not_found">User not found</string>
+    <string name="cancel">Cancel</string>
+    <string name="desc">Desc</string>
+    <string name="lastname_is_required">Lastname is required</string>
+    <string name="firstname_is_required">Firstname is required</string>
 </resources>

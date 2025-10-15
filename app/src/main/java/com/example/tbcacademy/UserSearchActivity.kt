@@ -1,6 +1,5 @@
 package com.example.tbcacademy
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -63,20 +62,22 @@ class UserSearchActivity : AppCompatActivity() {
     private val launcher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
+        if (result.resultCode == RESULT_OK) {
             val newUser = result.data?.getParcelableExtra("newUser", User::class.java)
             val searchText = result.data?.getStringExtra("searchText")
             if (newUser != null) users.add(newUser)
 
-            if (!searchText.isNullOrEmpty()) {
-                binding.etSearchField.setText(searchText)
-                val user = searchUser(searchText)
-                if (user != null) {
-                    binding.tvMessage.text = formatUser(user)
-                    binding.btnAddNewUser.hide()
-                } else {
-                    binding.tvMessage.text = getString(R.string.user_not_found)
-                    binding.btnAddNewUser.show()
+            binding.apply {
+                if (!searchText.isNullOrEmpty()) {
+                    etSearchField.setText(searchText)
+                    val user = searchUser(searchText)
+                    if (user != null) {
+                        tvMessage.text = formatUser(user)
+                        btnAddNewUser.hide()
+                    } else {
+                        tvMessage.text = getString(R.string.user_not_found)
+                        btnAddNewUser.show()
+                    }
                 }
             }
         }
@@ -88,25 +89,26 @@ class UserSearchActivity : AppCompatActivity() {
         binding = ActivityUserSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnAddNewUser.hide()
+        binding.apply {
+            btnAddNewUser.hide()
 
-        binding.etSearchField.addTextChangedListener { editable ->
-            val query = editable.toString()
-            val user = searchUser(query)
-            if (user != null) {
-                binding.tvMessage.text = formatUser(user)
-                binding.btnAddNewUser.hide()
-            } else {
-                binding.tvMessage.text = getString(R.string.user_not_found)
-                binding.btnAddNewUser.show()
+            etSearchField.addTextChangedListener { editable ->
+                val query = editable.toString()
+                val user = searchUser(query)
+                if (user != null) {
+                    tvMessage.text = formatUser(user)
+                    btnAddNewUser.hide()
+                } else {
+                    tvMessage.text = getString(R.string.user_not_found)
+                    btnAddNewUser.show()
+                }
+            }
+
+            btnAddNewUser.setOnClickListener {
+                val intent = Intent(this@UserSearchActivity, AddUserActivity::class.java)
+                launcher.launch(intent)
             }
         }
-
-        binding.btnAddNewUser.setOnClickListener {
-            val intent = Intent(this, AddUserActivity::class.java)
-            launcher.launch(intent)
-        }
-
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

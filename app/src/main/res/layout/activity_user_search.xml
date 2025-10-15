@@ -19,10 +19,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
-        android:textSize="35sp"
+        android:gravity="center"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/etSearchField"
         app:layout_constraintStart_toStartOf="@id/etSearchField"
@@ -30,6 +32,7 @@
         tools:text="User not found" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddNewUser"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginHorizontal="110dp"
@@ -38,6 +41,5 @@
         android:text="@string/add_new_user"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
