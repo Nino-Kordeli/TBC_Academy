@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.tbcacademy.databinding.ActivityMainBinding
-import com.example.tbcacademy.utils.ui.hideKeyboard
-import com.example.tbcacademy.utils.ui.trimmedTextValue
+import com.example.tbcacademy.utils.extensions.hideKeyboard
+import com.example.tbcacademy.utils.extensions.trimmedTextValue
 import com.example.tbcacademy.utils.validation.isValidEmail
 
 class MainActivity : AppCompatActivity() {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } ?: return@setOnClickListener
 
-            if (!email.isValidEmail()) {
+            if (!isValidEmail(email)) {
                 handleError(R.string.invalid_email)
                 return@setOnClickListener
             }
