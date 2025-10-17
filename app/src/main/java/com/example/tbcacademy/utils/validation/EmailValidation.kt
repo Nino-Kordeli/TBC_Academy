@@ -5,6 +5,6 @@ package com.example.tbcacademy.utils.validation
  *
  * @return `true` if the string matches a valid email pattern, `false` otherwise.
  */
-fun String.isValidEmail(): Boolean {
-    return android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+fun isValidEmail(email: String): Boolean {
+    return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }
