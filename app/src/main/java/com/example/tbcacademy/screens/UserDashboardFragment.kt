@@ -11,7 +11,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tbcacademy.R
+import com.example.tbcacademy.UserAdapter
 import com.example.tbcacademy.databinding.FragmentUserDashboardBinding
 import com.example.tbcacademy.model.OperationType
 import com.example.tbcacademy.model.User
@@ -20,6 +22,7 @@ class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
 
     private val userMap = mutableMapOf<String, User>()
     private val deletedUsers = mutableListOf<User>()
+    private lateinit var adapter: UserAdapter
 
     override fun inflateBinding(
         inflater: LayoutInflater,
@@ -31,6 +34,7 @@ class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setRecyclerView()
         setListeners()
         showActiveUsers()
         showDeletedUsers()
@@ -43,6 +47,20 @@ class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
         }
     }
 
+    private fun setRecyclerView() = with(binding) {
+        adapter = UserAdapter { user ->
+            findNavController().navigate(
+                UserDashboardFragmentDirections.actionUserDashboardFragmentToUserFormFragment(
+                    operationType = OperationType.UPDATE,
+                    user = user
+                )
+            )
+        }
+        rvUsers.adapter = adapter
+        rvUsers.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+    }
+
     private fun setListeners() = with(binding) {
         setBtnAddUserListener()
         setBtnUpdateUser()
@@ -50,7 +68,7 @@ class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
 
     private fun listenForFormResults() {
         setFragmentResultListener("userFormResult") { _, bundle ->
-            val operationType = bundle.getSerializable("operationType", OperationType::class.java)
+            val operationType = bundle.getParcelable("operationType", OperationType::class.java)
                 ?: return@setFragmentResultListener
             val user = bundle.getParcelable("user", User::class.java)
                 ?: return@setFragmentResultListener
@@ -83,6 +101,9 @@ class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
                 handleSuccess(R.string.user_updated_successfully)
             }
         }
+        adapter.submitList(userMap.values.toList())
+        showActiveUsers()
+        showDeletedUsers()
     }
 
     private fun setBtnAddUserListener() = with(binding) {
