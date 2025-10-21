@@ -1,10 +1,11 @@
-package com.example.tbcacademy
+package com.example.tbcacademy.screens.dashboard.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tbcacademy.R
 import com.example.tbcacademy.databinding.ItemUserBinding
 import com.example.tbcacademy.model.User
 

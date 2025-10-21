@@ -1,4 +1,4 @@
-package com.example.tbcacademy.screens
+package com.example.tbcacademy.screens.form
 
 import android.os.Bundle
 import android.view.LayoutInflater

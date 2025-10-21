@@ -1,6 +1,6 @@
-package com.example.tbcacademy.screens
+package com.example.tbcacademy.screens.dashboard
 
-import BaseFragment
+import com.example.tbcacademy.common.BaseFragment
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,10 +13,10 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tbcacademy.R
-import com.example.tbcacademy.UserAdapter
 import com.example.tbcacademy.databinding.FragmentUserDashboardBinding
 import com.example.tbcacademy.model.OperationType
 import com.example.tbcacademy.model.User
+import com.example.tbcacademy.screens.dashboard.adapter.UserAdapter
 
 class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
 
@@ -57,13 +57,32 @@ class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
             )
         }
         rvUsers.adapter = adapter
-        rvUsers.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rvUsers.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun setListeners() = with(binding) {
-        setBtnAddUserListener()
-        setBtnUpdateUser()
+        btnAddUser.setOnClickListener {
+            findNavController().navigate(
+                UserDashboardFragmentDirections.actionUserDashboardFragmentToUserFormFragment(
+                    operationType = OperationType.ADD,
+                    user = null
+                )
+            )
+        }
+
+        btnUpdateUser.setOnClickListener {
+            if (userMap.isEmpty()) {
+                handleError(R.string.user_list_is_empty)
+                return@setOnClickListener
+            }
+            val randomUser = userMap.values.random()
+            findNavController().navigate(
+                UserDashboardFragmentDirections.actionUserDashboardFragmentToUserFormFragment(
+                    operationType = OperationType.UPDATE,
+                    user = randomUser
+                )
+            )
+        }
     }
 
     private fun listenForFormResults() {
@@ -84,20 +103,14 @@ class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
                     userMap[user.email] = user
                     handleSuccess(R.string.user_added_successfully)
                 }
-                showActiveUsers()
             }
-
             OperationType.REMOVE -> {
                 userMap.remove(user.email)
                 deletedUsers.add(user)
-                showActiveUsers()
-                showDeletedUsers()
                 handleSuccess(R.string.user_removed)
             }
-
             OperationType.UPDATE -> {
                 userMap[user.email] = user
-                showActiveUsers()
                 handleSuccess(R.string.user_updated_successfully)
             }
         }
@@ -106,48 +119,21 @@ class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
         showDeletedUsers()
     }
 
-    private fun setBtnAddUserListener() = with(binding) {
-        btnAddUser.setOnClickListener {
-            findNavController().navigate(
-                UserDashboardFragmentDirections.actionUserDashboardFragmentToUserFormFragment(
-                    operationType = OperationType.ADD,
-                    user = null
-                )
-            )
-        }
+    private fun showActiveUsers() {
+        binding.twActiveUsers.text = getString(R.string.active_users, userMap.size)
     }
 
-    private fun setBtnUpdateUser() = with(binding) {
-        btnUpdateUser.setOnClickListener {
-            if (userMap.isEmpty()) {
-                handleError(R.string.user_list_is_empty)
-                return@setOnClickListener
-            }
-            val randomUser = userMap.values.random()
-            findNavController().navigate(
-                UserDashboardFragmentDirections.actionUserDashboardFragmentToUserFormFragment(
-                    operationType = OperationType.UPDATE,
-                    user = randomUser
-                )
-            )
-        }
+    private fun showDeletedUsers() {
+        binding.twDeletedUsers.text = getString(R.string.deleted_users, deletedUsers.size)
     }
 
-    private fun showActiveUsers() = with(binding) {
-        twActiveUsers.text = getString(R.string.active_users, userMap.size)
+    private fun handleSuccess(@StringRes resId: Int) {
+        binding.twStatusMessage.text = getString(resId)
+        binding.twStatusMessage.setTextColor(Color.GREEN)
     }
 
-    private fun showDeletedUsers() = with(binding) {
-        twDeletedUsers.text = getString(R.string.deleted_users, deletedUsers.size)
-    }
-
-    private fun handleSuccess(@StringRes resId: Int) = with(binding) {
-        twStatusMessage.text = getString(resId)
-        twStatusMessage.setTextColor(Color.GREEN)
-    }
-
-    private fun handleError(@StringRes resId: Int) = with(binding) {
-        twStatusMessage.text = getString(resId)
-        twStatusMessage.setTextColor(Color.RED)
+    private fun handleError(@StringRes resId: Int) {
+        binding.twStatusMessage.text = getString(resId)
+        binding.twStatusMessage.setTextColor(Color.RED)
     }
 }

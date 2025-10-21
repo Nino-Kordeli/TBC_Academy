@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/userDashboardFragment"
-        android:name="com.example.tbcacademy.screens.UserDashboardFragment"
+        android:name="com.example.tbcacademy.screens.dashboard.UserDashboardFragment"
         android:label="fragment_user_dashboard"
         tools:layout="@layout/fragment_user_dashboard">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/userFormFragment"
-        android:name="com.example.tbcacademy.screens.UserFormFragment"
+        android:name="com.example.tbcacademy.screens.form.UserFormFragment"
         android:label="fragment_user_form"
         tools:layout="@layout/fragment_user_form">
 
