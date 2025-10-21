@@ -1,5 +1,6 @@
 package com.example.tbcacademy.screens
 
+import BaseFragment
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
@@ -16,20 +16,20 @@ import com.example.tbcacademy.databinding.FragmentUserDashboardBinding
 import com.example.tbcacademy.model.OperationType
 import com.example.tbcacademy.model.User
 
-class UserDashboardFragment : Fragment() {
-
-    private var _binding: FragmentUserDashboardBinding? = null
-    private val binding get() = _binding!!
+class UserDashboardFragment : BaseFragment<FragmentUserDashboardBinding>() {
 
     private val userMap = mutableMapOf<String, User>()
     private val deletedUsers = mutableListOf<User>()
 
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUserDashboardBinding.inflate(inflater, container, false)
+        container: ViewGroup?
+    ): FragmentUserDashboardBinding {
+        return FragmentUserDashboardBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setListeners()
         showActiveUsers()
@@ -41,8 +41,6 @@ class UserDashboardFragment : Fragment() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        return binding.root
     }
 
     private fun setListeners() = with(binding) {
@@ -130,10 +128,5 @@ class UserDashboardFragment : Fragment() {
     private fun handleError(@StringRes resId: Int) = with(binding) {
         twStatusMessage.text = getString(resId)
         twStatusMessage.setTextColor(Color.RED)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

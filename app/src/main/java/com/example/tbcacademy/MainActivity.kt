@@ -1,9 +1,8 @@
-package com.example.tbcacademy.screens
+package com.example.tbcacademy
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import com.example.tbcacademy.R
 import com.example.tbcacademy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
