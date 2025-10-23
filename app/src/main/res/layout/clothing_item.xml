@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="150dp"
+        android:layout_height="210dp"
+        android:background="@drawable/item_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivModelGirl"
+        android:layout_width="150dp"
+        android:layout_height="210dp"
+        android:scaleType="fitEnd"
+        android:src="@drawable/girl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivBackground" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/favorites_circle"
+        android:padding="12dp"
+        android:src="@drawable/heart"
+        app:layout_constraintBottom_toBottomOf="@id/ivBackground"
+        app:layout_constraintStart_toStartOf="@id/ivBackground" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvItemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="#96A7AF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/ivBackground"
+        app:layout_constraintTop_toBottomOf="@id/ivBackground"
+        tools:text="Belt suit blazer" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tvItemTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvItemTitle"
+        tools:text="$120" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
