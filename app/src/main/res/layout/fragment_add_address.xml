@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?><?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AddAddressFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBackButton"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="51dp"
+        android:background="@drawable/back_button_design"
+        android:elevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="6dp"
+        android:layout_height="11dp"
+        android:elevation="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivBackButton"
+        app:layout_constraintEnd_toEndOf="@id/ivBackButton"
+        app:layout_constraintStart_toStartOf="@id/ivBackButton"
+        app:layout_constraintTop_toTopOf="@id/ivBackButton"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAddFragmentTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/product_sans_regular"
+        android:text="@string/add_new_address"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etAddressTitleField"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="33dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/product_sans_light"
+        android:hint="@string/address_title"
+        android:inputType="text"
+        android:paddingStart="4dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="1dp"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tvAddFragmentTitleText" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etAddressDetailsField"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginHorizontal="33dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/product_sans_light"
+        android:hint="@string/address_details"
+        android:inputType="text"
+        android:paddingStart="4dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="1dp"
+        android:textColorHint="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/etAddressTitleField" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddAddressDetails"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="86dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/add_button_design"
+        android:text="@string/add"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
