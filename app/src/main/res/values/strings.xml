@@ -5,7 +5,9 @@
     <string name="edit"><u>Edit</u></string>
     <string name="delivery_address">Delivery address</string>
     <string name="add_new_address">Add new address</string>
-    <string name="address_title">Address Title</string>
     <string name="address_details">Address Details</string>
+    <string name="address_title">Address Title</string>
+    <string name="edit_address">Edit Address</string>
+    <string name="save">Save</string>
     <string name="add">Add</string>
 </resources>

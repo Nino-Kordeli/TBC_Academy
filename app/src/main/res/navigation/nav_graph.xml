@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/deliveryAddressFragment">
 
+    <fragment
+        android:id="@+id/deliveryAddressFragment"
+        android:name="com.example.tbcacademy.screen.address_list.DeliveryAddressFragment"
+        android:label="fragment_delivery_address"
+        tools:layout="@layout/fragment_delivery_address">
+        <action
+            android:id="@+id/action_deliveryAddressFragment_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addAddressFragment"
+        android:name="com.example.tbcacademy.screen.address_add.AddAddressFragment"
+        android:label="fragment_add_address"
+        tools:layout="@layout/fragment_add_address">
+        <argument
+            android:name="address"
+            app:argType="com.example.tbcacademy.screen.address_add.model.Address"
+            app:nullable="true" />
+        <argument
+            android:name="isEdit"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_addAddressFragment_to_deliveryAddressFragment"
+            app:destination="@id/deliveryAddressFragment" />
+    </fragment>
 </navigation>

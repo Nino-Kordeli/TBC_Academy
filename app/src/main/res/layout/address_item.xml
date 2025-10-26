@@ -3,26 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingStart="9.5dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="9.5dp"
+    android:paddingBottom="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAddressItem"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="110dp"
         android:layout_marginHorizontal="30dp"
-        android:elevation="10dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/radioButton"
         android:layout_width="26dp"
         android:layout_height="24dp"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="22dp"
         android:elevation="11dp"
-        app:layout_constraintStart_toStartOf="@id/cvAddressItem"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/cvAddressItem" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -61,28 +68,34 @@
         tools:text="My Office" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvAddressDetails"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="-7dp"
         android:layout_marginTop="17dp"
+        android:layout_marginEnd="60dp"
         android:elevation="11dp"
+        android:ellipsize="end"
         android:fontFamily="@font/product_sans_light"
-        android:textColor="#777E90"
+        android:maxLines="2"
+        android:textColor="@color/grey"
         android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/cvAddressItem"
         app:layout_constraintStart_toStartOf="@id/ivBuildingIcon"
         app:layout_constraintTop_toBottomOf="@id/tvAddressName"
         tools:text="SBI Building, street 3, Software Park" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:layout_marginEnd="23dp"
+        android:layout_marginEnd="53dp"
         android:elevation="11dp"
         android:fontFamily="@font/product_sans_light"
         android:text="@string/edit"
-        android:textColor="#F80000"
-        app:layout_constraintEnd_toEndOf="@id/cvAddressItem"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/cvAddressItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
