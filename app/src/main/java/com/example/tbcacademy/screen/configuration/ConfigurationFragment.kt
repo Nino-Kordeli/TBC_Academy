@@ -1,13 +1,13 @@
-package com.example.tbcacademy
+package com.example.tbcacademy.screen.configuration
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentConfigurationBinding
 import com.example.tbcacademy.utils.extensions.showSnackBar
-
 
 class ConfigurationFragment : BaseFragment<FragmentConfigurationBinding>() {
 
@@ -18,7 +18,7 @@ class ConfigurationFragment : BaseFragment<FragmentConfigurationBinding>() {
         return FragmentConfigurationBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnStartGame.setOnClickListener {

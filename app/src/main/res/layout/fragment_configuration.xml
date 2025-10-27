@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_pink"
-    tools:context=".ConfigurationFragment">
+    tools:context=".screen.configuration.ConfigurationFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitleText"

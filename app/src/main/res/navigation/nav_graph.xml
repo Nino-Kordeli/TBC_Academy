@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/configurationFragment"
-        android:name="com.example.tbcacademy.ConfigurationFragment"
+        android:name="com.example.tbcacademy.screen.configuration.ConfigurationFragment"
         android:label="fragment_configuration"
         tools:layout="@layout/fragment_configuration">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.tbcacademy.GameFragment"
+        android:name="com.example.tbcacademy.screen.game.GameFragment"
         android:label="fragment_game"
         tools:layout="@layout/fragment_game">
         <argument
