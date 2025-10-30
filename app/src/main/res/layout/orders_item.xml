@@ -19,17 +19,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvOrderId"
+        android:id="@+id/tvOrderIdText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="18dp"
         android:elevation="2dp"
+        android:fontFamily="@font/product_sans_regular"
+        android:text="@string/order"
         android:textColor="@color/black"
+        android:textFontWeight="700"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/orderItem"
-        app:layout_constraintTop_toTopOf="@id/orderItem"
-        tools:text="Order #1524" />
+        app:layout_constraintTop_toTopOf="@id/orderItem" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvOrderId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:elevation="2dp"
+        android:fontFamily="@font/product_sans_regular"
+        android:textColor="@color/black"
+        android:textFontWeight="700"
+        app:layout_constraintBottom_toBottomOf="@id/tvOrderIdText"
+        app:layout_constraintStart_toEndOf="@id/tvOrderIdText"
+        app:layout_constraintTop_toTopOf="@id/tvOrderIdText"
+        tools:text="#498735389" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDate"
@@ -38,7 +54,9 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="12dp"
         android:elevation="2dp"
-        android:textColor="#777E90"
+        android:fontFamily="@font/product_sans_medium"
+        android:textColor="@color/grey"
+        android:textFontWeight="500"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/orderItem"
         app:layout_constraintTop_toTopOf="@id/orderItem"
@@ -50,15 +68,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:elevation="2dp"
+        android:fontFamily="@font/product_sans_medium"
         android:text="@string/tracking_number"
+        android:textColor="@color/grey"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/tvOrderId"
-        app:layout_constraintTop_toBottomOf="@id/tvOrderId" />
+        app:layout_constraintStart_toStartOf="@id/tvOrderIdText"
+        app:layout_constraintTop_toBottomOf="@id/tvOrderIdText" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTrackingNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="2dp"
+        android:fontFamily="@font/product_sans_medium"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/tvTrackingNumberText"
@@ -72,17 +94,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:elevation="2dp"
+        android:fontFamily="@font/product_sans_medium"
         android:text="@string/quantity"
-        android:textColor="#777E90"
+        android:textColor="@color/grey"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tvTrackingNumberText"
         app:layout_constraintTop_toBottomOf="@id/tvTrackingNumberText" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvquantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
         android:layout_marginStart="3dp"
+        android:elevation="2dp"
+        android:fontFamily="@font/product_sans_medium"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/tvQuantityText"
@@ -94,10 +119,11 @@
         android:id="@+id/tvStatusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="22dp"
         android:elevation="2dp"
-        android:textColor="#CF6212"
+        android:fontFamily="@font/product_sans_medium"
+        android:textColor="@color/orange"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/orderItem"
         app:layout_constraintStart_toStartOf="@id/tvQuantityText"
@@ -111,6 +137,8 @@
         android:layout_marginTop="57dp"
         android:layout_marginEnd="20dp"
         android:elevation="2dp"
+        android:fontFamily="@font/product_sans_medium"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/orderItem"
         app:layout_constraintTop_toBottomOf="@id/tvDate"
@@ -119,25 +147,28 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
-        android:text="@string/subtotal"
         android:layout_marginEnd="4dp"
-        android:textColor="#777E90"
+        android:elevation="2dp"
+        android:fontFamily="@font/product_sans_medium"
+        android:text="@string/subtotal"
+        android:textColor="@color/grey"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/tvPrice"
         app:layout_constraintEnd_toStartOf="@id/tvPrice"
         app:layout_constraintTop_toTopOf="@id/tvPrice" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDetails"
         android:layout_width="100dp"
         android:layout_height="35dp"
         android:layout_marginEnd="12dp"
         android:background="@drawable/button_design"
+        android:fontFamily="@font/product_sans_medium"
         android:text="@string/details"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="@id/orderItem"
+        app:layout_constraintBottom_toBottomOf="@id/tvStatusText"
         app:layout_constraintEnd_toEndOf="@id/orderItem"
-        app:layout_constraintTop_toBottomOf="@id/tvPrice" />
+        app:layout_constraintTop_toTopOf="@id/tvStatusText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
