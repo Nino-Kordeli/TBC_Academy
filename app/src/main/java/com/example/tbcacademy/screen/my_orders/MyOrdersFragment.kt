@@ -1,30 +1,37 @@
 package com.example.tbcacademy.screen.my_orders
 
 import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.example.tbcacademy.R
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import com.example.tbcacademy.common.BaseFragment
+import com.example.tbcacademy.databinding.FragmentMyOrdersBinding
+import com.example.tbcacademy.screen.active_orders.ActiveOrdersFragment
+import com.example.tbcacademy.screen.completed_orders.CompletedOrdersFragment
 import com.example.tbcacademy.screen.view_pager.adapter.OrdersPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.example.tbcacademy.screen.my_orders.model.Status
 
-class MyOrdersFragment : Fragment(R.layout.fragment_my_orders) {
+class MyOrdersFragment : BaseFragment<FragmentMyOrdersBinding>() {
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentMyOrdersBinding {
+        return FragmentMyOrdersBinding.inflate(inflater, container, false)
+    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewPager = view.findViewById<ViewPager2>(R.id.viewPager)
-        viewPager.adapter = OrdersPagerAdapter(this)
-        viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        val fragments = listOf(
+            ActiveOrdersFragment.newInstance(Status.ACTIVE),
+            CompletedOrdersFragment()
+        )
 
-        val tabLayout =
-            view.findViewById<com.google.android.material.tabs.TabLayout>(R.id.tabLayout)
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> getString(R.string.active)
-                1 -> getString(R.string.completed)
-                else -> null
-            }.toString()
+        val adapter = OrdersPagerAdapter(this, fragments)
+        binding.viewPager.adapter = adapter
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = if (position == 0) "Active" else "Completed"
         }.attach()
     }
 }

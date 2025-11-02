@@ -10,7 +10,7 @@
         android:id="@+id/tvLeaveAReviewText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="12dp"
         android:text="@string/leave_a_review"
         android:textColor="@color/white"
         android:textSize="23sp"
@@ -23,16 +23,18 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="8dp"
         android:background="@color/grey"
         app:layout_constraintTop_toBottomOf="@id/tvLeaveAReviewText" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSingleItem"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
+        android:clipToPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topSeparator" />
 
     <View
@@ -40,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="8dp"
         android:background="@color/grey"
         app:layout_constraintTop_toBottomOf="@id/rvSingleItem" />
 
@@ -48,7 +50,7 @@
         android:id="@+id/tvHowIsOrderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:letterSpacing="-0.04"
         android:text="@string/how_is_your_order"
         android:textColor="@color/white"
@@ -61,7 +63,7 @@
         android:id="@+id/tvGiveRatingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="18dp"
         android:letterSpacing="-0.04"
         android:text="@string/please_give_your_rating_also_your_review"
         android:textColor="@color/lighter_grey"
@@ -74,8 +76,8 @@
         android:id="@+id/starRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="70dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginHorizontal="85dp"
+        android:layout_marginTop="18dp"
         android:numStars="5"
         android:stepSize="1"
         app:layout_constraintTop_toBottomOf="@id/tvGiveRatingText" />
@@ -85,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/review_field_design"
         android:hint="@string/write_your_review"
         android:paddingStart="20dp"
@@ -110,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="8dp"
         android:background="@color/grey"
         app:layout_constraintTop_toBottomOf="@id/etReviewField" />
 
@@ -119,7 +121,7 @@
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/review_button_design"
         android:text="@string/cancel"
         android:textAllCaps="false"
@@ -136,7 +138,7 @@
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/review_button_design"
         android:backgroundTint="@color/creamy_white"
         android:text="@string/submit"

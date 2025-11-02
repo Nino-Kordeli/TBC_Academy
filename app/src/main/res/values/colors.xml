@@ -8,4 +8,6 @@
     <color name="light_grey">#898c8f</color>
     <color name="lighter_grey">#d8d9dd</color>
     <color name="creamy_white">#fafafa</color>
+    <color name="blue">#2E4E92</color>
+    <color name="green">#68AD61</color>
 </resources>

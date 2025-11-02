@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tbcacademy.databinding.ActivityMainBinding
+import com.example.tbcacademy.screen.my_orders.MyOrdersFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -13,5 +14,9 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, MyOrdersFragment())
+            .commit()
     }
 }

@@ -12,4 +12,10 @@
     <string name="write_your_review">Write your review</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
+    <string name="please_provide_a_rating">Please provide a rating</string>
+    <string name="please_write_a_review">Please write a review</string>
+    <string name="review_submitted_successfully">Review submitted successfully</string>
+    <string name="buy_again">Buy Again</string>
+    <string name="leave_review" />
+    <string name="settings">Settings</string>
 </resources>
