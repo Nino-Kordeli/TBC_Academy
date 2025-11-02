@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.tbcacademy.R
-import com.example.tbcacademy.screen.adapter.OrdersPagerAdapter
+import com.example.tbcacademy.screen.view_pager.adapter.OrdersPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MyOrdersFragment : Fragment(R.layout.fragment_my_orders) {

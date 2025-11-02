@@ -1,4 +1,4 @@
-package com.example.tbcacademy.screen.adapter
+package com.example.tbcacademy.screen.view_pager.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
