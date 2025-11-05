@@ -1,48 +1,42 @@
 package com.example.tbcacademy.screen.chat
 
 import ChatViewModel
-import android.os.Bundle
-import android.view.View
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.tbcacademy.R
+import com.example.tbcacademy.common.BaseFragment
+import com.example.tbcacademy.databinding.FragmentChatBinding
 import com.example.tbcacademy.screen.chat.adapter.ChatAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class ChatFragment : Fragment(R.layout.fragment_chat) {
+class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private val viewModel: ChatViewModel by viewModels()
     private lateinit var adapter: ChatAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun inflateBinding(inflater: android.view.LayoutInflater, container: android.view.ViewGroup?) =
+        FragmentChatBinding.inflate(inflater, container, false)
+
+    override fun onViewCreated(view: android.view.View, savedInstanceState: android.os.Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val rvChat = view.findViewById<RecyclerView>(R.id.rvChatMessages)
-        val etMessage = view.findViewById<AppCompatEditText>(R.id.etChatField)
-        val btnSend = view.findViewById<AppCompatImageView>(R.id.btnSendButton)
-
         adapter = ChatAdapter()
-        rvChat.layoutManager = LinearLayoutManager(requireContext())
-        rvChat.adapter = adapter
+        binding.rvChatMessages.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvChatMessages.adapter = adapter
 
-        btnSend.setOnClickListener {
-            val text = etMessage.text.toString()
+        binding.btnSendButton.setOnClickListener {
+            val text = binding.etChatField.text.toString()
             if (text.isNotBlank()) {
                 viewModel.sendMessage(text)
-                etMessage.text?.clear()
+                binding.etChatField.text?.clear()
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.messages.collectLatest { messages ->
                 adapter.submitList(messages) {
-                    rvChat.scrollToPosition(messages.size - 1)
+                    binding.rvChatMessages.scrollToPosition(messages.size - 1)
                 }
             }
         }
