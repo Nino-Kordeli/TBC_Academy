@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">TBC Academy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint">Hint</string>
+    <string name="username">Username</string>
+    <string name="register">Register</string>
+    <string name="e_auth">E AUTH</string>
+    <string name="register_"><![CDATA[Register ->]]></string>
+    <string name="registration_successful">Registration successful</string>
+    <string name="registration_successful_">Registration successful</string>
 </resources>
