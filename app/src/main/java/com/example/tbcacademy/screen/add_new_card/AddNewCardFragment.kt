@@ -15,7 +15,11 @@ import com.example.tbcacademy.databinding.FragmentAddNewCardBinding
 import com.example.tbcacademy.screen.card_management.model.Card
 import com.example.tbcacademy.screen.card_management.model.CardType
 import com.example.tbcacademy.screen.card_management.vm.CardViewModel
+import com.example.tbcacademy.utils.extensions.showSnackBar
 import com.example.tbcacademy.utils.extensions.textValue
+import com.google.android.material.snackbar.Snackbar
+import com.squareup.moshi.Moshi
+import java.io.File
 
 class AddNewCardFragment : BaseFragment<FragmentAddNewCardBinding>() {
 
@@ -61,6 +65,21 @@ class AddNewCardFragment : BaseFragment<FragmentAddNewCardBinding>() {
         setupTextWatchers()
     }
 
+    private fun saveCardToJsonFile(card: Card) {
+        val moshi = Moshi.Builder().build()
+        val adapter = moshi.adapter(Card::class.java)
+        val json = adapter.toJson(card)
+
+        try {
+            val file = File(requireContext().filesDir, "cards.json")
+            file.appendText(json + "\n")
+            binding.root.showSnackBar("Card saved")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            binding.root.showSnackBar("Save failed", Snackbar.LENGTH_LONG)
+        }
+    }
+
     private fun setupDefaultPreview() = with(binding.layoutCardPreview) {
         tvCardHolderName.text = getString(R.string.card_holder)
         tvCardNumber.text = getString(R.string.stars_)
@@ -85,6 +104,7 @@ class AddNewCardFragment : BaseFragment<FragmentAddNewCardBinding>() {
             when (checkedId) {
                 R.id.rbVisa -> binding.layoutCardPreview.ivCardImage
                     .setImageResource(R.drawable.visa_card)
+
                 R.id.rbMastercard -> binding.layoutCardPreview.ivCardImage
                     .setImageResource(R.drawable.mastercard_card)
             }
@@ -101,6 +121,7 @@ class AddNewCardFragment : BaseFragment<FragmentAddNewCardBinding>() {
 
         binding.etExpiryField.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
             override fun afterTextChanged(s: Editable?) {
                 val raw = s.toString().replace("/", "")
@@ -150,22 +171,27 @@ class AddNewCardFragment : BaseFragment<FragmentAddNewCardBinding>() {
             name.isEmpty() -> {
                 etCardNameField.error = getString(R.string.enter_name); false
             }
+
             number.length != 16 -> {
                 etCardNumberField.error = getString(R.string._16_digits); false
             }
+
             !expiry.matches(Regex("""\d{2}/\d{2}""")) -> {
                 etExpiryField.error = getString(R.string._mm_yy_); false
             }
+
             cvv.length != 3 -> {
                 etCvv.error = getString(R.string._3_digits); false
             }
+
             else -> true
         }
     }
 
     private fun addCard() {
         val type = if (binding.rbVisa.isChecked) CardType.VISA else CardType.MASTERCARD
-        val bgRes = if (type == CardType.MASTERCARD) R.drawable.mastercard_card else R.drawable.visa_card
+        val bgRes =
+            if (type == CardType.MASTERCARD) R.drawable.mastercard_card else R.drawable.visa_card
 
         val card = Card(
             cardHolder = binding.etCardNameField.textValue().trim(),
@@ -177,6 +203,7 @@ class AddNewCardFragment : BaseFragment<FragmentAddNewCardBinding>() {
         )
 
         cardViewModel.addCard(card)
+        saveCardToJsonFile(card)
         findNavController().popBackStack()
     }
 }
