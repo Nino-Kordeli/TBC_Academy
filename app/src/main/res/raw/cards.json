@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "cardHolder": "Selena Gomez",
+    "cardNumber": "2341 5721 9830 1214",
+    "expirationDate": "12/28",
+    "cvv": "123",
+    "cardType": "MASTERCARD"
+  },
+  {
+    "id": 2,
+    "cardHolder": "Orlando Bloom",
+    "cardNumber": "4325 6774 7610 9876",
+    "expirationDate": "05/27",
+    "cvv": "621",
+    "cardType": "VISA"
+  },
+  {
+    "id": 3,
+    "cardHolder": "Alex Shadow",
+    "cardNumber": "9403 1530 2049 9876",
+    "expiry": "02/28",
+    "cvv": "456",
+    "cardType": "VISA"
+  },
+  {
+    "id": 4,
+    "cardHolder": "Alex Shadow",
+    "cardNumber": "9403 1530 2049 9876",
+    "expiry": "02/28",
+    "cvv": "456",
+    "cardType": "VISA"
+  }
+]

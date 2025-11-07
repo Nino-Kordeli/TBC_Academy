@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cardManagement">
+
+    <fragment
+        android:id="@+id/cardManagement"
+        android:name="com.example.tbcacademy.screen.card_management.CardManagementFragment"
+        android:label="Card Management">
+        <action
+            android:id="@+id/action_cardManagement_to_addNewCard"
+            app:destination="@id/addNewCardFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addNewCardFragment"
+        android:name="com.example.tbcacademy.screen.add_new_card.AddNewCardFragment"
+        android:label="Add New Card" />
 
 </navigation>

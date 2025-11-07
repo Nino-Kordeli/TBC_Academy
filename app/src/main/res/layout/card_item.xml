@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCardImage"
+        android:layout_width="320dp"
+        android:layout_height="191dp"
+        android:src="@drawable/mastercard_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="64dp"
+        android:inputType="number"
+        android:letterSpacing="0.2"
+        android:text="@string/stars"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivCardImage"
+        app:layout_constraintStart_toStartOf="@id/ivCardImage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCardholderNameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="31dp"
+        android:letterSpacing="0.04"
+        android:text="@string/cardholder_name"
+        android:textColor="@color/white"
+        android:textSize="9sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivCardImage"
+        app:layout_constraintStart_toStartOf="@id/ivCardImage"
+        tools:ignore="SmallSp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCardHolderName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/name"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@id/tvCardholderNameTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvCardholderNameTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvValidThroughTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="31dp"
+        android:text="@string/valid_thru"
+        android:textColor="@color/white"
+        android:textSize="9sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivCardImage"
+        app:layout_constraintEnd_toEndOf="@id/ivCardImage"
+        tools:ignore="SmallSp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvValidThrough"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/mm_yy"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@id/tvValidThroughTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvValidThroughTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

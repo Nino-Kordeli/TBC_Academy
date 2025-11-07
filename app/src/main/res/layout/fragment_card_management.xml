@@ -62,13 +62,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnBack" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpCards"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
         android:layout_marginTop="44dp"
-        android:orientation="horizontal"
+        android:layout_marginStart="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvAddNewCard" />
 
@@ -82,13 +82,16 @@
         android:text="@string/or_check_out_with"
         android:textFontWeight="400"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvCards" />
+        app:layout_constraintTop_toBottomOf="@id/vpCards" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPaymentMethod"
         android:layout_width="wrap_content"
-        android:layout_height="34dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="57dp"
-        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tcCheckOut" />
