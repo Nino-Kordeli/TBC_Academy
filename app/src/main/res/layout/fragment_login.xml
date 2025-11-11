@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.login.LoginFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLoginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="95dp"
+        android:fontFamily="roboto"
+        android:text="@string/login"
+        android:textFontWeight="500"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivManGoing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:src="@drawable/ic_login_man_going"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLoginText" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etUsernameFieldLogin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/design_light"
+        android:drawableStart="@drawable/ic_user"
+        android:drawablePadding="45dp"
+        android:hint="@string/username"
+        android:paddingStart="33dp"
+        android:paddingEnd="0dp"
+        android:textColorHint="#ac88f4"
+        app:layout_constraintTop_toBottomOf="@id/ivManGoing" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etPasswordFieldLogin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="46dp"
+        android:background="@drawable/design_light"
+        android:drawableStart="@drawable/ic_password"
+        android:drawableEnd="@drawable/ic_password_visibility"
+        android:drawablePadding="50dp"
+        android:hint="@string/password"
+        android:paddingStart="33dp"
+        android:paddingEnd="25dp"
+        android:textColorHint="#ac88f4"
+        app:layout_constraintTop_toBottomOf="@id/etUsernameFieldLogin" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/design_dark"
+        android:fontFamily="roboto"
+        android:text="@string/login"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textFontWeight="400"
+        android:textSize="23sp"
+        app:layout_constraintTop_toBottomOf="@id/etPasswordFieldLogin" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ellipse_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ellipse_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
