@@ -30,18 +30,19 @@
         app:layout_constraintTop_toBottomOf="@id/tvLoginText" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etUsernameFieldLogin"
+        android:id="@+id/etEmailFieldLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="26dp"
         android:background="@drawable/design_light"
-        android:drawableStart="@drawable/ic_user"
+        android:drawableStart="@drawable/ic_mail"
         android:drawablePadding="45dp"
-        android:hint="@string/username"
+        android:hint="@string/email"
         android:paddingStart="33dp"
         android:paddingEnd="0dp"
-        android:textColorHint="#ac88f4"
+        android:textColorHint="@color/light_purple"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/ivManGoing" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -55,12 +56,15 @@
         android:drawableEnd="@drawable/ic_password_visibility"
         android:drawablePadding="50dp"
         android:hint="@string/password"
+        android:inputType="textPassword"
         android:paddingStart="33dp"
         android:paddingEnd="25dp"
-        android:textColorHint="#ac88f4"
-        app:layout_constraintTop_toBottomOf="@id/etUsernameFieldLogin" />
+        android:textColorHint="@color/light_purple"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/etEmailFieldLogin" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"

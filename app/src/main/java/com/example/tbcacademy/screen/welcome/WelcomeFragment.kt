@@ -9,7 +9,6 @@ import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentWelcomeBinding
 
-
 class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, Nothing>() {
 
     override fun inflateBinding(

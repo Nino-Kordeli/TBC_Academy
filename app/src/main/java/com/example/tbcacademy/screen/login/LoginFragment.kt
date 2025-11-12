@@ -1,33 +1,66 @@
 package com.example.tbcacademy.screen.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentLoginBinding
+import com.example.tbcacademy.screen.login.vm.LoginUiState
 import com.example.tbcacademy.screen.login.vm.LoginViewModel
+import com.example.tbcacademy.utils.extensions.showSnackBar
+import com.example.tbcacademy.utils.extensions.trimmedTextValue
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
-    override val viewModel: LoginViewModel
-        get() = TODO("Not yet implemented")
+    override val viewModel: LoginViewModel by viewModels()
 
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentLoginBinding {
-        TODO("Not yet implemented")
+        return FragmentLoginBinding.inflate(inflater, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            btnLogin.setOnClickListener {
+                val email = etEmailFieldLogin.trimmedTextValue()
+                val password = etPasswordFieldLogin.trimmedTextValue()
+                viewModel.login(email = email, password = password)
+            }
+            observeUiState()
+        }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
+    private fun observeUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.uiState.collect { state ->
+                when (state) {
+                    is LoginUiState.Idle -> {}
+                    is LoginUiState.Loading -> {
+                        binding.root.showSnackBar("Loading")
+                    }
+
+                    is LoginUiState.Success -> {
+                        binding.root.showSnackBar("Login successful")
+                        findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
+                        viewModel.resetState()
+                    }
+
+                    is LoginUiState.Error -> {
+                        binding.root.showSnackBar(state.message)
+                        viewModel.resetState()
+                    }
+                }
+            }
+        }
+    }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screen.register.RegisterFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -35,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
-        android:textColorHint="#ac88f4"
         android:layout_marginTop="56dp"
         android:background="@drawable/design_light"
         android:drawableStart="@drawable/ic_mail"
@@ -44,15 +43,15 @@
         android:hint="@string/email"
         android:paddingStart="33dp"
         android:paddingEnd="0dp"
+        android:textColorHint="#ac88f4"
         android:textFontWeight="400"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/ivRegisterImage" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etUsernameField"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textColorHint="#ac88f4"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/design_light"
@@ -62,8 +61,9 @@
         android:hint="@string/username"
         android:paddingStart="33dp"
         android:paddingEnd="0dp"
+        android:textColorHint="#ac88f4"
         android:textFontWeight="400"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/etEmailField"
         tools:layout_editor_absoluteX="30dp" />
 
@@ -79,11 +79,12 @@
         android:drawablePadding="48dp"
         android:fontFamily="roboto"
         android:hint="@string/password"
+        android:inputType="textPassword"
         android:paddingStart="33dp"
         android:paddingEnd="25dp"
         android:textColorHint="#ac88f4"
         android:textFontWeight="400"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/etUsernameField"
         tools:layout_editor_absoluteX="60dp" />
 
