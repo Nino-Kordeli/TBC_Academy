@@ -1,4 +1,4 @@
-package com.example.tbcacademy.screen.welcome
+package com.example.tbcacademy.presentation.screens.welcome.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

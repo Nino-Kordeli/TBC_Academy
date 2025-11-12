@@ -1,9 +1,10 @@
-package com.example.tbcacademy.screen.register.vm
+package com.example.tbcacademy.presentation.screens.register.vm
 
+import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbcacademy.screen.data.remote.dto.RegisterResponse
-import com.example.tbcacademy.screen.data.repository.AuthRepository
+import com.example.tbcacademy.data.dto.RegisterResponse
+import com.example.tbcacademy.data.repository.AuthRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -86,7 +87,7 @@ class RegisterViewModel(
     }
 
     private fun isValidEmail(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     fun resetState() {

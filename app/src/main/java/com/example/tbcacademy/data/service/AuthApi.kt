@@ -1,10 +1,9 @@
-package com.example.tbcacademy.screen.data.remote
+package com.example.tbcacademy.data.service
 
-import com.example.tbcacademy.screen.data.remote.dto.AuthRequest
-import com.example.tbcacademy.screen.data.remote.dto.LoginResponse
-import com.example.tbcacademy.screen.data.remote.dto.RegisterResponse
+import com.example.tbcacademy.data.dto.AuthRequest
+import com.example.tbcacademy.data.dto.LoginResponse
+import com.example.tbcacademy.data.dto.RegisterResponse
 import retrofit2.Response
-
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST

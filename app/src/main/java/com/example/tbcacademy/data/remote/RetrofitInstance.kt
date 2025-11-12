@@ -1,5 +1,6 @@
-package com.example.tbcacademy.screen.data.remote
+package com.example.tbcacademy.data.remote
 
+import com.example.tbcacademy.data.service.AuthApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

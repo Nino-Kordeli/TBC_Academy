@@ -1,4 +1,4 @@
-package com.example.tbcacademy.screen.login
+package com.example.tbcacademy.presentation.screens.login.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,12 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentLoginBinding
-import com.example.tbcacademy.screen.login.vm.LoginUiState
-import com.example.tbcacademy.screen.login.vm.LoginViewModel
+import com.example.tbcacademy.presentation.screens.login.vm.LoginUiState
+import com.example.tbcacademy.presentation.screens.login.vm.LoginViewModel
 import com.example.tbcacademy.utils.extensions.showSnackBar
 import com.example.tbcacademy.utils.extensions.trimmedTextValue
 import kotlinx.coroutines.launch
-
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override val viewModel: LoginViewModel by viewModels()

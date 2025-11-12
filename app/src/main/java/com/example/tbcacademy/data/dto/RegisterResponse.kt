@@ -1,4 +1,4 @@
-package com.example.tbcacademy.screen.data.remote.dto
+package com.example.tbcacademy.data.dto
 
 data class RegisterResponse(
     val id: Int?,

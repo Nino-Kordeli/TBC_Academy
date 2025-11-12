@@ -1,9 +1,9 @@
-package com.example.tbcacademy.screen.login.vm
+package com.example.tbcacademy.presentation.screens.login.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbcacademy.screen.data.remote.dto.LoginResponse
-import com.example.tbcacademy.screen.data.repository.AuthRepository
+import com.example.tbcacademy.data.dto.LoginResponse
+import com.example.tbcacademy.data.repository.AuthRepository
 import com.example.tbcacademy.utils.validation.isValidEmail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

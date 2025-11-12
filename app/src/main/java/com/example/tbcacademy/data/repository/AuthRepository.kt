@@ -1,9 +1,9 @@
-package com.example.tbcacademy.screen.data.repository
+package com.example.tbcacademy.data.repository
 
-import com.example.tbcacademy.screen.data.remote.RetrofitInstance
-import com.example.tbcacademy.screen.data.remote.dto.AuthRequest
-import com.example.tbcacademy.screen.data.remote.dto.LoginResponse
-import com.example.tbcacademy.screen.data.remote.dto.RegisterResponse
+import com.example.tbcacademy.data.remote.RetrofitInstance
+import com.example.tbcacademy.data.dto.AuthRequest
+import com.example.tbcacademy.data.dto.LoginResponse
+import com.example.tbcacademy.data.dto.RegisterResponse
 import retrofit2.Response
 
 class AuthRepository {

@@ -1,4 +1,4 @@
-package com.example.tbcacademy.screen.register
+package com.example.tbcacademy.presentation.screens.register.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentRegisterBinding
-import com.example.tbcacademy.screen.register.vm.RegisterUiState
-import com.example.tbcacademy.screen.register.vm.RegisterViewModel
+import com.example.tbcacademy.presentation.screens.register.vm.RegisterUiState
+import com.example.tbcacademy.presentation.screens.register.vm.RegisterViewModel
 import com.example.tbcacademy.utils.extensions.showSnackBar
 import com.example.tbcacademy.utils.extensions.trimmedTextValue
 import kotlinx.coroutines.launch

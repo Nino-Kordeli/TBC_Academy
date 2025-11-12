@@ -6,7 +6,7 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.tbcacademy.screen.welcome.WelcomeFragment"
+        android:name="com.example.tbcacademy.presentation.screens.welcome.fragment.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.tbcacademy.screen.login.LoginFragment"
+        android:name="com.example.tbcacademy.presentation.screens.login.fragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.tbcacademy.screen.register.RegisterFragment"
+        android:name="com.example.tbcacademy.presentation.screens.register.fragment.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
