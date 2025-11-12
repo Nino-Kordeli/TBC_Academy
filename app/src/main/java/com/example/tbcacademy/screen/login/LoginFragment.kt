@@ -46,11 +46,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 when (state) {
                     is LoginUiState.Idle -> {}
                     is LoginUiState.Loading -> {
-                        binding.root.showSnackBar("Loading")
+                        binding.root.showSnackBar(getString(R.string.loading))
                     }
 
                     is LoginUiState.Success -> {
-                        binding.root.showSnackBar("Login successful")
+                        binding.root.showSnackBar(getString(R.string.login_successful))
                         findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
                         viewModel.resetState()
                     }

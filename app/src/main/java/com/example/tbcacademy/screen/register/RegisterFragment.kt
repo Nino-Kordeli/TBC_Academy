@@ -47,9 +47,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             viewModel.uiState.collect { state ->
                 when (state) {
                     is RegisterUiState.Idle -> {}
-                    is RegisterUiState.Loading -> binding.root.showSnackBar("Loading")
+                    is RegisterUiState.Loading -> binding.root.showSnackBar(getString(R.string.loading_))
                     is RegisterUiState.Success -> {
-                        binding.root.showSnackBar("Registration successful")
+                        binding.root.showSnackBar(getString(R.string.registration_successful))
                         findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
                         viewModel.resetState()
                     }
