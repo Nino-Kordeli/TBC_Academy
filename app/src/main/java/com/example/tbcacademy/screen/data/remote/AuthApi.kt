@@ -10,11 +10,11 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface AuthApi {
-    @Headers("x-api-key: reqres-free-v1")
-    @POST("api/register")
+    @Headers("x-api-key: reqres-free-v1","Content-Type: application/json")
+    @POST("/api/register")
     suspend fun register(@Body body: AuthRequest): Response<RegisterResponse>
 
-    @Headers("x-api-key: reqres-free-v1")
-    @POST("api/login")
+    @Headers("x-api-key: reqres-free-v1","Content-Type: application/json")
+    @POST("/api/login")
     suspend fun login(@Body body: AuthRequest): Response<LoginResponse>
 }
