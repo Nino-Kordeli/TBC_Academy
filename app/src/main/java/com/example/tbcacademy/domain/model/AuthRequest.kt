@@ -1,4 +1,4 @@
-package com.example.tbcacademy.data.dto
+package com.example.tbcacademy.domain.model
 
 data class AuthRequest(
     val email: String,

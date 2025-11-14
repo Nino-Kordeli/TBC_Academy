@@ -1,5 +1,5 @@
 package com.example.tbcacademy.data.dto
 
-data class LoginResponse(
+data class LoginResponseDto(
     val token:String?
 )

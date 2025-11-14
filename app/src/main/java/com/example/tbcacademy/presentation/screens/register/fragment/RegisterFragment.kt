@@ -10,15 +10,18 @@ import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentRegisterBinding
-import com.example.tbcacademy.presentation.screens.register.vm.RegisterUiState
+import com.example.tbcacademy.presentation.screens.register.model.RegisterUiState
 import com.example.tbcacademy.presentation.screens.register.vm.RegisterViewModel
+import com.example.tbcacademy.presentation.screens.register.vm.RegisterViewModelFactory
 import com.example.tbcacademy.utils.extensions.showSnackBar
 import com.example.tbcacademy.utils.extensions.trimmedTextValue
 import kotlinx.coroutines.launch
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel>() {
 
-    override val viewModel: RegisterViewModel by viewModels()
+    override val viewModel: RegisterViewModel by viewModels() {
+        RegisterViewModelFactory(requireContext())
+    }
 
     override fun inflateBinding(
         inflater: LayoutInflater,
@@ -50,7 +53,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
                     is RegisterUiState.Loading -> binding.root.showSnackBar(getString(R.string.loading_))
                     is RegisterUiState.Success -> {
                         binding.root.showSnackBar(getString(R.string.registration_successful))
-                        findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                         viewModel.resetState()
                     }
 

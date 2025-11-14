@@ -2,8 +2,10 @@ package com.example.tbcacademy.presentation.screens.login.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbcacademy.data.dto.LoginResponse
-import com.example.tbcacademy.data.repository.AuthRepository
+import com.example.tbcacademy.domain.model.AuthRequest
+import com.example.tbcacademy.domain.model.LoginResponse
+import com.example.tbcacademy.domain.repository.AuthRepository
+import com.example.tbcacademy.domain.repository.TokenRepository
 import com.example.tbcacademy.utils.validation.isValidEmail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +22,10 @@ sealed class LoginUiState {
     data class Error(val message: String) : LoginUiState()
 }
 
-class LoginViewModel(private val repository: AuthRepository = AuthRepository()) : ViewModel() {
+class LoginViewModel(
+    private val repository: AuthRepository,
+    private val tokenRepository: TokenRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
@@ -34,14 +39,13 @@ class LoginViewModel(private val repository: AuthRepository = AuthRepository()) 
 
         viewModelScope.launch {
             _uiState.value = LoginUiState.Loading
-
             try {
-                val response = repository.login(email.trim(), password)
+                val response = repository.login(AuthRequest(email.trim(), password))
                 handleResponse(response)
             } catch (io: IOException) {
                 _uiState.value = LoginUiState.Error("Network error")
             } catch (t: Throwable) {
-                _uiState.value = LoginUiState.Error("An unexpected error occurred")
+                _uiState.value = LoginUiState.Error("Unexpected error: ${t.localizedMessage}")
             }
         }
     }
@@ -54,28 +58,23 @@ class LoginViewModel(private val repository: AuthRepository = AuthRepository()) 
         }
     }
 
-
     private fun handleResponse(response: Response<LoginResponse>) {
-
         if (response.isSuccessful) {
-            val body = response.body()
-            val token = body?.token
-
+            val token = response.body()?.token
             if (!token.isNullOrBlank()) {
                 _uiState.value = LoginUiState.Success(token)
+                viewModelScope.launch { tokenRepository.saveToken(token) }
             } else {
                 _uiState.value = LoginUiState.Error("Login failed: No token received")
             }
         } else {
-            val errorMsg = parseErrorBody(response.errorBody()?.string())
-            _uiState.value = LoginUiState.Error(errorMsg)
+            val msg = parseErrorBody(response.errorBody()?.string())
+            _uiState.value = LoginUiState.Error(msg)
         }
     }
 
     private fun parseErrorBody(body: String?): String {
-        if (body.isNullOrBlank()) return "Server error occurred"
-
-        return try {
+        return if (body.isNullOrBlank()) "Server error" else try {
             val json = JSONObject(body)
             json.optString("error", "An error occurred")
         } catch (e: Exception) {
@@ -86,6 +85,4 @@ class LoginViewModel(private val repository: AuthRepository = AuthRepository()) 
     fun resetState() {
         _uiState.value = LoginUiState.Idle
     }
-
-
 }

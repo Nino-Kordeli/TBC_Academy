@@ -1,6 +1,6 @@
 package com.example.tbcacademy.data.dto
 
-data class RegisterResponse(
+data class RegisterResponseDto(
     val id: Int?,
     val token:String?
 )
