@@ -7,6 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
     private const val BASE_URL = "https://reqres.in/api/"
 
+    fun buildRetrofitWithoutAuth(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     fun buildRetrofit(tokenProvider: () -> String?): Retrofit {
         val client = OkHttpClient.Builder()
             .addInterceptor { chain ->
@@ -29,4 +36,7 @@ object RetrofitInstance {
 
     inline fun <reified T> createService(noinline tokenProvider: () -> String?): T =
         buildRetrofit(tokenProvider).create(T::class.java)
+
+    inline fun <reified T> createServiceWithoutAuth(): T =
+        buildRetrofitWithoutAuth().create(T::class.java)
 }

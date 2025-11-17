@@ -25,7 +25,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         super.onViewCreated(view, savedInstanceState)
         setupUI()
         observeEvents()
-        validateAndLogin()
     }
 
     private fun setupUI() = binding.apply {

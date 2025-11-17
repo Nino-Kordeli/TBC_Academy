@@ -43,7 +43,4 @@ class LoginViewModel(
             }
         }
     }
-
-    fun isLoggedIn(): Boolean = SessionManager.getToken(loginUseCase.context) != null
-    fun isRememberMe(): Boolean = SessionManager.isRememberMe(loginUseCase.context)
 }

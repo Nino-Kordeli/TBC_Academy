@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.tbcacademy.domain.usecase.CheckSessionUseCase
 import com.example.tbcacademy.data.repository.SessionRepositoryImpl
-import com.example.tbcacademy.R
+import com.example.tbcacademy.domain.usecase.CheckSessionUseCase
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {

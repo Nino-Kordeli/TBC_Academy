@@ -17,7 +17,7 @@ object ViewModelFactory {
     private fun provideSessionRepo(ctx: Context) = SessionRepositoryImpl(ctx)
 
     private fun provideAuthApi(ctx: Context) =
-        RetrofitInstance.createService<AuthApi> { provideSessionRepo(ctx).getToken() }
+        RetrofitInstance.createServiceWithoutAuth<AuthApi>()
 
     private fun provideUsersApi(ctx: Context) =
         RetrofitInstance.createService<AuthApi> { provideSessionRepo(ctx).getToken() }
