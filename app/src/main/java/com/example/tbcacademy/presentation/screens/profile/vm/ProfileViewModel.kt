@@ -6,11 +6,15 @@ import com.example.tbcacademy.domain.usecase.GetUserEmailUseCase
 import com.example.tbcacademy.domain.usecase.LogoutUseCase
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 data class ProfileState(val email: String = "")
-object ProfileEvent
+
+sealed class ProfileEvent {
+    object LogoutSuccess : ProfileEvent()
+}
 
 class ProfileViewModel(
     private val getUserEmailUseCase: GetUserEmailUseCase,
@@ -21,11 +25,15 @@ class ProfileViewModel(
     val state: StateFlow<ProfileState> = _state
 
     private val _events = MutableSharedFlow<ProfileEvent>()
-    val events = _events
+    val events: SharedFlow<ProfileEvent> = _events
 
     init {
+        loadEmail()
+    }
+
+    private fun loadEmail() {
         viewModelScope.launch {
-            val email = getUserEmailUseCase() ?: ""
+            val email = getUserEmailUseCase() ?: "No email"
             _state.value = ProfileState(email)
         }
     }
@@ -33,7 +41,7 @@ class ProfileViewModel(
     fun logout() {
         viewModelScope.launch {
             logoutUseCase()
-            _events.emit(ProfileEvent)
+            _events.emit(ProfileEvent.LogoutSuccess)
         }
     }
 }

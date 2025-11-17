@@ -2,7 +2,6 @@ package com.example.tbcacademy.presentation.screens.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
@@ -11,12 +10,17 @@ import com.example.tbcacademy.databinding.FragmentHomeBinding
 import com.example.tbcacademy.presentation.screens.home.adapter.UserAdapter
 import com.example.tbcacademy.presentation.screens.home.vm.HomeUiState
 import com.example.tbcacademy.presentation.screens.home.vm.HomeViewModel
+import com.example.tbcacademy.presentation.viewmodel.ViewModelFactory
 import com.example.tbcacademy.utils.extensions.showSnackBar
 import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelFactory.createHomeViewModelFactory(requireContext())
+            .create(HomeViewModel::class.java)
+    }
+
     private val adapter = UserAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -31,14 +31,21 @@ class AuthRepositoryImpl(private val api: AuthApi) : AuthRepository {
         emit(Result.Loading)
         try {
             val resp = api.register(AuthRequestDto(request.email, request.password))
-            if (resp.isSuccessful) {
+
+            if (resp.isSuccessful && resp.body() != null) {
                 val body = resp.body()!!
                 emit(Result.Success(RegisterResponse(body.id, body.token)))
             } else {
-                emit(Result.Error(Exception("${resp.code()} ${resp.message()}")))
+                val errorBody = resp.errorBody()?.string()
+                val errorMsg = when {
+                    errorBody != null -> "API Error: $errorBody"
+                    resp.code() == 401 -> "Unauthorized"
+                    else -> "Error ${resp.code()}: ${resp.message()}"
+                }
+                emit(Result.Error(Exception(errorMsg)))
             }
         } catch (e: Exception) {
-            emit(Result.Error(e))
+            emit(Result.Error(Exception("Network error: ${e.message}")))
         }
     }
 }
