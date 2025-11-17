@@ -36,7 +36,7 @@ object ViewModelFactory {
     }
 
     fun createRegisterViewModelFactory(ctx: Context): ViewModelProvider.Factory {
-        val api = provideAuthApi(ctx)
+        val api = RetrofitInstance.createServiceWithoutAuth<AuthApi>()
         val authRepo = AuthRepositoryImpl(api)
         val registerUseCase = RegisterUseCase(authRepo)
         return object : ViewModelProvider.Factory {

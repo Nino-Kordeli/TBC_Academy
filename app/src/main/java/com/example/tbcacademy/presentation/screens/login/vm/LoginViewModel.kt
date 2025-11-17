@@ -23,6 +23,29 @@ class LoginViewModel(
 
     fun login(email: String, password: String, remember: Boolean) {
         viewModelScope.launch {
+            when {
+                email.isEmpty() && password.isEmpty() -> {
+                    _events.emit(LoginEvent.ShowError("Please enter email and password"))
+                    return@launch
+                }
+                email.isEmpty() -> {
+                    _events.emit(LoginEvent.ShowError("Please enter your email"))
+                    return@launch
+                }
+                !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    _events.emit(LoginEvent.ShowError("Please enter a valid email"))
+                    return@launch
+                }
+                password.isEmpty() -> {
+                    _events.emit(LoginEvent.ShowError("Please enter your password"))
+                    return@launch
+                }
+                password.length < 6 -> {
+                    _events.emit(LoginEvent.ShowError("Password must be at least 6 characters"))
+                    return@launch
+                }
+            }
+
             loginUseCase(email, password, remember).collect { result ->
                 when (result) {
                     is Result.Success -> {
@@ -36,9 +59,19 @@ class LoginViewModel(
                         _events.emit(LoginEvent.NavigateToHome)
                     }
                     is Result.Error -> {
-                        _events.emit(LoginEvent.ShowError(result.exception.message ?: "Login failed"))
+                        val message = when {
+                            result.exception.message?.contains("400") == true ->
+                                "Invalid email or password"
+                            result.exception.message?.contains("404") == true ->
+                                "Account not found"
+                            result.exception.message?.contains("401") == true ->
+                                "Invalid credentials"
+                            else -> result.exception.message ?: "Login failed"
+                        }
+                        _events.emit(LoginEvent.ShowError(message))
                     }
-                    else -> {}
+                    is Result.Loading -> {
+                    }
                 }
             }
         }

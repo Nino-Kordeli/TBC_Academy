@@ -21,6 +21,21 @@ class RegistrationViewModel(
 
     fun register(email: String, password: String) {
         viewModelScope.launch {
+            when {
+                email.isEmpty() -> {
+                    _events.emit(RegisterEvent.ShowError("Please enter email"))
+                    return@launch
+                }
+                password.isEmpty() -> {
+                    _events.emit(RegisterEvent.ShowError("Please enter password"))
+                    return@launch
+                }
+                password.length < 6 -> {
+                    _events.emit(RegisterEvent.ShowError("Password must be at least 6 characters"))
+                    return@launch
+                }
+            }
+
             registerUseCase(email, password).collect { result ->
                 when (result) {
                     is com.example.tbcacademy.domain.model.Result.Success -> {

@@ -49,31 +49,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
     }
-
-    private fun validateAndLogin() = with(binding) {
-        val email = etEmailLoginField.text.toString().trim()
-        val password = etPasswordLoginField.text.toString()
-        val remember = rememberMeCheckBox.isChecked
-
-        when {
-            email.isEmpty() && password.isEmpty() -> {
-                root.showSnackBar("Please enter email and password")
-                return@with
-            }
-
-            email.isEmpty() -> {
-                root.showSnackBar("Please enter your email")
-                return@with
-            }
-
-            password.isEmpty() -> {
-                root.showSnackBar("Please enter your password")
-                return@with
-            }
-
-            else -> {
-                viewModel.login(email, password, remember)
-            }
-        }
-    }
 }
