@@ -5,6 +5,9 @@ import com.example.tbcacademy.data.repository.SessionRepositoryImpl
 class CheckSessionUseCase(
     private val sessionRepo: SessionRepositoryImpl
 ) {
-    operator fun invoke(): Boolean =
-        sessionRepo.getToken() != null && sessionRepo.isRememberMe()
+    suspend operator fun invoke(): Boolean {
+        val token = sessionRepo.readToken()
+        val rememberMe = sessionRepo.isRememberMe()
+        return token != null && rememberMe
+    }
 }

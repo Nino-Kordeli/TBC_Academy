@@ -23,13 +23,13 @@ class RegistrationViewModel(
         viewModelScope.launch {
             registerUseCase(email, password).collect { result ->
                 when (result) {
-                    is com.example.tbcacademy.domain.model.Result.Loading -> {}
                     is com.example.tbcacademy.domain.model.Result.Success -> {
                         _events.emit(RegisterEvent.NavigateBack(email, password))
                     }
                     is com.example.tbcacademy.domain.model.Result.Error -> {
-                        _events.emit(RegisterEvent.ShowError(result.exception.message ?: "Register failed"))
+                        _events.emit(RegisterEvent.ShowError(result.exception.message ?: "Registration failed"))
                     }
+                    else -> {}
                 }
             }
         }

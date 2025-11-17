@@ -23,17 +23,22 @@ class LoginViewModel(
 
     fun login(email: String, password: String, remember: Boolean) {
         viewModelScope.launch {
-            loginUseCase(email, password).collect { result ->
+            loginUseCase(email, password, remember).collect { result ->
                 when (result) {
-                    is Result.Loading -> {}
                     is Result.Success -> {
-                        val token = result.data
-                        SessionManager.saveAuth(loginUseCase.context, token, remember, email)
+                        val token = result.data.token
+                        SessionManager.saveAuth(
+                            context = loginUseCase.context,
+                            token = token,
+                            remember = remember,
+                            email = email
+                        )
                         _events.emit(LoginEvent.NavigateToHome)
                     }
                     is Result.Error -> {
                         _events.emit(LoginEvent.ShowError(result.exception.message ?: "Login failed"))
                     }
+                    else -> {}
                 }
             }
         }

@@ -3,6 +3,7 @@ package com.example.tbcacademy.presentation.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.tbcacademy.data.remote.AuthApi
 import com.example.tbcacademy.data.remote.RetrofitInstance
 import com.example.tbcacademy.data.repository.*
 import com.example.tbcacademy.domain.usecase.*
@@ -16,7 +17,10 @@ object ViewModelFactory {
     private fun provideSessionRepo(ctx: Context) = SessionRepositoryImpl(ctx)
 
     private fun provideAuthApi(ctx: Context) =
-        RetrofitInstance.create { provideSessionRepo(ctx).getToken() }
+        RetrofitInstance.createService<AuthApi> { provideSessionRepo(ctx).getToken() }
+
+    private fun provideUsersApi(ctx: Context) =
+        RetrofitInstance.createService<AuthApi> { provideSessionRepo(ctx).getToken() }
 
     fun createLoginViewModelFactory(ctx: Context): ViewModelProvider.Factory {
         val api = provideAuthApi(ctx)
@@ -43,8 +47,8 @@ object ViewModelFactory {
     }
 
     fun createHomeViewModelFactory(ctx: Context): ViewModelProvider.Factory {
-        val api = provideAuthApi(ctx)
-        val usersRepo = UsersRepositoryImpl(api)
+        val api = provideUsersApi(ctx)
+        val usersRepo = UserRepositoryImpl(api)
         val getUsersUseCase = GetUsersUseCase(usersRepo)
         return object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")

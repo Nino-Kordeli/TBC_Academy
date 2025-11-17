@@ -7,9 +7,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
     private const val BASE_URL = "https://reqres.in/api/"
 
-    fun create(tokenProvider: () -> String?): AuthApi {
+    fun buildRetrofit(tokenProvider: () -> String?): Retrofit {
         val client = OkHttpClient.Builder()
-            .addInterceptor(TokenInterceptor(tokenProvider))
+            .addInterceptor { chain ->
+                val token = tokenProvider()
+                val request = chain.request().newBuilder().apply {
+                    if (token != null) {
+                        addHeader("Authorization", "Bearer $token")
+                    }
+                }.build()
+                chain.proceed(request)
+            }
             .build()
 
         return Retrofit.Builder()
@@ -17,6 +25,8 @@ object RetrofitInstance {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(AuthApi::class.java)
     }
+
+    inline fun <reified T> createService(noinline tokenProvider: () -> String?): T =
+        buildRetrofit(tokenProvider).create(T::class.java)
 }

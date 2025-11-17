@@ -5,23 +5,54 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.tbcacademy.domain.repository.SessionRepository
-import com.example.tbcacademy.utils.SessionManager
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 
 private val Context.dataStore by preferencesDataStore(name = "session_prefs")
 
 class SessionRepositoryImpl(private val context: Context) : SessionRepository {
+
+    companion object {
+        private val KEY_TOKEN = stringPreferencesKey("token")
+        private val KEY_EMAIL = stringPreferencesKey("email")
+        private val KEY_REMEMBER_ME = stringPreferencesKey("remember_me")
+    }
+
     private val dataStore = context.dataStore
-    private val KEY_TOKEN = stringPreferencesKey("token")
-    private val KEY_EMAIL = stringPreferencesKey("email")
-    fun getToken(): String? = SessionManager.getToken(context)
-    fun isRememberMe(): Boolean = SessionManager.isRememberMe(context)
-    fun clear() = SessionManager.clear(context)
-    override suspend fun saveToken(token: String) = dataStore.edit { it[KEY_TOKEN] = token }
-    override suspend fun saveEmail(email: String) = dataStore.edit { it[KEY_EMAIL] = email }
-    override suspend fun readToken(): String? = dataStore.data.map { it[KEY_TOKEN] }.first()
-    override suspend fun readEmail(): String? = dataStore.data.map { it[KEY_EMAIL] }.first()
-    fun getEmail(): String? = SessionManager.getSavedEmail(context)
-    override suspend fun clearAll() = dataStore.edit { it.clear() }
+
+    override suspend fun saveToken(token: String) {
+        dataStore.edit { prefs ->
+            prefs[KEY_TOKEN] = token
+        }
+    }
+
+    override suspend fun saveEmail(email: String) {
+        dataStore.edit { prefs ->
+            prefs[KEY_EMAIL] = email
+        }
+    }
+
+    override suspend fun saveRememberMe(remember: Boolean) {
+        dataStore.edit { prefs ->
+            prefs[KEY_REMEMBER_ME] = remember.toString()
+        }
+    }
+
+    fun getToken(): String? = runBlocking {
+        dataStore.data.map { it[KEY_TOKEN] }.first()
+    }
+
+    override suspend fun readToken(): String? =
+        dataStore.data.map { it[KEY_TOKEN] }.first()
+
+    override suspend fun readEmail(): String? =
+        dataStore.data.map { it[KEY_EMAIL] }.first()
+
+    override suspend fun isRememberMe(): Boolean =
+        dataStore.data.map { it[KEY_REMEMBER_ME]?.toBoolean() ?: false }.first()
+
+    override suspend fun clearAll() {
+        dataStore.edit { it.clear() }
+    }
 }
