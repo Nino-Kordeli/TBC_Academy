@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.screens.login.LoginFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLoginTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/login_title"
+        android:textColor="@color/brown"
+        android:textFontWeight="600"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etEmailLoginField"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginTop="45dp"
+        android:backgroundTint="@color/brown"
+        android:hint="@string/email"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tvLoginTitleText" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etPasswordLoginField"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/brown"
+        android:hint="@string/password"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/etEmailLoginField" />
+
+    <CheckBox
+        android:id="@+id/rememberMeCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/remember_me"
+        app:layout_constraintStart_toStartOf="@id/etPasswordLoginField"
+        app:layout_constraintTop_toBottomOf="@id/etPasswordLoginField" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_design"
+        android:text="@string/log_in"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/rememberMeCheckBox"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_design"
+        android:text="@string/register"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

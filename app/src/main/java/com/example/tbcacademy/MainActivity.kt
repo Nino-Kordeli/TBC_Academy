@@ -1,24 +1,38 @@
 package com.example.tbcacademy
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.tbcacademy.databinding.ActivityMainBinding
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.example.tbcacademy.domain.usecase.CheckSessionUseCase
+import com.example.tbcacademy.data.repository.SessionRepositoryImpl
+import com.example.tbcacademy.R
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(R.layout.activity_main)
+
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+        checkSessionAndNavigate()
+    }
+
+    private fun checkSessionAndNavigate() {
+        lifecycleScope.launch {
+            val sessionRepo = SessionRepositoryImpl(this@MainActivity)
+            val hasSession = CheckSessionUseCase(sessionRepo).invoke()
+
+            if (hasSession) {
+                navController.navigate(R.id.homeFragment)
+            }
         }
     }
 }
