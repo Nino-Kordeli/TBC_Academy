@@ -7,8 +7,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.tbcacademy.data.repository.SessionRepositoryImpl
 import com.example.tbcacademy.domain.usecase.CheckSessionUseCase
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController

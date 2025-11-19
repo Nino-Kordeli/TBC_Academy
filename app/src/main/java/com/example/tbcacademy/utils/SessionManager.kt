@@ -1,7 +1,6 @@
 package com.example.tbcacademy.utils
 
 import android.content.Context
-import com.example.tbcacademy.domain.model.LoginResponse
 
 object SessionManager {
     private const val PREF_NAME = "auth_prefs"

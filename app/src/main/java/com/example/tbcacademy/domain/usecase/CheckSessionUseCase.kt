@@ -1,13 +1,11 @@
 package com.example.tbcacademy.domain.usecase
 
-import com.example.tbcacademy.data.repository.SessionRepositoryImpl
+import com.example.tbcacademy.domain.repository.SessionRepository
+import javax.inject.Inject
 
-class CheckSessionUseCase(
-    private val sessionRepo: SessionRepositoryImpl
+class CheckSessionUseCase @Inject constructor(
+    private val sessionRepository: SessionRepository
 ) {
-    suspend operator fun invoke(): Boolean {
-        val token = sessionRepo.readToken()
-        val rememberMe = sessionRepo.isRememberMe()
-        return token != null && rememberMe
-    }
+    suspend operator fun invoke(): Boolean =
+        sessionRepository.readToken() != null && sessionRepository.isRememberMe()
 }

@@ -1,76 +1,66 @@
 package com.example.tbcacademy.presentation.screens.login.vm
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.domain.model.Result
+import com.example.tbcacademy.domain.repository.SessionRepository
 import com.example.tbcacademy.domain.usecase.LoginUseCase
-import com.example.tbcacademy.utils.SessionManager
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import com.example.tbcacademy.presentation.screens.login.LoginEffect
+import com.example.tbcacademy.presentation.screens.login.LoginEvent
+import com.example.tbcacademy.presentation.screens.login.LoginState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-sealed class LoginEvent {
-    data class ShowError(val message: String) : LoginEvent()
-    object NavigateToHome : LoginEvent()
-}
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginUseCase: LoginUseCase,
+    private val sessionRepository: SessionRepository
+) : BaseViewModel<LoginState, LoginEvent, LoginEffect>(LoginState()) {
 
-class LoginViewModel(
-    private val loginUseCase: LoginUseCase
-) : ViewModel() {
+    override fun onEvent(event: LoginEvent) {
+        when (event) {
+            is LoginEvent.EmailChanged ->
+                setState { copy(email = event.email) }
 
-    private val _events = MutableSharedFlow<LoginEvent>()
-    val events: SharedFlow<LoginEvent> = _events
+            is LoginEvent.PasswordChanged ->
+                setState { copy(password = event.password) }
 
-    fun login(email: String, password: String, remember: Boolean) {
-        viewModelScope.launch {
-            when {
-                email.isEmpty() && password.isEmpty() -> {
-                    _events.emit(LoginEvent.ShowError("Please enter email and password"))
-                    return@launch
-                }
-                email.isEmpty() -> {
-                    _events.emit(LoginEvent.ShowError("Please enter your email"))
-                    return@launch
-                }
-                !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    _events.emit(LoginEvent.ShowError("Please enter a valid email"))
-                    return@launch
-                }
-                password.isEmpty() -> {
-                    _events.emit(LoginEvent.ShowError("Please enter your password"))
-                    return@launch
-                }
-                password.length < 6 -> {
-                    _events.emit(LoginEvent.ShowError("Password must be at least 6 characters"))
-                    return@launch
+            is LoginEvent.RememberMeToggled ->
+                setState { copy(rememberMe = event.checked) }
+
+            is LoginEvent.Submit ->
+                login(event.email, event.password)
+
+            LoginEvent.NavigateToRegister -> {
+                viewModelScope.launch {
+                    postEffect(LoginEffect.NavigateToRegister)
                 }
             }
+        }
+    }
 
-            loginUseCase(email, password, remember).collect { result ->
+    private fun login(email: String, password: String) {
+        viewModelScope.launch {
+            loginUseCase(email, password).collect { result ->
                 when (result) {
-                    is Result.Success -> {
-                        val token = result.data.token
-                        SessionManager.saveAuth(
-                            context = loginUseCase.context,
-                            token = token,
-                            remember = remember,
-                            email = email
-                        )
-                        _events.emit(LoginEvent.NavigateToHome)
-                    }
-                    is Result.Error -> {
-                        val message = when {
-                            result.exception.message?.contains("400") == true ->
-                                "Invalid email or password"
-                            result.exception.message?.contains("404") == true ->
-                                "Account not found"
-                            result.exception.message?.contains("401") == true ->
-                                "Invalid credentials"
-                            else -> result.exception.message ?: "Login failed"
-                        }
-                        _events.emit(LoginEvent.ShowError(message))
-                    }
                     is Result.Loading -> {
+                        setState { copy(isLoading = true) }
+                    }
+
+                    is Result.Success -> {
+                        setState { copy(isLoading = false) }
+                        sessionRepository.saveEmail(email)
+                        postEffect(LoginEffect.NavigateToHome)
+                    }
+
+                    is Result.Error -> {
+                        setState { copy(isLoading = false) }
+                        postEffect(
+                            LoginEffect.ShowError(
+                                result.exception.message ?: "Unknown error"
+                            )
+                        )
                     }
                 }
             }

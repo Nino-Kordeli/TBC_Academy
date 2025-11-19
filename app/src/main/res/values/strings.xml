@@ -19,4 +19,14 @@
     <string name="please_enter_password">Please enter password</string>
     <string name="invalid_email_format">Invalid email format</string>
     <string name="please_enter_email">Please enter email</string>
+    <string name="please_enter_email_">Please enter email</string>
+    <string name="invalid_email_">Invalid email</string>
+    <string name="please_enter_password_">Please enter password</string>
+    <string name="password_too_short_">Password too short</string>
+    <string name="please_repeat_password_">Please repeat password</string>
+    <string name="passwords_don_t_match_">Passwords don\'t match</string>
+    <string name="logged_out_successfully">Logged out successfully</string>
+    <string name="logged_out_successfully_">Logged out successfully</string>
+    <string name="loading_users">Loading users...</string>
+    <string name="no_users_found">No users found</string>
 </resources>

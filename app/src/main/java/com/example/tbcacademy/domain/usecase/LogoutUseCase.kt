@@ -1,8 +1,11 @@
 package com.example.tbcacademy.domain.usecase
 
 import com.example.tbcacademy.domain.repository.SessionRepository
+import javax.inject.Inject
 
-class LogoutUseCase(private val sessionRepository: SessionRepository) {
+class LogoutUseCase @Inject constructor(
+    private val sessionRepository: SessionRepository
+) {
     suspend operator fun invoke() {
         sessionRepository.clearAll()
     }

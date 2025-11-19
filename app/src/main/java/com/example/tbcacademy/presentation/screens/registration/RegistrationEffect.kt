@@ -1,0 +1,6 @@
+package com.example.tbcacademy.presentation.screens.registration
+
+sealed class RegistrationEffect {
+    data class NavigateBackWithCredentials(val email: String, val password: String) : RegistrationEffect()
+    data class ShowError(val message: String) : RegistrationEffect()
+}

@@ -2,43 +2,63 @@ package com.example.tbcacademy.presentation.screens.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentProfileBinding
 import com.example.tbcacademy.presentation.screens.profile.vm.ProfileViewModel
-import com.example.tbcacademy.presentation.viewmodel.ViewModelFactory
 import com.example.tbcacademy.utils.extensions.showSnackBar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
-    private val viewModel: ProfileViewModel by lazy {
-        ViewModelFactory.createProfileViewModelFactory(requireContext())
-            .create(ProfileViewModel::class.java)
-    }
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnLogout.setOnClickListener { viewModel.logout() }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { }
+
+        setupListeners()
         observeState()
-        observeEvents()
+        observeEffects()
+    }
+
+    private fun setupListeners() {
+        binding.btnLogout.setOnClickListener {
+            viewModel.logout()
+            it.isEnabled = false
+        }
     }
 
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.state.collect { state ->
-                binding.tvProfileUserEmail.text = state.email
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect { state ->
+                    binding.tvProfileUserEmail.text = state.email
+                }
             }
         }
     }
 
-    private fun observeEvents() {
+    private fun observeEffects() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.events.collect {
-                findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
-                binding.root.showSnackBar("Logged out successfully")
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.events.collect { event ->
+                    when (event) {
+                        ProfileEvent.LogoutSuccess -> {
+                            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+                            binding.root.showSnackBar(getString(R.string.logged_out_successfully_))
+                        }
+                    }
+                }
             }
         }
     }

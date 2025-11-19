@@ -8,4 +8,5 @@ interface SessionRepository {
     suspend fun readEmail(): String?
     suspend fun isRememberMe(): Boolean
     suspend fun clearAll()
+    fun getTokenSync(): String?
 }

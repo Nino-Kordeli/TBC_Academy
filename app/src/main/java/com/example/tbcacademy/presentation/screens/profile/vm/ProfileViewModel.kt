@@ -4,19 +4,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tbcacademy.domain.usecase.GetUserEmailUseCase
 import com.example.tbcacademy.domain.usecase.LogoutUseCase
+import com.example.tbcacademy.presentation.screens.profile.ProfileEvent
+import com.example.tbcacademy.presentation.screens.profile.ProfileState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-data class ProfileState(val email: String = "")
-
-sealed class ProfileEvent {
-    object LogoutSuccess : ProfileEvent()
+sealed class ProfileUiEvent {
+    object LogoutClicked : ProfileUiEvent()
 }
 
-class ProfileViewModel(
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
     private val getUserEmailUseCase: GetUserEmailUseCase,
     private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
@@ -35,6 +38,14 @@ class ProfileViewModel(
         viewModelScope.launch {
             val email = getUserEmailUseCase() ?: "No email"
             _state.value = ProfileState(email)
+        }
+    }
+
+    fun onEvent(event: ProfileUiEvent) {
+        when (event) {
+            ProfileUiEvent.LogoutClicked -> {
+                logout()
+            }
         }
     }
 
