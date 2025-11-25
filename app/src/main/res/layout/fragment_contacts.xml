@@ -14,6 +14,8 @@
         android:textColor="@color/white"
         android:layout_marginHorizontal="28dp"
         android:layout_marginTop="68dp"
+        android:maxLines="1"
+        android:inputType="text"
         android:background="@drawable/search_design"
         android:drawableStart="@drawable/search_icon"
         android:drawablePadding="10dp"
