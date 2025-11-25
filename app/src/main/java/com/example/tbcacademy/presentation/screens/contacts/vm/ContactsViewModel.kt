@@ -2,54 +2,64 @@ package com.example.tbcacademy.presentation.screens.contacts.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbcacademy.domain.model.ContactsState
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.tbcacademy.common.NetworkHelper
 import com.example.tbcacademy.domain.model.Message
 import com.example.tbcacademy.domain.repository.MessageRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ContactsViewModel @Inject constructor(
-    private val repository: MessageRepository
+    private val repository: MessageRepository,
+    private val networkHelper: NetworkHelper
 ) : ViewModel() {
 
-    private val _messages = MutableStateFlow<List<Message>>(emptyList())
-    val messages: StateFlow<List<Message>> = _messages.asStateFlow()
+    private val queryFlow = MutableStateFlow("")
 
-    private val _state = MutableStateFlow<ContactsState>(ContactsState.LOADING)
-    val state: StateFlow<ContactsState> = _state.asStateFlow()
+    private val _isConnected = MutableStateFlow(networkHelper.isNetworkConnected())
+    val isConnected: StateFlow<Boolean> = _isConnected.asStateFlow()
 
-    private var fullMessageList = listOf<Message>()
-
-    init {
-        fetchMessages()
-    }
-
-    private fun fetchMessages() {
-        viewModelScope.launch {
-            _state.value = ContactsState.LOADING
-            when(val result = repository.getMessagesSafe()) {
-                is com.example.tbcacademy.common.ApiResult.Success -> {
-                    fullMessageList = result.data
-                    _messages.value = fullMessageList
-                    _state.value = ContactsState.SUCCESS
-                }
-                is com.example.tbcacademy.common.ApiResult.Error -> {
-                    _state.value = ContactsState.ERROR
-                }
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+    val pagedMessages: StateFlow<PagingData<Message>> = queryFlow
+        .debounce(300)
+        .distinctUntilChanged()
+        .flatMapLatest { query ->
+            if (_isConnected.value) {
+                repository.getMessagesPaging(query)
+            } else {
+                flowOf(PagingData.empty())
             }
         }
+        .cachedIn(viewModelScope)
+        .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
+
+    init {
+        observeNetwork()
     }
 
     fun onSearch(query: String) {
-        _messages.value = if (query.isBlank()) {
-            fullMessageList
-        } else {
-            fullMessageList.filter { it.owner.contains(query, ignoreCase = true) }
-        }
+        queryFlow.value = query.trim()
+    }
+
+    private fun observeNetwork() {
+        networkHelper.registerNetworkCallback(
+            onAvailable = {
+                viewModelScope.launch {
+                    _isConnected.value = true
+                    queryFlow.value = queryFlow.value
+                }
+            },
+            onLost = {
+                viewModelScope.launch {
+                    _isConnected.value = false
+                }
+            }
+        )
     }
 }
