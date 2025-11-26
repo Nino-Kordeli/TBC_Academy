@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.tbcacademy.data.repository.SessionRepositoryImpl
+import com.example.tbcacademy.domain.repository.SessionRepository
 import com.example.tbcacademy.domain.usecase.CheckSessionUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+
+    @Inject
+    lateinit var sessionRepository: SessionRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkSessionAndNavigate() {
         lifecycleScope.launch {
-            val sessionRepo = SessionRepositoryImpl(this@MainActivity)
-            val hasSession = CheckSessionUseCase(sessionRepo).invoke()
+            val hasSession = CheckSessionUseCase(sessionRepository).invoke()
 
             if (hasSession) {
                 navController.navigate(R.id.homeFragment)

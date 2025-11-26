@@ -9,4 +9,10 @@ interface SessionRepository {
     suspend fun isRememberMe(): Boolean
     suspend fun clearAll()
     fun getTokenSync(): String?
+
+    suspend fun hasValidSession(): Boolean {
+        val hasToken = readToken() != null
+        val shouldRemember = isRememberMe()
+        return hasToken && shouldRemember
+    }
 }

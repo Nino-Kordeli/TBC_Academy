@@ -1,67 +1,61 @@
 package com.example.tbcacademy.presentation.screens.home
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tbcacademy.R
-import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentHomeBinding
-import com.example.tbcacademy.presentation.screens.home.adapter.UserAdapter
-import com.example.tbcacademy.presentation.screens.home.vm.HomeEffect
+import com.example.tbcacademy.presentation.screens.home.adapter.UsersPagingAdapter
 import com.example.tbcacademy.presentation.screens.home.vm.HomeViewModel
-import com.example.tbcacademy.utils.extensions.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
-    private val adapter = UserAdapter()
+    private lateinit var binding: FragmentHomeBinding
+    private val adapter = UsersPagingAdapter()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvUserList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+        setupRecyclerView()
+        observeUsers()
+        setupClickListeners()
+    }
 
+    private fun setupRecyclerView() {
         binding.rvUserList.adapter = adapter
+        binding.rvUserList.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun setupClickListeners() {
         binding.btnProfile.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
-        observeState()
-        observeEffects()
     }
 
-    private fun observeState() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect { state ->
-                    if (state.isLoading) {
-                        binding.root.showSnackBar(getString(R.string.loading_users))
-                    }
-
-                    adapter.submitList(state.users)
-
-                    if (state.users.isEmpty() && !state.isLoading) {
-                        binding.root.showSnackBar(getString(R.string.no_users_found))
-                    }
-                }
-            }
-        }
-    }
-
-    private fun observeEffects() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.effect.collect { effect ->
-                    if (effect is HomeEffect.ShowError) {
-                        binding.root.showSnackBar(effect.message)
-                    }
-                }
+    private fun observeUsers() {
+        lifecycleScope.launch {
+            viewModel.usersFlow.collectLatest { pagingData ->
+                adapter.submitData(pagingData = pagingData)
             }
         }
     }

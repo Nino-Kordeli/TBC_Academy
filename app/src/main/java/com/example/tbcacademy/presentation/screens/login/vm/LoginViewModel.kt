@@ -50,7 +50,12 @@ class LoginViewModel @Inject constructor(
 
                     is Result.Success -> {
                         setState { copy(isLoading = false) }
+
+                        // Save all session data
+                        sessionRepository.saveToken(result.data.token)
                         sessionRepository.saveEmail(email)
+                        sessionRepository.saveRememberMe(state.value.rememberMe)
+
                         postEffect(LoginEffect.NavigateToHome)
                     }
 

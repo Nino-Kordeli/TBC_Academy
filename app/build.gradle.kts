@@ -45,7 +45,9 @@ android {
 
 dependencies {
 
+    implementation("androidx.paging:paging-runtime-ktx:3.2.0")
     implementation("com.google.dagger:hilt-android:2.57.2")
+    implementation(libs.androidx.paging.common)
     kapt("com.google.dagger:hilt-compiler:2.57.2")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.datastore:datastore-preferences:1.1.1")

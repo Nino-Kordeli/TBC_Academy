@@ -6,6 +6,7 @@ import javax.inject.Inject
 class CheckSessionUseCase @Inject constructor(
     private val sessionRepository: SessionRepository
 ) {
-    suspend operator fun invoke(): Boolean =
-        sessionRepository.readToken() != null && sessionRepository.isRememberMe()
+    suspend operator fun invoke(): Boolean {
+        return sessionRepository.hasValidSession()
+    }
 }

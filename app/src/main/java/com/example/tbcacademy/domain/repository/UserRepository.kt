@@ -1,9 +1,8 @@
 package com.example.tbcacademy.domain.repository
 
-import com.example.tbcacademy.domain.model.Result
-import com.example.tbcacademy.domain.model.User
+import androidx.paging.PagingSource
+import com.example.tbcacademy.data.dto.UserDto
 
 interface UserRepository {
-    suspend fun getUsers(page: Int = 1): Result<List<User>>
-    suspend fun getUser(): User
+    fun getUsersPaging(): PagingSource<Int, UserDto>
 }

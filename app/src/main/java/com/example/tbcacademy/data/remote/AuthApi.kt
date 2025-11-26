@@ -12,15 +12,15 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AuthApi {
-    @Headers("x-api-key: reqres-free-v1","Content-Type: application/json")
+    @Headers("x-api-key: reqres-free-v1", "Content-Type: application/json")
     @POST("login")
     suspend fun login(@Body request: AuthRequestDto): Response<LoginResponseDto>
 
-    @Headers("x-api-key: reqres-free-v1","Content-Type: application/json")
+    @Headers("x-api-key: reqres-free-v1", "Content-Type: application/json")
     @POST("register")
     suspend fun register(@Body request: AuthRequestDto): Response<RegisterResponseDto>
 
-    @Headers("x-api-key: reqres-free-v1","Content-Type: application/json")
+    @Headers("x-api-key: reqres-free-v1", "Content-Type: application/json")
     @GET("users")
     suspend fun getUsers(@Query("page") page: Int): Response<UsersResponseDto>
 }
