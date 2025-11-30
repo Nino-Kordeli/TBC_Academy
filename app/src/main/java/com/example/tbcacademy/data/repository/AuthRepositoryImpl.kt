@@ -1,6 +1,7 @@
 package com.example.tbcacademy.data.repository
 
 import com.example.tbcacademy.data.dto.AuthRequestDto
+import com.example.tbcacademy.data.dto.toDomain
 import com.example.tbcacademy.data.remote.AuthApi
 import com.example.tbcacademy.domain.model.AuthRequest
 import com.example.tbcacademy.utils.safeApiCall
@@ -27,7 +28,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
 
         if (result is Result.Success) {
-            emit(Result.Success(LoginResponse(result.data.token)))
+            emit(Result.Success(result.data.toDomain()))
         } else if (result is Result.Error) {
             emit(result)
         }
@@ -39,7 +40,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
 
         return if (result is Result.Success) {
-            Result.Success(RegisterResponse(result.data.id, result.data.token))
+            Result.Success(result.data.toDomain())
         } else {
             result as Result.Error
         }
