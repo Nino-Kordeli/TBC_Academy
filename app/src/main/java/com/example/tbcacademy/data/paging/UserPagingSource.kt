@@ -2,8 +2,8 @@ package com.example.tbcacademy.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.tbcacademy.data.remote.AuthApi
 import com.example.tbcacademy.data.dto.UserDto
+import com.example.tbcacademy.data.remote.AuthApi
 
 class UsersPagingSource(
     private val api: AuthApi
@@ -16,7 +16,6 @@ class UsersPagingSource(
 
             if (response.isSuccessful) {
                 val users = response.body()?.data ?: emptyList()
-
                 LoadResult.Page(
                     data = users,
                     prevKey = if (page == 1) null else page - 1,

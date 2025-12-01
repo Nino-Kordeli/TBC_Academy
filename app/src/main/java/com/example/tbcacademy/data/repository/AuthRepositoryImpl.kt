@@ -1,7 +1,7 @@
 package com.example.tbcacademy.data.repository
 
 import com.example.tbcacademy.data.dto.AuthRequestDto
-import com.example.tbcacademy.data.dto.toDomain
+import com.example.tbcacademy.data.mapper.toDomain
 import com.example.tbcacademy.data.remote.AuthApi
 import com.example.tbcacademy.domain.model.AuthRequest
 import com.example.tbcacademy.utils.safeApiCall

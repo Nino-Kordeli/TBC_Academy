@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.tbcacademy.data.dto.UserDto
+import com.example.tbcacademy.domain.model.User
 import com.example.tbcacademy.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +18,7 @@ class HomeViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    val usersFlow: Flow<PagingData<UserDto>> = Pager(
+    val usersFlow: Flow<PagingData<User>> = Pager(
         config = PagingConfig(pageSize = 6),
         pagingSourceFactory = { userRepository.getUsersPaging() }
     ).flow.cachedIn(viewModelScope)
