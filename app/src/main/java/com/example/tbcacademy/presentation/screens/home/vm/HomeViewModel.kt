@@ -2,11 +2,8 @@ package com.example.tbcacademy.presentation.screens.home.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.tbcacademy.data.dto.UserDto
 import com.example.tbcacademy.domain.model.User
 import com.example.tbcacademy.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,11 +12,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val repository: UserRepository
 ) : ViewModel() {
 
-    val usersFlow: Flow<PagingData<User>> = Pager(
-        config = PagingConfig(pageSize = 6),
-        pagingSourceFactory = { userRepository.getUsersPaging() }
-    ).flow.cachedIn(viewModelScope)
+    val usersFlow: Flow<PagingData<User>> = repository.getUsersPaging()
+        .cachedIn(viewModelScope)
 }

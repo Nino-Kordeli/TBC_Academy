@@ -1,4 +1,4 @@
-package com.example.tbcacademy.di
+package com.example.tbcacademy.di.module
 
 import com.example.tbcacademy.data.repository.ProfileRepositoryImpl
 import com.example.tbcacademy.domain.repository.ProfileRepository

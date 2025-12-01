@@ -7,30 +7,39 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tbcacademy.databinding.ItemUserBinding
-import com.example.tbcacademy.data.dto.UserDto
+import com.example.tbcacademy.domain.model.User
 
-class UsersPagingAdapter :
-    PagingDataAdapter<UserDto, UsersPagingAdapter.UserViewHolder>(UserDiffCallback()) {
+class UsersPagingAdapter : PagingDataAdapter<User, UsersPagingAdapter.UserViewHolder>(UserDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder =
-        UserViewHolder(ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return UserViewHolder(binding)
     }
 
-    class UserViewHolder(private val binding: ItemUserBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        val user = getItem(position)
+        user?.let { holder.bind(it) }
+    }
 
-        fun bind(u: UserDto) {
-            binding.tvUserName.text = "${u.firstname} ${u.lastname}"
-            binding.tvUserEmail.text = u.email
-            Glide.with(binding.root).load(u.avatar).into(binding.ivUserAvatar)
+    inner class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: User) {
+            binding.tvUserName.text = "${user.firstname} ${user.lastname}"
+            binding.tvUserEmail.text = user.email
+
+            Glide.with(binding.root.context)
+                .load(user.avatar)
+                .circleCrop()
+                .into(binding.ivUserAvatar)
         }
     }
 
-    class UserDiffCallback : DiffUtil.ItemCallback<UserDto>() {
-        override fun areItemsTheSame(a: UserDto, b: UserDto) = a.id == b.id
-        override fun areContentsTheSame(a: UserDto, b: UserDto) = a == b
+    class UserDiffCallback : DiffUtil.ItemCallback<User>() {
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+            return oldItem == newItem
+        }
     }
 }

@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
     private fun observeUsers() {
         lifecycleScope.launch {
             viewModel.usersFlow.collectLatest { pagingData ->
-                adapter.submitData(pagingData = pagingData)
+                adapter.submitData(pagingData)
             }
         }
     }
