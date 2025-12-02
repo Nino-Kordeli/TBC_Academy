@@ -1,4 +1,4 @@
-package com.example.tbcacademy.data.module
+package com.example.tbcacademy.di.module
 
 import dagger.Module
 import dagger.hilt.InstallIn
