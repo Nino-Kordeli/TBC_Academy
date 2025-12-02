@@ -14,8 +14,8 @@ class LockScreenViewModel @Inject constructor(
     private val checkPasscodeUseCase: CheckPasscodeUseCase
 ) : ViewModel() {
 
-    private val _input = mutableListOf<Int>()
-    val input: List<Int> get() = _input
+    private val _input = mutableListOf<String>()
+    val input: List<String> get() = _input
 
     private val _status = MutableStateFlow("")
     val status: StateFlow<String> = _status
@@ -23,7 +23,7 @@ class LockScreenViewModel @Inject constructor(
     private val _dots = MutableStateFlow(listOf(false, false, false, false))
     val dots: StateFlow<List<Boolean>> = _dots
 
-    fun addDigit(digit: Int) {
+    fun addDigit(digit: String) {
         if (_input.size < 4) {
             _input.add(digit)
             updateDots()

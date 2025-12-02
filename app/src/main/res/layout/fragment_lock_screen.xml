@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/security_screen_background"
     tools:context=".presentation.lock_screen.LockScreenFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -32,20 +33,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPasswordDots"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="26dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/enterPasswordTitle"
         android:layout_marginHorizontal="70dp"
+        app:layout_constraintStart_toStartOf="@id/enterPasswordTitle"
         app:layout_constraintTop_toBottomOf="@id/enterPasswordTitle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNumbers"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="48dp"
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvPasswordDots" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -59,6 +65,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
