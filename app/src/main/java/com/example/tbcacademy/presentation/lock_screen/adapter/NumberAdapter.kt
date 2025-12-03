@@ -1,48 +1,53 @@
 package com.example.tbcacademy.presentation.lock_screen.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tbcacademy.R
+import com.example.tbcacademy.databinding.NumberItemBinding
 import com.example.tbcacademy.presentation.lock_screen.model.KeypadItem
 
 class NumberAdapter(
     private val onClick: (KeypadItem) -> Unit
 ) : ListAdapter<KeypadItem, NumberAdapter.NumberViewHolder>(DiffCallback()) {
 
-    inner class NumberViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val numberText: TextView = view.findViewById(R.id.numberText)
-        val background: ImageView = view.findViewById(R.id.background)
+    inner class NumberViewHolder(
+        private val binding: NumberItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: KeypadItem) = with(binding) {
+            when (item) {
+                is KeypadItem.Number -> {
+                    numberText.text = item.number
+                    background.setImageResource(R.drawable.number_background)
+                }
+                KeypadItem.Delete -> {
+                    numberText.text = ""
+                    background.setImageResource(R.drawable.ic_delete)
+                }
+                KeypadItem.Fingerprint -> {
+                    numberText.text = ""
+                    background.setImageResource(R.drawable.ic_touch_id)
+                }
+            }
+
+            root.setOnClickListener { onClick(item) }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.number_item, parent, false)
-        return NumberViewHolder(view)
+        val binding = NumberItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return NumberViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
-        val item = getItem(position)
-        when (item) {
-            is KeypadItem.Number -> {
-                holder.numberText.text = item.number
-                holder.background.setImageResource(R.drawable.number_background)
-            }
-            KeypadItem.Delete -> {
-                holder.numberText.text = ""
-                holder.background.setImageResource(R.drawable.ic_delete)
-            }
-            KeypadItem.Fingerprint -> {
-                holder.numberText.text = ""
-                holder.background.setImageResource(R.drawable.ic_touch_id)
-            }
-        }
-        holder.itemView.setOnClickListener { onClick(item) }
+        holder.bind(getItem(position))
     }
 
     class DiffCallback : DiffUtil.ItemCallback<KeypadItem>() {
