@@ -1,10 +1,11 @@
 package com.example.tbcacademy.presentation.users.vm
 
-import android.util.Log.d
 import androidx.lifecycle.viewModelScope
+import androidx.room.util.copy
 import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.data.common.Resource
 import com.example.tbcacademy.domain.usecase.FetchUsersUseCase
+import com.example.tbcacademy.domain.usecase.ObserveUsersUseCase
 import com.example.tbcacademy.presentation.users.contract.UsersEvent
 import com.example.tbcacademy.presentation.users.contract.UsersSideEffects
 import com.example.tbcacademy.presentation.users.contract.UsersState
@@ -15,20 +16,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UsersViewModel @Inject constructor(
-    private val fetchUsersUseCase: FetchUsersUseCase
+    private val fetchUsersUseCase: FetchUsersUseCase,
+    private val observeUsersUseCase: ObserveUsersUseCase
 ) : BaseViewModel<UsersState, UsersEvent, UsersSideEffects>(initialState = UsersState()) {
-
-    init {
-        loadUsers()
-    }
 
     override fun onEvent(event: UsersEvent) {
         when (event) {
-            UsersEvent.FetchUsers -> loadUsers()
+            UsersEvent.FetchUsers -> fetchUsers()
+            UsersEvent.ObserveUsers -> observeUsers()
         }
     }
 
-    private fun loadUsers() {
+    private fun fetchUsers() {
         viewModelScope.launch {
             fetchUsersUseCase().collectLatest { res ->
                 when (res) {
@@ -37,7 +36,6 @@ class UsersViewModel @Inject constructor(
                     }
 
                     is Resource.Success -> {
-                        d("messageasikdasjdh", res.data.toString())
                     }
 
                     is Resource.Error -> {
@@ -48,6 +46,16 @@ class UsersViewModel @Inject constructor(
                             )
                         )*/
                     }
+                }
+            }
+        }
+    }
+
+    private fun observeUsers() {
+        viewModelScope.launch {
+            observeUsersUseCase().collectLatest { usersList ->
+                updateState { currentState ->
+                    currentState.copy(users = usersList)
                 }
             }
         }

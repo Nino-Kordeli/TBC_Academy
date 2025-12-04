@@ -4,6 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
+/*
 class AuthInterceptor @Inject constructor(
     private val apiKey: String
 ) : Interceptor {
@@ -15,4 +16,4 @@ class AuthInterceptor @Inject constructor(
             .build()
         return chain.proceed(request)
     }
-}
+}*/

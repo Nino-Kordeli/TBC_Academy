@@ -20,7 +20,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-       buildConfigField("String", "BASE_URL", "\"https://mocki.io/\"")
+        buildConfigField("String", "BASE_URL", "\"https://mocki.io/v1/\"")
     }
 
     buildFeatures {
@@ -49,7 +49,7 @@ android {
 
 dependencies {
 
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
     implementation("androidx.room:room-ktx:2.7.0-alpha12")
     ksp("androidx.room:room-compiler:2.7.0-alpha12")

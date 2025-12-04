@@ -1,7 +1,6 @@
 package com.example.tbcacademy.di.module
 
 import com.example.tbcacademy.BuildConfig
-import com.example.tbcacademy.data.remote.service.AuthInterceptor
 import com.example.tbcacademy.data.remote.service.UsersService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -15,8 +14,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
-private const val API_KEY = "v1/3668d139-e182-4fe2-b909-6259524117cb"
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -27,13 +24,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthInterceptor(): AuthInterceptor {
-        return AuthInterceptor(API_KEY)
-    }
-
-    @Provides
-    @Singleton
-    fun provideHttpClient(authInterceptor: AuthInterceptor): OkHttpClient {
+    fun provideHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }

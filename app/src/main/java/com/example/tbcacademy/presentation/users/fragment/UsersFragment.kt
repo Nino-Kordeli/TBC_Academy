@@ -1,34 +1,31 @@
 package com.example.tbcacademy.presentation.users.fragment
 
-import android.os.Bundle
-import android.util.Log.d
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.tbcacademy.R
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentUsersBinding
+import com.example.tbcacademy.presentation.users.contract.UsersEvent
 import com.example.tbcacademy.presentation.users.vm.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class UsersFragment : BaseFragment<FragmentUsersBinding, UsersViewModel>() {
+class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::inflate) {
 
-    override val viewModel: UsersViewModel by viewModels()
+    private val viewModel: UsersViewModel by viewModels()
 
-    override fun inflateBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentUsersBinding {
-        return FragmentUsersBinding.inflate(inflater, container, false)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_users, container, false)
+    override fun bind() {
+        viewModel.onEvent(UsersEvent.FetchUsers)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collectLatest { state ->
+                    state.users?.let { usersList ->
+                    }
+                }
+            }
+        }
     }
 }
