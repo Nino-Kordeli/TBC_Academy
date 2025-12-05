@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="35dp"
+    android:layout_marginVertical="60dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="25dp"
+    app:cardPreventCornerOverlap="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@color/cardview_dark_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivPin"
+            android:layout_width="12dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_location_pin"
+            app:layout_constraintStart_toStartOf="@id/ivImage"
+            app:layout_constraintTop_toTopOf="@id/ivImage" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:elevation="2dp"
+            android:text="@string/barcelona"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/ivPin"
+            app:layout_constraintStart_toEndOf="@id/ivPin"
+            app:layout_constraintTop_toTopOf="@id/ivPin" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/numbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:text="@string/_2500"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvLocationName"
+            app:layout_constraintEnd_toEndOf="@id/ivImage"
+            app:layout_constraintTop_toTopOf="@id/tvLocationName" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivFire"
+            android:layout_width="12dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="13dp"
+            android:src="@drawable/ic_fire"
+            app:layout_constraintBottom_toBottomOf="@id/numbers"
+            app:layout_constraintEnd_toStartOf="@id/numbers"
+            app:layout_constraintTop_toTopOf="@id/numbers" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLocationTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="97dp"
+            android:breakStrategy="simple"
+            android:ellipsize="end"
+            android:maxWidth="200dp"
+            android:minLines="2"
+            android:text="@string/natural_walk_to_the_top"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivImage"
+            app:layout_constraintStart_toStartOf="@id/ivImage" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/_120"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tvLocationTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationTitle" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:progressTint="@color/white"
+            android:rating="5"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:stepSize="1"
+            app:layout_constraintBottom_toBottomOf="@id/tvPrice"
+            app:layout_constraintStart_toStartOf="@id/tvPrice"
+            app:layout_constraintTop_toTopOf="@id/tvPrice" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
