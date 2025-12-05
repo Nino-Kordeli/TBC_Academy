@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentUsersBinding
 import com.example.tbcacademy.presentation.users.adapter.UsersAdapter
@@ -38,27 +39,31 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
             adapter = usersAdapter
         }
     }
+
     private fun setupListeners() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.onEvent(UsersEvent.FetchUsers)
         }
     }
 
-    private fun observeState() {
+    private fun observeState() = with(binding) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collectLatest { state ->
-                    binding.swipeRefreshLayout.isRefreshing = state.isLoading
+                    swipeRefreshLayout.isRefreshing = state.isLoading
 
-                    binding.tvConnectivityStatus.apply {
-                        text = if (state.isOnline) "You are online." else "You are offline."
+                    tvConnectivityStatus.apply {
+                        text =
+                            if (state.isOnline) context.getString(R.string.you_are_online) else context.getString(
+                                R.string.you_are_offline
+                            )
                         isVisible = true
                     }
 
                     state.users?.let { usersList ->
                         usersAdapter.submitList(usersList)
-                        binding.recyclerViewUsers.isVisible = usersList.isNotEmpty()
-                        binding.tvEmptyState.isVisible = usersList.isEmpty()
+                        recyclerViewUsers.isVisible = usersList.isNotEmpty()
+                        tvEmptyState.isVisible = usersList.isEmpty()
                     }
                 }
             }
@@ -71,18 +76,31 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>(FragmentUsersBinding::i
                 viewModel.sideEffect.collectLatest { sideEffect ->
                     when (sideEffect) {
                         is UsersSideEffects.ShowError -> {
-                            Toast.makeText(
-                                requireContext(),
-                                sideEffect.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            val message = when {
+                                !sideEffect.message.isNullOrEmpty() -> sideEffect.message
+                                sideEffect.messageResId != null -> getString(sideEffect.messageResId)
+                                else -> getString(R.string.unknown_error)
+                            }
+
+                            if (message.isNotEmpty()) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
+
                         is UsersSideEffects.ShowSuccess -> {
-                            Toast.makeText(
-                                requireContext(),
-                                sideEffect.message,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            val message = getString(sideEffect.messageResId)
+
+                            if (message.isNotEmpty()) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
                 }

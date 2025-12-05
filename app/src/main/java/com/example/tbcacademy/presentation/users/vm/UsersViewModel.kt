@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.viewModelScope
+import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.data.common.Resource
 import com.example.tbcacademy.domain.usecase.FetchUsersUseCase
@@ -40,7 +41,7 @@ class UsersViewModel @Inject constructor(
         updateState { it.copy(isOnline = isOnline) }
 
         if (!isOnline) {
-            emitSideEffect(UsersSideEffects.ShowError("You are offline. Showing cached data."))
+            emitSideEffect(UsersSideEffects.ShowError(messageResId = R.string.offline_showing_cached))
             return
         }
 
@@ -52,14 +53,15 @@ class UsersViewModel @Inject constructor(
                     }
 
                     is Resource.Success -> {
-                        emitSideEffect(UsersSideEffects.ShowSuccess("Users loaded successfully"))
+                        emitSideEffect(UsersSideEffects.ShowSuccess(R.string.users_loaded_successfully))
                     }
 
                     is Resource.Error -> {
                         updateState { it.copy(isLoading = false) }
                         emitSideEffect(
                             UsersSideEffects.ShowError(
-                                resource.errorMessage.ifEmpty { "Unknown error occurred" }
+                                resource.errorMessage.ifEmpty { null },
+                                messageResId = R.string.unknown_error
                             )
                         )
                     }

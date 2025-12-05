@@ -1,5 +1,6 @@
 package com.example.tbcacademy.presentation.users.contract
 
+import androidx.annotation.StringRes
 import com.example.tbcacademy.domain.model.User
 
 data class UsersState(
@@ -15,8 +16,7 @@ sealed interface UsersEvent {
 }
 
 sealed interface UsersSideEffects {
-    data class ShowError(val message: String) : UsersSideEffects
-    data class ShowSuccess(val message: String) : UsersSideEffects
+    data class ShowError(val message: String? = null, @StringRes val messageResId: Int? = null) : UsersSideEffects
+    data class ShowSuccess(@StringRes val messageResId: Int) : UsersSideEffects
 }
-
 

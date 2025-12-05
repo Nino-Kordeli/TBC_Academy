@@ -6,4 +6,9 @@
     <string name="users_loaded_successfully">Users loaded successfully</string>
     <string name="unknown_error">Unknown error</string>
     <string name="no_users_found">No users found</string>
+    <string name="you_are_online">You are online.</string>
+    <string name="you_are_offline">You are offline.</string>
+    <string name="unknown">Unknown</string>
+    <string name="offline_showing_cached">You are offline. Showing cached data.</string>
+    <string name="unknown_error_occurred">Unknown error occurred</string>
 </resources>

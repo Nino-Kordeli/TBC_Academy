@@ -16,11 +16,12 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UserViewHolder>(UserDiffCall
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(user: User) {
-            binding.tvUserName.text = user.fullName ?: "Unknown"
-            binding.tvActivationStatus.text = user.lastActiveDescription ?: "Unknown"
+        fun bind(user: User) = with(binding) {
+            tvUserName.text = user.fullName ?: itemView.context.getString(R.string.unknown)
+            tvActivationStatus.text =
+                user.lastActiveDescription ?: itemView.context.getString(R.string.unknown)
 
-            binding.ivUserProfile.load(user.profileImageUrl) {
+            ivUserProfile.load(user.profileImageUrl) {
                 placeholder(R.drawable.ic_launcher_foreground)
                 error(R.drawable.ic_launcher_foreground)
             }
@@ -32,7 +33,7 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UserViewHolder>(UserDiffCall
                 user.activationStatus in 3..22 -> Color.BLUE
                 else -> Color.RED
             }
-            binding.viewStatusIndicator.setBackgroundColor(color)
+            viewStatusIndicator.setBackgroundColor(color)
         }
     }
 
