@@ -1,7 +1,10 @@
 package com.example.tbcacademy.presentation.users.vm
 
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.lifecycle.viewModelScope
-import androidx.room.util.copy
 import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.data.common.Resource
 import com.example.tbcacademy.domain.usecase.FetchUsersUseCase
@@ -17,8 +20,13 @@ import javax.inject.Inject
 @HiltViewModel
 class UsersViewModel @Inject constructor(
     private val fetchUsersUseCase: FetchUsersUseCase,
-    private val observeUsersUseCase: ObserveUsersUseCase
+    private val observeUsersUseCase: ObserveUsersUseCase,
+    private val application: Application
 ) : BaseViewModel<UsersState, UsersEvent, UsersSideEffects>(initialState = UsersState()) {
+
+    init {
+        observeUsers()
+    }
 
     override fun onEvent(event: UsersEvent) {
         when (event) {
@@ -28,23 +36,32 @@ class UsersViewModel @Inject constructor(
     }
 
     private fun fetchUsers() {
+        val isOnline = isNetworkAvailable()
+        updateState { it.copy(isOnline = isOnline) }
+
+        if (!isOnline) {
+            emitSideEffect(UsersSideEffects.ShowError("You are offline. Showing cached data."))
+            return
+        }
+
         viewModelScope.launch {
-            fetchUsersUseCase().collectLatest { res ->
-                when (res) {
+            fetchUsersUseCase().collectLatest { resource ->
+                when (resource) {
                     is Resource.Loading -> {
-                        /*updateState { it.copy(isLoading = res.loading) }*/
+                        updateState { it.copy(isLoading = resource.loading) }
                     }
 
                     is Resource.Success -> {
+                        emitSideEffect(UsersSideEffects.ShowSuccess("Users loaded successfully"))
                     }
 
                     is Resource.Error -> {
-                        /*updateState { it.copy(error = res.errorMessage) }
+                        updateState { it.copy(isLoading = false) }
                         emitSideEffect(
-                            UsersSideEffect.ShowToast(
-                                res.errorMessage ?: "Unknown error"
+                            UsersSideEffects.ShowError(
+                                resource.errorMessage.ifEmpty { "Unknown error occurred" }
                             )
-                        )*/
+                        )
                     }
                 }
             }
@@ -54,10 +71,16 @@ class UsersViewModel @Inject constructor(
     private fun observeUsers() {
         viewModelScope.launch {
             observeUsersUseCase().collectLatest { usersList ->
-                updateState { currentState ->
-                    currentState.copy(users = usersList)
-                }
+                updateState { it.copy(users = usersList) }
             }
         }
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }
