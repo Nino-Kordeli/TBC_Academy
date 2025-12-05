@@ -1,11 +1,13 @@
 package com.example.tbcacademy.presentation.fragment
 
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.tbcacademy.R
 import com.example.tbcacademy.common.BaseFragment
+import com.example.tbcacademy.common.Resource
 import com.example.tbcacademy.databinding.FragmentCardsBinding
 import com.example.tbcacademy.presentation.adapter.CardsAdapter
 import com.example.tbcacademy.presentation.vm.CardsViewModel
@@ -42,8 +44,19 @@ class CardsFragment : BaseFragment<FragmentCardsBinding>(FragmentCardsBinding::i
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.cards.collect { cardsList ->
-                    adapter.submitList(cardsList)
+                viewModel.cardsState.collect { state ->
+                    when (state) {
+                        is Resource.Loading -> {
+                        }
+
+                        is Resource.Success -> {
+                            adapter.submitList(state.data)
+                        }
+
+                        is Resource.Error -> {
+                            Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
         }
