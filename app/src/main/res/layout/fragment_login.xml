@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.fragment.login.LoginFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-130dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/background_vector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSignInTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/product_sans_bold"
+        android:text="@string/sign_in"
+        android:textFontWeight="600"
+        android:textSize="38sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivBackground"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/signInView"
+        android:layout_width="75dp"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/green"
+        app:layout_constraintStart_toStartOf="@id/tvSignInTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvSignInTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/product_sans_bold"
+        android:text="@string/email"
+        android:textColor="@color/dark_gray"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/signInView"
+        app:layout_constraintTop_toBottomOf="@id/signInView" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="25dp"
+        android:backgroundTint="@color/green"
+        android:layout_marginTop="2dp"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="6dp"
+        android:hint="@string/email"
+        app:layout_constraintTop_toBottomOf="@id/tvEmailTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
