@@ -1,4 +1,34 @@
 <resources>
     <string name="app_name">TBC Academy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="heart">heart</string>
+    <string name="home">home</string>
+    <string name="messages">messages</string>
+    <string name="bell">bell</string>
+    <string name="when_you_wake_up">when you wake up</string>
+    <string name="write_comment">Write comment...</string>
+    <string name="background_sync">Background Sync</string>
+    <string name="background_data_synchronization">Background data synchronization</string>
+    <string name="sync_failed">Sync failed: %1$s</string>
+    <string name="sync_completed_successfully">Sync completed successfully</string>
+    <string name="syncing_data">Syncing data</string>
+    <string name="sync_failed_">Sync failed: %1$s</string>
+    <string name="sync_complete_stories_posts">Sync complete: %1$d stories, %2$d posts</string>
+    <string name="background_sync_started">Background sync started</string>
+    <string name="notification_permission_denied">Notification permission denied</string>
+    <string name="background_data_synchronization_">Background data synchronization</string>
+    <string name="sync_failed__">Sync failed: %1$s</string>
+    <string name="sync__failed__">Sync failed</string>
+    <string name="sync_complete_stories_posts_">Sync complete! %1$d stories, %2$d posts</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="fetching_posts">Fetching posts</string>
+    <string name="fetching_stories">Fetching stories</string>
+    <string name="fetching_latest_stories_and_posts">Fetching latest stories and posts</string>
+    <string name="syncing_data_">Syncing Data</string>
+    <string name="tbc_academy">TBC Academy</string>
+    <string name="data_sync">Data Sync</string>
+    <string name="share">Share</string>
+    <string name="comments">%1$d Comments</string>
+    <string name="likes">%1$d Likes</string>
+    <string name="name">%1$s %2$s</string>
 </resources>
