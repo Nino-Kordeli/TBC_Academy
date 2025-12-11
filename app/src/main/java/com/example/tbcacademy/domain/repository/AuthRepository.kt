@@ -1,10 +1,11 @@
 package com.example.tbcacademy.domain.repository
 
+import com.example.tbcacademy.data.common.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    suspend fun register(email: String, password: String): Result<Unit>
-    suspend fun login(email: String, password: String): Result<Unit>
-    suspend fun signOut()
+    fun register(email: String, password: String): Flow<Resource<Boolean>>
+    fun login(email: String, password: String): Flow<Resource<Boolean>>
     fun isUserLoggedIn(): Flow<Boolean>
+    suspend fun signOut()
 }

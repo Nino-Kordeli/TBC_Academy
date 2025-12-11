@@ -1,23 +1,22 @@
 package com.example.tbcacademy.presentation.fragment.welcome
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
-class WelcomeFragment : Fragment() {
+import com.example.tbcacademy.common.BaseFragment
+import com.example.tbcacademy.databinding.FragmentWelcomeBinding
 
+class WelcomeFragment :
+    BaseFragment<FragmentWelcomeBinding>(FragmentWelcomeBinding::inflate) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun bind() {
+        setupClicks()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+    private fun setupClicks() {
+        binding.btnContinueButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_welcomeFragment_to_registerFragment
+            )
+        }
     }
-
 }

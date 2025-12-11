@@ -1,19 +1,14 @@
 package com.example.tbcacademy.data.common
 
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-
-class SafeFirebaseCall @Inject constructor() {
-
+class SafeCall {
     fun <T : Any> call(block: suspend () -> T) = flow {
-        emit(Resource.Loading(true))
+        emit(Resource.Loading)
         try {
-            val result = block()
-            emit(Resource.Success(result))
+            emit(Resource.Success(block()))
         } catch (e: Exception) {
             emit(Resource.Error(e.message ?: "Unknown error"))
         }
-        emit(Resource.Loading(false))
     }
 }
