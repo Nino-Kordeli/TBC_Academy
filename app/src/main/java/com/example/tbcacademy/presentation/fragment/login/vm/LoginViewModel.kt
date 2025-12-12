@@ -39,6 +39,7 @@ class LoginViewModel @Inject constructor(
     private fun login() = viewModelScope.launch {
         val email = state.value.email
         val password = state.value.password
+        val rememberMe = state.value.rememberMe
 
         when (val validation = validateLoginUseCase(email, password)) {
             is ValidationResult.Error -> {
@@ -64,8 +65,10 @@ class LoginViewModel @Inject constructor(
                 is Resource.Success -> {
                     updateState { it.copy(loading = false, error = null) }
 
-                    if (state.value.rememberMe) {
-                        userPreferences.saveEmail(email)
+                    if (rememberMe) {
+                        userPreferences.saveLogin(email)
+                    } else {
+                        userPreferences.clearLogin()
                     }
 
                     emitSideEffect(LoginSideEffect.NavigateToHome)

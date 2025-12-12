@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
 import com.example.tbcacademy.data.datastore.UserPreferences
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -18,15 +19,30 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     @Inject
     lateinit var userPreferences: UserPreferences
 
+    @Inject
+    lateinit var auth: FirebaseAuth
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
-            val savedEmail = userPreferences.getEmail.first()
-            if (savedEmail.isNotEmpty()) {
-                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+        viewLifecycleOwner.lifecycleScope.launch {
+            kotlinx.coroutines.delay(1500)
+
+            val isLoggedIn = userPreferences.isLoggedIn.first()
+            val currentUser = auth.currentUser
+
+            if (isLoggedIn && currentUser != null) {
+                findNavController().navigate(
+                    R.id.action_splashFragment_to_homeFragment
+                )
             } else {
-                findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
+                if (isLoggedIn && currentUser == null) {
+                    userPreferences.clearLogin()
+                }
+
+                findNavController().navigate(
+                    R.id.action_splashFragment_to_welcomeFragment
+                )
             }
         }
     }
