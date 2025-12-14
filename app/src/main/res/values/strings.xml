@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TBC Academy</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_turn_on_location_sharing">Please turn on location sharing</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="failed_to_load_locations">Failed to load locations</string>
 </resources>
