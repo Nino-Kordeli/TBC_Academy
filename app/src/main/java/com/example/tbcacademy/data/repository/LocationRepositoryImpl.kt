@@ -1,5 +1,6 @@
 package com.example.tbcacademy.data.repository
 
+import com.example.tbcacademy.data.common.ApiResult
 import com.example.tbcacademy.data.local.dao.LocationDao
 import com.example.tbcacademy.data.mapper.dtoListToEntities
 import com.example.tbcacademy.data.mapper.dtoToDomain
@@ -14,19 +15,25 @@ class LocationRepositoryImpl @Inject constructor(
     private val dao: LocationDao,
 ) : LocationRepository {
 
-    override suspend fun getLocations(): List<Location> {
+    override suspend fun getLocations(): ApiResult<List<Location>> {
         return try {
             val locationsFromApi = api.getLocations()
 
             dao.deleteAll()
             dao.insertLocations(locationsFromApi.dtoListToEntities())
 
-            locationsFromApi.dtoToDomain()
+            ApiResult.Success(locationsFromApi.dtoToDomain())
         } catch (e: Exception) {
-            val locationsFromDb = dao.getAllLocations()
-            locationsFromDb.entityToDomain()
+            val localData = dao.getAllLocations()
+
+            if (localData.isNotEmpty()) {
+                ApiResult.Success(localData.entityToDomain())
+            } else {
+                ApiResult.Error(e)
+            }
         }
     }
+
 
     override suspend fun hasLocalData(): Boolean {
         return dao.getCount() > 0
