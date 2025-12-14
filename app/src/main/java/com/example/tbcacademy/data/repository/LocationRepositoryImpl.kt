@@ -1,6 +1,7 @@
 package com.example.tbcacademy.data.repository
 
 import com.example.tbcacademy.data.common.ApiResult
+import com.example.tbcacademy.data.common.safeApiCall
 import com.example.tbcacademy.data.local.dao.LocationDao
 import com.example.tbcacademy.data.mapper.dtoListToEntities
 import com.example.tbcacademy.data.mapper.dtoToDomain
@@ -16,20 +17,23 @@ class LocationRepositoryImpl @Inject constructor(
 ) : LocationRepository {
 
     override suspend fun getLocations(): ApiResult<List<Location>> {
-        return try {
-            val locationsFromApi = api.getLocations()
+        return when (val result = safeApiCall { api.getLocations() }) {
 
-            dao.deleteAll()
-            dao.insertLocations(locationsFromApi.dtoListToEntities())
+            is ApiResult.Success -> {
+                dao.deleteAll()
+                dao.insertLocations(result.data.dtoListToEntities())
 
-            ApiResult.Success(locationsFromApi.dtoToDomain())
-        } catch (e: Exception) {
-            val localData = dao.getAllLocations()
+                ApiResult.Success(result.data.dtoToDomain())
+            }
 
-            if (localData.isNotEmpty()) {
-                ApiResult.Success(localData.entityToDomain())
-            } else {
-                ApiResult.Error(e)
+            is ApiResult.Error -> {
+                val cached = dao.getAllLocations()
+
+                if (cached.isNotEmpty()) {
+                    ApiResult.Success(cached.entityToDomain())
+                } else {
+                    ApiResult.Error(result.throwable)
+                }
             }
         }
     }
