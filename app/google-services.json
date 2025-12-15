@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "875199967547",
+    "project_id": "reglog-cead6",
+    "storage_bucket": "reglog-cead6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875199967547:android:f65184a73d351ad980871e",
+        "android_client_info": {
+          "package_name": "com.example.registrationverification"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxBukVtNnGJFKvFCl_j7qKSGy2bV30dDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875199967547:android:b15deadb0246537980871e",
+        "android_client_info": {
+          "package_name": "com.example.tbcacademy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxBukVtNnGJFKvFCl_j7qKSGy2bV30dDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
