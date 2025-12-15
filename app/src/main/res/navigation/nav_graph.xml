@@ -65,7 +65,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.tbcacademy.presentation.fragment.home.HomeFragment"
+        android:name="com.example.tbcacademy.presentation.fragment.home.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action

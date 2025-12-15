@@ -1,52 +1,46 @@
 package com.example.tbcacademy.presentation.fragment.home.vm
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbcacademy.data.datastore.UserPreferences
-import com.example.tbcacademy.domain.usecase.SignOutUseCase
-import com.google.firebase.auth.FirebaseAuth
+import com.example.tbcacademy.common.BaseViewModel
+import com.example.tbcacademy.domain.repository.RecipeRepository
+import com.example.tbcacademy.presentation.fragment.home.contract.HomeContract
+import com.example.tbcacademy.presentation.mapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class HomeState(
-    val userEmail: String = "",
-    val isLoggedOut: Boolean = false
-)
-
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val signOutUseCase: SignOutUseCase,
-    private val auth: FirebaseAuth,
-    private val userPreferences: UserPreferences
-) : ViewModel() {
-
-    private val _state = MutableStateFlow(HomeState())
-    val state: StateFlow<HomeState> = _state.asStateFlow()
+    private val recipeRepository: RecipeRepository,
+) : BaseViewModel<
+        HomeContract.HomeState,
+        HomeContract.HomeEvent,
+        HomeContract.HomeSideEffect
+        >(HomeContract.HomeState()) {
 
     init {
-        loadUserInfo()
+        onEvent(HomeContract.HomeEvent.LoadTrendingRecipes)
     }
 
-    private fun loadUserInfo() {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            _state.value = _state.value.copy(
-                userEmail = currentUser.email ?: "User"
-            )
+    override fun onEvent(event: HomeContract.HomeEvent) {
+        when (event) {
+            HomeContract.HomeEvent.LoadTrendingRecipes -> loadTrendingRecipes()
+            HomeContract.HomeEvent.Retry -> loadTrendingRecipes()
+            is HomeContract.HomeEvent.OnRecipeClick -> {
+                emitSideEffect(HomeContract.HomeSideEffect.NavigateToRecipe(event.id))
+            }
         }
     }
 
-    fun logout() {
-        viewModelScope.launch {
-            signOutUseCase()
+    private fun loadTrendingRecipes() = viewModelScope.launch {
+        updateState { it.copy(isLoading = true, error = null) }
 
-            userPreferences.clearLogin()
-
-            _state.value = _state.value.copy(isLoggedOut = true)
+        try {
+            val recipes = recipeRepository.getTrendingRecipes().toUi()
+            updateState { it.copy(isLoading = false, recipes = recipes) }
+        } catch (e: Exception) {
+            updateState { it.copy(isLoading = false, error = e.message ?: "Unknown error") }
+            emitSideEffect(HomeContract.HomeSideEffect.ShowError(e.message ?: "Unknown error"))
         }
     }
 }
