@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivRecipeImage"
+        android:layout_width="160dp"
+        android:layout_height="220dp"
+        android:background="@drawable/bg_rounded_corners"
+        android:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/textBackground"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_rounded_bottom"
+        app:layout_constraintBottom_toBottomOf="@id/ivRecipeImage"
+        app:layout_constraintEnd_toEndOf="@id/ivRecipeImage"
+        app:layout_constraintStart_toStartOf="@id/ivRecipeImage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textFontWeight="800"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/textBackground"
+        app:layout_constraintEnd_toEndOf="@id/textBackground"
+        app:layout_constraintStart_toStartOf="@id/textBackground"
+        app:layout_constraintTop_toTopOf="@id/textBackground"
+        tools:text="Apple" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="#6D000000"
+        android:padding="6dp"
+        android:src="@drawable/ic_remove"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/ivRecipeImage"
+        app:layout_constraintTop_toTopOf="@id/ivRecipeImage" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bg_unselected_ingredient"
+        android:backgroundTint="#6D000000"
+        android:padding="6dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/ivRecipeImage"
+        app:layout_constraintTop_toTopOf="@id/ivRecipeImage" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bg_selected_ingredient"
+        android:src="@drawable/ic_check"
+        app:layout_constraintEnd_toEndOf="@id/ivRecipeImage"
+        app:layout_constraintTop_toTopOf="@id/ivRecipeImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

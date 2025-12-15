@@ -20,4 +20,7 @@
     <string name="create_account">Create Account</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="log_in">Log In</string>
+    <string name="trending_recipes">Trending Recipes</string>
+    <string name="_2">2</string>
+    <string name="add_0_ingredients">add 0 ingredients</string>
 </resources>

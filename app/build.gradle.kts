@@ -56,6 +56,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
     implementation("androidx.room:room-ktx:2.7.0-alpha12")
     implementation(libs.androidx.core.ktx)
+    implementation(libs.firebase.auth)
     ksp("androidx.room:room-compiler:2.7.0-alpha12")
     implementation("androidx.room:room-runtime:2.7.0-alpha12")
     implementation("com.google.dagger:hilt-android:2.57.2")

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivRecipeImage"
+        android:layout_width="250dp"
+        android:layout_height="310dp"
+        android:background="@drawable/bg_rounded_corners"
+        android:backgroundTint="@color/green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/textBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_rounded_bottom"
+        app:layout_constraintBottom_toBottomOf="@id/ivRecipeImage"
+        app:layout_constraintEnd_toEndOf="@id/ivRecipeImage"
+        app:layout_constraintStart_toStartOf="@id/ivRecipeImage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/recipeName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="@id/textBackground"
+        app:layout_constraintStart_toStartOf="@id/textBackground"
+        app:layout_constraintTop_toTopOf="@id/textBackground"
+        tools:text="Oven roaster tofu with spinach paprika and parsley" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/bg_add_ingredients_btn"
+        android:text="@string/add_0_ingredients"
+        android:textColor="@color/white"
+        android:textFontWeight="800"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/textBackground"
+        app:layout_constraintTop_toBottomOf="@id/recipeName" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="#6D000000"
+        android:padding="2dp"
+        android:src="@drawable/ic_bookmark_white"
+        app:layout_constraintEnd_toEndOf="@id/ivRecipeImage"
+        app:layout_constraintTop_toTopOf="@id/ivRecipeImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
