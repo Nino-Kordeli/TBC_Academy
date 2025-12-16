@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.fragment.recipe_details.RecipeDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivRecipeImage"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ginger_chicken"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewRecipeName"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="350dp"
+            android:elevation="14dp"
+            app:cardCornerRadius="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRecipeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:elevation="20dp"
+            android:text="@string/recipe"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/viewRecipeName"
+            app:layout_constraintStart_toStartOf="@id/viewRecipeName"
+            app:layout_constraintTop_toTopOf="@id/viewRecipeName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRecipeName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="11dp"
+            android:elevation="20dp"
+            android:gravity="center"
+            android:textFontWeight="600"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@id/viewRecipeName"
+            app:layout_constraintStart_toStartOf="@id/viewRecipeName"
+            app:layout_constraintTop_toBottomOf="@id/tvRecipeTitle"
+            tools:text="Ginger marinated chicken and soy" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewRecipeName"
+            tools:text="@string/sample_text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="#7A000000"
+            app:layout_constraintBottom_toTopOf="@id/tvIngredientsTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvIngredientsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/ingredients"
+            android:textFontWeight="600"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnMinus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/plus_minus_design"
+            android:src="@drawable/ic_minus"
+            app:layout_constraintStart_toStartOf="@id/tvIngredientsTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvIngredientsTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRecipeServings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:text="@string/serves_0"
+            android:textFontWeight="600"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/btnMinus"
+            app:layout_constraintEnd_toStartOf="@id/btnPlus"
+            app:layout_constraintStart_toEndOf="@id/btnMinus"
+            app:layout_constraintTop_toTopOf="@id/btnMinus" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnPlus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/plus_minus_design"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="@id/btnMinus"
+            app:layout_constraintStart_toEndOf="@id/tvRecipeServings"
+            app:layout_constraintTop_toTopOf="@id/btnMinus" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvRecipeServings" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDirectionsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:elevation="20dp"
+            android:text="@string/directions"
+            android:textFontWeight="600"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvIngredients" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:layout_marginTop="-10dp"
+            android:background="#F8F4F4"
+            app:layout_constraintTop_toTopOf="@id/tvDirectionsTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            app:layout_constraintTop_toBottomOf="@id/tvDirectionsTitle"
+            tools:text="@string/sample_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>
