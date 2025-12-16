@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.fragment.recipe_details.RecipeDetailsFragment">
+    tools:context=".presentation.recipe_details.fragment.RecipeDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivRecipeImage"
@@ -130,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:padding="10dp"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintTop_toBottomOf="@id/tvRecipeServings" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -145,23 +146,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvIngredients" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1000dp"
-            android:layout_marginTop="-10dp"
-            android:background="#F8F4F4"
-            app:layout_constraintTop_toTopOf="@id/tvDirectionsTitle" />
-
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDirections"
+            android:layout_marginBottom="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:textSize="21sp"
             app:layout_constraintTop_toBottomOf="@id/tvDirectionsTitle"
             tools:text="@string/sample_text" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:layout_marginTop="-10dp"
+            android:background="#F8F4F4"
+            app:layout_constraintTop_toTopOf="@id/tvDirectionsTitle" />-->
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

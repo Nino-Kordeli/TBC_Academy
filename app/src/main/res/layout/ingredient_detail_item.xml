@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIngredient"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="#AABF9D"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_bookmark" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvIngredientName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivIngredient"
+        app:layout_constraintStart_toEndOf="@id/ivIngredient"
+        app:layout_constraintTop_toTopOf="@id/ivIngredient"
+        android:textFontWeight="600"
+        android:textSize="17sp"
+        tools:text="White Beans" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

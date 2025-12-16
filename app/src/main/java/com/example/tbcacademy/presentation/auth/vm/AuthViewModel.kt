@@ -3,8 +3,8 @@ package com.example.tbcacademy.presentation.auth.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tbcacademy.data.common.Resource
-import com.example.tbcacademy.domain.usecase.LoginUseCase
-import com.example.tbcacademy.domain.usecase.RegisterUseCase
+import com.example.tbcacademy.domain.usecase.auth.LoginUseCase
+import com.example.tbcacademy.domain.usecase.auth.RegisterUseCase
 import com.example.tbcacademy.presentation.auth.AuthEvent
 import com.example.tbcacademy.presentation.auth.AuthSideEffect
 import com.example.tbcacademy.presentation.auth.AuthState
@@ -62,7 +62,7 @@ class AuthViewModel @Inject constructor(
                         _state.value = _state.value.copy(
                             loading = false,
                             isSuccess = false,
-                            errorMessage = resource.message
+                            errorMessage = resource.errorMessage
                         )
                     }
                 }
@@ -90,7 +90,7 @@ class AuthViewModel @Inject constructor(
                         _state.value = _state.value.copy(
                             loading = false,
                             isSuccess = false,
-                            errorMessage = resource.message
+                            errorMessage = resource.errorMessage
                         )
                     }
                 }

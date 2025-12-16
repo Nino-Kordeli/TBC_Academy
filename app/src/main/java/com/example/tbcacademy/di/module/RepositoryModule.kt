@@ -2,7 +2,8 @@ package com.example.tbcacademy.di.module
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import com.example.tbcacademy.data.common.SafeCall
+import com.example.tbcacademy.data.common.HandleFirebaseResponse
+import com.example.tbcacademy.data.common.HandleResponse
 import com.example.tbcacademy.data.repository.AuthRepositoryImpl
 import com.example.tbcacademy.data.repository.IngredientRepositoryImpl
 import com.example.tbcacademy.data.repository.RecipeRepositoryImpl
@@ -24,26 +25,30 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindIngredientRepository(
-        impl: IngredientRepositoryImpl
+        impl: IngredientRepositoryImpl,
     ): IngredientRepository
 
     @Binds
     @Singleton
     abstract fun bindRecipeRepository(
-        impl: RecipeRepositoryImpl
+        impl: RecipeRepositoryImpl,
     ): RecipeRepository
 
     companion object {
         @Provides
         @Singleton
-        fun provideSafeCall(): SafeCall = SafeCall()
+        fun provideHandleResponse(): HandleResponse = HandleResponse()
+
+        @Provides
+        @Singleton
+        fun provideHandleFirebaseResponse(): HandleFirebaseResponse = HandleFirebaseResponse()
 
         @Provides
         @Singleton
         fun provideAuthRepository(
             auth: FirebaseAuth,
             dataStore: DataStore<Preferences>,
-            safeCall: SafeCall,
-        ): AuthRepository = AuthRepositoryImpl(auth, dataStore, safeCall)
+            handleResponse: HandleFirebaseResponse,
+        ): AuthRepository = AuthRepositoryImpl(auth, dataStore, handleResponse)
     }
 }

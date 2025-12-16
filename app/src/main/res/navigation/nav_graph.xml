@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.tbcacademy.presentation.fragment.splash.fragment.SplashFragment"
+        android:name="com.example.tbcacademy.presentation.splash.fragment.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.tbcacademy.presentation.fragment.welcome.fragment.WelcomeFragment"
+        android:name="com.example.tbcacademy.presentation.welcome.fragment.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.tbcacademy.presentation.fragment.login.fragment.LoginFragment"
+        android:name="com.example.tbcacademy.presentation.login.fragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.tbcacademy.presentation.fragment.register.fragment.RegisterFragment"
+        android:name="com.example.tbcacademy.presentation.register.fragment.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register">
         <action
@@ -65,7 +65,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.tbcacademy.presentation.fragment.home.fragment.HomeFragment"
+        android:name="com.example.tbcacademy.presentation.home.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -74,12 +74,15 @@
         <action
             android:id="@+id/action_homeFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/userDetailsFragment"
-        android:name="com.example.tbcacademy.presentation.fragment.user_details.UserDetailsFragment"
+        android:name="com.example.tbcacademy.presentation.user_details.UserDetailsFragment"
         android:label="fragment_user_details"
-        tools:layout="@layout/fragment_user_details" >
+        tools:layout="@layout/fragment_user_details">
         <action
             android:id="@+id/action_userDetailsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -89,8 +92,17 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.tbcacademy.presentation.fragment.search.fragment.SearchFragment"
+        android:name="com.example.tbcacademy.presentation.search.fragment.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.example.tbcacademy.presentation.recipe_details.fragment.RecipeDetailsFragment"
+        tools:layout="@layout/fragment_recipe_details">
+
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
