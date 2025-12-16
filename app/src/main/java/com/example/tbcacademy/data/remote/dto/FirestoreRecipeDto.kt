@@ -1,7 +1,16 @@
 package com.example.tbcacademy.data.remote.dto
 
-data class FirestoreRecipeDto (
-    val id: String,
-    val name: String,
-    val imageUrl: String,
-)
+import com.google.firebase.firestore.PropertyName
+
+data class FirestoreRecipeDto(
+    @PropertyName("id")
+    val id: Int = 0,
+
+    @PropertyName("name")
+    val name: String = "",
+
+    @PropertyName("imageUrl")
+    val imageUrl: String = ""
+) {
+    constructor() : this(0, "", "")
+}

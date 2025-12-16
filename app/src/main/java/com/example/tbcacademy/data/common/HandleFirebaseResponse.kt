@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.flow
 class HandleFirebaseResponse {
 
     fun <T : Any> authCall(call: suspend () -> T): Flow<Resource<T>> = flow {
-        emit(Resource.Loading(true))
+        emit(Resource.Loading(loading = true))
         try {
             val result = call()
-            emit(Resource.Success(result))
+            emit(Resource.Success(data = result))
         } catch (e: Throwable) {
-            emit(Resource.Error(e.message.orEmpty()))
+            emit(Resource.Error(errorMessage = e.message.orEmpty()))
         }
-        emit(Resource.Loading(false))
+        emit(Resource.Loading(loading = false))
     }
 }

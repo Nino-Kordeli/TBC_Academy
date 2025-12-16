@@ -8,7 +8,8 @@ import com.example.tbcacademy.presentation.model.RecipeUi
 fun Recipe.toUi(): RecipeUi = RecipeUi(
     id = id,
     name = name,
-    imageUrl = imageUrl
+    imageUrl = imageUrl,
+    isFavourite = true
 )
 
 fun RecipeUi.toDomainRecipe(): Recipe = Recipe(

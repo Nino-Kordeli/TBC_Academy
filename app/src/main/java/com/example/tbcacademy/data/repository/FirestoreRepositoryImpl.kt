@@ -3,7 +3,6 @@ package com.example.tbcacademy.data.repository
 import com.example.tbcacademy.data.common.HandleFirebaseResponse
 import com.example.tbcacademy.data.common.Resource
 import com.example.tbcacademy.data.mapper.firestoreToDomain
-import com.example.tbcacademy.data.mapper.toFirestoreDto
 import com.example.tbcacademy.data.remote.dto.FirestoreRecipeDto
 import com.example.tbcacademy.domain.model.Recipe
 import com.example.tbcacademy.domain.repository.FirestoreRepository
@@ -20,14 +19,21 @@ class FirestoreRepositoryImpl @Inject constructor(
 
     override suspend fun saveFavourite(request: Recipe) {
         val uid = auth.currentUser?.uid ?: error("User not logged in")
+
+        val dataMap = hashMapOf(
+            "id" to request.id,
+            "name" to request.name,
+            "imageUrl" to request.imageUrl
+        )
+
         FirebaseFirestore.getInstance()
             .collection("users")
             .document(uid)
             .collection("favorites")
             .document(request.id.toString())
-            .set(request)
+            .set(dataMap)
+            .await()
     }
-
 
     override fun getFavourites(): Flow<Resource<List<Recipe>>> {
         return handleResponse.authCall {
@@ -54,5 +60,6 @@ class FirestoreRepositoryImpl @Inject constructor(
             .collection("favorites")
             .document(recipeId.toString())
             .delete()
+            .await()
     }
 }

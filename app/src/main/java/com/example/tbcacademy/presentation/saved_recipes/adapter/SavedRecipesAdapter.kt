@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.home.adapter
+package com.example.tbcacademy.presentation.saved_recipes.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,10 +10,10 @@ import com.example.tbcacademy.R
 import com.example.tbcacademy.databinding.RecipeItemBinding
 import com.example.tbcacademy.presentation.model.RecipeUi
 
-class TrendingRecipesAdapter(
+class SavedRecipesAdapter(
     private val onRecipeClick: (Int) -> Unit,
-    private val onFavoriteClick: (Int) -> Unit,
-) : ListAdapter<RecipeUi, TrendingRecipesAdapter.RecipeViewHolder>(RecipeDiffCallback()) {
+    private val onFavoriteClick: (Int) -> Unit
+) : ListAdapter<RecipeUi, SavedRecipesAdapter.RecipeViewHolder>(RecipeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = RecipeItemBinding.inflate(
@@ -28,40 +28,27 @@ class TrendingRecipesAdapter(
         holder.bind(getItem(position))
     }
 
-    inner class RecipeViewHolder(
-        private val binding: RecipeItemBinding,
-    ) : RecyclerView.ViewHolder(binding.root) {
+    inner class RecipeViewHolder(private val binding: RecipeItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: RecipeUi) = with(binding) {
-
             recipeName.text = item.name
-
             Glide.with(ivRecipeImage.context)
                 .load(item.imageUrl)
                 .into(ivRecipeImage)
 
             ivBookmark.setImageResource(
-                if (item.isFavourite)
-                    R.drawable.ic_favorited_bookmark
-                else
-                    R.drawable.ic_bookmark_white
+                if (item.isFavourite) R.drawable.ic_favorited_bookmark
+                else R.drawable.ic_bookmark_white
             )
 
-            root.setOnClickListener {
-                onRecipeClick(item.id)
-            }
-
-            ivBookmark.setOnClickListener {
-                onFavoriteClick(item.id)
-            }
+            root.setOnClickListener { onRecipeClick(item.id) }
+            ivBookmark.setOnClickListener { onFavoriteClick(item.id) }
         }
     }
 
     private class RecipeDiffCallback : DiffUtil.ItemCallback<RecipeUi>() {
-        override fun areItemsTheSame(oldItem: RecipeUi, newItem: RecipeUi): Boolean =
-            oldItem.id == newItem.id
-
-        override fun areContentsTheSame(oldItem: RecipeUi, newItem: RecipeUi): Boolean =
-            oldItem == newItem
+        override fun areItemsTheSame(oldItem: RecipeUi, newItem: RecipeUi) = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: RecipeUi, newItem: RecipeUi) = oldItem == newItem
     }
 }

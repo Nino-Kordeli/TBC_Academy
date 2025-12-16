@@ -15,13 +15,13 @@ fun List<RecipeDto>.recipeToDomain(): List<Recipe> = this.map {
 }
 
 fun Recipe.toFirestoreDto(): FirestoreRecipeDto = FirestoreRecipeDto(
-    id = id.toString(),
+    id = id,
     name = name,
     imageUrl = imageUrl
 )
 
 fun FirestoreRecipeDto.firestoreToDomain(): Recipe = Recipe(
-    id = id.toInt(),
+    id = id,
     name = name,
     imageUrl = imageUrl
 )

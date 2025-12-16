@@ -31,8 +31,9 @@
     <string name="search_by_meal">Search by Meal</string>
     <string name="breakfast">Breakfast</string>
     <string name="recipe">RECIPE</string>
-    <string name="sample_text">so this is my recipeee i worte this this is tsample text nothig bold hapening here sampl;e text just testingso this is my recipeee i worte this this is tsample text nothig bold hapening here sampl;e text just testingso this is my recipeee i worte this this is tsample text nothig bold hapening here sampl;e text just testing</string>
+    <string name="sample_text">test string sample text</string>
     <string name="ingredients">Ingredients</string>
     <string name="serves_0">Serves 0</string>
     <string name="directions">Directions</string>
+    <string name="saved_recipes">Saved Recipes</string>
 </resources>

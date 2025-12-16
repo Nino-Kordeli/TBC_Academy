@@ -31,29 +31,15 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/recipeName"
         android:layout_width="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivRecipeImage"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="40dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="12dp"
         app:layout_constraintEnd_toEndOf="@id/textBackground"
         app:layout_constraintStart_toStartOf="@id/textBackground"
         app:layout_constraintTop_toTopOf="@id/textBackground"
         tools:text="Oven roaster tofu with spinach paprika and parsley" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bg_add_ingredients_btn"
-        android:padding="5dp"
-        android:text="@string/add_0_ingredients"
-        android:textColor="@color/white"
-        android:textFontWeight="800"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/textBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivBookmark"
