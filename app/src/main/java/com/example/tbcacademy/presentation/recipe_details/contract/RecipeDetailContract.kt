@@ -1,11 +1,11 @@
 package com.example.tbcacademy.presentation.recipe_details.contract
 
 import com.example.tbcacademy.presentation.model.IngredientUi
-import com.example.tbcacademy.presentation.model.RecipeUi
+import com.example.tbcacademy.presentation.model.RecipeDetailsUi
 
 data class RecipeDetailState(
     val isLoading: Boolean = false,
-    val recipe: RecipeUi? = null,
+    val recipe: RecipeDetailsUi? = null,
     val ingredients: List<IngredientUi> = emptyList(),
     val servings: Int = 1,
     val error: String? = null,

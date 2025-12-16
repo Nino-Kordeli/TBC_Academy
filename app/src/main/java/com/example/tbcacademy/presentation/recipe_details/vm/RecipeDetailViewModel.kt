@@ -1,12 +1,11 @@
 package com.example.tbcacademy.presentation.recipe_details.vm
 
-import android.util.Log.d
 import androidx.lifecycle.viewModelScope
 import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.data.common.Resource
 import com.example.tbcacademy.domain.usecase.ingredient.GetIngredientsUseCase
 import com.example.tbcacademy.domain.usecase.recipe.GetRecipeDetailsUseCase
-import com.example.tbcacademy.presentation.recipe_details.mapper.toUi
+import com.example.tbcacademy.presentation.mapper.toUi
 import com.example.tbcacademy.presentation.recipe_details.contract.RecipeDetailEvent
 import com.example.tbcacademy.presentation.recipe_details.contract.RecipeDetailEvent.DecreaseServings
 import com.example.tbcacademy.presentation.recipe_details.contract.RecipeDetailEvent.IncreaseServings

@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.data.common.Resource
 import com.example.tbcacademy.domain.usecase.ingredient.GetIngredientsUseCase
-import com.example.tbcacademy.presentation.recipe_details.mapper.toUi
+import com.example.tbcacademy.presentation.mapper.toUi
 import com.example.tbcacademy.presentation.search.contract.SearchContract.SearchEvent
 import com.example.tbcacademy.presentation.search.contract.SearchContract.SearchSideEffect
 import com.example.tbcacademy.presentation.search.contract.SearchContract.SearchState

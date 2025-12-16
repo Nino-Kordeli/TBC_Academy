@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.recipe_details.mapper
+package com.example.tbcacademy.presentation.mapper
 
 import com.example.tbcacademy.domain.model.Ingredient
 import com.example.tbcacademy.presentation.model.IngredientUi

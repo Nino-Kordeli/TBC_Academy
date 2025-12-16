@@ -13,6 +13,7 @@ sealed interface HomeEvent {
     data object Retry : HomeEvent
     data class OnRecipeClick(val id: Int) : HomeEvent
     data object NavigateToProfile : HomeEvent
+    data class OnFavoriteClick(val id:Int): HomeEvent
 }
 
 sealed interface HomeSideEffect {

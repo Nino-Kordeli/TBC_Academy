@@ -21,9 +21,14 @@ class HomeFragment :
     private val viewModel: HomeViewModel by viewModels()
 
     private val trendingAdapter by lazy {
-        TrendingRecipesAdapter { recipeId ->
-            viewModel.onEvent(HomeEvent.OnRecipeClick(recipeId))
-        }
+        TrendingRecipesAdapter(
+            onRecipeClick = { recipeId ->
+                viewModel.onEvent(HomeEvent.OnRecipeClick(recipeId))
+            },
+            onFavoriteClick = { recipeId ->
+                viewModel.onEvent(HomeEvent.OnFavoriteClick(recipeId))
+            }
+        )
     }
 
     override fun bind() {

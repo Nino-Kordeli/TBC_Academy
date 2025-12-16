@@ -1,5 +1,6 @@
 package com.example.tbcacademy.data.mapper
 
+import com.example.tbcacademy.data.remote.dto.FirestoreRecipeDto
 import com.example.tbcacademy.data.remote.dto.RecipeDetailDto
 import com.example.tbcacademy.data.remote.dto.RecipeDto
 import com.example.tbcacademy.domain.model.Recipe
@@ -12,6 +13,18 @@ fun List<RecipeDto>.recipeToDomain(): List<Recipe> = this.map {
         imageUrl = it.imageUrl
     )
 }
+
+fun Recipe.toFirestoreDto(): FirestoreRecipeDto = FirestoreRecipeDto(
+    id = id.toString(),
+    name = name,
+    imageUrl = imageUrl
+)
+
+fun FirestoreRecipeDto.firestoreToDomain(): Recipe = Recipe(
+    id = id.toInt(),
+    name = name,
+    imageUrl = imageUrl
+)
 
 fun List<RecipeDetailDto>.detailToDomain(): List<RecipeDetail> = this.map {
     RecipeDetail(

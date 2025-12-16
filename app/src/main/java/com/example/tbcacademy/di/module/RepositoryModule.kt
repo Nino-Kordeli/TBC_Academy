@@ -5,9 +5,11 @@ import androidx.datastore.preferences.core.Preferences
 import com.example.tbcacademy.data.common.HandleFirebaseResponse
 import com.example.tbcacademy.data.common.HandleResponse
 import com.example.tbcacademy.data.repository.AuthRepositoryImpl
+import com.example.tbcacademy.data.repository.FirestoreRepositoryImpl
 import com.example.tbcacademy.data.repository.IngredientRepositoryImpl
 import com.example.tbcacademy.data.repository.RecipeRepositoryImpl
 import com.example.tbcacademy.domain.repository.AuthRepository
+import com.example.tbcacademy.domain.repository.FirestoreRepository
 import com.example.tbcacademy.domain.repository.IngredientRepository
 import com.example.tbcacademy.domain.repository.RecipeRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +35,12 @@ abstract class RepositoryModule {
     abstract fun bindRecipeRepository(
         impl: RecipeRepositoryImpl,
     ): RecipeRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindFirestoreRepository(
+        impl: FirestoreRepositoryImpl,
+    ): FirestoreRepository
 
     companion object {
         @Provides
