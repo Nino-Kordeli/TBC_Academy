@@ -1,16 +1,18 @@
 package com.example.tbcacademy.presentation.fragment.home.fragment
 
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentHomeBinding
 import com.example.tbcacademy.presentation.fragment.home.adapter.TrendingRecipesAdapter
 import com.example.tbcacademy.presentation.fragment.home.contract.HomeContract
 import com.example.tbcacademy.presentation.fragment.home.vm.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import androidx.lifecycle.lifecycleScope
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private val viewModel: HomeViewModel by viewModels()
@@ -29,7 +31,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun setupRecyclerView() = with(binding.rvTrendingRecipes) {
-        layoutManager = LinearLayoutManager(requireContext())
+        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         adapter = trendingAdapter
     }
 

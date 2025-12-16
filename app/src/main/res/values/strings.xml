@@ -23,4 +23,11 @@
     <string name="trending_recipes">Trending Recipes</string>
     <string name="_2">2</string>
     <string name="add_0_ingredients">add 0 ingredients</string>
+    <string name="search">Search</string>
+    <string name="search_recipes">Search Recipes</string>
+    <string name="search_by_ingredients">Search by Ingredients</string>
+    <string name="artichoke">Artichoke</string>
+    <string name="view_all"><u>VIEW ALL</u></string>
+    <string name="search_by_meal">Search by Meal</string>
+    <string name="breakfast">Breakfast</string>
 </resources>

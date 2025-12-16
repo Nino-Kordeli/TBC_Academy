@@ -6,7 +6,7 @@ import com.example.tbcacademy.presentation.model.RecipeUi
 fun Recipe.toUi(): RecipeUi =
     RecipeUi(
         id = id,
-        title = name,
+        name = name,
         imageUrl = imageUrl
     )
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <View
+        android:id="@+id/recipeBackground"
+        android:layout_width="165dp"
+        android:layout_height="105dp"
+        android:background="@drawable/meal_category_design"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCategory"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/breakfast_item"
+        app:layout_constraintBottom_toBottomOf="@id/recipeBackground"
+        app:layout_constraintEnd_toEndOf="@id/recipeBackground" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCategoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/breakfast"
+        android:textFontWeight="600"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/recipeBackground"
+        app:layout_constraintTop_toTopOf="@id/recipeBackground" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

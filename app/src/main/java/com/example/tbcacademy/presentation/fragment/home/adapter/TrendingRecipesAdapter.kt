@@ -30,7 +30,7 @@ class TrendingRecipesAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(recipe: RecipeUi) {
-            binding.recipeName.text = recipe.title
+            binding.recipeName.text = recipe.name
             Glide.with(binding.ivRecipeImage.context)
                 .load(recipe.imageUrl)
                 .into(binding.ivRecipeImage)

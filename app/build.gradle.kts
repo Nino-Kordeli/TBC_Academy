@@ -48,6 +48,9 @@ android {
 
 dependencies {
 
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
@@ -57,6 +60,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.7.0-alpha12")
     implementation(libs.androidx.core.ktx)
     implementation(libs.firebase.auth)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     ksp("androidx.room:room-compiler:2.7.0-alpha12")
     implementation("androidx.room:room-runtime:2.7.0-alpha12")
     implementation("com.google.dagger:hilt-android:2.57.2")

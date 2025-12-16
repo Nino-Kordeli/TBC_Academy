@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.domain.repository.RecipeRepository
 import com.example.tbcacademy.presentation.fragment.home.contract.HomeContract
-import com.example.tbcacademy.presentation.mapper.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,7 +35,7 @@ class HomeViewModel @Inject constructor(
         updateState { it.copy(isLoading = true, error = null) }
 
         try {
-            val recipes = recipeRepository.getTrendingRecipes().toUi()
+            val recipes = recipeRepository.getTrendingRecipes()
             updateState { it.copy(isLoading = false, recipes = recipes) }
         } catch (e: Exception) {
             updateState { it.copy(isLoading = false, error = e.message ?: "Unknown error") }
