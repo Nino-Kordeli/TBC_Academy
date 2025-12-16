@@ -89,40 +89,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDescription" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnMinus"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/plus_minus_design"
-            android:src="@drawable/ic_minus"
-            app:layout_constraintStart_toStartOf="@id/tvIngredientsTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvIngredientsTitle" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvRecipeServings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:text="@string/serves_0"
-            android:textFontWeight="600"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/btnMinus"
-            app:layout_constraintEnd_toStartOf="@id/btnPlus"
-            app:layout_constraintStart_toEndOf="@id/btnMinus"
-            app:layout_constraintTop_toTopOf="@id/btnMinus" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnPlus"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="7dp"
-            android:background="@drawable/plus_minus_design"
-            android:src="@drawable/ic_add"
-            app:layout_constraintBottom_toBottomOf="@id/btnMinus"
-            app:layout_constraintStart_toEndOf="@id/tvRecipeServings"
-            app:layout_constraintTop_toTopOf="@id/btnMinus" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIngredients"
@@ -131,7 +97,7 @@
             android:layout_marginTop="15dp"
             android:padding="10dp"
             android:nestedScrollingEnabled="false"
-            app:layout_constraintTop_toBottomOf="@id/tvRecipeServings" />
+            app:layout_constraintTop_toBottomOf="@id/tvIngredientsTitle" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDirectionsTitle"

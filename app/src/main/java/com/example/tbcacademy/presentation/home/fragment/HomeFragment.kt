@@ -59,36 +59,32 @@ class HomeFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.collectLatest { state ->
                 trendingAdapter.submitList(state.recipes)
-
                 binding.btnFavorites.text = state.favouriteCount.toString()
             }
+        }
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.sideEffect.collectLatest { sideEffect ->
-                    when (sideEffect) {
-
-                        is HomeSideEffect.NavigateToRecipe -> {
-                            findNavController().navigate(
-                                HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
-                                    recipeId = sideEffect.id
-                                )
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.sideEffect.collectLatest { sideEffect ->
+                when (sideEffect) {
+                    is HomeSideEffect.NavigateToRecipe -> {
+                        findNavController().navigate(
+                            HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
+                                recipeId = sideEffect.id
                             )
-                        }
-
-                        is HomeSideEffect.ShowError -> {
-                        }
-
-                        HomeSideEffect.NavigateToProfile -> {
-                            findNavController().navigate(
-                                HomeFragmentDirections.actionHomeFragmentToUserDetailsFragment()
-                            )
-                        }
-
-                        HomeSideEffect.NavigateToFavourites -> {
-                            findNavController().navigate(
-                                HomeFragmentDirections.actionHomeFragmentToSavedRecipesFragment()
-                            )
-                        }
+                        )
+                    }
+                    HomeSideEffect.NavigateToProfile -> {
+                        findNavController().navigate(
+                            HomeFragmentDirections.actionHomeFragmentToUserDetailsFragment()
+                        )
+                    }
+                    HomeSideEffect.NavigateToFavourites -> {
+                        findNavController().navigate(
+                            HomeFragmentDirections.actionHomeFragmentToSavedRecipesFragment()
+                        )
+                    }
+                    is HomeSideEffect.ShowError -> {
+                        // TODO: handle error
                     }
                 }
             }

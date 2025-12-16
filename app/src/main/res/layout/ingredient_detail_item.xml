@@ -12,22 +12,24 @@
         android:layout_height="60dp"
         android:background="@drawable/circle_background"
         android:backgroundTint="#AABF9D"
+        android:clipToOutline="true"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_bookmark" />
+        tools:src="@drawable/ic_bookmark"
+        tools:targetApi="31" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvIngredientName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
+        android:textFontWeight="600"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@id/ivIngredient"
         app:layout_constraintStart_toEndOf="@id/ivIngredient"
         app:layout_constraintTop_toTopOf="@id/ivIngredient"
-        android:textFontWeight="600"
-        android:textSize="17sp"
         tools:text="White Beans" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

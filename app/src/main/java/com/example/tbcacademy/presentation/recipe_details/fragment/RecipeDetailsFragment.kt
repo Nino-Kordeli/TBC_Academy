@@ -28,7 +28,6 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
 
     override fun bind() {
         setupRecyclerView()
-        setupClickListeners()
         observeState()
         viewModel.onEvent(RecipeDetailEvent.LoadData(args.recipeId))
     }
@@ -39,15 +38,6 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
         isNestedScrollingEnabled = false
     }
 
-    private fun setupClickListeners() {
-        binding.btnPlus.setOnClickListener {
-            viewModel.onEvent(RecipeDetailEvent.IncreaseServings)
-        }
-
-        binding.btnMinus.setOnClickListener {
-            viewModel.onEvent(RecipeDetailEvent.DecreaseServings)
-        }
-    }
 
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -56,7 +46,6 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
                 state.recipe?.let { recipe ->
                     binding.tvRecipeName.text = recipe.name
                     binding.tvDescription.text = recipe.description
-                    binding.tvRecipeServings.text = "Serves ${state.servings}"
 
                     Glide.with(requireContext())
                         .load(recipe.imageUrl)
