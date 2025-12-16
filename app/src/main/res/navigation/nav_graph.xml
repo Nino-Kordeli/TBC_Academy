@@ -77,6 +77,9 @@
         <action
             android:id="@+id/action_homeFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_savedRecipesFragment"
+            app:destination="@id/savedRecipesFragment" />
     </fragment>
     <fragment
         android:id="@+id/userDetailsFragment"
@@ -104,5 +107,10 @@
             android:name="recipeId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/savedRecipesFragment"
+        android:name="com.example.tbcacademy.presentation.saved_recipes.fragment.SavedRecipesFragment"
+        android:label="fragment_saved_recipes"
+        tools:layout="@layout/fragment_saved_recipes" />
 
 </navigation>

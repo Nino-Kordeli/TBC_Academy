@@ -1,5 +1,6 @@
 package com.example.tbcacademy.presentation.home.fragment
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -42,6 +43,9 @@ class HomeFragment :
         binding.ivUserIcon.setOnClickListener {
             viewModel.onEvent(HomeEvent.NavigateToProfile)
         }
+        binding.btnFavorites.setOnClickListener {
+            viewModel.onEvent(HomeEvent.OnFavouriteIconClick)
+        }
     }
 
 
@@ -55,29 +59,36 @@ class HomeFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.collectLatest { state ->
                 trendingAdapter.submitList(state.recipes)
+
+                binding.btnFavorites.text = state.favouriteCount.toString()
             }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.sideEffect.collectLatest { sideEffect ->
-                when (sideEffect) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.sideEffect.collectLatest { sideEffect ->
+                    when (sideEffect) {
 
-                    is HomeSideEffect.NavigateToRecipe -> {
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
-                                recipeId = sideEffect.id
+                        is HomeSideEffect.NavigateToRecipe -> {
+                            findNavController().navigate(
+                                HomeFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
+                                    recipeId = sideEffect.id
+                                )
                             )
-                        )
-                    }
+                        }
 
-                    is HomeSideEffect.ShowError -> {
-                        // show error UI if needed
-                    }
+                        is HomeSideEffect.ShowError -> {
+                        }
 
-                    HomeSideEffect.NavigateToProfile -> {
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionHomeFragmentToUserDetailsFragment()
-                        )
+                        HomeSideEffect.NavigateToProfile -> {
+                            findNavController().navigate(
+                                HomeFragmentDirections.actionHomeFragmentToUserDetailsFragment()
+                            )
+                        }
+
+                        HomeSideEffect.NavigateToFavourites -> {
+                            findNavController().navigate(
+                                HomeFragmentDirections.actionHomeFragmentToSavedRecipesFragment()
+                            )
+                        }
                     }
                 }
             }

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.data.common.Resource
 import com.example.tbcacademy.domain.usecase.firestore.GetFavouriteUseCase
+import com.example.tbcacademy.domain.usecase.firestore.RemoveFavouriteUseCase
 import com.example.tbcacademy.domain.usecase.firestore.SaveFavouriteUseCase
 import com.example.tbcacademy.domain.usecase.recipe.GetTrendingRecipesUseCase
 import com.example.tbcacademy.presentation.home.contract.HomeEvent
@@ -21,6 +22,7 @@ class HomeViewModel @Inject constructor(
     private val getTrendingRecipesUseCase: GetTrendingRecipesUseCase,
     private val saveFavouriteUseCase: SaveFavouriteUseCase,
     private val getFavouriteUseCase: GetFavouriteUseCase,
+    private val removeFavouriteUseCase: RemoveFavouriteUseCase
 ) : BaseViewModel<HomeState, HomeEvent, HomeSideEffect>(HomeState()) {
 
     override fun onEvent(event: HomeEvent) {
@@ -36,14 +38,32 @@ class HomeViewModel @Inject constructor(
             }
 
             is HomeEvent.OnFavoriteClick -> {
-                saveFavouriteRecipe(event.id)
+                toggleFavourite(event.id)
             }
+
+            HomeEvent.OnFavouriteIconClick -> emitSideEffect(HomeSideEffect.NavigateToFavourites)
         }
     }
 
-    private fun saveFavouriteRecipe(recipeId: Int) = viewModelScope.launch {
-        val recipe = state.value.recipes.first { item -> item.id == recipeId }.toDomainRecipe()
-        saveFavouriteUseCase.invoke(recipe)
+    private fun toggleFavourite(recipeId: Int) = viewModelScope.launch {
+        val currentRecipe = state.value.recipes.first { it.id == recipeId }
+
+        if (currentRecipe.isFavourite) {
+            removeFavouriteUseCase(recipeId)
+        } else {
+            saveFavouriteUseCase.invoke(currentRecipe.toDomainRecipe())
+        }
+
+        updateState { currentState ->
+            currentState.copy(
+                recipes = currentState.recipes.map { recipe ->
+                    if (recipe.id == recipeId) {
+                        recipe.copy(isFavourite = !recipe.isFavourite)
+                    } else recipe
+                }
+            )
+        }
+
         getFavouriteRecipes()
     }
 
@@ -69,7 +89,10 @@ class HomeViewModel @Inject constructor(
                             )
                         }
 
-                        currentState.copy(recipes = updatedRecipes)
+                        currentState.copy(
+                            recipes = updatedRecipes,
+                            favouriteCount = updatedRecipes.count { it.isFavourite }
+                        )
                     }
                 }
             }

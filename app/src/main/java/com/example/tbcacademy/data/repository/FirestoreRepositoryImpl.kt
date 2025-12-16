@@ -18,15 +18,14 @@ class FirestoreRepositoryImpl @Inject constructor(
     private val handleResponse: HandleFirebaseResponse,
 ) : FirestoreRepository {
 
-    override fun saveFavourite(request: Recipe) {
+    override suspend fun saveFavourite(request: Recipe) {
         val uid = auth.currentUser?.uid ?: error("User not logged in")
-
         FirebaseFirestore.getInstance()
             .collection("users")
             .document(uid)
             .collection("favorites")
             .document(request.id.toString())
-            .set(request.toFirestoreDto())
+            .set(request)
     }
 
 
@@ -45,5 +44,15 @@ class FirestoreRepositoryImpl @Inject constructor(
                 document.toObject(FirestoreRecipeDto::class.java)?.firestoreToDomain()
             }
         }
+    }
+
+    override suspend fun removeFavourite(recipeId: Int) {
+        val uid = auth.currentUser?.uid ?: error("User not logged in")
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(uid)
+            .collection("favorites")
+            .document(recipeId.toString())
+            .delete()
     }
 }
