@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
+        android:elevation="3dp"
         android:text="@string/all_caps_cook_master"
         android:textColor="@color/white"
-        android:elevation="3dp"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +37,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="20dp"
+        android:background="gre"
+        android:elevation="2dp"
         android:gravity="center"
         android:text="@string/cooking_made_simple_with_love"
         android:textColor="@color/white"
+        android:textFontWeight="600"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/separator" />
 
@@ -47,7 +50,8 @@
         android:id="@+id/ivBigFood"
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:layout_marginTop="45dp"
+        android:elevation="2dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/breakfast_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,10 +59,10 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="950dp"
-        android:src="@drawable/cut_vegetables"
         android:layout_height="950dp"
+        android:layout_marginTop="160dp"
+        android:src="@drawable/cut_vegetables"
         app:layout_constraintBottom_toBottomOf="@id/ivBigFood"
-        android:layout_marginTop="150"
         app:layout_constraintEnd_toEndOf="@id/ivBigFood"
         app:layout_constraintStart_toStartOf="@id/ivBigFood"
         app:layout_constraintTop_toTopOf="parent" />
