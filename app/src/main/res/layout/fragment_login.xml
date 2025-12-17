@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.fragment.login.fragment.LoginFragment">
+    tools:context=".presentation.login.fragment.LoginFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivBackground"
@@ -60,7 +60,8 @@
         android:layout_marginTop="2dp"
         android:backgroundTint="@color/green"
         android:drawableStart="@drawable/ic_email_big"
-        android:drawablePadding="6dp"
+        android:drawableEnd="@drawable/ic_password_visible"
+        android:drawablePadding="5dp"
         android:hint="@string/enter_your_email"
         app:layout_constraintTop_toBottomOf="@id/tvEmailTitle" />
 
@@ -87,16 +88,17 @@
         android:drawableEnd="@drawable/ic_password_visible"
         android:drawablePadding="5dp"
         android:hint="@string/enter_your_password"
+        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/tvPasswordTitle" />
 
     <CheckBox
         android:id="@+id/rememberMeCheckBox"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:clickable="true"
         android:layout_marginStart="3dp"
         android:layout_marginTop="18dp"
         android:background="@drawable/checkbox_design"
+        android:clickable="true"
         app:layout_constraintStart_toStartOf="@id/etPasswordField"
         app:layout_constraintTop_toBottomOf="@id/etPasswordField" />
 

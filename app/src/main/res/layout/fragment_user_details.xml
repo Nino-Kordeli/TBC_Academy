@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.fragment.user_details.UserDetailsFragment">
+    tools:context=".presentation.user_details.UserDetailsFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/backArrow"
@@ -31,12 +31,12 @@
         android:id="@+id/tvUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@id/userIcon"
+        android:layout_marginTop="20dp"
         android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/backArrow"
+        app:layout_constraintTop_toTopOf="@id/view"
         tools:text="Welcome, user@gmail.com" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -46,18 +46,25 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/circle_background"
+        android:padding="10dp"
         android:clipToOutline="true"
-        android:src="@color/green"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/outline_comedy_mask_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="31" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
         android:layout_height="65dp"
-        android:text="Logout"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_rounded_corners"
+        android:backgroundTint="@color/white"
+        android:text="@string/logout"
         android:textAllCaps="false"
-        app:layout_constraintTop_toTopOf="@id/view" />
+        app:layout_constraintTop_toBottomOf="@id/tvUserEmail" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
