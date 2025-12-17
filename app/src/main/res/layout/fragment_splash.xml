@@ -37,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="20dp"
-        android:background="gre"
         android:elevation="2dp"
         android:gravity="center"
         android:text="@string/cooking_made_simple_with_love"
@@ -60,7 +59,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="950dp"
         android:layout_height="950dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="260dp"
         android:src="@drawable/cut_vegetables"
         app:layout_constraintBottom_toBottomOf="@id/ivBigFood"
         app:layout_constraintEnd_toEndOf="@id/ivBigFood"

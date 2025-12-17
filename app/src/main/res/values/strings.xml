@@ -42,4 +42,6 @@
     <string name="cook_master">Cook Master</string>
     <string name="all_caps_cook_master">COOK MASTER</string>
     <string name="cooking_made_simple_with_love">Cooking made simple, with love.</string>
+    <string name="category_name">Category Name</string>
+    <string name="no_items_found">No items found</string>
 </resources>

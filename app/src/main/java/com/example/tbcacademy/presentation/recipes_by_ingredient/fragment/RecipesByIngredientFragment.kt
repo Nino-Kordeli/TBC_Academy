@@ -39,7 +39,6 @@ class RecipesByIngredientFragment :
         )
     }
 
-
     private fun setupRecycler() = with(binding.rvRecipesByIngredients) {
         layoutManager = GridLayoutManager(requireContext(), 1)
         adapter = this@RecipesByIngredientFragment.adapter
