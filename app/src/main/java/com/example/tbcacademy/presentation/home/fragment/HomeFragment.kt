@@ -1,6 +1,5 @@
 package com.example.tbcacademy.presentation.home.fragment
 
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -84,7 +83,6 @@ class HomeFragment :
                         )
                     }
                     is HomeSideEffect.ShowError -> {
-                        // TODO: handle error
                     }
                 }
             }
