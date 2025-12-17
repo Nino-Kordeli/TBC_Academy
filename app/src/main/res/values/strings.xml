@@ -37,4 +37,7 @@
     <string name="directions">Directions</string>
     <string name="saved_recipes">Saved Recipes</string>
     <string name="selected_recipes">Selected Recipes</string>
+    <string name="sort_by_ingredients">Sort by Ingredients</string>
+    <string name="sort_by_meal">Sort by Meal</string>
+    <string name="cook_master">Cook Master</string>
 </resources>

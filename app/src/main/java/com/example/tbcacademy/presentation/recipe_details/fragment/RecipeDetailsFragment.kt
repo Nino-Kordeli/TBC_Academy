@@ -1,11 +1,13 @@
 package com.example.tbcacademy.presentation.recipe_details.fragment
 
+
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
 import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentRecipeDetailsBinding
 import com.example.tbcacademy.presentation.recipe_details.adapter.RecipeIngredientsAdapter
@@ -47,8 +49,10 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
                     binding.tvRecipeName.text = recipe.name
                     binding.tvDescription.text = recipe.description
 
-                    Glide.with(requireContext())
+                    Glide.with(binding.ivRecipeImage.context)
                         .load(recipe.imageUrl)
+                        .centerCrop()
+                        .format(DecodeFormat.PREFER_ARGB_8888)
                         .into(binding.ivRecipeImage)
 
                     val directionsText = recipe.directions.mapIndexed { index, step ->

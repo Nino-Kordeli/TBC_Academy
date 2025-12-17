@@ -33,16 +33,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/ivUserIcon" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBannerPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_rounded_corners"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/banner_image"
+        app:layout_constraintTop_toBottomOf="@id/ivUserIcon"
+        tools:targetApi="31" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/cook_master"
+        android:background="@drawable/bg_rounded_corners"
+        android:backgroundTint="#95BF7C"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textFontWeight="800"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="@id/ivBannerPhoto"
+        app:layout_constraintTop_toTopOf="@id/ivBannerPhoto" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvRecipeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="25dp"
         android:text="@string/trending_recipes"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivUserIcon" />
+        app:layout_constraintTop_toBottomOf="@id/ivBannerPhoto" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTrendingRecipes"

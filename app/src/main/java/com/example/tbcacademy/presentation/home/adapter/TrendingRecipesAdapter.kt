@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
 import com.example.tbcacademy.R
 import com.example.tbcacademy.databinding.RecipeItemBinding
 import com.example.tbcacademy.presentation.model.RecipeUi
@@ -36,9 +37,11 @@ class TrendingRecipesAdapter(
 
             recipeName.text = item.name
 
-            Glide.with(ivRecipeImage.context)
+            Glide.with(binding.ivRecipeImage.context)
                 .load(item.imageUrl)
-                .into(ivRecipeImage)
+                .centerCrop()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .into(binding.ivRecipeImage)
 
             ivBookmark.setImageResource(
                 if (item.isFavourite)

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
 import com.example.tbcacademy.databinding.RecipeItemBinding
 import com.example.tbcacademy.presentation.model.RecipeUi
 
@@ -20,8 +21,9 @@ class RecipesByIngredientAdapter(
             binding.recipeName.text = recipe.name
             Glide.with(binding.ivRecipeImage.context)
                 .load(recipe.imageUrl)
+                .centerCrop()
+                .format(DecodeFormat.PREFER_ARGB_8888)
                 .into(binding.ivRecipeImage)
-
             binding.root.setOnClickListener { onClick(recipe.id) }
         }
     }
