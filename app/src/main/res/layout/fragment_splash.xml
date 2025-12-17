@@ -14,6 +14,7 @@
         android:layout_marginTop="90dp"
         android:text="@string/all_caps_cook_master"
         android:textColor="@color/white"
+        android:elevation="3dp"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,11 +47,20 @@
         android:id="@+id/ivBigFood"
         android:layout_width="350dp"
         android:layout_height="350dp"
-        app:layout_constraintTop_toBottomOf="@id/tvQuote"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="45dp"
         android:src="@drawable/breakfast_item"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvQuote" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="950dp"
+        android:src="@drawable/cut_vegetables"
+        android:layout_height="950dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivBigFood"
+        android:layout_marginTop="150"
+        app:layout_constraintEnd_toEndOf="@id/ivBigFood"
+        app:layout_constraintStart_toStartOf="@id/ivBigFood"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
