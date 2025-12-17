@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F4F4"
+    android:background="@color/pinkish"
     tools:context=".presentation.home.fragment.HomeFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
