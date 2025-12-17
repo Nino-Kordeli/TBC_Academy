@@ -6,10 +6,8 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import com.example.tbcacademy.data.common.HandleFirebaseResponse
-import com.example.tbcacademy.data.common.HandleResponse
 import com.example.tbcacademy.data.common.Resource
 import com.example.tbcacademy.data.firebase.awaitResult
-import com.example.tbcacademy.data.mapper.base.asResource
 import com.example.tbcacademy.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow
