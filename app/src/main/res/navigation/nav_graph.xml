@@ -97,7 +97,11 @@
         android:id="@+id/searchFragment"
         android:name="com.example.tbcacademy.presentation.search.fragment.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_recipesByIngredientFragment"
+            app:destination="@id/recipesByIngredientFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="com.example.tbcacademy.presentation.recipe_details.fragment.RecipeDetailsFragment"
@@ -121,5 +125,18 @@
                 app:argType="integer" />
         </action>
     </fragment>
+    <fragment
+        android:id="@+id/recipesByIngredientFragment"
+        android:name="com.example.tbcacademy.presentation.recipes_by_ingredient.fragment.RecipesByIngredientFragment">
+
+        <argument
+            android:name="ingredientId"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_recipesByIngredientFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
+
 
 </navigation>

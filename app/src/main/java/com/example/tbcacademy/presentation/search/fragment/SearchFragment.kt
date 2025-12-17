@@ -8,6 +8,7 @@ import com.example.tbcacademy.presentation.search.adapter.IngredientAdapter
 import com.example.tbcacademy.presentation.search.vm.SearchViewModel
 import kotlinx.coroutines.flow.collectLatest
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.tbcacademy.domain.model.FoodCategory
 import com.example.tbcacademy.presentation.search.adapter.MealCategoryAdapter
@@ -22,8 +23,13 @@ class SearchFragment :
 
     private val ingredientAdapter by lazy {
         IngredientAdapter { ingredient ->
+            findNavController().navigate(
+                SearchFragmentDirections
+                    .actionSearchFragmentToRecipesByIngredientFragment(ingredient.id)
+            )
         }
     }
+
 
     private val mealCategoryAdapter by lazy {
         MealCategoryAdapter(

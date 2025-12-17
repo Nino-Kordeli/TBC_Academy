@@ -21,6 +21,24 @@ class RecipeRepositoryImpl @Inject constructor(
         return handleResponse.apiCall { api.getRecipes() }.asResource { it.recipeToDomain() }
     }
 
+    override suspend fun getRecipesByIngredient(
+        ingredientId: Int
+    ): Flow<Resource<List<Recipe>>> {
+        return handleResponse.apiCall { api.getRecipeDetails() }
+            .asResource { details ->
+                details
+                    .detailToDomain()
+                    .filter { ingredientId in it.ingredientIds }
+                    .map {
+                        Recipe(
+                            id = it.id,
+                            name = it.name,
+                            imageUrl = it.imageUrl
+                        )
+                    }
+            }
+    }
+
     override suspend fun getRecipeDetails(): Flow<Resource<List<RecipeDetail>>> {
         return handleResponse.apiCall { api.getRecipeDetails() }.asResource { it.detailToDomain() }
     }

@@ -6,6 +6,7 @@ import com.example.tbcacademy.domain.model.RecipeDetail
 import kotlinx.coroutines.flow.Flow
 
 interface RecipeRepository {
-    suspend fun getRecipeDetails(): Flow<Resource<List<RecipeDetail>>>
     suspend fun getTrendingRecipes(): Flow<Resource<List<Recipe>>>
+    suspend fun getRecipesByIngredient(ingredientId: Int): Flow<Resource<List<Recipe>>>
+    suspend fun getRecipeDetails(): Flow<Resource<List<RecipeDetail>>>
 }

@@ -4,28 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.saved_recipes.fragment.SavedRecipesFragment">
+    tools:context=".presentation.recipes_by_ingredient.fragment.RecipesByIngredientFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitleSavedRecipes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/saved_recipes"
+        android:text="@string/selected_recipes"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSavedRecipes"
+        android:id="@+id/rvRecipesByIngredients"
         android:layout_width="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_height="0dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
         android:padding="10dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleSavedRecipes"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleSavedRecipes" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
