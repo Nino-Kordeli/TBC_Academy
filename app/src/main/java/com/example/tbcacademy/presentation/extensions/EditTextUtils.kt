@@ -1,4 +1,4 @@
-package com.example.tbcacademy.common.extensions
+package com.example.tbcacademy.presentation.extensions
 
 import android.widget.EditText
 

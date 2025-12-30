@@ -1,4 +1,4 @@
-package com.example.tbcacademy.common
+package com.example.tbcacademy.presentation.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
