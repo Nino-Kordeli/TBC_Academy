@@ -9,7 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tbcacademy.presentation.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentSearchBinding
-import com.example.tbcacademy.presentation.search.CategoryAdapter
+import com.example.tbcacademy.presentation.search.adapter.CategoryAdapter
 import com.example.tbcacademy.presentation.search.contract.CategoryEvent
 import com.example.tbcacademy.presentation.search.contract.CategorySideEffect
 import com.example.tbcacademy.presentation.search.vm.CategoryViewModel

@@ -1,14 +1,14 @@
-package com.example.tbcacademy.presentation.search
+package com.example.tbcacademy.presentation.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tbcacademy.presentation.extensions.hide
-import com.example.tbcacademy.presentation.extensions.show
 import com.example.tbcacademy.databinding.CategoryItemBinding
 import com.example.tbcacademy.domain.model.Category
+import com.example.tbcacademy.presentation.extensions.hide
+import com.example.tbcacademy.presentation.extensions.show
 
 class CategoryAdapter :
     ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
