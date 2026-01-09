@@ -1,13 +1,13 @@
 package com.example.tbcacademy.presentation.screens.login.vm
 
 import androidx.lifecycle.viewModelScope
-import com.example.tbcacademy.common.BaseViewModel
 import com.example.tbcacademy.domain.model.Result
 import com.example.tbcacademy.domain.repository.SessionRepository
 import com.example.tbcacademy.domain.usecase.LoginUseCase
-import com.example.tbcacademy.presentation.screens.login.LoginEffect
-import com.example.tbcacademy.presentation.screens.login.LoginEvent
-import com.example.tbcacademy.presentation.screens.login.LoginState
+import com.example.tbcacademy.presentation.common.BaseViewModel
+import com.example.tbcacademy.presentation.screens.login.contract.LoginEffect
+import com.example.tbcacademy.presentation.screens.login.contract.LoginEvent
+import com.example.tbcacademy.presentation.screens.login.contract.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,21 +21,19 @@ class LoginViewModel @Inject constructor(
     override fun onEvent(event: LoginEvent) {
         when (event) {
             is LoginEvent.EmailChanged ->
-                setState { copy(email = event.email) }
+                updateState { it.copy(email = event.email) }
 
             is LoginEvent.PasswordChanged ->
-                setState { copy(password = event.password) }
+                updateState { it.copy(password = event.password) }
 
             is LoginEvent.RememberMeToggled ->
-                setState { copy(rememberMe = event.checked) }
+                updateState { it.copy(rememberMe = event.checked) }
 
             is LoginEvent.Submit ->
                 login(event.email, event.password)
 
             LoginEvent.NavigateToRegister -> {
-                viewModelScope.launch {
-                    postEffect(LoginEffect.NavigateToRegister)
-                }
+                emitSideEffect(LoginEffect.NavigateToRegister)
             }
         }
     }
@@ -45,23 +43,22 @@ class LoginViewModel @Inject constructor(
             loginUseCase(email, password).collect { result ->
                 when (result) {
                     is Result.Loading -> {
-                        setState { copy(isLoading = true) }
+                        updateState { it.copy(isLoading = true) }
                     }
 
                     is Result.Success -> {
-                        setState { copy(isLoading = false) }
+                        updateState { it.copy(isLoading = false) }
 
-                        // Save all session data
                         sessionRepository.saveToken(result.data.token)
                         sessionRepository.saveEmail(email)
                         sessionRepository.saveRememberMe(state.value.rememberMe)
 
-                        postEffect(LoginEffect.NavigateToHome)
+                        emitSideEffect(LoginEffect.NavigateToHome)
                     }
 
                     is Result.Error -> {
-                        setState { copy(isLoading = false) }
-                        postEffect(
+                        updateState { it.copy(isLoading = false) }
+                        emitSideEffect(
                             LoginEffect.ShowError(
                                 result.exception.message ?: "Unknown error"
                             )

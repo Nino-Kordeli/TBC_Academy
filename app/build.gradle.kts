@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
     id("com.google.dagger.hilt.android")
     kotlin("plugin.serialization") version "1.9.20"
 }
@@ -71,4 +72,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
+    implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-messaging:25.0.1")
+    implementation("com.google.firebase:firebase-analytics-ktx:22.5.0")
 }

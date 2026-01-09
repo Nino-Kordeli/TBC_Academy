@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.screens.login
+package com.example.tbcacademy.presentation.screens.login.contract
 
 data class LoginState(
     val email: String = "",

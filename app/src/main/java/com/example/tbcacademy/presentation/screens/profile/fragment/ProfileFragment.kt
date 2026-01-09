@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.screens.profile
+package com.example.tbcacademy.presentation.screens.profile.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -9,8 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.tbcacademy.R
-import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentProfileBinding
+import com.example.tbcacademy.presentation.common.BaseFragment
+import com.example.tbcacademy.presentation.screens.profile.contract.ProfileEvent
 import com.example.tbcacademy.presentation.screens.profile.vm.ProfileViewModel
 import com.example.tbcacademy.utils.extensions.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,9 @@ import kotlinx.coroutines.launch
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
     private val viewModel: ProfileViewModel by viewModels()
+    override fun bind() {
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

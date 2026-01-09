@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.screens.splash
+package com.example.tbcacademy.presentation.screens.splash.fragment
 
 import android.os.Bundle
 import android.view.View

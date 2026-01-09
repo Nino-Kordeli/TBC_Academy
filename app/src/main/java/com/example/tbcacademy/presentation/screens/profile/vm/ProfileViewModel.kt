@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tbcacademy.domain.usecase.GetUserEmailUseCase
 import com.example.tbcacademy.domain.usecase.LogoutUseCase
-import com.example.tbcacademy.presentation.screens.profile.ProfileEvent
-import com.example.tbcacademy.presentation.screens.profile.ProfileState
+import com.example.tbcacademy.presentation.screens.profile.contract.ProfileEvent
+import com.example.tbcacademy.presentation.screens.profile.contract.ProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

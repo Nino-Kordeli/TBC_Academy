@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.tbcacademy.presentation.screens.splash.SplashFragment">
+        android:name="com.example.tbcacademy.presentation.screens.splash.fragment.SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.tbcacademy.presentation.screens.login.LoginFragment">
+        android:name="com.example.tbcacademy.presentation.screens.login.fragment.LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -30,11 +30,11 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.tbcacademy.presentation.screens.registration.RegistrationFragment" />
+        android:name="com.example.tbcacademy.presentation.screens.registration.fragment.RegistrationFragment" />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.tbcacademy.presentation.screens.home.HomeFragment">
+        android:name="com.example.tbcacademy.presentation.screens.home.fragment.HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -42,12 +42,14 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.tbcacademy.presentation.screens.profile.ProfileFragment">
+        android:name="com.example.tbcacademy.presentation.screens.profile.fragment.ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+
+        <deepLink app:uri="tbcacademy://profile" />
     </fragment>
 
     <action

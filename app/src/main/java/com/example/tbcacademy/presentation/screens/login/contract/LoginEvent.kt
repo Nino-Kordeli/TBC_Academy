@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.screens.login
+package com.example.tbcacademy.presentation.screens.login.contract
 
 sealed class LoginEvent {
     data class EmailChanged(val email: String) : LoginEvent()

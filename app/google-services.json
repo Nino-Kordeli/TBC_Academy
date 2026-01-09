@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "657235121200",
+    "project_id": "notifications-20209",
+    "storage_bucket": "notifications-20209.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657235121200:android:7f1f8c0bceffb54b3cc9f5",
+        "android_client_info": {
+          "package_name": "com.example.tbcacademy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALIdycMtd5A-WoN845J0oyntE5aWXzBAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

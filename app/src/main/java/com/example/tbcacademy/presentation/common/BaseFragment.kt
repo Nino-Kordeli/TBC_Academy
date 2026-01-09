@@ -1,4 +1,4 @@
-package com.example.tbcacademy.common
+package com.example.tbcacademy.presentation.common
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,23 +7,27 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-typealias Inflate<VB> = (LayoutInflater, ViewGroup?, Boolean) -> VB
-
 abstract class BaseFragment<VB : ViewBinding>(
-    private val inflate: Inflate<VB>
+    private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
 ) : Fragment() {
 
     private var _binding: VB? = null
-    protected val binding: VB
-        get() = _binding!!
+    protected val binding get() = _binding!!
+
+    abstract fun bind()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = inflate(inflater, container, false)
+        _binding = bindingInflater.invoke(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        bind()
     }
 
     override fun onDestroyView() {

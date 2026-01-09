@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.screens.registration
+package com.example.tbcacademy.presentation.screens.registration.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -7,8 +7,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.tbcacademy.common.BaseFragment
 import com.example.tbcacademy.databinding.FragmentRegistrationBinding
+import com.example.tbcacademy.presentation.common.BaseFragment
 import com.example.tbcacademy.presentation.screens.registration.vm.RegisterEvent
 import com.example.tbcacademy.presentation.screens.registration.vm.RegistrationViewModel
 import com.example.tbcacademy.utils.extensions.showSnackBar
@@ -20,6 +20,8 @@ class RegistrationFragment :
     BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {
 
     private val viewModel: RegistrationViewModel by viewModels()
+    override fun bind() {
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
