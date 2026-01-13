@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395213985024",
+    "project_id": "imagestorage-6fd2b",
+    "storage_bucket": "imagestorage-6fd2b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395213985024:android:2123aed88339c7eefecfe5",
+        "android_client_info": {
+          "package_name": "com.example.tbcacademy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyCE_tEEIqfv7WeB5odOHMIY8YEsphzhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

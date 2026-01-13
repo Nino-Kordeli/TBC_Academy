@@ -5,6 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     kotlin("plugin.serialization") version "1.9.20"
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -47,10 +48,12 @@ android {
 
 dependencies {
 
+
     implementation("io.coil-kt:coil:2.5.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
     implementation("androidx.room:room-ktx:2.7.0-alpha12")
+    implementation(libs.firebase.storage)
     ksp("androidx.room:room-compiler:2.7.0-alpha12")
     implementation("androidx.room:room-runtime:2.7.0-alpha12")
     implementation("com.google.dagger:hilt-android:2.57.2")
@@ -62,11 +65,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
