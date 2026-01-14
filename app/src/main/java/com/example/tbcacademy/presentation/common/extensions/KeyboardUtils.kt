@@ -1,4 +1,4 @@
-package com.example.tbcacademy.common.extensions
+package com.example.tbcacademy.presentation.common.extensions
 
 import android.content.Context
 import android.view.View
