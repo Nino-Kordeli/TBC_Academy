@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.screen
+package com.example.tbcacademy.presentation.presentation.welcome.screen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -27,12 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.tbcacademy.R
 import com.example.tbcacademy.presentation.presentation.common.BaseScreen
 import com.example.tbcacademy.presentation.presentation.navigation.Routes
 import com.example.myapplication.presentation.welcome.contract.WelcomeEvent
 import com.example.myapplication.presentation.welcome.contract.WelcomeSideEffect
 import com.example.myapplication.presentation.welcome.vm.WelcomeViewModel
+import com.example.tbcacademy.R
 
 @Composable
 fun WelcomeScreen(
@@ -44,7 +44,7 @@ fun WelcomeScreen(
         onSideEffect = { effect ->
             when (effect) {
                 WelcomeSideEffect.NavigateToLogin -> navigator.navigate(Routes.LOGIN)
-                WelcomeSideEffect.NavigateToRegister -> navigator.navigate(Routes.REGISTER)
+                WelcomeSideEffect.NavigateToRegister -> {navigator.navigate(Routes.REGISTER)}
             }
         }
     ) { state, onEvent ->
@@ -110,7 +110,7 @@ fun WelcomeScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun WelcomeScreenPreview() {
     WelcomeScreen(
