@@ -24,4 +24,3 @@ fun <State, Event, SideEffect> BaseScreen(
 
     content(state, viewModel::onEvent)
 }
-
