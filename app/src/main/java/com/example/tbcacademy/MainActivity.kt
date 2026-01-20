@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.tbcacademy.presentation.presentation.navigation.AppNavHost
-import com.example.tbcacademy.presentation.presentation.theme.ComposeAppTheme
+import com.example.tbcacademy.presentation.navigation.AppNavHost
+import com.example.tbcacademy.presentation.theme.ComposeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

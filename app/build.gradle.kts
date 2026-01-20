@@ -5,6 +5,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
     kotlin("plugin.serialization") version "1.9.20"
 }
 
@@ -52,6 +53,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.auth)
     val composeBom = "2024.12.01"
     implementation(platform("androidx.compose:compose-bom:$composeBom"))
     implementation("androidx.compose.ui:ui")
@@ -68,12 +70,17 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
     implementation("androidx.room:room-ktx:2.7.0-alpha12")
     implementation("androidx.room:room-runtime:2.7.0-alpha12")
+    implementation("io.coil-kt:coil-compose:2.5.0")
     ksp("androidx.room:room-compiler:2.7.0-alpha12")
     implementation("com.google.dagger:hilt-android:2.57.2")
     ksp("com.google.dagger:hilt-compiler:2.57.2")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
     implementation("com.squareup.moshi:moshi:1.15.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
