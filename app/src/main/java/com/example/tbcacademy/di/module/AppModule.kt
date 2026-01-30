@@ -1,34 +1,51 @@
 package com.example.tbcacademy.di.module
 
 import com.example.tbcacademy.data.remote.ApiService
-import com.example.tbcacademy.data.repository.CardsRepositoryImpl
-import com.example.tbcacademy.domain.repository.CardsRepository
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-    private const val BASE_URL = "http://192.168.1.27:3004/"
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi =
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
     @Provides
     @Singleton
-    fun provideApi(): ApiService =
+    fun provideOkHttp(): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(
+                HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }
+            )
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideApi(
+        moshi: Moshi,
+        client: OkHttpClient
+    ): ApiService =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://721659fa-22e5-4fe1-b42e-f482698553b4.mock.pstmn.io/")
+            .client(client)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(ApiService::class.java)
 
-    @Provides
-    @Singleton
-    fun provideRepository(
-        api: ApiService
-    ): CardsRepository = CardsRepositoryImpl(api)
+
 }

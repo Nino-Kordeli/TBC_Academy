@@ -9,14 +9,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun <State, Event, SideEffect> BaseScreen(
     viewModel: BaseViewModel<State, Event, SideEffect>,
     onSideEffect: (SideEffect) -> Unit = {},
-    content: @Composable (
-        state: State,
-        onEvent: (Event) -> Unit
-    ) -> Unit
+    content: @Composable (state: State, onEvent: (Event) -> Unit) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(viewModel.sideEffect) {
         viewModel.sideEffect.collect { effect ->
             onSideEffect(effect)
         }
@@ -24,4 +21,3 @@ fun <State, Event, SideEffect> BaseScreen(
 
     content(state, viewModel::onEvent)
 }
-

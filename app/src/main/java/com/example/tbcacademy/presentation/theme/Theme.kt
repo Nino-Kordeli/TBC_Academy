@@ -1,54 +1,40 @@
 package com.example.tbcacademy.presentation.theme
 
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import com.example.composeapp.ui.theme.Pink40
-import com.example.composeapp.ui.theme.Pink80
-import com.example.composeapp.ui.theme.Purple40
-import com.example.composeapp.ui.theme.Purple80
-import com.example.composeapp.ui.theme.PurpleGrey40
-import com.example.composeapp.ui.theme.PurpleGrey80
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+data class ThemeColors(
+    val primary: Color,
+    val background: Color,
+    val surface: Color,
+    val textPrimary: Color,
+    val textSecondary: Color,
+    val error: Color,
+    val darkerBackground: Color,
+    val onSurface: Color,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+val LightColors = ThemeColors(
+    primary = Blue,
+    background = DarkBlue,
+    surface = DarkerBlue,
+    textPrimary = White,
+    textSecondary = Gray,
+    error = Red,
+    darkerBackground = DarkGreen,
+    onSurface = White,
 )
+
+val LocalColors = staticCompositionLocalOf { LightColors }
 
 @Composable
 fun ComposeAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    colors: ThemeColors = LightColors,
     content: @Composable () -> Unit
 ) {
-
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context)
-            else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+    CompositionLocalProvider(LocalColors provides colors) {
+        content()
     }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = AppTypography,
-        content = content
-    )
 }

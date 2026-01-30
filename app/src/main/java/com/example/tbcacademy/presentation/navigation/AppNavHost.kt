@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.tbcacademy.presentation.screen.feed.FeedScreen
+import com.example.tbcacademy.presentation.screen.feed.screen.FeedScreen
 
 @Composable
 fun AppNavHost(
@@ -18,6 +18,10 @@ fun AppNavHost(
         modifier = modifier
     ) {
         composable(Routes.FEED) {
+            FeedScreen(navigator = navController)
+        }
+
+        composable(Routes.CARDS) {
             FeedScreen(navigator = navController)
         }
     }

@@ -1,4 +1,4 @@
-package com.example.composeapp.ui.theme
+package com.example.tbcacademy.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -10,8 +10,13 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-val DarkBlue = Color(0xFF0A1A2F)
 val DarkGreen = Color(0xFF22343C)
 val LightGreen = Color(0xFF30444E)
 
 val White = Color(0xFFFFFFFF)
+val Blue = Color(0xFF30444E)
+val LightGray = Color(0xFF96A7AF)
+val DarkBlue = Color(0xFF1F2E35)
+val Red = Color(0xFFFF565E)
+val Gray = Color(0xFFB8C2C0)
+val DarkerBlue = Color(0xFF2A3C44)
