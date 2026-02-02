@@ -104,4 +104,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(kotlin("test"))
+    implementation(project(":core:data:"))
+    implementation(project(":feature:register"))
 }

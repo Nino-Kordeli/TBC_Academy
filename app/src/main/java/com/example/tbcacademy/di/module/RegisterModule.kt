@@ -1,7 +1,7 @@
 package com.example.tbcacademy.di.module
 
-import com.example.tbcacademy.data.remote.RegisterApi
-import com.example.tbcacademy.data.repository.RegisterRepositoryImpl
+import com.example.tbcacademy.core.data.remote.RegisterApi
+import com.example.tbcacademy.core.data.repository.RegisterRepositoryImpl
 import com.example.tbcacademy.domain.repository.RegisterRepository
 import dagger.Module
 import dagger.Provides

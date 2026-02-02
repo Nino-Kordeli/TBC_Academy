@@ -21,3 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "TBC Academy"
 include(":app")
+include(":core")
+include(":core:data")
+include(":core:presentation")
+include(":core:domain")
+include(":feature")
+include(":feature:register")
