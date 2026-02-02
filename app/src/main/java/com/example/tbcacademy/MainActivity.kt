@@ -8,12 +8,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.tbcacademy.presentation.navigation.AppNavHost
-import com.example.tbcacademy.presentation.screen.component.BottomNavigationBar
 import com.example.tbcacademy.presentation.theme.ComposeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,12 +21,10 @@ class MainActivity : ComponentActivity() {
             ComposeAppTheme {
                 val navController = rememberNavController()
 
-                Scaffold(
-                    bottomBar = { BottomNavigationBar(navController) }
-                ) { innerPadding ->
+                Scaffold { padding ->
                     AppNavHost(
                         navController = navController,
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(padding)
                     )
                 }
             }

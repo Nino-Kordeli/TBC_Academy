@@ -89,6 +89,8 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     testImplementation("io.mockk:mockk:1.13.10")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
     implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")

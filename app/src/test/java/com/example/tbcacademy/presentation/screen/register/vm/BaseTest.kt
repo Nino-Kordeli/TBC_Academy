@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.screen.feed.vm
+package com.example.tbcacademy.presentation.screen.register.vm
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

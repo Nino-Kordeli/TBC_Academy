@@ -1,7 +1,7 @@
 package com.example.tbcacademy.presentation.common
 
-sealed class Resource<T> {
-    class Success<T>(val data: T) : Resource<T>()
-    class Error<T>(val message: String) : Resource<T>()
-    class Loading<T> : Resource<T>()
+sealed class Resource<out T> {
+    data class Success<T>(val data: T) : Resource<T>()
+    data class Error(val message: String) : Resource<Nothing>()
+    data class Loader(val isLoading: Boolean) : Resource<Nothing>()
 }
