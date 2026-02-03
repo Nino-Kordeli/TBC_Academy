@@ -2,10 +2,9 @@ package com.example.tbcacademy.feature.register.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tbcacademy.domain.model.Field
-import com.example.tbcacademy.domain.usecase.GetRegisterFieldsUseCase
-import com.example.tbcacademy.presentation.common.Resource
-import com.example.tbcacademy.presentation.common.safeApiCall
+import com.example.tbcacademy.core.domain.common.Resource
+import com.example.tbcacademy.core.domain.model.Field
+import com.example.tbcacademy.core.domain.usecase.GetRegisterFieldsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,12 +25,9 @@ class RegisterViewModel @Inject constructor(
 
     fun loadFields() {
         viewModelScope.launch {
-            _state.value = Resource.Loader(true)
-
-            val result = safeApiCall {
-                getFieldsUseCase()
+            getFieldsUseCase().collect { resource ->
+                _state.value = resource
             }
-            _state.value = result
         }
     }
 

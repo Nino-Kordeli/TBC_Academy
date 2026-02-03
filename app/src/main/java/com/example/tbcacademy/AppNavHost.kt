@@ -1,11 +1,13 @@
-package com.example.tbcacademy.core.presentation.navigation
+package com.example.tbcacademy
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.tbcacademy.presentation.screen.register.screen.RegisterScreen
+import com.example.tbcacademy.core.presentation.navigation.Routes
+import com.example.tbcacademy.feature.register.screen.RegisterScreen
+
 
 @Composable
 fun AppNavHost(

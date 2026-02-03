@@ -7,8 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.tbcacademy.presentation.navigation.AppNavHost
-import com.example.tbcacademy.presentation.theme.ComposeAppTheme
+import com.example.tbcacademy.core.presentation.theme.ComposeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

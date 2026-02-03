@@ -1,5 +1,7 @@
 package com.example.tbcacademy.core.data.dto
 
+import com.squareup.moshi.Json
+
 data class FieldDto(
     @Json(name = "field_id") val id: Int,
     val hint: String,

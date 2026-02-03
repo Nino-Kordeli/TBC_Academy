@@ -1,8 +1,9 @@
 package com.example.tbcacademy.presentation.screen.register.vm
 
+import com.bumptech.glide.load.engine.Resource
 import com.example.tbcacademy.domain.model.Field
 import com.example.tbcacademy.domain.usecase.GetRegisterFieldsUseCase
-import com.example.tbcacademy.presentation.common.Resource
+import com.example.tbcacademy.feature.register.vm.RegisterViewModel
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

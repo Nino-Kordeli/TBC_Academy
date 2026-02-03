@@ -3,6 +3,7 @@ import org.gradle.kotlin.dsl.implementation
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.ksp)
 }
 
 java {
@@ -17,4 +18,6 @@ kotlin {
 }
 
 dependencies {
+    implementation("javax.inject:javax.inject:1")
+    implementation(libs.coroutines.core)
 }

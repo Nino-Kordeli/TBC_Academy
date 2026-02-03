@@ -1,18 +1,29 @@
 package com.example.tbcacademy.core.data.repository
 
+import com.example.tbcacademy.core.data.HandleResponse
 import com.example.tbcacademy.core.data.mapper.toDomain
 import com.example.tbcacademy.core.data.remote.RegisterApi
+import com.example.tbcacademy.core.domain.common.Resource
 import com.example.tbcacademy.core.domain.model.Field
 import com.example.tbcacademy.core.domain.repository.RegisterRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class RegisterRepositoryImpl(
-    private val api: RegisterApi
+class RegisterRepositoryImpl @Inject constructor(
+    private val apiService: RegisterApi,
+    private val handleResponse: HandleResponse
 ) : RegisterRepository {
 
-    override suspend fun getRegisterFields(): List<Field> {
-        return api.getFields()
-            .flatten()
-            .filter { it.isActive }
-            .map { it.toDomain() }
-    }
+    override suspend fun getRegisterFields(): Flow<Resource<List<Field>>> =
+        handleResponse.safeApiCall {
+            apiService.getRegisterFields()
+        }.map { resource ->
+            println("Repository emitted: $resource")
+            when (resource) {
+                is Resource.Success -> Resource.Success(resource.data.map { it.toDomain() })
+                is Resource.Error -> resource
+                is Resource.Loader -> resource
+            }
+        }
 }

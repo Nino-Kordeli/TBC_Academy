@@ -57,16 +57,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.tbcacademy.domain.model.Field
-import com.example.tbcacademy.presentation.common.Resource
-import com.example.tbcacademy.presentation.screen.register.vm.RegisterViewModel
-import com.example.tbcacademy.presentation.theme.Black
-import com.example.tbcacademy.presentation.theme.Blue
-import com.example.tbcacademy.presentation.theme.GradientEnd
-import com.example.tbcacademy.presentation.theme.GradientStart
-import com.example.tbcacademy.presentation.theme.Gray
-import com.example.tbcacademy.presentation.theme.Red
-import com.example.tbcacademy.presentation.theme.White
+import com.example.tbcacademy.core.domain.common.Resource
+import com.example.tbcacademy.core.domain.model.Field
+import com.example.tbcacademy.core.presentation.theme.Black
+import com.example.tbcacademy.core.presentation.theme.Blue
+import com.example.tbcacademy.core.presentation.theme.GradientEnd
+import com.example.tbcacademy.core.presentation.theme.GradientStart
+import com.example.tbcacademy.core.presentation.theme.Gray
+import com.example.tbcacademy.core.presentation.theme.Red
+import com.example.tbcacademy.core.presentation.theme.White
+import com.example.tbcacademy.feature.register.vm.RegisterViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -125,7 +125,8 @@ fun RegisterScreen(
                             modifier = Modifier.padding(8.dp),
                             contentPadding = PaddingValues(8.dp)
                         ) {
-                            items(fields) { field ->
+                            items(fields.size) { index ->
+                                val field = fields[index]
                                 FieldItem(
                                     field = field,
                                     onValueChange = { viewModel.updateValue(field.id, it) }

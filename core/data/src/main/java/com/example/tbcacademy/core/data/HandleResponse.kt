@@ -1,5 +1,6 @@
-package com.example.tbcacademy.core.presentation.common
+package com.example.tbcacademy.core.data
 
+import com.example.tbcacademy.core.domain.common.Resource
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import retrofit2.Response

@@ -1,8 +1,9 @@
-package com.example.tbcacademy.di.module
+package com.example.tbcacademy.core.data.di.module
 
+import com.example.tbcacademy.core.data.HandleResponse
 import com.example.tbcacademy.core.data.remote.RegisterApi
 import com.example.tbcacademy.core.data.repository.RegisterRepositoryImpl
-import com.example.tbcacademy.domain.repository.RegisterRepository
+import com.example.tbcacademy.core.domain.repository.RegisterRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +19,9 @@ object RegisterModule {
         retrofit.create(RegisterApi::class.java)
 
     @Provides
-    fun provideRepo(api: RegisterApi): RegisterRepository =
-        RegisterRepositoryImpl(api)
+    fun provideRepo(
+        api: RegisterApi,
+        handleResponse: HandleResponse
+    ): RegisterRepository =
+        RegisterRepositoryImpl(api, handleResponse)
 }

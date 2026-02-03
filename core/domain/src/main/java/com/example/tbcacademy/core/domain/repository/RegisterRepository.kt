@@ -1,7 +1,9 @@
 package com.example.tbcacademy.core.domain.repository
 
-import com.example.tbcacademy.domain.model.Field
+import com.example.tbcacademy.core.domain.common.Resource
+import com.example.tbcacademy.core.domain.model.Field
+import kotlinx.coroutines.flow.Flow
 
 interface RegisterRepository {
-    suspend fun getRegisterFields(): List<Field>
+    suspend fun getRegisterFields(): Flow<Resource<List<Field>>>
 }

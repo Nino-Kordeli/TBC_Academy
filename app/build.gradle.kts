@@ -5,7 +5,6 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
-    kotlin("plugin.serialization") version "1.9.20"
 }
 
 android {
@@ -14,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.tbcacademy"
-        minSdk = 30
+        minSdk = 35
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -104,6 +103,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(kotlin("test"))
-    implementation(project(":core:data:"))
+    implementation(project(":core:data"))
     implementation(project(":feature:register"))
+    implementation(project(":core:presentation"))
 }

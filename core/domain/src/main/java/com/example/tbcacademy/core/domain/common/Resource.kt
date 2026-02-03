@@ -1,4 +1,4 @@
-package com.example.tbcacademy.core.presentation.common
+package com.example.tbcacademy.core.domain.common
 
 sealed class Resource<out T> {
     data class Success<T>(val data: T) : Resource<T>()
