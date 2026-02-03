@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -18,7 +20,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,15 +40,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.tbcacademy.R
 import com.example.tbcacademy.presentation.model.CaloriesUiModel
+import com.example.tbcacademy.presentation.navigation.Routes
 import com.example.tbcacademy.presentation.theme.Pink40
+import com.example.tbcacademy.presentation.theme.PinkOutline
+import com.example.tbcacademy.presentation.theme.PrimaryBlue
 import com.example.tbcacademy.presentation.theme.White
 
 @Composable
 fun DashboardScreen(
-    navigator: NavController
+    navigator: NavController,
+    modifier: Modifier = Modifier.fillMaxWidth()
 ) {
 
     val dummyCalories = CaloriesUiModel(
@@ -101,15 +115,31 @@ fun DashboardScreen(
 
             }
         }
+
+
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun DashboardPreview() {
-    DashboardScreen(
-        navigator = rememberNavController()
-    )
+fun DashboardWithBottomBarPreview() {
+
+    val navController = rememberNavController()
+
+    Scaffold(
+        bottomBar = {
+            BottomBar(
+                navController,
+                hasSearch = true
+            )
+        }
+    ) { padding ->
+
+        DashboardScreen(
+            navigator = navController,
+            modifier = Modifier.padding(padding)
+        )
+    }
 }
 
 @Composable
@@ -134,7 +164,10 @@ fun DailyCaloriesCard(data: CaloriesUiModel) {
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(5.dp)
+        elevation = CardDefaults.cardElevation(5.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = White
+        )
     ) {
         Column(modifier = Modifier.padding(10.dp)) {
 
@@ -172,6 +205,140 @@ fun DailyCaloriesCard(data: CaloriesUiModel) {
                     Text("Exercise: ${data.exercise}")
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun CustomBottomBar(navController: NavController) {
+    Box {
+
+    }
+
+
+}
+
+@Composable
+fun BottomBar(navController: NavController, hasSearch: Boolean) {
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(if (hasSearch) 145.dp else 64.dp)
+    ) {
+        if (hasSearch) {
+            Image(
+                painter = painterResource(R.drawable.vector_4),
+                contentDescription = null,
+                contentScale = androidx.compose.ui.layout.ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .height(50.dp)
+                    .align(Alignment.TopCenter)
+                    .offset(y = 34.dp)
+                    .clip(RoundedCornerShape(24.dp))
+                    .background(Color.White),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                TextField(
+                    value = "",
+                    onValueChange = {},
+                    singleLine = true,
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_magnifying_glass),
+                            contentDescription = null,
+                            tint = PrimaryBlue
+                        )
+                    },
+                    placeholder = { Text("Search for food", color = Color.Gray) },
+                    modifier = Modifier.fillMaxSize(),
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color.Transparent,
+                        unfocusedContainerColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent
+                    )
+                )
+            }
+        }
+
+        NavigationBar(
+            containerColor = PrimaryBlue,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .height(56.dp)
+        ) {
+            NavigationBarItem(
+                selected = currentRoute == Routes.DASHBOARD,
+                onClick = { navController.navigate(Routes.DASHBOARD) },
+                icon = {
+                    Icon(
+                        painter = painterResource(
+                            id = if (currentRoute == Routes.DASHBOARD)
+                                R.drawable.ic_dashboard
+                            else
+                                R.drawable.ic_dashboard_outline
+                        ),
+                        contentDescription = ""
+                    )
+                },
+                label = { Text("Dashboard") },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = White,
+                    selectedTextColor = White,
+                    unselectedIconColor = PinkOutline,
+                    unselectedTextColor = PinkOutline
+                )
+            )
+
+            NavigationBarItem(
+                selected = currentRoute == Routes.DIARY,
+                onClick = { navController.navigate(Routes.DIARY) },
+                icon = {
+                    Icon(
+                        painter = painterResource(
+                            id = if (currentRoute == Routes.DIARY)
+                                R.drawable.ic_diary_filled
+                            else
+                                R.drawable.ic_diary
+                        ),
+                        contentDescription = ""
+                    )
+                },
+                label = { Text("Diary") },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = White,
+                    selectedTextColor = White,
+                    unselectedIconColor = PinkOutline,
+                    unselectedTextColor = PinkOutline
+                )
+            )
+
+            NavigationBarItem(
+                selected = currentRoute == Routes.MORE,
+                onClick = { navController.navigate(Routes.MORE) },
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_more),
+                        contentDescription = ""
+                    )
+                },
+                label = { Text("More") },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = White,
+                    selectedTextColor = White,
+                    unselectedIconColor = PinkOutline,
+                    unselectedTextColor = PinkOutline
+                )
+            )
         }
     }
 }

@@ -6,4 +6,6 @@ object Routes {
     const val REGISTER = "register_screen"
     const val PROFILE = "profile_screen"
     const val DASHBOARD = "dashboard_screen"
+    const val DIARY = "diary_screen"
+    const val MORE = "more_screen"
 }

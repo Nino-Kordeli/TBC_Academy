@@ -1,5 +1,6 @@
 package com.example.tbcacademy.presentation.navigation
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -14,12 +15,15 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.WELCOME,
+        startDestination = Routes.DASHBOARD,
         modifier = modifier
     ) {
 
         composable(Routes.DASHBOARD) {
-            DashboardScreen(navigator = navController)
+            DashboardScreen(
+                navigator = navController,
+                modifier = Modifier.fillMaxSize()
+            )
         }
     }
 }
