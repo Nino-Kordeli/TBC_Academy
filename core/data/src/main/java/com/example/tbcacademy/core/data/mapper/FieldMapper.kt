@@ -5,10 +5,11 @@ import com.example.tbcacademy.core.domain.model.Field
 
 fun FieldDto.toDomain() = Field(
     id = id,
-    hint = hint,
-    type = fieldType,
+    hint = hint.orEmpty(),
+    type = type.orEmpty(),
     keyboard = keyboard,
-    required = required,
-    isActive = isActive,
-    icon = icon
+    required = required ?: false,
+    isActive = isActive ?: false,
+    icon = icon.orEmpty(),
+    value = ""
 )

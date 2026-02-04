@@ -1,13 +1,20 @@
 package com.example.tbcacademy.core.data.dto
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 data class FieldDto(
-    @Json(name = "field_id") val id: Int,
-    val hint: String,
-    @Json(name = "field_type") val fieldType: String,
+    @SerializedName("field_id")
+    val id: Int,
+    @SerializedName("hint")
+    val hint: String?,
+    @SerializedName("field_type")
+    val type: String?,
+    @SerializedName("keyboard")
     val keyboard: String?,
-    val required: Boolean,
-    @Json(name = "is_active") val isActive: Boolean,
-    val icon: String
+    @SerializedName("required")
+    val required: Boolean?,
+    @SerializedName("is_active")
+    val isActive: Boolean?,
+    @SerializedName("icon")
+    val icon: String?
 )

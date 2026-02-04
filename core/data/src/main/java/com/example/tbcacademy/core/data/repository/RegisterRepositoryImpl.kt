@@ -14,14 +14,15 @@ class RegisterRepositoryImpl @Inject constructor(
     private val apiService: RegisterApi,
     private val handleResponse: HandleResponse
 ) : RegisterRepository {
-
     override suspend fun getRegisterFields(): Flow<Resource<List<Field>>> =
         handleResponse.safeApiCall {
             apiService.getRegisterFields()
         }.map { resource ->
-            println("Repository emitted: $resource")
             when (resource) {
-                is Resource.Success -> Resource.Success(resource.data.map { it.toDomain() })
+                is Resource.Success -> {
+                    val flattenedFields = resource.data.flatten().map { it.toDomain() }
+                    Resource.Success(flattenedFields)
+                }
                 is Resource.Error -> resource
                 is Resource.Loader -> resource
             }

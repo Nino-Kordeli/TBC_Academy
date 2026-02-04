@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface RegisterApi {
 
     @GET("fields")
-    suspend fun getRegisterFields(): Response<List<FieldDto>>
+    suspend fun getRegisterFields(): Response<List<List<FieldDto>>>
 }

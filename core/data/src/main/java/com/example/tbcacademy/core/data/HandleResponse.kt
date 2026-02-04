@@ -1,6 +1,7 @@
 package com.example.tbcacademy.core.data
 
 import com.example.tbcacademy.core.domain.common.Resource
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import retrofit2.Response
@@ -11,8 +12,10 @@ class HandleResponse @Inject constructor() {
 
     fun <T> safeApiCall(apiCall: suspend () -> Response<T>) = flow {
         emit(Resource.Loader(true))
+
         try {
             val response = apiCall()
+
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
@@ -21,15 +24,18 @@ class HandleResponse @Inject constructor() {
                     emit(Resource.Error("Empty response"))
                 }
             } else {
-                emit(Resource.Error(response.errorBody()?.string().orEmpty()))
+                val error = response.errorBody()?.string() ?: "Unknown error"
+                emit(Resource.Error(error))
             }
         } catch (e: Exception) {
-            when (e) {
-                is IOException -> emit(Resource.Error(e.message.orEmpty()))
-                is HttpException -> emit(Resource.Error(e.message.orEmpty()))
-                else -> emit(Resource.Error(e.message.orEmpty()))
+            val errorMessage = when (e) {
+                is IOException -> "Network error: ${e.message}"
+                is HttpException -> "HTTP error: ${e.message}"
+                else -> "Error: ${e.message}"
             }
+            emit(Resource.Error(errorMessage))
         }
-        emit(Resource.Loader(false))
+    }.catch { e ->
+        emit(Resource.Error("Flow error: ${e.message}"))
     }
 }

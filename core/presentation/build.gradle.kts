@@ -30,7 +30,6 @@ dependencies {
     implementation(project(":core:domain"))
 
     implementation(libs.androidx.core.ktx)
-
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
@@ -39,12 +38,8 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
     implementation(libs.compose.navigation)
     implementation(libs.compose.material.icons.extended)
-
-    // Lifecycle
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.lifecycle.viewmodel.compose)
-
-    // Coroutines
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
     implementation("androidx.navigation:navigation-compose:2.7.2")
