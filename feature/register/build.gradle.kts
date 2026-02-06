@@ -10,6 +10,17 @@ android {
     namespace = "com.example.tbcacademy.feature.register"
     compileSdk = 36
 
+    // ADD THIS PACKAGING BLOCK HERE
+    packaging {
+        resources {
+            excludes += setOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+                "META-INF/NOTICE.md"
+            )
+        }
+    }
+
     defaultConfig {
         minSdk = 30
 
@@ -82,9 +93,18 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
 
-    // Testing
+    // Testing - Unit Tests
     testImplementation(libs.junit)
+    testImplementation("io.mockk:mockk:1.13.10")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("org.robolectric:robolectric:4.11")
+    testImplementation("androidx.compose.ui:ui-test-junit4:1.5.0")
+
+    // Testing - Instrumented Tests
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("androidx.navigation:navigation-compose:2.7.2")
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation("io.mockk:mockk-android:1.13.8")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 }
