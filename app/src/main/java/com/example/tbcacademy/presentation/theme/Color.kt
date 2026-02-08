@@ -12,4 +12,10 @@ val Pink40 = Color(0xFF7D5260)
 
 val White = Color(0xFFFFFFFF)
 val PrimaryBlue = Color(0xFF0066EE)
-val PinkOutline = Color(0xFFbfc6d6)
+val NeutralLightGray = Color(0xFFbfc6d6)
+
+val NeutralDarkGrey = Color(0xFF3B383E)
+val LightGray = Color(0xFF605D66)
+val NeutralGray = Color(0xFF938F96)
+val Black = Color(0xFF000000)
+val LightCreamBlue = Color(0xFFfbf8ff)

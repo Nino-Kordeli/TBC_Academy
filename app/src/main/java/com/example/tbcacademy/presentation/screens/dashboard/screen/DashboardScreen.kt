@@ -45,8 +45,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tbcacademy.R
 import com.example.tbcacademy.presentation.model.CaloriesUiModel
 import com.example.tbcacademy.presentation.navigation.Routes
+import com.example.tbcacademy.presentation.theme.NeutralLightGray
 import com.example.tbcacademy.presentation.theme.Pink40
-import com.example.tbcacademy.presentation.theme.PinkOutline
 import com.example.tbcacademy.presentation.theme.PrimaryBlue
 import com.example.tbcacademy.presentation.theme.White
 
@@ -90,7 +90,8 @@ fun DashboardScreen(
                     text = "My Fitness Journey",
                     fontSize = 25.sp,
                     color = Pink40,
-                    fontFamily = FontFamily.SansSerif
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.Bold
                 )
             }
 
@@ -294,8 +295,8 @@ fun BottomBar(navController: NavController, hasSearch: Boolean) {
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = White,
                     selectedTextColor = White,
-                    unselectedIconColor = PinkOutline,
-                    unselectedTextColor = PinkOutline
+                    unselectedIconColor = NeutralLightGray,
+                    unselectedTextColor = NeutralLightGray
                 )
             )
 
@@ -317,8 +318,8 @@ fun BottomBar(navController: NavController, hasSearch: Boolean) {
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = White,
                     selectedTextColor = White,
-                    unselectedIconColor = PinkOutline,
-                    unselectedTextColor = PinkOutline
+                    unselectedIconColor = NeutralLightGray,
+                    unselectedTextColor = NeutralLightGray
                 )
             )
 
@@ -335,8 +336,8 @@ fun BottomBar(navController: NavController, hasSearch: Boolean) {
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = White,
                     selectedTextColor = White,
-                    unselectedIconColor = PinkOutline,
-                    unselectedTextColor = PinkOutline
+                    unselectedIconColor = NeutralLightGray,
+                    unselectedTextColor = NeutralLightGray
                 )
             )
         }
