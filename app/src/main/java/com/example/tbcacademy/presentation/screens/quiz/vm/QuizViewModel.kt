@@ -105,6 +105,17 @@ private fun loadStep(step: QuizStep): QuizState {
             )
         )
 
+        QuizStep.GENDER_AGE -> QuizState(
+            currentStep = step,
+            selectionType = SelectionType.SINGLE,
+            questions = listOf(
+                QuestionItem(1, "Male"),
+                QuestionItem(2, "Female")
+            )
+        )
+
+
+
 
         QuizStep.NAME -> TODO()
         QuizStep.GENDER_AGE -> TODO()
