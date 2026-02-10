@@ -16,7 +16,7 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.DASHBOARD,
+        startDestination = Routes.QUIZ,
         modifier = modifier
     ) {
 
@@ -26,6 +26,10 @@ fun AppNavHost(
                 modifier = Modifier.fillMaxSize()
             )
         }
+        composable(Routes.QUIZ){
+            QuizScreen()
+        }
+
         composable(Routes.QUIZ){
             QuizScreen()
         }

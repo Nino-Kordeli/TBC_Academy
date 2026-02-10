@@ -9,4 +9,5 @@ object Routes {
     const val DIARY = "diary_screen"
     const val MORE = "more_screen"
     const val QUIZ = "quiz_screen"
+    const val AGE_GENDER = "about_yourself_step"
 }

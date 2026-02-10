@@ -11,8 +11,10 @@ import com.example.tbcacademy.presentation.screens.quiz.contract.QuizSideEffect
 import com.example.tbcacademy.presentation.screens.quiz.model.QuizStep
 import com.example.tbcacademy.presentation.screens.quiz.screen.steps.AboutYourselfStep
 import com.example.tbcacademy.presentation.screens.quiz.screen.steps.ActivityLevelStep
+import com.example.tbcacademy.presentation.screens.quiz.screen.steps.BodyInfoStep
 import com.example.tbcacademy.presentation.screens.quiz.screen.steps.GoalsStep
 import com.example.tbcacademy.presentation.screens.quiz.screen.steps.NameStep
+import com.example.tbcacademy.presentation.screens.quiz.screen.steps.WeeklyGoalStep
 import com.example.tbcacademy.presentation.screens.quiz.vm.QuizViewModel
 
 @Composable
@@ -36,7 +38,9 @@ fun QuizScreen(
             QuizStep.NAME -> NameStep(state, onEvent)
             QuizStep.GOALS -> GoalsStep(state, onEvent)
             QuizStep.ACTIVITIES -> ActivityLevelStep(state, onEvent)
-            QuizStep.GENDER_AGE -> AboutYourselfStep(state,onEvent)
+            QuizStep.GENDER_AGE -> AboutYourselfStep(state, onEvent)
+            QuizStep.BODY -> BodyInfoStep(state, onEvent)
+            QuizStep.WEEKLY_GOAL -> WeeklyGoalStep(state, onEvent)
             else -> {}
         }
     }

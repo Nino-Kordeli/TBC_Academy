@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -24,7 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tbcacademy.presentation.theme.Black
+import com.example.tbcacademy.presentation.screens.login.screen.OutlinedTextFieldWithInlineLabel
 import com.example.tbcacademy.presentation.theme.LightGray
 import com.example.tbcacademy.presentation.theme.NeutralGray
 import com.example.tbcacademy.presentation.theme.PrimaryBlue
@@ -55,10 +56,10 @@ fun RegisterScreen() {
             value = email,
             onValueChange = { email = it },
             label = "Email Address",
-            placeholder = "user@example.com",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 16.dp),
+            placeholder = "user@example.com",
         )
 
         Spacer(Modifier.height(32.dp))
@@ -67,10 +68,10 @@ fun RegisterScreen() {
             value = email,
             onValueChange = { email = it },
             label = "Password",
-            placeholder = "••••••••••••",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 16.dp),
+            placeholder = "••••••••••••",
         )
 
         Spacer(Modifier.height(32.dp))
@@ -79,10 +80,10 @@ fun RegisterScreen() {
             value = email,
             onValueChange = { email = it },
             label = "Repeat password",
-            placeholder = "••••••••••••",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 16.dp),
+            placeholder = "••••••••••••",
         )
 
         Spacer(Modifier.height(40.dp))
@@ -123,7 +124,8 @@ fun OutlinedTextFieldWithInlineLabel(
     onValueChange: (String) -> Unit,
     label: String,
     modifier: Modifier = Modifier,
-    placeholder: String
+    placeholder: String,
+    keyboardOptions: KeyboardOptions
 ) {
     Box(modifier = modifier) {
 

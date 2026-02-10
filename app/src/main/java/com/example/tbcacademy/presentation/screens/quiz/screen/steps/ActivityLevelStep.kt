@@ -65,7 +65,7 @@ fun ActivityLevelStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             SingleChoiceItem(
                 question = question,
                 onSelect = {
-                    onEvent(QuizEvent.OnQuestionChecked(question.id, true))
+                    onEvent(QuizEvent.OnQuestionChecked(question.id, false))
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -123,7 +123,7 @@ fun ActivityLevelStepPreview() {
     ActivityLevelStep(
         state = QuizState(
             questions = listOf(
-                QuestionItem(1, "Not Active", "Barely active not moving a lot", selected = true),
+                QuestionItem(1, "Not Active", "Barely active not moving a lot", selected = false),
                 QuestionItem(2, "Not Active", "Barely active not moving a lot", selected = false),
                 QuestionItem(3, "Not Active", "Barely active not moving a lot", selected = false),
                 QuestionItem(4, "Not Active", "Barely active not moving a lot", selected = false)

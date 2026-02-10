@@ -6,6 +6,6 @@ enum class QuizStep {
     ACTIVITIES,
     GENDER_AGE,
     BODY,
-    MONTHLY_GOAL,
+    WEEKLY_GOAL,
     CREATE_ACCOUNT
 }

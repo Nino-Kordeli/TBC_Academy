@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class QuizViewModel @Inject constructor() :
     BaseViewModel<QuizState, QuizEvent, QuizSideEffect>(
-        initialState = loadStep(QuizStep.NAME)
+        initialState = loadStep(QuizStep.GENDER_AGE)
     ) {
 
     override fun onEvent(event: QuizEvent) {
@@ -118,9 +118,8 @@ private fun loadStep(step: QuizStep): QuizState {
 
 
         QuizStep.NAME -> TODO()
-        QuizStep.GENDER_AGE -> TODO()
         QuizStep.BODY -> TODO()
-        QuizStep.MONTHLY_GOAL -> TODO()
+        QuizStep.WEEKLY_GOAL -> TODO()
         QuizStep.CREATE_ACCOUNT -> TODO()
     }
 }
