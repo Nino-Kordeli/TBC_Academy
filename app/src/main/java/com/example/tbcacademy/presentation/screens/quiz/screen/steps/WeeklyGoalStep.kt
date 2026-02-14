@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState
+import com.example.tbcacademy.presentation.screens.quiz.model.QuestionItem
 import com.example.tbcacademy.presentation.theme.White
 
 @Composable
@@ -33,18 +34,27 @@ fun WeeklyGoalStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             SingleChoiceItem(
                 question = question,
                 onSelect = {
-                    onEvent(QuizEvent.OnQuestionChecked(question.id, false))
+                    onEvent(QuizEvent.OnQuestionChecked(question.id, true))
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 6.dp)
             )
-
         }
     }
 }
+@Preview(showBackground = true)
 @Composable
-@Preview
 fun WeeklyGoalStepPreview() {
-    WeeklyGoalStep(state = QuizState(), onEvent = {})
+    WeeklyGoalStep(
+        state = QuizState(
+            questions = listOf(
+                QuestionItem(1, "Lose 0.25 kg per week","Recommended"),
+                QuestionItem(2, "Lose 0.50 kg per week"),
+                QuestionItem(3, "Lose 0.75 kg per week"),
+                QuestionItem(4, "Lose 1 kg per week"),
+            )
+        ),
+        onEvent = {}
+    )
 }

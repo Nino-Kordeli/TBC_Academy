@@ -10,4 +10,5 @@ object Routes {
     const val MORE = "more_screen"
     const val QUIZ = "quiz_screen"
     const val AGE_GENDER = "about_yourself_step"
+    const val SEARCH = "search_screen"
 }

@@ -3,10 +3,12 @@ package com.example.tbcacademy.presentation.common
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun <State, Event, SideEffect> BaseScreen(
+    modifier: Modifier,
     viewModel: BaseViewModel<State, Event, SideEffect>,
     onSideEffect: (SideEffect) -> Unit = {},
     content: @Composable (

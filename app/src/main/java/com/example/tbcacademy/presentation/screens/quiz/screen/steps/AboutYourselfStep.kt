@@ -33,7 +33,7 @@ import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState
 import com.example.tbcacademy.presentation.screens.quiz.model.QuestionItem
 import com.example.tbcacademy.presentation.screens.quiz.model.QuizStep
 import com.example.tbcacademy.presentation.screens.quiz.model.SelectionType
-import com.example.tbcacademy.presentation.screens.register.OutlinedTextFieldWithInlineLabel
+import com.example.tbcacademy.presentation.screens.register.screen.OutlinedTextFieldWithInlineLabel
 import com.example.tbcacademy.presentation.theme.LightGray
 import com.example.tbcacademy.presentation.theme.White
 
@@ -175,28 +175,4 @@ fun BorderedDropdownField(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun AboutYourselfStepPreview() {
-    AboutYourselfStep(
-        state = QuizState(
-            currentStep = QuizStep.GENDER_AGE,
-            selectionType = SelectionType.SINGLE,
-            questions = listOf(
-                QuestionItem(
-                    id = 1,
-                    primaryText = "Male",
-                    selected = true
-                ),
-                QuestionItem(
-                    id = 2,
-                    primaryText = "Female",
-                    selected = false
-                )
-            )
-        ),
-        onEvent = {}
-    )
 }

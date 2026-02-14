@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -21,3 +22,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "TBC Academy"
 include(":app")
+include(":core")
+include(":core:navigation")

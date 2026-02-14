@@ -53,8 +53,8 @@ fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            value = "",
-            onValueChange = {}
+            value = state.height,
+            onValueChange = { onEvent(QuizEvent.HeightChanged(it)) }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -74,8 +74,8 @@ fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            value = "",
-            onValueChange = {}
+            value = state.weight,
+            onValueChange = { onEvent(QuizEvent.WeightChanged(it)) }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -95,8 +95,8 @@ fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            value = "",
-            onValueChange = {}
+            value = state.goalWeight,
+            onValueChange = { onEvent(QuizEvent.GoalWeightChanged(it)) }
         )
     }
 

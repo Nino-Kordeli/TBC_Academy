@@ -49,30 +49,19 @@ class MainActivity : ComponentActivity() {
                         val currentRoute =
                             navController.currentBackStackEntryAsState().value?.destination?.route
 
-                        when (currentRoute) {
-                            /*Routes.QUIZ -> {
-                                QuizBottomBar()
-                            }*/
-
-                            Routes.DASHBOARD -> {
-                                BottomBar(
-                                    navController = navController,
-                                    hasSearch = true
-                                )
-                            }
-
-                            else -> {}
-                        }
-
-                        val hasSearch = currentRoute == Routes.DASHBOARD
-
-                        BottomBar(
-                            navController = navController,
-                            hasSearch = hasSearch
+                        val bottomBarVisible = listOf(
+                            Routes.DASHBOARD
                         )
-                    }
-                ) { padding ->
 
+                        if (currentRoute?.startsWith(Routes.DASHBOARD) == true){
+                            BottomBar(
+                                navController = navController,
+                                hasSearch = currentRoute.startsWith(Routes.DASHBOARD)
+                            )
+                        }
+                    }
+                )
+                { padding ->
                     AppNavHost(
                         navController = navController,
                         modifier = Modifier.padding(padding)

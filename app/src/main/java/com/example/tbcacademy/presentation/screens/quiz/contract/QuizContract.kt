@@ -7,8 +7,17 @@ import com.example.tbcacademy.presentation.screens.quiz.model.SelectionType
 data class QuizState(
     val currentStep: QuizStep = QuizStep.NAME,
     val name: String = "",
+    val gender: String? = null,
+    val age: Int? = null,
+    val height: String = "",
+    val weight: String = "",
+    val goalWeight: String = "",
+    val activityLevel: SelectionType = SelectionType.MULTI,
+    val goals: List<String> = emptyList(),
     val questions: List<QuestionItem> = emptyList(),
-    val selectionType: SelectionType = SelectionType.MULTI
+    val selectionType: SelectionType = SelectionType.SINGLE,
+    val dailyCalories: Int = 0,
+    val calculatedCalories: Int? = null
 ) {
     val progress: Float
         get() {
@@ -29,8 +38,12 @@ sealed interface QuizEvent {
         val id: Int,
         val checked: Boolean
     ) : QuizEvent
+
+    data class HeightChanged(val value: String) : QuizEvent
+    data class WeightChanged(val value: String) : QuizEvent
+    data class GoalWeightChanged(val value: String) : QuizEvent
 }
 
 sealed interface QuizSideEffect {
-    object NavigateToDashboard : QuizSideEffect
+    data class NavigateToDashboard(val calories: Int) : QuizSideEffect
 }
