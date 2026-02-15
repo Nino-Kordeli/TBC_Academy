@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.google.core.navigation"
+    namespace = "com.example.navigation"
 }
 
 dependencies {

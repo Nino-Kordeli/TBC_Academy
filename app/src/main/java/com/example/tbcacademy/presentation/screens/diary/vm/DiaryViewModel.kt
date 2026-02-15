@@ -1,7 +1,7 @@
 package com.example.tbcacademy.presentation.screens.diary.vm
 
 import com.example.tbcacademy.domain.model.food.MealType
-import com.example.tbcacademy.presentation.common.BaseViewModel
+import com.example.ui.base.BaseViewModel
 import com.example.tbcacademy.presentation.screens.diary.contract.DiaryEvent
 import com.example.tbcacademy.presentation.screens.diary.contract.DiaryState
 

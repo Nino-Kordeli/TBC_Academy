@@ -1,7 +1,7 @@
 package com.example.tbcacademy.presentation.screens.dashboard.vm
 
 import com.example.tbcacademy.domain.usecase.DashboardUseCase
-import com.example.tbcacademy.presentation.common.BaseViewModel
+import com.example.ui.base.BaseViewModel
 import com.example.tbcacademy.presentation.screens.dashboard.contract.DashboardEvent
 import com.example.tbcacademy.presentation.screens.dashboard.contract.DashboardSideEffect
 import com.example.tbcacademy.presentation.screens.dashboard.contract.DashboardUiState

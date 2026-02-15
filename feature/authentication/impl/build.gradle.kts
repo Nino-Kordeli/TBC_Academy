@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.google.impl"
+    namespace = "com.example.impl"
     testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 dependencies {
-//    implementation(projects.core.domain)
+    implementation(projects.core.domain)
     implementation(projects.feature.authentication.api)
     implementation(libs.androidx.activity.compose)
 }

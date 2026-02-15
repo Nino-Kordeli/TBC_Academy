@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.example.tbcacademy.presentation.common.BaseScreen
+import com.example.ui.base.BaseScreen
 import com.example.tbcacademy.presentation.navigation.Routes
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizSideEffect
@@ -38,9 +38,9 @@ import com.example.tbcacademy.presentation.screens.quiz.screen.steps.GoalsStep
 import com.example.tbcacademy.presentation.screens.quiz.screen.steps.NameStep
 import com.example.tbcacademy.presentation.screens.quiz.screen.steps.WeeklyGoalStep
 import com.example.tbcacademy.presentation.screens.quiz.vm.QuizViewModel
-import com.example.tbcacademy.presentation.theme.PrimaryBlue
-import com.example.tbcacademy.presentation.theme.White
-import com.example.tbcacademy.presentation.theme.WhiteBlue
+import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.White
+import com.example.designsystem.theme.WhiteBlue
 import com.example.tbcacademy.R
 
 @Composable

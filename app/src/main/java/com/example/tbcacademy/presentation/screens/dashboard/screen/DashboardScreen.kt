@@ -48,10 +48,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.tbcacademy.presentation.model.CaloriesUiModel
 import com.example.tbcacademy.presentation.navigation.Routes
-import com.example.tbcacademy.presentation.theme.Green
-import com.example.tbcacademy.presentation.theme.Pink40
-import com.example.tbcacademy.presentation.theme.PrimaryBlue
-import com.example.tbcacademy.presentation.theme.White
+import com.example.designsystem.theme.Green
+import com.example.designsystem.theme.Pink40
+import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.White
 import com.example.tbcacademy.R
 
 @Composable

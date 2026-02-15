@@ -1,6 +1,6 @@
 package com.example.tbcacademy.presentation.screens.quiz.vm
 
-import com.example.tbcacademy.presentation.common.BaseViewModel
+import com.example.ui.base.BaseViewModel
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizSideEffect
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState

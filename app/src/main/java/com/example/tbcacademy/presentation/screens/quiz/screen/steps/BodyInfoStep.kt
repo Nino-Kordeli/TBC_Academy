@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState
-import com.example.tbcacademy.presentation.theme.LightGray
-import com.example.tbcacademy.presentation.theme.White
+import com.example.designsystem.theme.LightGray
+import com.example.designsystem.theme.White
 
 @Composable
 fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {

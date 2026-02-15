@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.android.lint)
 }
 
-group = "com.google.example.buildlogic"
+group = "com.example.buildlogic"
 
 // Configure the build-logic plugins to target JDK 11
 // This matches the JDK used to build the project, and is not related to what is running on device.

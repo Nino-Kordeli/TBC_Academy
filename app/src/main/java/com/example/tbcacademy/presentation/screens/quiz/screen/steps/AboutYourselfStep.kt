@@ -25,17 +25,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState
-import com.example.tbcacademy.presentation.screens.quiz.model.QuestionItem
-import com.example.tbcacademy.presentation.screens.quiz.model.QuizStep
-import com.example.tbcacademy.presentation.screens.quiz.model.SelectionType
-import com.example.tbcacademy.presentation.screens.register.screen.OutlinedTextFieldWithInlineLabel
-import com.example.tbcacademy.presentation.theme.LightGray
-import com.example.tbcacademy.presentation.theme.White
+import com.example.impl.screens.register.screen.OutlinedTextFieldWithInlineLabel
+import com.example.designsystem.theme.LightGray
+import com.example.designsystem.theme.White
 
 @Composable
 fun AboutYourselfStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {

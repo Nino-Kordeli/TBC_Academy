@@ -13,4 +13,5 @@ dependencies {
     implementation(libs.androidx.browser)
     implementation(libs.coil)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 }

@@ -131,8 +131,11 @@ android {
 dependencies {
     implementation(projects.tbcacademy.feature.authentication.api)
     implementation(projects.tbcacademy.feature.authentication.impl)
+
+    implementation(projects.core.common)
     implementation(projects.core.ui)
     implementation(projects.core.designsystem)
+    implementation(projects.core.data)
 
     implementation(libs.androidx.hilt.navigation.compose)
 

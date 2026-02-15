@@ -24,10 +24,10 @@ import androidx.compose.ui.unit.sp
 import com.example.tbcacademy.domain.model.food.Food
 import com.example.tbcacademy.domain.model.food.MealType
 import com.example.tbcacademy.presentation.screens.diary.contract.DiaryState
-import com.example.tbcacademy.presentation.theme.MilkyPink
-import com.example.tbcacademy.presentation.theme.PrimaryBlue
-import com.example.tbcacademy.presentation.theme.VeryLightGray
-import com.example.tbcacademy.presentation.theme.White
+import com.example.designsystem.theme.MilkyPink
+import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.VeryLightGray
+import com.example.designsystem.theme.White
 import com.example.tbcacademy.R
 
 @Composable

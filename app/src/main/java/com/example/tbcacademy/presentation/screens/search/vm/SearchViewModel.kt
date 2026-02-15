@@ -1,14 +1,11 @@
 package com.example.tbcacademy.presentation.screens.search.vm
 
-import androidx.lifecycle.viewModelScope
 //import com.example.tbcacademy.domain.usecase.SearchFoodsUseCase
-import com.example.tbcacademy.presentation.common.BaseViewModel
-import com.example.tbcacademy.presentation.model.FoodModel
+import com.example.ui.base.BaseViewModel
 import com.example.tbcacademy.presentation.screens.search.contract.SearchEvent
 import com.example.tbcacademy.presentation.screens.search.contract.SearchSideEffect
 import com.example.tbcacademy.presentation.screens.search.contract.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

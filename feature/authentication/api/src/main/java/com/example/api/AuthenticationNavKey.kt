@@ -5,4 +5,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 object AuthenticationNavKey : NavKey {
+    @Serializable
+    object WelcomeNavKey : NavKey
+
+    @Serializable
+    object LoginNavKey : NavKey
+
+    @Serializable
+    object RegisterNavKey : NavKey
+
 }

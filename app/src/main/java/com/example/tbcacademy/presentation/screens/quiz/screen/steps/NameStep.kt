@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState
-import com.example.tbcacademy.presentation.screens.login.screen.OutlinedTextFieldWithInlineLabel
-import com.example.tbcacademy.presentation.theme.LightGray
-import com.example.tbcacademy.presentation.theme.White
+import com.example.impl.screens.login.screen.OutlinedTextFieldWithInlineLabel
+import com.example.designsystem.theme.LightGray
+import com.example.designsystem.theme.White
 
 @Composable
 fun NameStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {

@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState
 import com.example.tbcacademy.presentation.screens.quiz.model.QuestionItem
-import com.example.tbcacademy.presentation.theme.White
+import com.example.designsystem.theme.White
 
 @Composable
 fun WeeklyGoalStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {

@@ -25,10 +25,10 @@ import androidx.compose.ui.unit.sp
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState
 import com.example.tbcacademy.presentation.screens.quiz.model.QuestionItem
-import com.example.tbcacademy.presentation.theme.LightCreamBlue
-import com.example.tbcacademy.presentation.theme.LightGray
-import com.example.tbcacademy.presentation.theme.PrimaryBlue
-import com.example.tbcacademy.presentation.theme.White
+import com.example.designsystem.theme.LightCreamBlue
+import com.example.designsystem.theme.LightGray
+import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.White
 
 @Composable
 fun ActivityLevelStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {

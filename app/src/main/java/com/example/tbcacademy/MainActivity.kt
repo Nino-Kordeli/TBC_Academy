@@ -14,10 +14,12 @@ import com.example.api.AuthenticationNavKey
 import com.example.core.navigation.Navigator
 import com.example.core.navigation.rememberNavigationState
 import com.example.core.navigation.toEntries
-import com.example.impl.navigation.authenticationEntry
-import com.example.tbcacademy.presentation.theme.ComposeAppTheme
+import com.example.designsystem.theme.ComposeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation3.ui.NavDisplay
+import com.example.impl.navigation.loginEntry
+//import com.example.impl.navigation.registerEntry
+import com.example.impl.navigation.welcomeEntry
 
 //@AndroidEntryPoint
 //class MainActivity : ComponentActivity() {
@@ -96,14 +98,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun AppNavigation() {
     val navigationState = rememberNavigationState(
-        startKey = AuthenticationNavKey,
-        topLevelKeys = setOf(AuthenticationNavKey)
+        startKey = AuthenticationNavKey.WelcomeNavKey,  // ← Start with Welcome
+        topLevelKeys = setOf(AuthenticationNavKey.WelcomeNavKey)
     )
 
     val navigator = remember(navigationState) { Navigator(navigationState) }
 
     val entryProvider = entryProvider {
-        authenticationEntry(navigator)
+        welcomeEntry(navigator)
+        loginEntry(navigator)
+//        registerEntry(navigator)
     }
 
     val entries = navigationState.toEntries(entryProvider)
