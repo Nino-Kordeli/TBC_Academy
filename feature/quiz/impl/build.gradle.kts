@@ -4,14 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.authentication.impl"
+    namespace = "com.example.core.quiz.impl"
     testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 dependencies {
-    implementation(projects.tbcacademy.feature.quiz.api)
-
     implementation(projects.core.domain)
-    implementation(projects.feature.authentication.api)
+    implementation(projects.feature.quiz.api)
     implementation(libs.androidx.activity.compose)
 }

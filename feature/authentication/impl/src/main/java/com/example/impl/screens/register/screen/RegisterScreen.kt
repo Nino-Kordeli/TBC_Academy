@@ -21,28 +21,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.designsystem.theme.LightGray
 import com.example.designsystem.theme.NeutralGray
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.White
-import com.example.impl.screens.login.screen.OutlinedTextFieldWithInlineLabel
 import com.example.impl.screens.register.contract.RegisterEvent
 import com.example.impl.screens.register.contract.RegisterSideEffect
 import com.example.impl.screens.register.vm.RegisterViewModel
 import com.example.ui.base.BaseScreen
+import com.example.ui.components.OutlinedTextFieldWithInlineLabel
 
 @Composable
 fun RegisterScreen(
-    viewModel: RegisterViewModel,
+    viewModel: RegisterViewModel = hiltViewModel(),
     onNavigateToLogin: () -> Unit,
-    onNavigateHome: () -> Unit,
+    onNavigateQuiz: () -> Unit,
     onShowError: (String) -> Unit
 ) {
     BaseScreen(
         viewModel = viewModel,
         onSideEffect = { effect ->
             when (effect) {
-                RegisterSideEffect.NavigateToHome -> onNavigateHome()
+                RegisterSideEffect.NavigateToHome -> onNavigateQuiz()
                 RegisterSideEffect.NavigateToLogin -> onNavigateToLogin()
                 is RegisterSideEffect.ShowError ->
                     onShowError(effect.message)

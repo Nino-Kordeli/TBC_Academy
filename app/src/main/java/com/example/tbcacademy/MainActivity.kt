@@ -18,7 +18,8 @@ import com.example.designsystem.theme.ComposeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation3.ui.NavDisplay
 import com.example.impl.navigation.loginEntry
-//import com.example.impl.navigation.registerEntry
+import com.example.impl.navigation.quizEntry
+import com.example.impl.navigation.registerEntry
 import com.example.impl.navigation.welcomeEntry
 
 //@AndroidEntryPoint
@@ -98,7 +99,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun AppNavigation() {
     val navigationState = rememberNavigationState(
-        startKey = AuthenticationNavKey.WelcomeNavKey,  // ← Start with Welcome
+        startKey = AuthenticationNavKey.WelcomeNavKey,
         topLevelKeys = setOf(AuthenticationNavKey.WelcomeNavKey)
     )
 
@@ -107,7 +108,8 @@ private fun AppNavigation() {
     val entryProvider = entryProvider {
         welcomeEntry(navigator)
         loginEntry(navigator)
-//        registerEntry(navigator)
+        quizEntry(navigator)
+        registerEntry(navigator)
     }
 
     val entries = navigationState.toEntries(entryProvider)

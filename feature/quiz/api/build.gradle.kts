@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.authentication.api"
+    namespace = "com.example.core.quiz.api"
 }
 
 dependencies {

@@ -33,13 +33,15 @@ include(":app")
 
 // Core
 include(":core:navigation")
-
-// Feature
-include(":feature:authentication")
-include(":feature:authentication:api")
-include(":feature:authentication:impl")
 include(":core:designsystem")
 include(":core:ui")
 include(":core:domain")
 include(":core:data")
 include(":core:common")
+
+// Feature
+include(":feature:authentication:api")
+include(":feature:authentication:impl")
+
+include(":feature:quiz:api")
+include(":feature:quiz:impl")

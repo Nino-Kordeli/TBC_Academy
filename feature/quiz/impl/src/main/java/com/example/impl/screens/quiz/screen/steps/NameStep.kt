@@ -1,4 +1,4 @@
-package com.example.tbcacademy.presentation.screens.quiz.screen.steps
+package com.example.impl.screens.quiz.screen.steps
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.designsystem.theme.LightGray
 import com.example.designsystem.theme.White
-import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
-import com.example.tbcacademy.presentation.screens.quiz.contract.QuizState
+import com.example.impl.screens.quiz.contract.QuizEvent
+import com.example.impl.screens.quiz.contract.QuizState
 import com.example.ui.components.OutlinedTextFieldWithInlineLabel
 
 @Composable
@@ -60,7 +60,6 @@ fun NameStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
                 .padding(horizontal = 16.dp),
             placeholder = "name"
         )
-
     }
 }
 
