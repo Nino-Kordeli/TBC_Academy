@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,10 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tbcacademy.R
 import com.example.tbcacademy.domain.model.food.Food
 import com.example.tbcacademy.domain.model.food.MealType
 import com.example.tbcacademy.presentation.screens.diary.contract.DiaryState
@@ -31,6 +28,7 @@ import com.example.tbcacademy.presentation.theme.MilkyPink
 import com.example.tbcacademy.presentation.theme.PrimaryBlue
 import com.example.tbcacademy.presentation.theme.VeryLightGray
 import com.example.tbcacademy.presentation.theme.White
+import com.example.tbcacademy.R
 
 @Composable
 fun DiaryScreen(

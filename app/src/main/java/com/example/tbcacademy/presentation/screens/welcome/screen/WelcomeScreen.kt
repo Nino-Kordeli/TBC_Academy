@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.tbcacademy.R
 import com.example.tbcacademy.presentation.common.BaseScreen
 import com.example.tbcacademy.presentation.navigation.Routes
 import com.example.tbcacademy.presentation.screens.welcome.contract.WelcomeEvent
@@ -37,6 +36,7 @@ import com.example.tbcacademy.presentation.screens.welcome.contract.WelcomeSideE
 import com.example.tbcacademy.presentation.screens.welcome.vm.WelcomeViewModel
 import com.example.tbcacademy.presentation.theme.PrimaryBlue
 import com.example.tbcacademy.presentation.theme.White
+import com.example.tbcacademy.R
 
 @Composable
 fun WelcomeScreen(

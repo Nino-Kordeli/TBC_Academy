@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.example.tbcacademy.R
 import com.example.tbcacademy.presentation.common.BaseScreen
 import com.example.tbcacademy.presentation.navigation.Routes
 import com.example.tbcacademy.presentation.screens.quiz.contract.QuizEvent
@@ -42,6 +41,7 @@ import com.example.tbcacademy.presentation.screens.quiz.vm.QuizViewModel
 import com.example.tbcacademy.presentation.theme.PrimaryBlue
 import com.example.tbcacademy.presentation.theme.White
 import com.example.tbcacademy.presentation.theme.WhiteBlue
+import com.example.tbcacademy.R
 
 @Composable
 fun QuizScreen(
@@ -68,10 +68,10 @@ fun QuizScreen(
             onSideEffect = { effect ->
                 when (effect) {
                     is QuizSideEffect.NavigateToDashboard -> {
-                    navController.navigate("${Routes.DASHBOARD}/${effect.calories}") {
-                        popUpTo(0) { inclusive = true }
+                        navController.navigate("${Routes.DASHBOARD}/${effect.calories}") {
+                            popUpTo(0) { inclusive = true }
+                        }
                     }
-                }
                 }
             }
         ) { _, onEvent ->
@@ -86,6 +86,7 @@ fun QuizScreen(
                     state, onEvent,
                     calculatedCalories = state.calculatedCalories
                 )
+
                 else -> {}
             }
         }

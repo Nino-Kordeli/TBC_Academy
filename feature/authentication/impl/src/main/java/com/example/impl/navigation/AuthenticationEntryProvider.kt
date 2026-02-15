@@ -6,7 +6,7 @@ import com.example.api.AuthenticationNavKey
 import com.example.core.navigation.Navigator
 import com.example.impl.AuthenticationScreen
 
-fun EntryProviderScope<NavKey>.forYouEntry(navigator: Navigator) {
+fun EntryProviderScope<NavKey>.authenticationEntry(navigator: Navigator) {
     entry<AuthenticationNavKey> {
         AuthenticationScreen()
     }

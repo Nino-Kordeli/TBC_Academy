@@ -97,6 +97,7 @@ plugins {
     alias(libs.plugins.tbcacademy.android.application.compose)
     alias(libs.plugins.tbcacademy.android.application.firebase)
     alias(libs.plugins.tbcacademy.hilt)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -124,13 +125,21 @@ android {
         }
     }
     testOptions.unitTests.isIncludeAndroidResources = true
-    namespace = "com.google.tbcacademy"
+    namespace = "com.example.tbcacademy"
 }
 
 dependencies {
+    implementation(projects.tbcacademy.feature.authentication.api)
+    implementation(projects.tbcacademy.feature.authentication.impl)
+    implementation(projects.core.ui)
+    implementation(projects.core.designsystem)
+
+    implementation(libs.androidx.hilt.navigation.compose)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation3.ui)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.material3.adaptive)
     implementation(libs.androidx.compose.material3.adaptive.layout)
     implementation(libs.androidx.compose.material3.adaptive.navigation)
@@ -144,5 +153,8 @@ dependencies {
     implementation(libs.androidx.window.core)
     implementation(libs.coil)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.material)
     ksp(libs.hilt.compiler)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 }

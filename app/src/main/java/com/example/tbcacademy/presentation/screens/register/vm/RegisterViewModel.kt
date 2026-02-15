@@ -6,7 +6,7 @@ import com.example.tbcacademy.presentation.common.BaseViewModel
 import com.example.tbcacademy.presentation.screens.register.contract.RegisterEvent
 import com.example.tbcacademy.presentation.screens.register.contract.RegisterSideEffect
 import com.example.tbcacademy.presentation.screens.register.contract.RegisterState
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
+//import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -53,13 +53,13 @@ class RegisterViewModel @Inject constructor(
                 }.onSuccess {
                     emitSideEffect(RegisterSideEffect.NavigateToHome)
                 }.onFailure { throwable ->
-                    val message = when (throwable) {
-                        is FirebaseAuthUserCollisionException ->
-                            "Email already in use"
-                        else ->
-                            throwable.message ?: "Registration failed"
-                    }
-                    emitSideEffect(RegisterSideEffect.ShowError(message))
+//                    val message = when (throwable) {
+//                        is FirebaseAuthUserCollisionException ->
+//                            "Email already in use"
+//                        else ->
+//                            throwable.message ?: "Registration failed"
+//                    }
+//                    emitSideEffect(RegisterSideEffect.ShowError(message))
 
                 }
                 updateState { it.copy(isLoading = false) }

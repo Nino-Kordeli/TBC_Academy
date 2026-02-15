@@ -35,7 +35,7 @@ import com.example.tbcacademy.presentation.theme.MilkyPink
 import com.example.tbcacademy.presentation.theme.PrimaryBlue
 import com.example.tbcacademy.presentation.theme.VeryLightGray
 import com.example.tbcacademy.presentation.theme.White
-import com.google.tbcacademy.R
+import com.example.tbcacademy.R
 
 @Composable
 fun AddFoodScreen() {
