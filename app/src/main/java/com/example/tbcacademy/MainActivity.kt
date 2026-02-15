@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.Navigator
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.tbcacademy.presentation.navigation.AppNavHost
@@ -28,6 +30,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ComposeAppTheme {
+                val navigationState = rememberNavigationState(
+                    startKey = WelcomeNavKey,
+                    topLevelKeys = setOf(WelcomeNavKey)
+                )
+
+                val navigator = remember(navigationState) { Navigator(navigationState) }
 
                 val navController = rememberNavController()
 

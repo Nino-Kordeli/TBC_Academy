@@ -31,11 +31,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tbcacademy.R
 import com.example.tbcacademy.presentation.theme.MilkyPink
 import com.example.tbcacademy.presentation.theme.PrimaryBlue
 import com.example.tbcacademy.presentation.theme.VeryLightGray
 import com.example.tbcacademy.presentation.theme.White
+import com.google.tbcacademy.R
 
 @Composable
 fun AddFoodScreen() {
@@ -112,7 +112,7 @@ fun SearchFoodItem() {
 
             CircleItem()
 
-            LazyColumn() { }//aq minda mokled fooditems romlebic wamova apidan, is zeda row
+            LazyColumn() { }//TODO: aq minda mokled fooditems romlebic wamova apidan, is zeda row
         }
     }
 }

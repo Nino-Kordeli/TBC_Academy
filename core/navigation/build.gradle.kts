@@ -1,13 +1,17 @@
 plugins {
-    id("java-library")
-    alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.tbcacademy.android.library)
+    alias(libs.plugins.tbcacademy.hilt)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+
+android {
+    namespace = "com.google.core.navigation"
 }
-kotlin {
-    compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
-    }
+
+dependencies {
+    api(libs.androidx.navigation3.runtime)
+    implementation(libs.androidx.savedstate.compose)
+    implementation(libs.androidx.lifecycle.viewModel.navigation3)
 }

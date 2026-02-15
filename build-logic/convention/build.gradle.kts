@@ -2,9 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.android.lint)
 }
 
-group = "com.google.example.final_project.buildlogic"
+group = "com.google.example.buildlogic"
 
 // Configure the build-logic plugins to target JDK 11
 // This matches the JDK used to build the project, and is not related to what is running on device.
@@ -23,6 +24,7 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
 }
 
 gradlePlugin {
