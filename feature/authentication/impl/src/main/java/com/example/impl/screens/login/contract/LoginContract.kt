@@ -3,12 +3,14 @@ package com.example.impl.screens.login.contract
 data class LoginState(
     val email: String = "",
     val password: String = "",
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val rememberMe: Boolean = false
 )
 
 sealed interface LoginEvent {
     data class EmailChanged(val value: String) : LoginEvent
     data class PasswordChanged(val value: String) : LoginEvent
+    data class RememberMeChanged(val value: Boolean) : LoginEvent
     object LoginCLicked : LoginEvent
     object RegisterClicked : LoginEvent
 }

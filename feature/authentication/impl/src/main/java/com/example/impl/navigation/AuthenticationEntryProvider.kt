@@ -3,6 +3,7 @@ package com.example.impl.navigation
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.example.api.AuthenticationNavKey
+import com.example.api.DashboardNavKey
 import com.example.api.QuizNavKey
 import com.example.core.navigation.Navigator
 import com.example.impl.screens.login.screen.LoginScreen
@@ -25,7 +26,9 @@ fun EntryProviderScope<NavKey>.welcomeEntry(navigator: Navigator) {
 fun EntryProviderScope<NavKey>.loginEntry(navigator: Navigator) {
     entry<AuthenticationNavKey.LoginNavKey> {
         LoginScreen(
-            onNavigateHome = {},
+            onNavigateHome = {
+                navigator.navigate(DashboardNavKey.HomeNavKey)
+            },
             onNavigateToRegister = {},
             onShowError = {}
         )

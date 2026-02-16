@@ -1,12 +1,12 @@
 package com.example.domain.usecase
 
-import com.example.domain.repository.repository.AuthRepository
+import com.example.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
     private val repository: AuthRepository
 ) {
-    suspend operator fun invoke(email: String, password: String) {
-        repository.login(email, password)
+    suspend operator fun invoke(email: String, password: String, rememberMe: Boolean) {
+        repository.login(email, password, rememberMe)
     }
 }

@@ -15,6 +15,7 @@ data class QuizState(
     val activityLevel: SelectionType = SelectionType.MULTI,
     val goals: List<String> = emptyList(),
     val questions: List<QuestionItem> = emptyList(),
+    val selectedAnswers: Map<QuizStep, Set<Int>> = emptyMap(),
     val selectionType: SelectionType = SelectionType.SINGLE,
     val dailyCalories: Int = 0,
     val calculatedCalories: Int? = null

@@ -11,6 +11,6 @@ fun FoodDto.toDomain(): Food {
         carbs = carbs,
         fat = fat,
         protein = protein,
-        isMeal = isMeal,
+        isMeal = isMeal
     )
 }

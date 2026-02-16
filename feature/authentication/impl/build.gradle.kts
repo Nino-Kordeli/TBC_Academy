@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.tbcacademy.android.feature.impl)
     alias(libs.plugins.tbcacademy.android.library.compose)
@@ -10,8 +12,10 @@ android {
 
 dependencies {
     implementation(projects.tbcacademy.feature.quiz.api)
+    implementation(projects.tbcacademy.feature.dashboard.api)
 
     implementation(projects.core.domain)
     implementation(projects.feature.authentication.api)
     implementation(libs.androidx.activity.compose)
+    implementation(project(":core:data"))
 }

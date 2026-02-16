@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.tbcacademy.android.library)
     id("com.google.devtools.ksp")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -9,6 +10,7 @@ android {
 
 dependencies {
     //api(projects.core.model)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.javax.inject)
 }

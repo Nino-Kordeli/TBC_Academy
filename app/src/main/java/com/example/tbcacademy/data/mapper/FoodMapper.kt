@@ -1,6 +1,6 @@
 package com.example.tbcacademy.data.mapper
 
-import com.example.tbcacademy.data.dto.FoodDto
+import com.example.data.dto.FoodDto
 import com.example.tbcacademy.domain.model.food.Food
 
 fun FoodDto.toDomain(): Food {

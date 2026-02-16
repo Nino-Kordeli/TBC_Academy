@@ -1,5 +1,6 @@
 package com.example.impl.screens.quiz.vm
 
+import androidx.lifecycle.viewModelScope
 import com.example.impl.screens.quiz.contract.QuizEvent
 import com.example.impl.screens.quiz.contract.QuizSideEffect
 import com.example.impl.screens.quiz.contract.QuizState
@@ -7,50 +8,90 @@ import com.example.impl.screens.quiz.model.QuestionItem
 import com.example.impl.screens.quiz.model.QuizStep
 import com.example.impl.screens.quiz.model.SelectionType
 import com.example.ui.base.BaseViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class QuizViewModel @Inject constructor() :
     BaseViewModel<QuizState, QuizEvent, QuizSideEffect>(
-        initialState = loadStep(QuizStep.GENDER_AGE)
+        initialState = loadStep(QuizStep.GENDER_AGE, null)
     ) {
 
     override fun onEvent(event: QuizEvent) {
         when (event) {
 
-            is QuizEvent.NameChanged -> updateState { it.copy(name = event.value) }
+            is QuizEvent.NameChanged ->
+                updateState { it.copy(name = event.value) }
 
             is QuizEvent.OnQuestionChecked -> updateState { state ->
+
+                val currentSelections =
+                    state.selectedAnswers[state.currentStep]
+                        ?.toMutableSet() ?: mutableSetOf()
+
                 when (state.selectionType) {
-                    SelectionType.MULTI -> state.copy(
-                        questions = state.questions.map {
-                            if (it.id == event.id) it.copy(selected = event.checked)
-                            else it
-                        }
-                    )
+
+                    SelectionType.MULTI -> {
+                        if (event.checked) currentSelections.add(event.id)
+                        else currentSelections.remove(event.id)
+                    }
 
                     SelectionType.SINGLE -> {
-                        val selected = state.questions.first { it.id == event.id }
-                        state.copy(
-                            gender = if (state.currentStep == QuizStep.GENDER_AGE)
-                                selected.primaryText.lowercase()
-                            else state.gender,
-                            questions = state.questions.map { it.copy(selected = it.id == event.id) }
-                        )
+                        currentSelections.clear()
+                        currentSelections.add(event.id)
                     }
                 }
+
+                val updatedAnswers =
+                    state.selectedAnswers.toMutableMap().apply {
+                        put(state.currentStep, currentSelections)
+                    }
+
+                val selectedQuestion =
+                    state.questions.firstOrNull { it.id == event.id }
+
+                state.copy(
+                    gender = if (
+                        state.currentStep == QuizStep.GENDER_AGE &&
+                        selectedQuestion != null
+                    ) selectedQuestion.primaryText.lowercase()
+                    else state.gender,
+
+                    selectedAnswers = updatedAnswers,
+
+                    questions = state.questions.map {
+                        it.copy(selected = currentSelections.contains(it.id))
+                    }
+                )
             }
 
-            QuizEvent.NextClicked -> moveStep(1)
+            QuizEvent.NextClicked -> {
+
+                val mustAnswer = state.value.questions.isNotEmpty()
+
+                val hasAnswer =
+                    state.value.selectedAnswers[state.value.currentStep]
+                        ?.isNotEmpty() == true
+
+                if (mustAnswer && !hasAnswer) return
+
+                moveStep(1)
+            }
 
             QuizEvent.BackClicked -> moveStep(-1)
 
-            is QuizEvent.HeightChanged -> updateState { it.copy(height = event.value) }
+            is QuizEvent.HeightChanged ->
+                updateState { it.copy(height = event.value) }
 
-            is QuizEvent.WeightChanged -> updateState { it.copy(weight = event.value) }
+            is QuizEvent.WeightChanged ->
+                updateState { it.copy(weight = event.value) }
 
-            is QuizEvent.GoalWeightChanged -> updateState { it.copy(goalWeight = event.value) }
+            is QuizEvent.GoalWeightChanged ->
+                updateState { it.copy(goalWeight = event.value) }
         }
     }
+
+    @Inject
+    lateinit var userPreferences: UserPreferenceManager
 
     private fun moveStep(delta: Int) {
         val steps = QuizStep.entries
@@ -93,15 +134,30 @@ class QuizViewModel @Inject constructor() :
             }
         } else {
             val calories = state.value.calculatedCalories ?: 0
-            emitSideEffect(
-                QuizSideEffect.NavigateToDashboard(calories)
-            )
+
+            viewModelScope.launch {
+                userPreferences.saveGoalCalories(calories)
+                userPreferences.saveUserProfile(
+                    email = "",
+                    name = state.value.name,
+                    weight = state.value.weight,
+                    height = state.value.height,
+                    age = state.value.age,
+                    gender = state.value.gender
+                )
+            }
+
+            emitSideEffect(QuizSideEffect.NavigateToDashboard(calories))
         }
     }
-}
 
-private fun loadStep(step: QuizStep): QuizState {
-    return when (step) {
+private fun loadStep(
+    step: QuizStep,
+    previousState: QuizState?
+): QuizState {
+
+    val baseState = when (step) {
+
         QuizStep.GOALS -> QuizState(
             currentStep = step,
             selectionType = SelectionType.MULTI,
@@ -120,10 +176,10 @@ private fun loadStep(step: QuizStep): QuizState {
             currentStep = step,
             selectionType = SelectionType.SINGLE,
             questions = listOf(
-                QuestionItem(1, "Not Very Active", "Mostly sitting all day (e.g., desk job)"),
-                QuestionItem(2, "Lightly Active", "On your feet part of the day (e.g., teacher)"),
-                QuestionItem(3, "Active", "Some physical activity all day (e.g., food server)"),
-                QuestionItem(4, "Very Active", "Heavy physical activity all day (e.g., carpenter)")
+                QuestionItem(1, "Not Very Active", "Mostly sitting all day"),
+                QuestionItem(2, "Lightly Active", "On your feet part of the day"),
+                QuestionItem(3, "Active", "Some physical activity all day"),
+                QuestionItem(4, "Very Active", "Heavy physical activity all day")
             )
         )
 
@@ -136,9 +192,9 @@ private fun loadStep(step: QuizStep): QuizState {
             )
         )
 
-        QuizStep.NAME, QuizStep.BODY -> QuizState(
+        QuizStep.NAME,
+        QuizStep.BODY -> QuizState(
             currentStep = step,
-            selectionType = SelectionType.SINGLE,
             questions = emptyList()
         )
 
@@ -155,11 +211,21 @@ private fun loadStep(step: QuizStep): QuizState {
 
         QuizStep.CREATE_ACCOUNT -> QuizState(
             currentStep = step,
-            selectionType = SelectionType.SINGLE,
             questions = emptyList()
         )
     }
+
+    val savedSelections =
+        previousState?.selectedAnswers?.get(step) ?: emptySet()
+
+    return baseState.copy(
+        selectedAnswers = previousState?.selectedAnswers ?: emptyMap(),
+        questions = baseState.questions.map {
+            it.copy(selected = savedSelections.contains(it.id))
+        }
+    )
 }
+
 
 fun calculateCalories(
     weight: Double,
@@ -169,6 +235,7 @@ fun calculateCalories(
     activityMultiplier: Double,
     weeklyGoalKg: Double
 ): Int {
+
     val bmr = if (gender.lowercase() == "male") {
         10 * weight + 6.25 * height - 5 * age + 5
     } else {
@@ -177,5 +244,6 @@ fun calculateCalories(
 
     val maintenanceCalories = bmr * activityMultiplier
     val dailyAdjustment = (weeklyGoalKg * 7700) / 7
+
     return (maintenanceCalories - dailyAdjustment).toInt()
 }

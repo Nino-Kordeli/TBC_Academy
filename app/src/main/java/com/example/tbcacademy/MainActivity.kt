@@ -17,6 +17,7 @@ import com.example.core.navigation.toEntries
 import com.example.designsystem.theme.ComposeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation3.ui.NavDisplay
+import com.example.impl.navigation.dashboardEntry
 import com.example.impl.navigation.loginEntry
 import com.example.impl.navigation.quizEntry
 import com.example.impl.navigation.registerEntry
@@ -110,6 +111,7 @@ private fun AppNavigation() {
         loginEntry(navigator)
         quizEntry(navigator)
         registerEntry(navigator)
+        dashboardEntry(navigator)
     }
 
     val entries = navigationState.toEntries(entryProvider)

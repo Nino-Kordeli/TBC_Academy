@@ -1,4 +1,6 @@
 package com.example.domain.usecase
 
-class DashboardUseCase {
+import javax.inject.Inject
+
+class DashboardUseCase @Inject constructor() {
 }

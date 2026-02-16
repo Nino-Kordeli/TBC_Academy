@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.tbcacademy.android.application.firebase)
     alias(libs.plugins.tbcacademy.hilt)
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -41,6 +42,9 @@ dependencies {
     implementation(projects.tbcacademy.feature.quiz.api)
     implementation(projects.tbcacademy.feature.quiz.impl)
 
+    implementation(projects.tbcacademy.feature.dashboard.api)
+    implementation(projects.tbcacademy.feature.dashboard.impl)
+
     implementation(projects.core.common)
     implementation(projects.core.ui)
     implementation(projects.core.designsystem)
@@ -69,4 +73,8 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
 }

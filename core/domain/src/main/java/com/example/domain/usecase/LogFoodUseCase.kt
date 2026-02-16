@@ -1,11 +1,15 @@
 package com.example.domain.usecase
 
-/*
-class LogFoodUseCase @Inject constructor(
-    private val diaryRepository: DiaryRepository
-) {
+import com.example.domain.model.food.Food
+import com.example.domain.model.food.LoggedFood
+import com.example.domain.model.food.MealType
+import java.util.UUID
+import javax.inject.Inject
 
-    suspend operator fun invoke(food: Food, grams: Int) {
+class LogFoodUseCase @Inject constructor(
+    private val userPreferences: UserPreferencesManager
+) {
+    suspend operator fun invoke(food: Food, grams: Int, mealType: MealType) {
         val multiplier = grams / 100f
 
         val loggedFood = LoggedFood(
@@ -19,6 +23,9 @@ class LogFoodUseCase @Inject constructor(
             protein = food.protein * multiplier,
             timestamp = System.currentTimeMillis(),
         )
-        diaryRepository.insert(loggedFood)
+
+        val currentFoods = userPreferences.getFoodsForMeal(mealType).first()
+        val updateFoods = currentFoods + loggedFood
+        userPreferences.saveFoodsForMeal(mealType, updateFoods)
     }
-}*/
+}

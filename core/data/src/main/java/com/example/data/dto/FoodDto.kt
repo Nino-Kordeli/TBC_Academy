@@ -1,5 +1,13 @@
 package com.example.data.dto
 
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class FoodResponse(
+    val foods: List<FoodDto>
+)
+
+@Serializable
 data class FoodDto(
     val id: String,
     val name: String,

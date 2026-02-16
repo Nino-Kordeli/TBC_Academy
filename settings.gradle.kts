@@ -45,3 +45,13 @@ include(":feature:authentication:impl")
 
 include(":feature:quiz:api")
 include(":feature:quiz:impl")
+
+include(":feature:dashboard:api")
+include(":feature:dashboard:impl")
+
+include(":feature:add_food:api")
+include(":feature:add_food:impl")
+
+include(":feature:diary")
+include(":feature:diary:api")
+include(":feature:diary:impl")
