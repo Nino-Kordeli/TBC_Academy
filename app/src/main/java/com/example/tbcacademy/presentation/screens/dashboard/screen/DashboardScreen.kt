@@ -1,5 +1,6 @@
 package com.example.tbcacademy.presentation.screens.dashboard.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -60,6 +61,10 @@ fun DashboardScreen(
     goalCalories: Int,
     modifier: Modifier = Modifier.fillMaxWidth()
 ) {
+
+    BackHandler {
+
+    }
 
     val caloriesData = CaloriesUiModel(
         goal = goalCalories,
@@ -494,7 +499,7 @@ fun DashboardWithBottomBarPreview() {
 
         DashboardScreen(
             navController = navController,
-            goalCalories = 2200,
+            goalCalories = 0,
             modifier = Modifier.padding(padding)
         )
     }

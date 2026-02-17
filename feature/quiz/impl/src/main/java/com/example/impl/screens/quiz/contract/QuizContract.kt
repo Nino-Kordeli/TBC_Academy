@@ -12,13 +12,13 @@ data class QuizState(
     val height: String = "",
     val weight: String = "",
     val goalWeight: String = "",
-    val activityLevel: SelectionType = SelectionType.MULTI,
     val goals: List<String> = emptyList(),
     val questions: List<QuestionItem> = emptyList(),
     val selectedAnswers: Map<QuizStep, Set<Int>> = emptyMap(),
     val selectionType: SelectionType = SelectionType.SINGLE,
-    val dailyCalories: Int = 0,
-    val calculatedCalories: Int? = null
+    val calculatedCalories: Int? = null,
+    val weeklyGoalKg: Double = 0.5,
+    val activityMultiplier: Double = 1.55
 ) {
     val progress: Float
         get() {

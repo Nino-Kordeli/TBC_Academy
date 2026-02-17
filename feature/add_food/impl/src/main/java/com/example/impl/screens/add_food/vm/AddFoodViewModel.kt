@@ -1,7 +1,7 @@
 package com.example.impl.screens.add_food.vm
 
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecase.SearchFoodsUseCase
+import com.example.domain.usecase.food.SearchFoodsUseCase
 import com.example.impl.screens.add_food.contract.AddFoodEvent
 import com.example.impl.screens.add_food.contract.AddFoodState
 import com.example.ui.base.BaseViewModel

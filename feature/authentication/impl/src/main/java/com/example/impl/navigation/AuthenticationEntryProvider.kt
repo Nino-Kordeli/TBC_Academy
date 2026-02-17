@@ -9,6 +9,7 @@ import com.example.core.navigation.Navigator
 import com.example.impl.screens.login.screen.LoginScreen
 import com.example.impl.screens.register.screen.RegisterScreen
 import com.example.impl.screens.welcome.screen.WelcomeScreen
+import com.example.ui.snackbar.SnackbarController
 
 fun EntryProviderScope<NavKey>.welcomeEntry(navigator: Navigator) {
     entry<AuthenticationNavKey.WelcomeNavKey> {
@@ -23,26 +24,40 @@ fun EntryProviderScope<NavKey>.welcomeEntry(navigator: Navigator) {
     }
 }
 
-fun EntryProviderScope<NavKey>.loginEntry(navigator: Navigator) {
+fun EntryProviderScope<NavKey>.loginEntry(
+    navigator: Navigator,
+    snackbarController: SnackbarController
+) {
     entry<AuthenticationNavKey.LoginNavKey> {
         LoginScreen(
             onNavigateHome = {
-                navigator.navigate(DashboardNavKey.HomeNavKey)
+                navigator.navigate(DashboardNavKey.HomeNavKey())
             },
-            onNavigateToRegister = {},
-            onShowError = {}
+            onNavigateToRegister = {
+                navigator.navigate(AuthenticationNavKey.RegisterNavKey)
+            },
+            onShowError = { message ->
+                snackbarController.showError(message)
+            }
         )
     }
 }
 
-fun EntryProviderScope<NavKey>.registerEntry(navigator: Navigator) {
+fun EntryProviderScope<NavKey>.registerEntry(
+    navigator: Navigator,
+    snackbarController: SnackbarController
+) {
     entry<AuthenticationNavKey.RegisterNavKey> {
         RegisterScreen(
             onNavigateQuiz = {
-                 navigator.navigate(QuizNavKey.QuizKey)
+                navigator.navigate(QuizNavKey.QuizKey)
             },
-            onNavigateToLogin = {},
-            onShowError = {}
+            onNavigateToLogin = {
+                navigator.navigate(AuthenticationNavKey.LoginNavKey)
+            },
+            onShowError = { message ->
+                snackbarController.showError(message)
+            }
         )
     }
 }

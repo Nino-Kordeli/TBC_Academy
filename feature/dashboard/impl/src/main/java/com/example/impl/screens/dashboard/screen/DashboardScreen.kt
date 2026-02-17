@@ -1,5 +1,6 @@
 package com.example.impl.screens.dashboard.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,6 +29,8 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -55,16 +58,15 @@ import com.example.impl.screens.dashboard.vm.DashboardViewModel
 
 @Composable
 fun DashboardScreen(
-    viewModel: DashboardViewModel = hiltViewModel(),
-    goalCalories: Int,
-    onSearchClick: () -> Unit = {},
+    onSearchClick: () -> Unit,
+    viewModel: DashboardViewModel = hiltViewModel()
 ) {
 
-    val caloriesData = CaloriesUiModel(
-        goal = goalCalories,
-        food = 1000,
-        exercise = 120
-    )
+    BackHandler {
+
+    }
+
+    val data by viewModel.caloriesUiModel.collectAsState()
 
     Column(
         modifier = Modifier
@@ -112,7 +114,7 @@ fun DashboardScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            DailyCaloriesCard(data = caloriesData)
+            DailyCaloriesCard(data = data)
 
             Spacer(modifier = Modifier.height(24.dp))
 

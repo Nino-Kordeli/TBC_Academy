@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.map
 
 private val Context.sessionDataStore by preferencesDataStore(name = "session")
 
-class SessionDataStore(
-    private val context: Context
-) {
+class SessionDataStore(private val context: Context) {
 
     companion object {
         private val TOKEN = stringPreferencesKey("token")
         private val REMEMBER_ME = booleanPreferencesKey("remember_me")
+        private val EMAIL = stringPreferencesKey("email")
+        private val PASSWORD = stringPreferencesKey("password") // encrypt for prod!
     }
 
     suspend fun saveSession(token: String, rememberMe: Boolean) {
@@ -27,18 +27,27 @@ class SessionDataStore(
     }
 
     val token: Flow<String?> =
-        context.sessionDataStore.data.map { prefs ->
-            prefs[TOKEN]
-        }
+        context.sessionDataStore.data.map { prefs -> prefs[TOKEN] }
 
-    val rememberMe: Flow<Boolean?> =
-        context.sessionDataStore.data.map { prefs ->
-            prefs[REMEMBER_ME] ?: false
-        }
+    val rememberMe: Flow<Boolean> =
+        context.sessionDataStore.data.map { prefs -> prefs[REMEMBER_ME] ?: false }
+
+    val email: Flow<String?> = context.sessionDataStore.data.map { prefs -> prefs[EMAIL] }
+    val password: Flow<String?> = context.sessionDataStore.data.map { prefs -> prefs[PASSWORD] }
+
+    suspend fun saveEmail(email: String) {
+        context.sessionDataStore.edit { prefs -> prefs[EMAIL] = email }
+    }
+
+    suspend fun savePassword(password: String) {
+        context.sessionDataStore.edit { prefs -> prefs[PASSWORD] = password }
+    }
 
     suspend fun clearSession() {
-        context.sessionDataStore.edit {
-            it.clear()
-        }
+        context.sessionDataStore.edit { it.clear() }
+    }
+
+    suspend fun setRememberMe(value: Boolean) {
+        context.sessionDataStore.edit { prefs -> prefs[REMEMBER_ME] = value }
     }
 }

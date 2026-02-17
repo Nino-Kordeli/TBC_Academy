@@ -1,7 +1,7 @@
-package com.example.domain.usecase
+package com.example.domain.usecase.food
 
 import com.example.domain.model.food.Food
-import com.example.domain.repository.FoodRepository
+import com.example.domain.repository.food.FoodRepository
 import javax.inject.Inject
 
 class SearchFoodsUseCase @Inject constructor(

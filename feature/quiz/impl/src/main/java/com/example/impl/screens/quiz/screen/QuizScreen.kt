@@ -43,7 +43,8 @@ import com.example.ui.base.BaseScreen
 
 @Composable
 fun QuizScreen(
-    viewModel: QuizViewModel = hiltViewModel()
+    viewModel: QuizViewModel = hiltViewModel(),
+    onNavigateToDashboard: (Int) -> Unit
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
 
@@ -65,9 +66,7 @@ fun QuizScreen(
             onSideEffect = { effect ->
                 when (effect) {
                     is QuizSideEffect.NavigateToDashboard -> {
-                      /*  navController.navigate("${Routes.DASHBOARD}/${effect.calories}") {
-                            popUpTo(0) { inclusive = true }
-                        }*/
+                        onNavigateToDashboard(effect.calories)
                     }
                 }
             }

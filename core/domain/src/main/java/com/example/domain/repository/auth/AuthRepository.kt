@@ -1,4 +1,4 @@
-package com.example.domain.repository
+package com.example.domain.repository.auth
 
 interface AuthRepository {
     suspend fun login(email: String, password: String, rememberMe: Boolean)

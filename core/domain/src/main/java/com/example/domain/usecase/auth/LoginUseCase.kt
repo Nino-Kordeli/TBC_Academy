@@ -1,6 +1,6 @@
-package com.example.domain.usecase
+package com.example.domain.usecase.auth
 
-import com.example.domain.repository.AuthRepository
+import com.example.domain.repository.auth.AuthRepository
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(

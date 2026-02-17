@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 object DashboardNavKey : NavKey {
     @Serializable
-    object HomeNavKey : NavKey
+    data class HomeNavKey(val calories: Int? = null) : NavKey
 
     @Serializable
     object DiaryNavKey : NavKey

@@ -2,7 +2,7 @@ package com.example.data.repository
 
 import com.example.data.datasource.FirebaseAuthDataSource
 import com.example.data.local.SessionDataStore
-import com.example.domain.repository.AuthRepository
+import com.example.domain.repository.auth.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(

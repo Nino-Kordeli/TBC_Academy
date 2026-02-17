@@ -1,7 +1,7 @@
 package com.example.impl.screens.register.vm
 
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecase.RegisterUseCase
+import com.example.domain.usecase.auth.RegisterUseCase
 import com.example.impl.screens.register.contract.RegisterEvent
 import com.example.impl.screens.register.contract.RegisterSideEffect
 import com.example.impl.screens.register.contract.RegisterState

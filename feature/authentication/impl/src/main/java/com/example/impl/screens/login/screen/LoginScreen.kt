@@ -16,12 +16,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.designsystem.theme.Black
 import com.example.designsystem.theme.LightGray
 import com.example.designsystem.theme.PrimaryBlue
@@ -39,7 +40,12 @@ fun LoginScreen(
     onNavigateToRegister: () -> Unit,
     onShowError: (String) -> Unit
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.checkAutoLogin()
+    }
+
     BaseScreen(
+        modifier = Modifier.fillMaxSize(),
         viewModel = viewModel,
         onSideEffect = { effect ->
             when (effect) {
@@ -52,8 +58,7 @@ fun LoginScreen(
                 is LoginSideEffect.ShowError ->
                     onShowError(effect.message)
             }
-        },
-        modifier = Modifier
+        }
     ) { state, onEvent ->
 
         Column(
@@ -61,11 +66,10 @@ fun LoginScreen(
                 .fillMaxSize()
                 .background(color = White),
             horizontalAlignment = Alignment.CenterHorizontally
-        )
-        {
+        ) {
             Text(
                 text = "Log In",
-                Modifier.padding(top = 34.dp),
+                modifier = Modifier.padding(top = 34.dp),
                 color = LightGray,
                 fontSize = 14.sp
             )
@@ -120,9 +124,6 @@ fun LoginScreen(
 
             Spacer(Modifier.height(40.dp))
 
-
-            Spacer(Modifier.height(40.dp))
-
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -130,9 +131,8 @@ fun LoginScreen(
                     .height(40.dp),
                 colors = ButtonDefaults
                     .buttonColors(containerColor = PrimaryBlue),
-                onClick = { onEvent(LoginEvent.LoginCLicked) },
-
-                ) {
+                onClick = { onEvent(LoginEvent.LoginCLicked) }
+            ) {
                 Text(text = "Log In", fontWeight = FontWeight.Bold)
             }
 
@@ -166,9 +166,8 @@ fun LoginScreen(
                 ),
                 colors = ButtonDefaults
                     .buttonColors(containerColor = White, contentColor = Black),
-                onClick = { onEvent(LoginEvent.RegisterClicked) },
-
-                ) {
+                onClick = { onEvent(LoginEvent.RegisterClicked) }
+            ) {
                 Text(text = "Register now!", fontWeight = FontWeight.Bold)
             }
         }

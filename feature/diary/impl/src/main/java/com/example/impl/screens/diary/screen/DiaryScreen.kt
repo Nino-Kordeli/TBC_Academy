@@ -21,14 +21,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tbcacademy.domain.model.food.Food
-import com.example.tbcacademy.domain.model.food.MealType
-import com.example.tbcacademy.presentation.screens.diary.contract.DiaryState
+import com.example.designsystem.R
 import com.example.designsystem.theme.MilkyPink
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.VeryLightGray
 import com.example.designsystem.theme.White
-import com.example.tbcacademy.R
+import com.example.domain.model.food.Food
+import com.example.domain.model.food.MealType
+import com.example.impl.screens.diary.contract.DiaryState
 
 @Composable
 fun DiaryScreen(

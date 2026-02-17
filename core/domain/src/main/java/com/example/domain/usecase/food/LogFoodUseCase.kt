@@ -1,13 +1,15 @@
-package com.example.domain.usecase
+package com.example.domain.usecase.food
 
 import com.example.domain.model.food.Food
 import com.example.domain.model.food.LoggedFood
 import com.example.domain.model.food.MealType
+import com.example.domain.repository.UserPreferencesRepository
+import kotlinx.coroutines.flow.first
 import java.util.UUID
 import javax.inject.Inject
 
 class LogFoodUseCase @Inject constructor(
-    private val userPreferences: UserPreferencesManager
+    private val userPreferencesRepository: UserPreferencesRepository
 ) {
     suspend operator fun invoke(food: Food, grams: Int, mealType: MealType) {
         val multiplier = grams / 100f
@@ -21,11 +23,11 @@ class LogFoodUseCase @Inject constructor(
             carbs = food.carbs * multiplier,
             fat = food.fat * multiplier,
             protein = food.protein * multiplier,
-            timestamp = System.currentTimeMillis(),
+            timestamp = System.currentTimeMillis()
         )
 
-        val currentFoods = userPreferences.getFoodsForMeal(mealType).first()
-        val updateFoods = currentFoods + loggedFood
-        userPreferences.saveFoodsForMeal(mealType, updateFoods)
+        val currentFoods = userPreferencesRepository.getFoodsForMeal(mealType).first()
+        val updatedFoods = currentFoods + loggedFood
+        userPreferencesRepository.saveFoodsForMeal(mealType, updatedFoods)
     }
 }

@@ -17,5 +17,6 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.feature.authentication.api)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(project(":core:data"))
 }

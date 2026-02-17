@@ -5,15 +5,13 @@ import com.example.data.dto.FoodResponse
 import com.example.data.mapper.toDomain
 import com.example.domain.model.food.Food
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class JsonFoodDataSource @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val json: Json
+    @param:ApplicationContext private val context: Context
 ) {
     private var cachedFoods: List<Food>? = null
 

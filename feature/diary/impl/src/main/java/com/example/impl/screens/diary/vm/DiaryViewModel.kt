@@ -1,22 +1,22 @@
 package com.example.impl.screens.diary.vm
 
-import androidx.compose.ui.graphics.Path.Companion.combine
-import androidx.compose.ui.text.style.TextDecoration.Companion.combine
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.food.Food
 import com.example.domain.model.food.LoggedFood
 import com.example.domain.model.food.MealType
+import com.example.domain.repository.UserPreferencesRepository
 import com.example.impl.screens.diary.contract.DiaryEvent
 import com.example.impl.screens.diary.contract.DiaryState
 import com.example.ui.base.BaseViewModel
-import kotlinx.coroutines.flow.collect
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import java.util.UUID
 import javax.inject.Inject
 
+@HiltViewModel
 class DiaryViewModel @Inject constructor(
-    private val userPreferences: UserPreferencesManager
+    private val userPreferencesRepository: UserPreferencesRepository
 ) : BaseViewModel<DiaryState, DiaryEvent, Nothing>(DiaryState()) {
 
     init {
@@ -26,24 +26,24 @@ class DiaryViewModel @Inject constructor(
 
     private fun checkAndReset() {
         viewModelScope.launch {
-            userPreferences.checkAndResetDailyData()
+            userPreferencesRepository.checkAndResetDailyData()
         }
     }
 
     private fun loadSavedFood() {
         viewModelScope.launch {
             combine(
-                userPreferences.getFoodsForMeal(MealType.BREAKFAST),
-                userPreferences.getFoodsForMeal(MealType.LUNCH),
-                userPreferences.getFoodsForMeal(MealType.DINNER),
-                userPreferences.getFoodsForMeal(MealType.SNACKS),
-                userPreferences.getGoalCalories()
+                userPreferencesRepository.getFoodsForMeal(MealType.BREAKFAST),
+                userPreferencesRepository.getFoodsForMeal(MealType.LUNCH),
+                userPreferencesRepository.getFoodsForMeal(MealType.DINNER),
+                userPreferencesRepository.getFoodsForMeal(MealType.SNACKS),
+                userPreferencesRepository.getGoalCalories()
             ) { breakfast, lunch, dinner, snacks, goalCalories ->
                 DiaryState(
-                    breakfast = breakfast.map { it.toFood() },
-                    lunch = lunch.map { it.toFood() },
-                    dinner = dinner.map { it.toFood() },
-                    snacks = snacks.map { it.toFood() },
+                    breakfast = breakfast.map { toFood(it) },
+                    lunch = lunch.map { toFood(it) },
+                    dinner = dinner.map { toFood(it) },
+                    snacks = snacks.map { toFood(it) },
                     goalCalories = goalCalories
                 )
             }.collect { newState ->
@@ -55,8 +55,6 @@ class DiaryViewModel @Inject constructor(
     override fun onEvent(event: DiaryEvent) {
         when (event) {
             is DiaryEvent.AddFood -> {
-                val loggedFood = event.food.toLoggedFood()
-
                 viewModelScope.launch {
                     val currentFoods = when (event.mealType) {
                         MealType.BREAKFAST -> state.value.breakfast
@@ -64,42 +62,48 @@ class DiaryViewModel @Inject constructor(
                         MealType.DINNER -> state.value.dinner
                         MealType.SNACKS -> state.value.snacks
                     }
-                    val updateFoods = currentFoods +event.food
-                    val updatedLoggedFoods = updateFoods.map { it.toLoggedFood() }
-                    userPreferences.saveFoodsForMeal(event.mealType, updatedLoggedFoods)
+
+                    val updatedFoods = currentFoods + event.food
+                    val updatedLoggedFoods = updatedFoods.map { toLoggedFood(it) }
+
+                    userPreferencesRepository.saveFoodsForMeal(event.mealType, updatedLoggedFoods)
 
                     updateState { current ->
                         when (event.mealType) {
-                            MealType.BREAKFAST -> current.copy(breakfast = updateFoods)
-                            MealType.LUNCH -> current.copy(lunch = updateFoods)
-                            MealType.DINNER -> current.copy(dinner = updateFoods)
-                            MealType.SNACKS -> current.copy(snacks = updateFoods)
+                            MealType.BREAKFAST -> current.copy(breakfast = updatedFoods)
+                            MealType.LUNCH -> current.copy(lunch = updatedFoods)
+                            MealType.DINNER -> current.copy(dinner = updatedFoods)
+                            MealType.SNACKS -> current.copy(snacks = updatedFoods)
                         }
                     }
-
                 }
             }
         }
     }
-}
-private fun Food.toLoggedFood() = LoggedFood(
-    id = UUID.randomUUID().toString(),
-    foodId = id,
-    name = name,
-    amountGrams = 100,
-    calories = calories,
-    carbs = carbs,
-    fat = fat,
-    protein = protein,
-    timestamp = System.currentTimeMillis()
-)
 
-private fun LoggedFood.toFood() = Food(
-    id = foodId,
-    name = name,
-    calories = calories,
-    carbs = carbs,
-    fat = fat,
-    protein = protein,
-    isMeal = false
-)
+    private fun toLoggedFood(food: Food): LoggedFood {
+        return LoggedFood(
+            id = UUID.randomUUID().toString(),
+            foodId = food.id,
+            name = food.name,
+            amountGrams = 100,
+            calories = food.calories,
+            carbs = food.carbs,
+            fat = food.fat,
+            protein = food.protein,
+            timestamp = System.currentTimeMillis()
+        )
+    }
+
+    private fun toFood(loggedFood: LoggedFood): Food {
+        return Food(
+            id = loggedFood.foodId,
+            name = loggedFood.name,
+            calories = loggedFood.calories,
+            carbs = loggedFood.carbs,
+            fat = loggedFood.fat,
+            protein = loggedFood.protein,
+            isMeal = false
+        )
+    }
+}
