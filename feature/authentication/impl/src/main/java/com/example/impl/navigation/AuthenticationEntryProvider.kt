@@ -31,7 +31,7 @@ fun EntryProviderScope<NavKey>.loginEntry(
     entry<AuthenticationNavKey.LoginNavKey> {
         LoginScreen(
             onNavigateHome = {
-                navigator.navigate(DashboardNavKey.HomeNavKey())
+                navigator.navigateAndClearStack(DashboardNavKey.HomeNavKey())
             },
             onNavigateToRegister = {
                 navigator.navigate(AuthenticationNavKey.RegisterNavKey)
@@ -50,10 +50,10 @@ fun EntryProviderScope<NavKey>.registerEntry(
     entry<AuthenticationNavKey.RegisterNavKey> {
         RegisterScreen(
             onNavigateQuiz = {
-                navigator.navigate(QuizNavKey.QuizKey)
+                navigator.navigateAndClearStack(QuizNavKey.QuizKey)
             },
             onNavigateToLogin = {
-                navigator.navigate(AuthenticationNavKey.LoginNavKey)
+                navigator.replace(AuthenticationNavKey.LoginNavKey)
             },
             onShowError = { message ->
                 snackbarController.showError(message)

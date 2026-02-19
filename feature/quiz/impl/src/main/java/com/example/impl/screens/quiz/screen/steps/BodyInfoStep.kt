@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,7 +43,7 @@ fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
         Spacer(modifier = Modifier.height(48.dp))
 
         Text(
-            text = "How tall are you?",
+            text = "How tall are you? (cm)",
             fontSize = 15.sp,
             color = LightGray,
             modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
@@ -54,13 +58,21 @@ fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
             value = state.height,
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Unspecified,
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Unspecified,
+                platformImeOptions = null,
+                showKeyboardOnFocus = null,
+                hintLocales = null
+            ),
             onValueChange = { onEvent(QuizEvent.HeightChanged(it)) }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "How much do you weight?",
+            text = "How much do you weight? (kg)",
             fontSize = 15.sp,
             color = LightGray,
             modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
@@ -75,18 +87,27 @@ fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
             value = state.weight,
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Unspecified,
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Unspecified,
+                platformImeOptions = null,
+                showKeyboardOnFocus = null,
+                hintLocales = null
+            ),
             onValueChange = { onEvent(QuizEvent.WeightChanged(it)) }
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "What's your goal weight?",
+            text = "What's your goal weight? (kg)",
             fontSize = 15.sp,
             color = LightGray,
             modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp),
-            fontWeight = FontWeight.SemiBold
-        )
+            fontWeight = FontWeight.SemiBold,
+
+            )
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -96,10 +117,17 @@ fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
             value = state.goalWeight,
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Unspecified,
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Unspecified,
+                platformImeOptions = null,
+                showKeyboardOnFocus = null,
+                hintLocales = null
+            ),
             onValueChange = { onEvent(QuizEvent.GoalWeightChanged(it)) }
         )
     }
-
 }
 
 @Composable

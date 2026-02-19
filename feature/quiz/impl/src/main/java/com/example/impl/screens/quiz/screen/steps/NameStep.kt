@@ -52,8 +52,10 @@ fun NameStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
         Spacer(modifier = Modifier.size(75.dp))
 
         OutlinedTextFieldWithInlineLabel(
-            value = name,
-            onValueChange = { name = it },
+            value = state.name,
+            onValueChange = {
+                onEvent(QuizEvent.NameChanged(it))
+            },
             label = "Preferred first name",
             modifier = Modifier
                 .fillMaxWidth()
@@ -61,13 +63,4 @@ fun NameStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             placeholder = "name"
         )
     }
-}
-
-@Preview
-@Composable
-fun NameStepPreview() {
-    NameStep(
-        state = QuizState(name = "Doll"),
-        onEvent = {}
-    )
 }

@@ -9,7 +9,7 @@ class UserSessionRepositoryImpl @Inject constructor(
     private val sessionDataStore: SessionDataStore
 ) : UserSessionRepository {
     override suspend fun getRememberMe(): Boolean {
-        return sessionDataStore.rememberMe.first() ?: false
+        return sessionDataStore.rememberMe.first()
     }
 
     override suspend fun getToken(): String? {
@@ -17,7 +17,7 @@ class UserSessionRepositoryImpl @Inject constructor(
     }
 
     override suspend fun setRememberMe(value: Boolean) {
-        sessionDataStore.setRememberMe(value)
+        sessionDataStore.setRememberMe(false)//value
     }
 
     override suspend fun saveEmail(email: String) {

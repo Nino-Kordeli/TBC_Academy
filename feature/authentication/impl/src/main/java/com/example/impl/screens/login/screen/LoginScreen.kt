@@ -103,10 +103,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-                    .clickable {
-                        onEvent(LoginEvent.RememberMeChanged(!state.rememberMe))
-                    }
-            ) {
+            ){
                 Checkbox(
                     checked = state.rememberMe,
                     onCheckedChange = { checked ->

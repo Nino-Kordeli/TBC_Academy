@@ -1,5 +1,6 @@
 package com.example.impl.screens.register.vm
 
+import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecase.auth.RegisterUseCase
 import com.example.impl.screens.register.contract.RegisterEvent
@@ -28,7 +29,9 @@ class RegisterViewModel @Inject constructor(
             is RegisterEvent.PasswordChanged ->
                 updateState { it.copy(password = event.value) }
 
-            RegisterEvent.RegisterClicked -> register()
+            RegisterEvent.RegisterClicked -> {
+                if (!state.value.isLoading) register()
+            }
 
             is RegisterEvent.RepeatPasswordChanged ->
                 updateState { it.copy(repeatPassword = event.value) }
@@ -36,32 +39,71 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun register() {
-        val state = state.value
+        val currentState = state.value
 
-        if (state.password != state.repeatPassword) {
-            emitSideEffect(
-                RegisterSideEffect.ShowError("Passwords do not match")
-            )
+        if (currentState.email.isBlank()) {
+            emitSideEffect(RegisterSideEffect.ShowError("Email is required"))
             return
         }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(currentState.email).matches()) {
+            emitSideEffect(RegisterSideEffect.ShowError("Invalid email format"))
+            return
+        }
+
+        if (currentState.password.isBlank()) {
+            emitSideEffect(RegisterSideEffect.ShowError("Password is required"))
+            return
+        }
+
+        if (currentState.password != currentState.repeatPassword) {
+            emitSideEffect(RegisterSideEffect.ShowError("Passwords do not match"))
+            return
+        }
+
         viewModelScope.launch {
             updateState { it.copy(isLoading = true) }
 
             runCatching {
-                registerUseCase(state.email, state.password)
+                registerUseCase(
+                    currentState.email,
+                    currentState.password,
+                    true
+                )
             }.onSuccess {
                 emitSideEffect(RegisterSideEffect.NavigateToHome)
-            }.onFailure { throwable ->
-//                    val message = when (throwable) {
-//                        is FirebaseAuthUserCollisionException ->
-//                            "Email already in use"
-//                        else ->
-//                            throwable.message ?: "Registration failed"
-//                    }
-//                    emitSideEffect(RegisterSideEffect.ShowError(message))
-
+            }.onFailure {
+                emitSideEffect(
+                    RegisterSideEffect.ShowError(
+                        it.message ?: "Registration failed"
+                    )
+                )
             }
-            updateState { it.copy(isLoading = false) }
+
+            viewModelScope.launch {
+                updateState { it.copy(isLoading = true) }
+
+                try {
+                    registerUseCase(
+                        currentState.email,
+                        currentState.password,
+                        true
+                    )
+
+                    emitSideEffect(RegisterSideEffect.NavigateToHome)
+
+                } catch (e: Exception) {
+                    emitSideEffect(
+                        RegisterSideEffect.ShowError(
+                            e.message ?: "Registration failed"
+                        )
+                    )
+                } finally {
+                    updateState { it.copy(isLoading = false) }
+                }
+            }
+
         }
     }
+
 }

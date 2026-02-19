@@ -45,6 +45,12 @@ dependencies {
     implementation(projects.tbcacademy.feature.dashboard.api)
     implementation(projects.tbcacademy.feature.dashboard.impl)
 
+    implementation(projects.tbcacademy.feature.diary.api)
+    implementation(projects.tbcacademy.feature.diary.impl)
+
+    implementation(projects.tbcacademy.feature.addFood.api)
+    implementation(projects.tbcacademy.feature.addFood.impl)
+
     implementation(projects.core.common)
     implementation(projects.core.ui)
     implementation(projects.core.designsystem)

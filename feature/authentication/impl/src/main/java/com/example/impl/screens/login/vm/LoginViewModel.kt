@@ -48,11 +48,13 @@ class LoginViewModel
             val savedEmail = userSessionRepository.getSavedEmail()
             val savedPassword = userSessionRepository.getSavedPassword()
 
-            updateState { it.copy(
-                rememberMe = remember,
-                email = savedEmail ?: "",
-                password = savedPassword ?: ""
-            ) }
+            updateState {
+                it.copy(
+                    rememberMe = remember,
+                    email = savedEmail ?: "",
+                    password = savedPassword ?: ""
+                )
+            }
 
             if (remember && !savedEmail.isNullOrBlank() && !savedPassword.isNullOrBlank()) {
                 login(auto = true)
@@ -63,7 +65,7 @@ class LoginViewModel
     private fun login(auto: Boolean = false) {
         val currentState = state.value
 
-        if (!auto) { // only validate if user pressed login
+        if (!auto) {
             if (currentState.email.isBlank()) {
                 emitSideEffect(LoginSideEffect.ShowError("Email is required"))
                 return
@@ -89,17 +91,28 @@ class LoginViewModel
                     password = currentState.password,
                     rememberMe = currentState.rememberMe
                 )
-            }.onSuccess {
-                emitSideEffect(LoginSideEffect.NavigateToHome)
-            }.onFailure {
-                if (!auto) {
-                    emitSideEffect(
-                        LoginSideEffect.ShowError(
-                            it.message ?: "Login failed"
-                        )
-                    )
-                }
             }
+                .onSuccess {
+
+                    if (currentState.rememberMe) {
+                        userSessionRepository.saveEmail(currentState.email)
+                        userSessionRepository.savePassword(currentState.password)
+                    } else {
+                        userSessionRepository.saveEmail("")
+                        userSessionRepository.savePassword("")
+                    }
+
+                    emitSideEffect(LoginSideEffect.NavigateToHome)
+                }
+                .onFailure { error ->
+                    if (!auto) {
+                        emitSideEffect(
+                            LoginSideEffect.ShowError(
+                                error.message ?: "Login failed"
+                            )
+                        )
+                    }
+                }
 
             updateState { it.copy(isLoading = false) }
         }

@@ -23,11 +23,7 @@ import com.example.impl.screens.quiz.contract.QuizEvent
 import com.example.impl.screens.quiz.contract.QuizState
 
 @Composable
-fun AccountCreatedStep(
-    state: QuizState,
-    onEvent: (QuizEvent) -> Unit,
-    calculatedCalories: Int?
-) {
+fun AccountCreatedStep(calculatedCalories: Int?) {
     Column(
         modifier = Modifier
             .fillMaxSize()

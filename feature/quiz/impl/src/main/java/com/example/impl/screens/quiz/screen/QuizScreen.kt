@@ -14,9 +14,14 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,10 +52,22 @@ fun QuizScreen(
     onNavigateToDashboard: (Int) -> Unit
 ) {
     val state = viewModel.state.collectAsStateWithLifecycle().value
+    val snackbarHostState = remember { SnackbarHostState() }
 
-    BackHandler(enabled = true) {}
+    LaunchedEffect(state.errorMessage) {
+        state.errorMessage?.let { message ->
+            snackbarHostState.showSnackbar(
+                message = message,
+                duration = SnackbarDuration.Short
+            )
+            viewModel.onEvent(QuizEvent.DismissError)
+        }
+    }
+
+    BackHandler() {}
 
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         bottomBar = {
             QuizBottomBar(
                 currentStep = state.currentStep,
@@ -78,12 +95,7 @@ fun QuizScreen(
                 QuizStep.GENDER_AGE -> AboutYourselfStep(state, onEvent)
                 QuizStep.BODY -> BodyInfoStep(state, onEvent)
                 QuizStep.WEEKLY_GOAL -> WeeklyGoalStep(state, onEvent)
-                QuizStep.CREATE_ACCOUNT -> AccountCreatedStep(
-                    state, onEvent,
-                    calculatedCalories = state.calculatedCalories
-                )
-
-                else -> {}
+                QuizStep.CREATE_ACCOUNT -> AccountCreatedStep(state.calculatedCalories)
             }
         }
     }
@@ -108,7 +120,6 @@ fun QuizBottomBar(
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             if (currentStep != QuizStep.NAME) {
                 Button(
                     onClick = onBack,

@@ -4,53 +4,51 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.model.food.Food
 import com.example.domain.model.food.LoggedFood
 import com.example.domain.model.food.MealType
-import com.example.domain.repository.UserPreferencesRepository
 import com.example.impl.screens.diary.contract.DiaryEvent
 import com.example.impl.screens.diary.contract.DiaryState
 import com.example.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
 class DiaryViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository
+//    private val userPreferencesRepository: UserPreferencesRepository
 ) : BaseViewModel<DiaryState, DiaryEvent, Nothing>(DiaryState()) {
 
-    init {
-        checkAndReset()
-        loadSavedFood()
-    }
-
-    private fun checkAndReset() {
-        viewModelScope.launch {
-            userPreferencesRepository.checkAndResetDailyData()
-        }
-    }
-
-    private fun loadSavedFood() {
-        viewModelScope.launch {
-            combine(
-                userPreferencesRepository.getFoodsForMeal(MealType.BREAKFAST),
-                userPreferencesRepository.getFoodsForMeal(MealType.LUNCH),
-                userPreferencesRepository.getFoodsForMeal(MealType.DINNER),
-                userPreferencesRepository.getFoodsForMeal(MealType.SNACKS),
-                userPreferencesRepository.getGoalCalories()
-            ) { breakfast, lunch, dinner, snacks, goalCalories ->
-                DiaryState(
-                    breakfast = breakfast.map { toFood(it) },
-                    lunch = lunch.map { toFood(it) },
-                    dinner = dinner.map { toFood(it) },
-                    snacks = snacks.map { toFood(it) },
-                    goalCalories = goalCalories
-                )
-            }.collect { newState ->
-                updateState { newState }
-            }
-        }
-    }
+//    init {
+//        checkAndReset()
+//        loadSavedFood()
+//    }
+//
+//    private fun checkAndReset() {
+//        viewModelScope.launch {
+//            userPreferencesRepository.checkAndResetDailyData()
+//        }
+//    }
+//
+//    private fun loadSavedFood() {
+//        viewModelScope.launch {
+//            combine(
+//                userPreferencesRepository.getFoodsForMeal(MealType.BREAKFAST),
+//                userPreferencesRepository.getFoodsForMeal(MealType.LUNCH),
+//                userPreferencesRepository.getFoodsForMeal(MealType.DINNER),
+//                userPreferencesRepository.getFoodsForMeal(MealType.SNACKS),
+//                userPreferencesRepository.getGoalCalories()
+//            ) { breakfast, lunch, dinner, snacks, goalCalories ->
+//                DiaryState(
+//                    breakfast = breakfast.map { toFood(it) },
+//                    lunch = lunch.map { toFood(it) },
+//                    dinner = dinner.map { toFood(it) },
+//                    snacks = snacks.map { toFood(it) },
+//                    goalCalories = goalCalories
+//                )
+//            }.collect { newState ->
+//                updateState { newState }
+//            }
+//        }
+//    }
 
     override fun onEvent(event: DiaryEvent) {
         when (event) {
@@ -66,7 +64,7 @@ class DiaryViewModel @Inject constructor(
                     val updatedFoods = currentFoods + event.food
                     val updatedLoggedFoods = updatedFoods.map { toLoggedFood(it) }
 
-                    userPreferencesRepository.saveFoodsForMeal(event.mealType, updatedLoggedFoods)
+//                    userPreferencesRepository.saveFoodsForMeal(event.mealType, updatedLoggedFoods)
 
                     updateState { current ->
                         when (event.mealType) {

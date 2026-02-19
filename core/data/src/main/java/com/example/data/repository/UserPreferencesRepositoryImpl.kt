@@ -22,7 +22,7 @@ private val Context.userPrefsDataStore by preferencesDataStore("user_preferences
 
 @Singleton
 class UserPreferencesRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param: ApplicationContext private val context: Context,
     private val json: Json
 ) : UserPreferencesRepository {
     private val dataStore = context.userPrefsDataStore

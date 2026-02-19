@@ -9,10 +9,34 @@ import com.example.impl.screens.dashboard.screen.DashboardScreen
 fun EntryProviderScope<NavKey>.dashboardEntry(
     navigator: Navigator
 ) {
+
     entry<DashboardNavKey.HomeNavKey> {
         DashboardScreen(
             onSearchClick = {
-            }
+                navigator.navigate(DashboardNavKey.SearchNavKey)
+            },
+            navigator = navigator
+        )
+    }
+
+    entry<DashboardNavKey.DiaryNavKey> {
+        DashboardScreen(
+            onSearchClick = {},
+            navigator = navigator
+        )
+    }
+
+    entry<DashboardNavKey.MoreNavKey> {
+        DashboardScreen(
+            onSearchClick = {},
+            navigator = navigator
+        )
+    }
+
+    entry<DashboardNavKey.SearchNavKey> {
+        DashboardScreen(
+            onSearchClick = {},
+            navigator = navigator
         )
     }
 }

@@ -2,28 +2,23 @@ package com.example.impl.screens.register.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.designsystem.theme.LightGray
-import com.example.designsystem.theme.NeutralGray
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.White
 import com.example.impl.screens.register.contract.RegisterEvent
@@ -127,44 +122,5 @@ fun RegisterScreen(
                 }
             )
         }
-    }
-}
-
-
-@Composable
-fun OutlinedTextFieldWithInlineLabel(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    modifier: Modifier = Modifier,
-    placeholder: String,
-    keyboardOptions: KeyboardOptions
-) {
-    Box(modifier = modifier) {
-
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            label = {},
-            placeholder = {
-                Text(
-                    text = placeholder,
-                    color = NeutralGray
-                )
-            },
-            singleLine = true
-        )
-
-        Text(
-            text = label,
-            fontSize = 12.sp,
-            color = Color.Gray,
-            modifier = Modifier
-                .padding(start = 28.dp)
-                .background(White)
-                .padding(horizontal = 6.dp)
-                .align(Alignment.TopStart)
-        )
     }
 }

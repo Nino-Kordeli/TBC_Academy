@@ -21,8 +21,13 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.api.AuthenticationNavKey
+import com.example.api.DashboardNavKey
+import com.example.api.QuizNavKey
 import com.example.core.navigation.Navigator
 import com.example.core.navigation.rememberNavigationState
+import androidx.compose.ui.platform.LocalContext
+import dagger.hilt.android.EntryPointAccessors
+import com.example.data.di.AuthRepositoryEntryPoint
 import com.example.core.navigation.toEntries
 import com.example.data.worker.DailyResetWorker
 import com.example.designsystem.theme.ComposeAppTheme
@@ -77,9 +82,37 @@ class MainActivity : ComponentActivity(), Configuration.Provider {
 
 @Composable
 private fun AppNavigation() {
+    val context = LocalContext.current
+
+    val authRepository = remember {
+        EntryPointAccessors
+            .fromApplication(
+                context,
+                AuthRepositoryEntryPoint::class.java
+            )
+            .authRepository()
+    }
+
+    val startKey = remember {
+        if (authRepository.isLoggedIn()) {
+            DashboardNavKey.HomeNavKey()
+        } else {
+            AuthenticationNavKey.WelcomeNavKey
+        }
+    }
+
     val navigationState = rememberNavigationState(
-        startKey = AuthenticationNavKey.WelcomeNavKey,
-        topLevelKeys = setOf(AuthenticationNavKey.WelcomeNavKey)
+        startKey = startKey,
+        topLevelKeys = setOf(
+            AuthenticationNavKey.WelcomeNavKey,
+            QuizNavKey.QuizKey,
+
+            DashboardNavKey.HomeNavKey(),
+            DashboardNavKey.DiaryNavKey,
+            DashboardNavKey.MoreNavKey,
+            DashboardNavKey.SearchNavKey
+        )
+
     )
 
     val navigator = remember(navigationState) { Navigator(navigationState) }

@@ -1,6 +1,6 @@
 package com.example.impl.screens.add_food.contract
 
-import com.example.tbcacademy.domain.model.food.Food
+import com.example.domain.model.food.Food
 
 data class AddFoodState(
     val query: String = "",

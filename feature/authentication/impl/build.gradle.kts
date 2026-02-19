@@ -11,12 +11,11 @@ android {
 }
 
 dependencies {
+    implementation(projects.feature.authentication.api)
     implementation(projects.tbcacademy.feature.quiz.api)
     implementation(projects.tbcacademy.feature.dashboard.api)
 
     implementation(projects.core.domain)
-    implementation(projects.feature.authentication.api)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(project(":core:data"))
 }

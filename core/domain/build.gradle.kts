@@ -1,10 +1,13 @@
 plugins {
-    alias(libs.plugins.tbcacademy.jvm.library)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.tbcacademy.android.library)
+    id("com.google.devtools.ksp")
+}
+
+android {
+    namespace = "com.example.domain"
 }
 
 dependencies {
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.javax.inject)
 }

@@ -17,7 +17,7 @@ class FirebaseAuthDataSource @Inject constructor(
         return result.user?.uid ?: throw IllegalStateException("User is null")
     }
 
-    fun isLoggedIn(): Boolean = auth.currentUser != null
+    fun isLoggedIn() = auth.currentUser != null
 
     fun logout() = auth.signOut()
 }

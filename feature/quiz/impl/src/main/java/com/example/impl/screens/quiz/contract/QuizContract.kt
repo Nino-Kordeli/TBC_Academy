@@ -18,7 +18,8 @@ data class QuizState(
     val selectionType: SelectionType = SelectionType.SINGLE,
     val calculatedCalories: Int? = null,
     val weeklyGoalKg: Double = 0.5,
-    val activityMultiplier: Double = 1.55
+    val activityMultiplier: Double = 1.55,
+    val errorMessage: String? = null
 ) {
     val progress: Float
         get() {
@@ -34,6 +35,7 @@ sealed interface QuizEvent {
     data class NameChanged(val value: String) : QuizEvent
     object NextClicked : QuizEvent
     object BackClicked : QuizEvent
+    object DismissError : QuizEvent
     data class OnQuestionChecked(
         val id: Int,
         val checked: Boolean
