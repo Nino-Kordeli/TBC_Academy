@@ -1,7 +1,7 @@
 package com.example.domain.repository
 
 import com.example.domain.model.food.LoggedFood
-import com.example.domain.model.food.MealType
+import com.example.model.MealType
 import kotlinx.coroutines.flow.Flow
 
 interface UserPreferencesRepository {
@@ -21,6 +21,7 @@ interface UserPreferencesRepository {
     suspend fun checkAndResetDailyData()
     suspend fun saveFoodsForMeal(mealType: MealType, foods: List<LoggedFood>)
     fun getFoodsForMeal(mealType: MealType): Flow<List<LoggedFood>>
+    suspend fun addFood(mealType: MealType, food: LoggedFood)
     suspend fun clearOnlyDailyFoodLogs()
     suspend fun clearAllUserData()
 }

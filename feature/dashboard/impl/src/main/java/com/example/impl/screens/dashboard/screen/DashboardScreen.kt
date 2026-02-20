@@ -1,8 +1,6 @@
 package com.example.impl.screens.dashboard.screen
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,224 +15,106 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.core.navigation.Navigator
-import com.example.designsystem.R
-import com.example.designsystem.theme.Green
 import com.example.designsystem.theme.Pink40
-import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.White
-import com.example.impl.screens.dashboard.model.CaloriesUiModel
+import com.example.impl.screens.dashboard.components.DailyCaloriesCard
+import com.example.impl.screens.dashboard.components.ProfileIcon
 import com.example.impl.screens.dashboard.vm.DashboardViewModel
+import com.example.ui.base.BaseScreen
 
 @Composable
 fun DashboardScreen(
     onSearchClick: () -> Unit,
     viewModel: DashboardViewModel = hiltViewModel(),
     navigator: Navigator
-) {
-    val data by viewModel.caloriesUiModel.collectAsState()
+){
+    BaseScreen(
+        modifier = Modifier.fillMaxSize(),
+        viewModel = viewModel,
+        onSideEffect = { effect ->
+        }
+    ) { state, onEvent ->
+        BackHandler() { }
 
-    BackHandler() { }
+        LaunchedEffect(Unit) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(White)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 20.dp)
-        ) {
-            ProfileIcon(
-                modifier = Modifier
-                    .size(50.dp)
-                    .clip(RoundedCornerShape(50))
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "My Fitness Journey",
-                    fontSize = 25.sp,
-                    color = Pink40,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Bold
-                )
-            }
         }
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
+                .background(White)
         ) {
-            Text(
-                text = "Today",
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            DailyCaloriesCard(data = data)
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(horizontal = 0.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 20.dp)
             ) {
-            }
-        }
-    }
-}
+                ProfileIcon(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .clip(RoundedCornerShape(50))
+                )
 
-@Composable
-fun ProfileIcon(modifier: Modifier = Modifier) {
-    val image = painterResource(id = R.drawable.ic_launcher_background)
-
-    Image(
-        painter = image,
-        contentDescription = null,
-        modifier = modifier
-    )
-}
-
-@Composable
-fun DailyCaloriesCard(data: CaloriesUiModel) {
-
-    val remaining = data.goal - data.food + data.exercise
-    val isOverGoal = data.food > data.goal + data.exercise
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(5.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = White
-        )
-    ) {
-        Column(modifier = Modifier.padding(24.dp)) {
-
-            Text(
-                text = "Calories",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    MultiColorCircularProgress(
-                        modifier = Modifier.size(120.dp),
-                        goal = data.goal,
-                        consumed = data.food,
-                        burned = data.exercise
-                    )
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = if (remaining >= 0) "$remaining" else "0",
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = if (isOverGoal) Color.Red else Color.Black
-                        )
-                        if (isOverGoal) {
-                            Text(
-                                text = "+${-remaining}",
-                                fontSize = 14.sp,
-                                color = Color.Red,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        }
-                    }
-                }
-
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.padding(end = 14.dp)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
                 ) {
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.ic_flag),
-                            contentDescription = null,
-                            Modifier.size(20.dp)
-                        )
-
-                        Text("Base Goal\n${data.goal}")
-                    }
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.ic_cutlery),
-                            contentDescription = null,
-                            Modifier.size(20.dp)
-                        )
-
-                        Text("Food\n${data.food}")
-                    }
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.ic_fire),
-                            contentDescription = null,
-                            Modifier.size(20.dp)
-                        )
-
-                        Text("Exercise\n${data.exercise}")
-                    }
+                    Text(
+                        text = "My Fitness Journey",
+                        fontSize = 25.sp,
+                        color = Pink40,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
+            }
 
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+            ) {
+                Text(
+                    text = "Today",
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                DailyCaloriesCard(
+                    data = state.caloriesData)
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(horizontal = 0.dp)
+                ) {
+                }
             }
         }
     }
 }
 
 /*@Composable
-fun BottomBar(hasSearch: Boolean) {
+fun BottomBar(navController: NavHostController,hasSearch: Boolean) {
     val currentRoute =
         navController.currentBackStackEntryAsState().value?.destination?.route
 
@@ -405,66 +285,3 @@ fun BottomBar(hasSearch: Boolean) {
         }
     }
 }*/
-
-@Composable
-fun MultiColorCircularProgress(
-    modifier: Modifier = Modifier,
-    goal: Int,
-    consumed: Int,
-    burned: Int,
-    strokeWidth: Dp = 10.dp
-) {
-    Canvas(modifier = modifier) {
-        val canvasSize = size.minDimension
-        val strokeWidthPx = strokeWidth.toPx()
-
-        drawArc(
-            color = Color.LightGray.copy(alpha = 0.3f),
-            startAngle = -90f,
-            sweepAngle = 360f,
-            useCenter = false,
-            style = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
-            size = Size(canvasSize, canvasSize)
-        )
-
-        val netCalories = consumed - burned
-        val consumedProgress = (consumed.toFloat() / goal).coerceIn(0f, 2f)
-        val burnedProgress = (burned.toFloat() / goal).coerceIn(0f, 1f)
-        val netProgress = (netCalories.toFloat() / goal).coerceIn(0f, 2f)
-
-        if (consumed > 0) {
-            drawArc(
-                color = if (netCalories > goal) Color(0xFFFF9800) else PrimaryBlue,
-                startAngle = -90f,
-                sweepAngle = 360f * netProgress.coerceIn(0f, 1f),
-                useCenter = false,
-                style = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
-                size = Size(canvasSize, canvasSize)
-            )
-        }
-
-        if (burned > 0 && consumed > 0) {
-            val greenStartAngle = -90f + (360f * netProgress.coerceIn(0f, 1f))
-            drawArc(
-                color = Green,
-                startAngle = greenStartAngle,
-                sweepAngle = 360f * burnedProgress,
-                useCenter = false,
-                style = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
-                size = Size(canvasSize, canvasSize)
-            )
-        }
-
-        if (netCalories > goal) {
-            val overProgress = ((netCalories - goal).toFloat() / goal).coerceAtMost(1f)
-            drawArc(
-                color = Color.Red,
-                startAngle = -90f,
-                sweepAngle = 360f * overProgress,
-                useCenter = false,
-                style = Stroke(width = strokeWidthPx, cap = StrokeCap.Round),
-                size = Size(canvasSize, canvasSize)
-            )
-        }
-    }
-}

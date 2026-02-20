@@ -2,7 +2,7 @@ package com.example.domain.usecase.food
 
 import com.example.domain.model.food.Food
 import com.example.domain.model.food.LoggedFood
-import com.example.domain.model.food.MealType
+import com.example.model.MealType
 import com.example.domain.repository.UserPreferencesRepository
 import kotlinx.coroutines.flow.first
 import java.util.UUID

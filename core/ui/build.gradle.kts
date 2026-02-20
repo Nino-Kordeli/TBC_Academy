@@ -9,9 +9,11 @@ android {
 
 dependencies {
     api(projects.core.designsystem)
+    api(projects.core.model)
 
     implementation(libs.androidx.browser)
     implementation(libs.coil)
     implementation(libs.coil.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.navigation3.runtime)
 }

@@ -1,7 +1,7 @@
 package com.example.data.local
 
 import android.content.Context
-import com.example.data.dto.FoodResponse
+import com.example.data.dto.FoodResponseDto
 import com.example.data.mapper.toDomain
 import com.example.domain.model.food.Food
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -19,8 +19,8 @@ class JsonFoodDataSource @Inject constructor(
         if (cachedFoods != null) return cachedFoods!!
 
         val jsonString = context.assets.open("foods.json").bufferedReader().use { it.readText() }
-        val response = Json.decodeFromString<FoodResponse>(jsonString)
-        cachedFoods = response.foods.map { it.toDomain() }
+        val response = Json.decodeFromString<FoodResponseDto>(jsonString)
+        cachedFoods = response.toDomain()
         return cachedFoods!!
     }
 

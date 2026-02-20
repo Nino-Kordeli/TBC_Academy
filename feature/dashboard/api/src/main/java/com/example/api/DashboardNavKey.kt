@@ -9,13 +9,10 @@ object DashboardNavKey : NavKey {
     data class HomeNavKey(val calories: Int? = null) : NavKey
 
     @Serializable
-    object DiaryNavKey : NavKey
+    data object MoreNavKey : NavKey
 
     @Serializable
-    object MoreNavKey : NavKey
-
-    @Serializable
-    object SearchNavKey : NavKey
+    data object SearchNavKey : NavKey
 
     @Serializable
     data class SearchResultsNavKey(val query: String) : NavKey

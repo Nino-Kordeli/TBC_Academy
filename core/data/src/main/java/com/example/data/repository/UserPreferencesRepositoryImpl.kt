@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.domain.model.food.LoggedFood
-import com.example.domain.model.food.MealType
+import com.example.model.MealType
 import com.example.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +25,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     @param: ApplicationContext private val context: Context,
     private val json: Json
 ) : UserPreferencesRepository {
+
     private val dataStore = context.userPrefsDataStore
 
     companion object {
@@ -138,6 +139,14 @@ class UserPreferencesRepositoryImpl @Inject constructor(
                 }
             }
         }
+    }
+
+    override suspend fun addFood(
+        mealType: MealType,
+        food: LoggedFood
+    ) {
+        val current = getFoodsForMeal(mealType).first()
+        saveFoodsForMeal(mealType, current + food)
     }
 
     override suspend fun clearOnlyDailyFoodLogs() {

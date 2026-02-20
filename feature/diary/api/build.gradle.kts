@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.diary.api"
+    namespace = "com.example.feature.diary.api"
 }
 
 dependencies {

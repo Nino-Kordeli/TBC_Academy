@@ -1,38 +1,51 @@
 package com.example.impl.screens.dashboard.vm
 
-import com.example.domain.repository.UserPreferencesRepository
-import com.example.impl.screens.dashboard.model.CaloriesUiModel
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import androidx.lifecycle.viewModelScope
-import com.example.domain.usecase.dashboard.DashboardUseCase
+import com.example.domain.repository.UserPreferencesRepository
 import com.example.impl.screens.dashboard.contract.DashboardEvent
 import com.example.impl.screens.dashboard.contract.DashboardSideEffect
 import com.example.impl.screens.dashboard.contract.DashboardUiState
+import com.example.impl.screens.dashboard.model.CaloriesUiModel
 import com.example.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository,
-    private val DashboardUsecase: DashboardUseCase
-) : BaseViewModel<DashboardUiState, DashboardEvent, DashboardSideEffect>(DashboardUiState(true)) {
+    private val userPreferencesRepository: UserPreferencesRepository
+) : BaseViewModel<DashboardUiState, DashboardEvent, DashboardSideEffect>(
+    initialState = DashboardUiState()
+) {
 
-    val caloriesUiModel =
-        userPreferencesRepository.getGoalCalories()
-            .map { goal ->
-                CaloriesUiModel(
-                    goal = goal,
-                    food = 0,
-                    exercise = 0
-                )
+    init {
+        loadCaloriesData()
+    }
+
+    override fun onEvent(event: DashboardEvent) {
+        when (event) {
+            DashboardEvent.ProfileClicked -> {
+
             }
-            .stateIn(
-                viewModelScope,
-                SharingStarted.WhileSubscribed(5000),
-                CaloriesUiModel(2000, 0, 0)
-            )
-}
+            DashboardEvent.GetGoalCalories -> loadCaloriesData()
+        }
+    }
 
+    private fun loadCaloriesData() {
+        viewModelScope.launch {
+            userPreferencesRepository.getGoalCalories()
+                .collect { goalCalories ->
+                    updateState {
+                        it.copy(
+                            caloriesData = CaloriesUiModel(
+                                goal = goalCalories,
+                                food = 0,  // TODO: Calculate from logged foods
+                                exercise = 0
+                            )
+                        )
+                    }
+                }
+        }
+    }
+}

@@ -1,4 +1,11 @@
 package com.example.api
 
-object AddFoodNavKey {
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
+import com.example.model.MealType
+
+@Serializable
+data class AddFoodNavKey(
+    val mealType: MealType
+) : NavKey {
 }

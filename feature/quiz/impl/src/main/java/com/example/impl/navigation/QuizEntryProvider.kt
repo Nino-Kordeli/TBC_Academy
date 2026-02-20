@@ -11,7 +11,7 @@ fun EntryProviderScope<NavKey>.quizEntry(navigator: Navigator) {
     entry<QuizNavKey.QuizKey> {
         QuizScreen(
             onNavigateToDashboard = { calories ->
-                navigator.navigate(DashboardNavKey.HomeNavKey(calories))//clearstack movshale aqedan
+                navigator.navigate(DashboardNavKey.HomeNavKey(calories))
             }
         )
     }

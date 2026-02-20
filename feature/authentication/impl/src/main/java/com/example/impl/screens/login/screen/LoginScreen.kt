@@ -1,7 +1,6 @@
 package com.example.impl.screens.login.screen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.designsystem.theme.Black
 import com.example.designsystem.theme.LightGray
 import com.example.designsystem.theme.PrimaryBlue
@@ -103,7 +102,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-            ){
+            ) {
                 Checkbox(
                     checked = state.rememberMe,
                     onCheckedChange = { checked ->

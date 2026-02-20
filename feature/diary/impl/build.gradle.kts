@@ -11,5 +11,7 @@ android {
 dependencies {
     implementation(projects.core.domain)
     implementation(projects.feature.diary.api)
+    implementation(projects.feature.addFood.api)
     implementation(libs.androidx.activity.compose)
+
 }

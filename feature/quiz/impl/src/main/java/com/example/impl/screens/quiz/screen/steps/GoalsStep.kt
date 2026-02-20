@@ -25,6 +25,7 @@ import com.example.designsystem.theme.LightCreamBlue
 import com.example.designsystem.theme.LightGray
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.White
+import com.example.impl.screens.quiz.components.QuestionList
 import com.example.impl.screens.quiz.contract.QuizEvent
 import com.example.impl.screens.quiz.contract.QuizState
 import com.example.impl.screens.quiz.model.QuestionItem
@@ -58,27 +59,6 @@ fun GoalsStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
                 onEvent(QuizEvent.OnQuestionChecked(id, checked))
             }
         )
-    }
-}
-
-@Composable
-fun QuestionList(
-    questions: List<QuestionItem>,
-    onCheckedChange: (Int, Boolean) -> Unit
-) {
-    LazyColumn {
-        items(
-            items = questions,
-            key = { it.id }
-        ) { item ->
-            CheckboxItem(
-                text = item.primaryText,
-                checked = item.selected,
-                onCheckedChange = { checked ->
-                    onCheckedChange(item.id, checked)
-                }
-            )
-        }
     }
 }
 

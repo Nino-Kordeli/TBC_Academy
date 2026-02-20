@@ -3,9 +3,9 @@ package com.example.data.di
 import com.example.data.repository.FoodRepositoryImpl
 import com.example.data.repository.UserPreferencesRepositoryImpl
 import com.example.data.repository.UserSessionRepositoryImpl
-import com.example.domain.repository.food.FoodRepository
 import com.example.domain.repository.UserPreferencesRepository
 import com.example.domain.repository.UserSessionRepository
+import com.example.domain.repository.food.FoodRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,11 +22,10 @@ abstract class RepositoryModule {
         impl: FoodRepositoryImpl
     ): FoodRepository
 
-    /*@Binds
-    @Singleton
-    abstract fun bindDiaryRepository(
-        impl: DiaryRepositoryImpl
-    ): DiaryRepository*/
+//    @Singleton
+//    abstract fun bindDiaryRepository(
+//        impl: DiaryRepositoryImpl
+//    ): DiaryRepository
 
     @Binds
     @Singleton

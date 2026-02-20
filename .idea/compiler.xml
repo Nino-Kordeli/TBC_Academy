@@ -5,7 +5,6 @@
       <module name="TBC_Academy.core.data" target="21" />
       <module name="TBC_Academy.core.presentation" target="21" />
       <module name="TBC_Academy.feature.register" target="21" />
-      <module name="tbcacademy.feature.authentication.impl" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

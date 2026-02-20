@@ -3,7 +3,9 @@ package com.example.tbcacademy
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -11,72 +13,46 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.work.HiltWorkerFactory
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import androidx.work.Configuration
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import com.example.api.AuthenticationNavKey
 import com.example.api.DashboardNavKey
+import com.example.api.DiaryNavKey
 import com.example.api.QuizNavKey
 import com.example.core.navigation.Navigator
 import com.example.core.navigation.rememberNavigationState
-import androidx.compose.ui.platform.LocalContext
-import dagger.hilt.android.EntryPointAccessors
-import com.example.data.di.AuthRepositoryEntryPoint
 import com.example.core.navigation.toEntries
-import com.example.data.worker.DailyResetWorker
+import com.example.data.di.AuthRepositoryEntryPoint
 import com.example.designsystem.theme.ComposeAppTheme
-import com.example.impl.navigation.dashboardEntry
+import com.example.impl.navigation.addFoodEntry
+import com.example.impl.navigation.diaryEntry
+import com.example.impl.navigation.homeEntry
 import com.example.impl.navigation.loginEntry
+import com.example.impl.navigation.moreNavEntry
 import com.example.impl.navigation.quizEntry
 import com.example.impl.navigation.registerEntry
+import com.example.impl.navigation.searchNavEntry
 import com.example.impl.navigation.welcomeEntry
 import com.example.ui.components.CustomSnackbar
+import com.example.ui.components.bottom_bar.BottomBar
+import com.example.ui.components.bottom_bar.BottomBarDestination
 import com.example.ui.snackbar.SnackbarController
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
+import dagger.hilt.android.EntryPointAccessors
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity(), Configuration.Provider {
-
-    @Inject
-    lateinit var workerFactory: HiltWorkerFactory
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        scheduleDailyReset()
 
         setContent {
             ComposeAppTheme {
                 AppNavigation()
             }
         }
-    }
-
-    override val workManagerConfiguration: Configuration
-        get() = Configuration.Builder()
-            .setWorkerFactory(workerFactory)
-            .build()
-
-    private fun scheduleDailyReset() {
-        val constraints = Constraints.Builder().build()
-
-        val dailyWorkRequest = PeriodicWorkRequestBuilder<DailyResetWorker>(
-            1, TimeUnit.DAYS
-        ).setConstraints(constraints).build()
-
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            "daily_reset_work",
-            ExistingPeriodicWorkPolicy.KEEP,
-            dailyWorkRequest
-        )
     }
 }
 
@@ -106,13 +82,11 @@ private fun AppNavigation() {
         topLevelKeys = setOf(
             AuthenticationNavKey.WelcomeNavKey,
             QuizNavKey.QuizKey,
-
             DashboardNavKey.HomeNavKey(),
-            DashboardNavKey.DiaryNavKey,
             DashboardNavKey.MoreNavKey,
-            DashboardNavKey.SearchNavKey
+            DashboardNavKey.SearchNavKey,
+            DiaryNavKey.DiaryNavKey,
         )
-
     )
 
     val navigator = remember(navigationState) { Navigator(navigationState) }
@@ -128,12 +102,54 @@ private fun AppNavigation() {
         loginEntry(navigator, snackbarController)
         registerEntry(navigator, snackbarController)
         quizEntry(navigator)
-        dashboardEntry(navigator)
+        homeEntry(navigator)
+        diaryEntry(navigator)
+        moreNavEntry(navigator)
+        searchNavEntry(navigator)
+        addFoodEntry(navigator)
     }
 
     val entries = navigationState.toEntries(entryProvider)
 
     Scaffold(
+        modifier = Modifier.systemBarsPadding(),
+        contentWindowInsets = WindowInsets(0),
+        bottomBar = {
+
+            val currentKey = navigationState.currentKey
+
+            if (
+                currentKey is DashboardNavKey.HomeNavKey ||
+                currentKey is DashboardNavKey.MoreNavKey ||
+                currentKey is DashboardNavKey.SearchNavKey ||
+                currentKey is DiaryNavKey.DiaryNavKey
+            ) {
+
+                val currentDestination = when (currentKey) {
+                    is DashboardNavKey.HomeNavKey -> BottomBarDestination.Home
+                    is DiaryNavKey.DiaryNavKey -> BottomBarDestination.Diary
+                    is DashboardNavKey.MoreNavKey -> BottomBarDestination.More
+                    is DashboardNavKey.SearchNavKey -> BottomBarDestination.Search
+                    else -> BottomBarDestination.Home
+                }
+
+                BottomBar(
+                    currentDestination = currentDestination,
+                    hasSearch = currentKey is DashboardNavKey.HomeNavKey,
+                    navigator = { destination ->
+                        when (destination) {
+                            BottomBarDestination.Home -> navigator.navigateAndClearStack(
+                                DashboardNavKey.HomeNavKey()
+                            )
+
+                            BottomBarDestination.Diary -> navigator.navigate(DiaryNavKey.DiaryNavKey)
+                            BottomBarDestination.More -> navigator.navigate(DashboardNavKey.MoreNavKey)
+                            BottomBarDestination.Search -> navigator.navigate(DashboardNavKey.SearchNavKey)
+                        }
+                    }
+                )
+            }
+        },
         snackbarHost = {
             SnackbarHost(snackbarHostState) { data ->
                 CustomSnackbar(
@@ -145,8 +161,8 @@ private fun AppNavigation() {
         }
     ) { padding ->
         NavDisplay(
-            entries = entries,
             modifier = Modifier.padding(padding),
+            entries = entries,
             onBack = { navigator.goBack() }
         )
     }

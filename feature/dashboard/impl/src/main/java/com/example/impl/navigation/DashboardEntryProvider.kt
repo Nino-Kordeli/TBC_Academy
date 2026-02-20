@@ -6,10 +6,9 @@ import com.example.api.DashboardNavKey
 import com.example.core.navigation.Navigator
 import com.example.impl.screens.dashboard.screen.DashboardScreen
 
-fun EntryProviderScope<NavKey>.dashboardEntry(
+fun EntryProviderScope<NavKey>.homeEntry(
     navigator: Navigator
 ) {
-
     entry<DashboardNavKey.HomeNavKey> {
         DashboardScreen(
             onSearchClick = {
@@ -18,25 +17,26 @@ fun EntryProviderScope<NavKey>.dashboardEntry(
             navigator = navigator
         )
     }
+}
 
-    entry<DashboardNavKey.DiaryNavKey> {
-        DashboardScreen(
-            onSearchClick = {},
-            navigator = navigator
-        )
-    }
-
+fun EntryProviderScope<NavKey>.moreNavEntry(
+    navigator: Navigator
+) {
     entry<DashboardNavKey.MoreNavKey> {
-        DashboardScreen(
-            onSearchClick = {},
-            navigator = navigator
-        )
+//        DashboardScreen(
+//            onSearchClick = {},
+//            navigator = navigator
+//        )
     }
+}
 
+fun EntryProviderScope<NavKey>.searchNavEntry(
+    navigator: Navigator
+) {
     entry<DashboardNavKey.SearchNavKey> {
-        DashboardScreen(
-            onSearchClick = {},
-            navigator = navigator
-        )
+//        DashboardScreen(
+//            onSearchClick = {},
+//            navigator = navigator
+//        )
     }
 }

@@ -21,149 +21,162 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.api.AddFoodNavKey
+import com.example.core.navigation.Navigator
 import com.example.designsystem.R
 import com.example.designsystem.theme.MilkyPink
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.VeryLightGray
 import com.example.designsystem.theme.White
 import com.example.domain.model.food.Food
-import com.example.domain.model.food.MealType
-import com.example.impl.screens.diary.contract.DiaryState
+import com.example.model.MealType
+import com.example.impl.screens.diary.vm.DiaryViewModel
+import com.example.ui.base.BaseScreen
 
 @Composable
 fun DiaryScreen(
-    state: DiaryState,
-    onAddFoodClick: (MealType) -> Unit
+    navigator: Navigator,
+    viewModel: DiaryViewModel = hiltViewModel()
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = VeryLightGray)
-    ) {
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = White)
-                .height(40.dp)
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.Absolute.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painterResource(R.drawable.ic_arrow_left),
-                contentDescription = ""
-            )
-
-            Text(text = "Today")
-
-            Image(
-                painterResource(R.drawable.ic_arrow_right),
-                contentDescription = ""
-            )
+    BaseScreen(
+        modifier = Modifier.fillMaxSize(),
+        viewModel = viewModel
+    ) { state, onEvent ->
+        val onAddFoodClick: (MealType) -> Unit = { mealType ->
+            navigator.navigate(AddFoodNavKey(mealType))
         }
-        Spacer(modifier = Modifier.height(8.dp))
 
-        Column(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = VeryLightGray)
+        ) {
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = White)
                     .height(40.dp)
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.Absolute.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Calories remaining",
-                    modifier = Modifier.padding(top = 18.dp, start = 16.dp),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold
+                Image(
+                    painterResource(R.drawable.ic_arrow_left),
+                    contentDescription = ""
                 )
-                Spacer(modifier = Modifier.weight(1f))
+
+                Text(text = "Today")
 
                 Image(
                     painterResource(R.drawable.ic_arrow_right),
-                    contentDescription = "",
-                    modifier = Modifier.padding(top = 22.dp, end = 24.dp)
+                    contentDescription = ""
                 )
             }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(White)
-                    .height(76.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Column(modifier = Modifier.fillMaxWidth()) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = White)
+                        .height(40.dp)
+                ) {
+                    Text(
+                        text = "Calories remaining",
+                        modifier = Modifier.padding(top = 18.dp, start = 16.dp),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Image(
+                        painterResource(R.drawable.ic_arrow_right),
+                        contentDescription = "",
+                        modifier = Modifier.padding(top = 22.dp, end = 24.dp)
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(White)
+                        .height(76.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    StatItem(
+                        value = "1600",
+                        label = "Goal",
+                    )
+                    StatItem(
+                        value = "+",
+                        label = "",
+                    )
+                    StatItem(
+                        value = "0",
+                        label = "Food",
+                    )
+                    StatItem(
+                        value = "+",
+                        label = "",
+                    )
+                    StatItem(
+                        value = "0",
+                        label = "Exercise",
+                    )
+                    StatItem(
+                        value = "=",
+                        label = "",
+                    )
+                    StatItem(
+                        value = "1600",
+                        label = "Remaining",
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.padding(top = 8.dp))
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
             ) {
-                StatItem(
-                    value = "1600",
-                    label = "Goal",
-                )
-                StatItem(
-                    value = "+",
-                    label = "",
-                )
-                StatItem(
-                    value = "0",
-                    label = "Food",
-                )
-                StatItem(
-                    value = "+",
-                    label = "",
-                )
-                StatItem(
-                    value = "0",
-                    label = "Exercise",
-                )
-                StatItem(
-                    value = "=",
-                    label = "",
-                )
-                StatItem(
-                    value = "1600",
-                    label = "Remaining",
-                )
-            }
-        }
 
-        Spacer(modifier = Modifier.padding(top = 8.dp))
+                item {
+                    FoodItem(
+                        title = "Breakfast",
+                        foods = state.breakfast,
+                        mealType = MealType.BREAKFAST,
+                        onAddFoodClick = onAddFoodClick
+                    )
+                }
 
-        LazyColumn(
-            modifier = Modifier.fillMaxSize()
-        ) {
+                item {
+                    FoodItem(
+                        title = "Lunch",
+                        foods = state.lunch,
+                        mealType = MealType.LUNCH,
+                        onAddFoodClick = onAddFoodClick
+                    )
+                }
 
-            item {
-                FoodItem(
-                    title = "Breakfast",
-                    foods = state.breakfast,
-                    mealType = MealType.BREAKFAST,
-                    onAddFoodClick = onAddFoodClick
-                )
-            }
+                item {
+                    FoodItem(
+                        title = "Dinner",
+                        foods = state.dinner,
+                        mealType = MealType.DINNER,
+                        onAddFoodClick = onAddFoodClick
+                    )
+                }
 
-            item {
-                FoodItem(
-                    title = "Lunch",
-                    foods = state.lunch,
-                    mealType = MealType.LUNCH,
-                    onAddFoodClick = onAddFoodClick
-                )
-            }
-
-            item {
-                FoodItem(
-                    title = "Dinner",
-                    foods = state.dinner,
-                    mealType = MealType.DINNER,
-                    onAddFoodClick = onAddFoodClick
-                )
-            }
-
-            item {
-                FoodItem(
-                    title = "Snacks",
-                    foods = state.snacks,
-                    mealType = MealType.SNACKS,
-                    onAddFoodClick = onAddFoodClick
-                )
+                item {
+                    FoodItem(
+                        title = "Snacks",
+                        foods = state.snacks,
+                        mealType = MealType.SNACKS,
+                        onAddFoodClick = onAddFoodClick
+                    )
+                }
             }
         }
     }
@@ -272,10 +285,9 @@ fun FoodItem(
                 text = "ADD FOOD",
                 color = PrimaryBlue,
                 modifier = Modifier.clickable {
-                    onAddFoodClick(mealType)
+                    onAddFoodClick(mealType)//es atrigerebs navigacias
                 }
             )
         }
     }
 }
-

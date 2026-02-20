@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "776435281857",
+    "project_id": "registerloginfinal",
+    "storage_bucket": "registerloginfinal.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776435281857:android:9f9b2e20b6aea7b42d4940",
+        "android_client_info": {
+          "package_name": "com.example.tbcacademy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD8IusitYSJ1g_0AKq3rFcgPfIBA5Zyog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,7 @@
 package com.example.impl.screens.diary.contract
 
 import com.example.domain.model.food.Food
-import com.example.domain.model.food.MealType
+import com.example.model.MealType
 
 data class DiaryState(
     val breakfast: List<Food> = emptyList(),

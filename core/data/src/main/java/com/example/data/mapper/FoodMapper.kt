@@ -1,9 +1,12 @@
 package com.example.data.mapper
 
 import com.example.data.dto.FoodDto
+import com.example.data.dto.FoodResponseDto
 import com.example.domain.model.food.Food
 
-fun FoodDto.toDomain(): Food {
+fun FoodResponseDto.toDomain() = this.foods.map { it.toDomain() }
+
+private fun FoodDto.toDomain(): Food {
     return Food(
         id = id,
         name = name,

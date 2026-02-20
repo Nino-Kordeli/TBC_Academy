@@ -9,8 +9,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.domain)
     implementation(projects.feature.quiz.api)
-    implementation(libs.androidx.activity.compose)
     implementation(projects.feature.dashboard.api)
+
+    implementation(projects.core.domain)
+    implementation(libs.androidx.activity.compose)
 }

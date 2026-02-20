@@ -1,4 +1,4 @@
-package com.example.tbcacademy.domain.model.food
+package com.example.model
 
 enum class MealType {
     BREAKFAST,

@@ -36,9 +36,14 @@ import com.example.designsystem.theme.MilkyPink
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.VeryLightGray
 import com.example.designsystem.theme.White
+import com.example.domain.model.food.Food
+import com.example.model.MealType
 
 @Composable
-fun AddFoodScreen() {
+fun AddFoodScreen(
+    mealType: MealType,
+    onFoodSelected: (Food) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -138,5 +143,5 @@ fun CircleItem() {
 @Composable
 @Preview
 fun AddFoodStepPreview() {
-    AddFoodScreen()
+   /* AddFoodScreen()*/
 }
