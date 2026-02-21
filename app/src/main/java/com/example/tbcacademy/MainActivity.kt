@@ -71,7 +71,7 @@ private fun AppNavigation() {
 
     val startKey = remember {
         if (authRepository.isLoggedIn()) {
-            DashboardNavKey.HomeNavKey()
+            DashboardNavKey.HomeNavKey
         } else {
             AuthenticationNavKey.WelcomeNavKey
         }
@@ -82,7 +82,7 @@ private fun AppNavigation() {
         topLevelKeys = setOf(
             AuthenticationNavKey.WelcomeNavKey,
             QuizNavKey.QuizKey,
-            DashboardNavKey.HomeNavKey(),
+            DashboardNavKey.HomeNavKey,
             DashboardNavKey.MoreNavKey,
             DashboardNavKey.SearchNavKey,
             DiaryNavKey.DiaryNavKey,
@@ -138,8 +138,8 @@ private fun AppNavigation() {
                     hasSearch = currentKey is DashboardNavKey.HomeNavKey,
                     navigator = { destination ->
                         when (destination) {
-                            BottomBarDestination.Home -> navigator.navigateAndClearStack(
-                                DashboardNavKey.HomeNavKey()
+                            BottomBarDestination.Home -> navigator.navigate(
+                                DashboardNavKey.HomeNavKey
                             )
 
                             BottomBarDestination.Diary -> navigator.navigate(DiaryNavKey.DiaryNavKey)

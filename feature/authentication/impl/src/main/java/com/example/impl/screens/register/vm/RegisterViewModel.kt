@@ -79,30 +79,6 @@ class RegisterViewModel @Inject constructor(
                     )
                 )
             }
-
-            viewModelScope.launch {
-                updateState { it.copy(isLoading = true) }
-
-                try {
-                    registerUseCase(
-                        currentState.email,
-                        currentState.password,
-                        true
-                    )
-
-                    emitSideEffect(RegisterSideEffect.NavigateToHome)
-
-                } catch (e: Exception) {
-                    emitSideEffect(
-                        RegisterSideEffect.ShowError(
-                            e.message ?: "Registration failed"
-                        )
-                    )
-                } finally {
-                    updateState { it.copy(isLoading = false) }
-                }
-            }
-
         }
     }
 

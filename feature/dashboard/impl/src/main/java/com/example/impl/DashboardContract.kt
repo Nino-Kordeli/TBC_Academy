@@ -1,4 +1,4 @@
-package com.example.impl.screens.dashboard.contract
+package com.example.impl
 
 import com.example.impl.screens.dashboard.model.CaloriesUiModel
 
@@ -9,7 +9,7 @@ data class DashboardUiState(
         exercise = 0
     ),
     val steps: Int = 0
-)
+    )
 
 sealed class DashboardSideEffect {
     data object DashboardToCalories : DashboardSideEffect()
@@ -17,6 +17,4 @@ sealed class DashboardSideEffect {
 
 sealed class DashboardEvent {
     data object ProfileClicked : DashboardEvent()
-    data object GetGoalCalories : DashboardEvent()
-    data object StartStepCounting : DashboardEvent()
 }

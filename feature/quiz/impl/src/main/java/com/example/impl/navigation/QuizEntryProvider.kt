@@ -10,8 +10,8 @@ import com.example.impl.screens.quiz.screen.QuizScreen
 fun EntryProviderScope<NavKey>.quizEntry(navigator: Navigator) {
     entry<QuizNavKey.QuizKey> {
         QuizScreen(
-            onNavigateToDashboard = { calories ->
-                navigator.navigate(DashboardNavKey.HomeNavKey(calories))
+            onNavigateToDashboard = {
+                navigator.navigate(DashboardNavKey.HomeNavKey)
             }
         )
     }

@@ -74,26 +74,25 @@ class Navigator(val state: NavigationState) {
     }
 
     fun navigateAndClearStack(key: NavKey) {
+        val destinationSubStack = state.subStacks[key]
+            ?: error("Sub stack for $key does not exist")
 
-        val destinationSubStack =
-            state.subStacks[key]
-                ?: error("Sub stack for $key does not exist")
-
-        // 1️⃣ Prepare destination FIRST (important)
+        // 1. Prepare destination
         destinationSubStack.clear()
         destinationSubStack.add(key)
 
-        // 2️⃣ Replace top-level history
-        state.topLevelStack.clear()
-        state.topLevelStack.add(key)
-
-        // 3️⃣ Clear OTHER substacks AFTER destination exists
+        // 2. Reset OTHER substacks to their own key (not clear them)
         state.subStacks
             .filterKeys { it != key }
-            .values
-            .forEach { it.clear() }
-    }
+            .forEach { (subKey, subStack) ->
+                subStack.clear()
+                subStack.add(subKey)  // <-- reset to their own key instead of leaving empty
+            }
 
+        // 3. Replace top-level history last
+        state.topLevelStack.add(key)
+        state.topLevelStack.removeAll { it != key }
+    }
 
 
     /**
