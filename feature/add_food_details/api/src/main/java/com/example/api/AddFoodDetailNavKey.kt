@@ -1,4 +1,8 @@
 package com.example.api
 
-class AddFoodDetailNavKey {
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object AddFoodDetailNavKey : NavKey{
 }

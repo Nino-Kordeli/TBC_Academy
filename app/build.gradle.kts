@@ -51,6 +51,9 @@ dependencies {
     implementation(projects.tbcacademy.feature.addFood.api)
     implementation(projects.tbcacademy.feature.addFood.impl)
 
+    implementation(projects.tbcacademy.feature.addFoodDetails.api)
+    implementation(projects.tbcacademy.feature.addFoodDetails.impl)
+
     implementation(projects.core.common)
     implementation(projects.core.ui)
     implementation(projects.core.designsystem)
@@ -82,5 +85,6 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.hilt.work)
+    implementation(libs.work.runtime.ktx)
     ksp(libs.androidx.hilt.compiler)
 }

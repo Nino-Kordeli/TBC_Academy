@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
+import com.example.api.AddFoodDetailNavKey
 import com.example.api.AuthenticationNavKey
 import com.example.api.DashboardNavKey
 import com.example.api.DiaryNavKey
@@ -26,6 +27,7 @@ import com.example.core.navigation.rememberNavigationState
 import com.example.core.navigation.toEntries
 import com.example.data.di.AuthRepositoryEntryPoint
 import com.example.designsystem.theme.ComposeAppTheme
+import com.example.impl.navigation.addFoodDetailsEntry
 import com.example.impl.navigation.addFoodEntry
 import com.example.impl.navigation.diaryEntry
 import com.example.impl.navigation.homeEntry
@@ -86,6 +88,7 @@ private fun AppNavigation() {
             DashboardNavKey.MoreNavKey,
             DashboardNavKey.SearchNavKey,
             DiaryNavKey.DiaryNavKey,
+            AddFoodDetailNavKey
         )
     )
 
@@ -107,6 +110,7 @@ private fun AppNavigation() {
         moreNavEntry(navigator)
         searchNavEntry(navigator)
         addFoodEntry(navigator)
+        addFoodDetailsEntry(navigator)
     }
 
     val entries = navigationState.toEntries(entryProvider)

@@ -12,17 +12,13 @@ import javax.inject.Inject
 
 class AddFoodDetailsViewModel @Inject constructor(
     private val getAllFoodsUseCase: GetAllFoodUseCase
-) : BaseViewModel<
-        AddFoodDetailsState,
-        AddFoodDetailsEvent,
-        AddFoodDetailsSideEffect>
+) : BaseViewModel<AddFoodDetailsState, AddFoodDetailsEvent, AddFoodDetailsSideEffect>
     (AddFoodDetailsState()) {
 
     override fun onEvent(event: AddFoodDetailsEvent) {
         when (event) {
             AddFoodDetailsEvent.FetchFoods -> fetchFoods()
         }
-
     }
 
     private fun fetchFoods() {
@@ -32,7 +28,7 @@ class AddFoodDetailsViewModel @Inject constructor(
                     is Resource.Error<*> -> {}
                     is Resource.Loading<*> -> {}
                     is Resource.Success<*> -> {
-
+                        updateState { it.copy(foodList = it.foodList) }
                     }
                 }
             }

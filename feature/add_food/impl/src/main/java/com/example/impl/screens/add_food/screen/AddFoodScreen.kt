@@ -20,6 +20,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,38 +32,52 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.designsystem.R
 import com.example.designsystem.theme.MilkyPink
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.VeryLightGray
 import com.example.designsystem.theme.White
 import com.example.domain.model.food.Food
+import com.example.impl.screens.add_food.contract.AddFoodEvent
+import com.example.impl.screens.add_food.vm.AddFoodViewModel
 import com.example.model.MealType
+import com.example.ui.base.BaseScreen
 
 @Composable
 fun AddFoodScreen(
+    viewModel: AddFoodViewModel = hiltViewModel(),
     mealType: MealType,
     onFoodSelected: (Food) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = White)
-    ) {
-        SearchField()
+    BaseScreen(
+        modifier = Modifier.fillMaxSize(),
+        viewModel = viewModel
+    ) { state, onEvent ->
 
-        Spacer(modifier = Modifier.height(20.dp))
+        LaunchedEffect(Unit) {
+            onEvent(AddFoodEvent.FetchFoods)
+        }
 
-        Text(
-            modifier = Modifier.padding(start = 14.dp),
-            text = "Suggested",
-            fontSize = 16.sp
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = White)
+        ) {
+            SearchField()
 
-        Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-        SearchFoodItem()
+            Text(
+                modifier = Modifier.padding(start = 14.dp),
+                text = "Suggested",
+                fontSize = 16.sp
+            )
 
+            Spacer(modifier = Modifier.height(15.dp))
+
+            SearchFoodItem()
+        }
     }
 }
 

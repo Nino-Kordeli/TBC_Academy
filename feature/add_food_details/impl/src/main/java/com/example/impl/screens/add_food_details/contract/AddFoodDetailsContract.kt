@@ -1,5 +1,6 @@
 package com.example.impl.screens.add_food_details.contract
 
+import com.example.domain.model.food.Food
 import com.example.impl.screens.add_food_details.model.NutritionUiModel
 
 data class AddFoodDetailsState(
@@ -10,7 +11,8 @@ data class AddFoodDetailsState(
         carbs = 0f,
         fat = 0f,
         protein = 0f
-    )
+    ),
+    val foodList: List<Food> = emptyList()
 )
 
 sealed class AddFoodDetailsSideEffect {

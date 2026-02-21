@@ -1,13 +1,17 @@
 package com.example.data.di
 
 import com.example.common.retrofit.HandleRetrofitResponse
+import com.example.data.remote.FoodApi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
@@ -46,5 +50,24 @@ object AppModule {
     @Provides
     fun provideHandleResponse(): HandleRetrofitResponse {
         return HandleRetrofitResponse()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        json: Json
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("http://192.168.1.27:3006/")
+            .client(okHttpClient)
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFoodApi(retrofit: Retrofit): FoodApi {
+        return retrofit.create(FoodApi::class.java)
     }
 }
