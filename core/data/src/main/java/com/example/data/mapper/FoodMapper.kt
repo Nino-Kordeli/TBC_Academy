@@ -6,7 +6,7 @@ import com.example.domain.model.food.Food
 
 fun FoodResponseDto.toDomain() = this.foods.map { it.toDomain() }
 
-private fun FoodDto.toDomain(): Food {
+fun FoodDto.toDomain(): Food {
     return Food(
         id = id,
         name = name,

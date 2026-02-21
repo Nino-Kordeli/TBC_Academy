@@ -9,7 +9,8 @@ android {
 
 dependencies {
     api(projects.core.model)
+    api(projects.core.common)
+
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.javax.inject)
-
 }

@@ -55,3 +55,6 @@ include(":feature:add_food:impl")
 include(":feature:diary:impl")
 include(":feature:diary:api")
 include(":core:model")
+
+include(":feature:add_food_details:api")
+include(":feature:add_food_details:impl")

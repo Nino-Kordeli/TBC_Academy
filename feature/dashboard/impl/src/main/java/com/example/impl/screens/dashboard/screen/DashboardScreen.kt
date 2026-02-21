@@ -1,5 +1,7 @@
 package com.example.impl.screens.dashboard.screen
 
+import android.Manifest
+import android.content.Intent
 import android.os.Build
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -24,6 +26,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,9 +39,8 @@ import com.example.impl.screens.dashboard.components.DailyCaloriesCard
 import com.example.impl.screens.dashboard.components.ProfileIcon
 import com.example.impl.screens.dashboard.components.StepCounterRow
 import com.example.impl.screens.dashboard.vm.DashboardViewModel
+import com.example.impl.service.StepCounterService
 import com.example.ui.base.BaseScreen
-import android.Manifest
-import com.example.impl.screens.dashboard.contract.DashboardEvent
 
 @Composable
 fun DashboardScreen(
@@ -46,17 +48,21 @@ fun DashboardScreen(
     viewModel: DashboardViewModel = hiltViewModel(),
     navigator: Navigator
 ) {
+    val context = LocalContext.current
+
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
-        if (isGranted) viewModel.onEvent(DashboardEvent.StartStepCounting)
+        val intent = Intent(context, StepCounterService::class.java)
+        context.startForegroundService(intent)
     }
 
     LaunchedEffect(Unit) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             permissionLauncher.launch(Manifest.permission.ACTIVITY_RECOGNITION)
         } else {
-            viewModel.onEvent(DashboardEvent.StartStepCounting)
+            val intent = Intent(context, StepCounterService::class.java)
+            context.startForegroundService(intent)
         }
     }
 

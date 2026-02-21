@@ -95,7 +95,7 @@ fun SearchFoodItem() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp)
+                .height(74.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(color = VeryLightGray)
                 .padding(end = 12.dp),
@@ -143,5 +143,8 @@ fun CircleItem() {
 @Composable
 @Preview
 fun AddFoodStepPreview() {
-   /* AddFoodScreen()*/
+   AddFoodScreen(
+       mealType = MealType.BREAKFAST,
+       onFoodSelected = TODO()
+   )
 }

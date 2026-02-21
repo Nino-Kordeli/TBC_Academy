@@ -9,4 +9,5 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit)
 }

@@ -21,13 +21,22 @@ class DashboardViewModel @Inject constructor(
 ) {
     init {
         loadCaloriesData()
+        collectSteps()
     }
 
     override fun onEvent(event: DashboardEvent) {
         when (event) {
             DashboardEvent.ProfileClicked -> {}
             DashboardEvent.GetGoalCalories -> loadCaloriesData()
-            DashboardEvent.StartStepCounting -> startStepCounting()
+            DashboardEvent.StartStepCounting -> {}
+        }
+    }
+
+    private fun collectSteps() {
+        viewModelScope.launch {
+            stepCounterRepository.steps.collect { steps ->
+                updateState { it.copy(steps = steps) }
+            }
         }
     }
 
@@ -48,17 +57,7 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
-    private fun startStepCounting() {
-        stepCounterRepository.startCounting()
-        viewModelScope.launch {
-            stepCounterRepository.steps.collect { steps ->
-                updateState { it.copy(steps = steps) }
-            }
-        }
-    }
-
     override fun onCleared() {
         super.onCleared()
-        stepCounterRepository.stopCounting()
     }
 }
