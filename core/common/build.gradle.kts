@@ -6,8 +6,9 @@ plugins {
 
 dependencies {
     implementation(libs.kotlinx.coroutines.core)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.turbine)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit)
+
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
 }

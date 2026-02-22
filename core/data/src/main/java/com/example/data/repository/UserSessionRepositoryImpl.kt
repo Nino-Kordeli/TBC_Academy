@@ -8,16 +8,17 @@ import javax.inject.Inject
 class UserSessionRepositoryImpl @Inject constructor(
     private val sessionDataStore: SessionDataStore
 ) : UserSessionRepository {
+
+    override suspend fun saveSession(token: String, rememberMe: Boolean) {
+        sessionDataStore.saveSession(token, rememberMe)
+    }
+
     override suspend fun getRememberMe(): Boolean {
         return sessionDataStore.rememberMe.first()
     }
 
     override suspend fun getToken(): String? {
         return sessionDataStore.token.first()
-    }
-
-    override suspend fun setRememberMe(value: Boolean) {
-        sessionDataStore.setRememberMe(false)//value
     }
 
     override suspend fun saveEmail(email: String) {

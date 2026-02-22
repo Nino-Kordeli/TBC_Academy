@@ -1,4 +1,4 @@
-package com.example.common.retrofit
+package com.example.data.response_handler.retrofit
 
 import com.example.common.resource.Resource
 import kotlinx.coroutines.flow.Flow

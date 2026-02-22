@@ -46,8 +46,4 @@ class SessionDataStore(private val context: Context) {
     suspend fun clearSession() {
         context.sessionDataStore.edit { it.clear() }
     }
-
-    suspend fun setRememberMe(value: Boolean) {
-        context.sessionDataStore.edit { prefs -> prefs[REMEMBER_ME] = value }
-    }
 }

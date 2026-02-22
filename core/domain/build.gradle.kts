@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.tbcacademy.android.library)
-    id("com.google.devtools.ksp")
     alias(libs.plugins.kotlin.serialization)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -15,4 +15,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.javax.inject)
     implementation(libs.kotlinx.serialization.json)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 }

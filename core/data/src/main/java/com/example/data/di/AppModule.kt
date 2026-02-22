@@ -1,6 +1,6 @@
 package com.example.data.di
 
-import com.example.common.retrofit.HandleRetrofitResponse
+import com.example.data.response_handler.retrofit.HandleRetrofitResponse
 import com.example.data.remote.FoodApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module

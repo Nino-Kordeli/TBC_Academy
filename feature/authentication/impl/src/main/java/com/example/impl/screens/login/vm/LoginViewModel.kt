@@ -2,9 +2,10 @@ package com.example.impl.screens.login.vm
 
 import android.util.Patterns
 import androidx.lifecycle.viewModelScope
+import com.example.common.resource.Resource
 import com.example.domain.repository.UserSessionRepository
-import com.example.domain.usecase.auth.CheckAutoLoginUseCase
 import com.example.domain.usecase.auth.LoginUseCase
+import com.example.domain.usecase.user_session.SaveSessionUseCase
 import com.example.impl.screens.login.contract.LoginEvent
 import com.example.impl.screens.login.contract.LoginSideEffect
 import com.example.impl.screens.login.contract.LoginState
@@ -17,8 +18,9 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val checkAutoLoginUseCase: CheckAutoLoginUseCase,
-    private val userSessionRepository: UserSessionRepository
+//    private val checkAutoLoginUseCase: CheckAuoLoginUseCase,
+    private val userSessionRepository: UserSessionRepository,
+    private val saveSessionUseCase: SaveSessionUseCase
 ) : BaseViewModel<LoginState, LoginEvent, LoginSideEffect>(initialState = LoginState()) {
 
     override fun onEvent(event: LoginEvent) {
@@ -31,9 +33,6 @@ class LoginViewModel
 
             is LoginEvent.RememberMeChanged -> {
                 updateState { it.copy(rememberMe = event.value) }
-                viewModelScope.launch {
-                    userSessionRepository.setRememberMe(event.value)
-                }
             }
 
             LoginEvent.LoginCLicked -> login()
@@ -83,38 +82,64 @@ class LoginViewModel
         }
 
         viewModelScope.launch {
-            updateState { it.copy(isLoading = true) }
-
-            runCatching {
-                loginUseCase(
-                    email = currentState.email,
-                    password = currentState.password,
-                    rememberMe = currentState.rememberMe
-                )
-            }
-                .onSuccess {
-
-                    if (currentState.rememberMe) {
-                        userSessionRepository.saveEmail(currentState.email)
-                        userSessionRepository.savePassword(currentState.password)
-                    } else {
-                        userSessionRepository.saveEmail("")
-                        userSessionRepository.savePassword("")
-                    }
-
-                    emitSideEffect(LoginSideEffect.NavigateToHome)
-                }
-                .onFailure { error ->
-                    if (!auto) {
+            loginUseCase.invoke(currentState.email, currentState.password).collect { result ->
+                when (result) {
+                    is Resource.Error<*> -> {
                         emitSideEffect(
                             LoginSideEffect.ShowError(
-                                error.message ?: "Login failed"
+                                result.errorMessage
                             )
                         )
                     }
-                }
 
-            updateState { it.copy(isLoading = false) }
+                    is Resource.Loading<*> -> {
+                        updateState { it.copy(isLoading = result.loading) }
+                    }
+
+                    is Resource.Success<String> -> {
+                        saveSessionUseCase.invoke(
+                            token = result.data,
+                            rememberMe = state.value.rememberMe
+                        )
+                        emitSideEffect(LoginSideEffect.NavigateToHome)
+                    }
+                }
+            }
         }
+
+//        viewModelScope.launch {
+//            updateState { it.copy(isLoading = true) }
+//
+//            runCatching {
+//                loginUseCase(
+//                    email = currentState.email,
+//                    password = currentState.password,
+//                    rememberMe = currentState.rememberMe
+//                )
+//            }
+//                .onSuccess {
+//
+//                    if (currentState.rememberMe) {
+//                        userSessionRepository.saveEmail(currentState.email)
+//                        userSessionRepository.savePassword(currentState.password)
+//                    } else {
+//                        userSessionRepository.saveEmail("")
+//                        userSessionRepository.savePassword("")
+//                    }
+//
+//                    emitSideEffect(LoginSideEffect.NavigateToHome)
+//                }
+//                .onFailure { error ->
+//                    if (!auto) {
+//                        emitSideEffect(
+//                            LoginSideEffect.ShowError(
+//                                error.message ?: "Login failed"
+//                            )
+//                        )
+//                    }
+//                }
+//
+//            updateState { it.copy(isLoading = false) }
+//        }
     }
 }
