@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
@@ -21,10 +20,10 @@ import com.example.api.AuthenticationNavKey
 import com.example.api.DashboardNavKey
 import com.example.api.DiaryNavKey
 import com.example.api.QuizNavKey
+import com.example.api.SplashNavKey
 import com.example.core.navigation.Navigator
 import com.example.core.navigation.rememberNavigationState
 import com.example.core.navigation.toEntries
-import com.example.data.di.AuthRepositoryEntryPoint
 import com.example.designsystem.theme.ComposeAppTheme
 import com.example.impl.navigation.addFoodDetailsEntry
 import com.example.impl.navigation.addFoodEntry
@@ -35,13 +34,13 @@ import com.example.impl.navigation.moreNavEntry
 import com.example.impl.navigation.quizEntry
 import com.example.impl.navigation.registerEntry
 import com.example.impl.navigation.searchNavEntry
+import com.example.impl.navigation.splashEntry
 import com.example.impl.navigation.welcomeEntry
 import com.example.ui.components.CustomSnackbar
 import com.example.ui.components.bottom_bar.BottomBar
 import com.example.ui.components.bottom_bar.BottomBarDestination
 import com.example.ui.snackbar.SnackbarController
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -59,27 +58,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun AppNavigation() {
-    val context = LocalContext.current
-
-    val authRepository = remember {
-        EntryPointAccessors
-            .fromApplication(
-                context,
-                AuthRepositoryEntryPoint::class.java
-            )
-            .authRepository()
-    }
-
-    val startKey = remember {
-        if (authRepository.isLoggedIn()) {
-            DashboardNavKey.HomeNavKey
-        } else {
-            AuthenticationNavKey.WelcomeNavKey
-        }
-    }
-
     val navigationState = rememberNavigationState(
-        startKey = startKey,
+        startKey = SplashNavKey,
         topLevelKeys = setOf(
             AuthenticationNavKey.WelcomeNavKey,
             QuizNavKey.QuizKey,
@@ -87,6 +67,7 @@ private fun AppNavigation() {
             DashboardNavKey.MoreNavKey,
             DashboardNavKey.SearchNavKey,
             DiaryNavKey.DiaryNavKey,
+            SplashNavKey,
             //AddFoodDetailNavKey//es unda wavshalo ro imushaos
         )
     )
@@ -110,6 +91,7 @@ private fun AppNavigation() {
         searchNavEntry(navigator)
         addFoodEntry(navigator)
         addFoodDetailsEntry(navigator)
+        splashEntry(navigator)
     }
 
     val entries = navigationState.toEntries(entryProvider)

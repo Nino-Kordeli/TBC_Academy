@@ -49,6 +49,8 @@ dependencies {
     implementation(projects.tbcacademy.feature.addFood.impl)
     implementation(projects.tbcacademy.feature.addFoodDetails.api)
     implementation(projects.tbcacademy.feature.addFoodDetails.impl)
+    implementation(projects.tbcacademy.feature.splash.api)
+    implementation(projects.tbcacademy.feature.splash.impl)
 
     // Core modules
     implementation(projects.core.common)

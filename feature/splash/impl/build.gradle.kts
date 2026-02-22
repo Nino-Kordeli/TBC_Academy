@@ -12,4 +12,7 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.feature.splash.api)
     implementation(libs.androidx.activity.compose)
+
+    implementation(projects.tbcacademy.feature.authentication.api)
+    implementation(projects.tbcacademy.feature.dashboard.api)
 }
