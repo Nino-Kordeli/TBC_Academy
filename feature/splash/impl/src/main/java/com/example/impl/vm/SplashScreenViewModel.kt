@@ -3,7 +3,9 @@ package com.example.impl.vm
 import androidx.lifecycle.viewModelScope
 import com.example.api.AuthenticationNavKey
 import com.example.api.DashboardNavKey
-import com.example.domain.usecase.auth.IsLoggedInUseCase
+import com.example.common.resource.Resource
+import com.example.domain.repository.UserSessionRepository
+import com.example.domain.usecase.auth.LoginUseCase
 import com.example.impl.contract.SplashScreenEvent
 import com.example.impl.contract.SplashScreenSideEffect
 import com.example.impl.contract.SplashScreenState
@@ -15,26 +17,49 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
-    private val isLoggedInUseCase: IsLoggedInUseCase
+    private val loginUseCase: LoginUseCase,
+    private val userSessionRepository: UserSessionRepository
 ) : BaseViewModel<SplashScreenState, SplashScreenEvent, SplashScreenSideEffect>(
     SplashScreenState()
 ) {
 
     init {
-        waitForAnimation()
-        handleNavigation()
+        checkAutoLogin()
     }
 
-    private fun waitForAnimation() {
+    private fun checkAutoLogin() {
         viewModelScope.launch {
-            delay(2500)
-            handleNavigation()
+            waitForAnimation()
+
+            val rememberMe = userSessionRepository.getRememberMe()
+            val savedEmail = userSessionRepository.getSavedEmail()
+            val savedPassword = userSessionRepository.getSavedPassword()
+
+            if (rememberMe) {
+                login(savedEmail ?: "", savedPassword ?: "")
+            } else {
+                handleNavigation(false)
+            }
         }
     }
 
-    private fun handleNavigation() {
-        val isLoggedIn = isLoggedInUseCase.invoke()
+    private suspend fun login(email: String, password: String) {
+        loginUseCase.invoke(email, password).collect { result ->
+            when (result) {
+                is Resource.Error<*> -> {}
 
+                is Resource.Loading<*> -> {
+                    updateState { it.copy(isLoading = result.loading) }
+                }
+
+                is Resource.Success<String> -> {
+                    handleNavigation(true)
+                }
+            }
+        }
+    }
+
+    private fun handleNavigation(isLoggedIn: Boolean) {
         val navKey = if (isLoggedIn) {
             DashboardNavKey.HomeNavKey
         } else {
@@ -42,5 +67,9 @@ class SplashScreenViewModel @Inject constructor(
         }
 
         emitSideEffect(SplashScreenSideEffect.Navigate(navKey))
+    }
+
+    private suspend fun waitForAnimation() {
+        delay(2500)
     }
 }

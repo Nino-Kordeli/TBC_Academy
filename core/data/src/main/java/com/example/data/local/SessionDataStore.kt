@@ -16,7 +16,7 @@ class SessionDataStore(private val context: Context) {
         private val TOKEN = stringPreferencesKey("token")
         private val REMEMBER_ME = booleanPreferencesKey("remember_me")
         private val EMAIL = stringPreferencesKey("email")
-        private val PASSWORD = stringPreferencesKey("password") // encrypt for prod!
+        private val PASSWORD = stringPreferencesKey("password")
     }
 
     suspend fun saveSession(token: String, rememberMe: Boolean) {

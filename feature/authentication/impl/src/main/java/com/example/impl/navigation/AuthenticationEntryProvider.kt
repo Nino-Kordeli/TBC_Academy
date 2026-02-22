@@ -30,7 +30,7 @@ fun EntryProviderScope<NavKey>.loginEntry(
 ) {
     entry<AuthenticationNavKey.LoginNavKey> {
         LoginScreen(
-            onNavigateHome = {
+            onNavigateToDashboard = {
                 navigator.navigateAndClearStack(DashboardNavKey.HomeNavKey)
             },
             onNavigateToRegister = {

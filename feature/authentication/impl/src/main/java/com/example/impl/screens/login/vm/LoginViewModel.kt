@@ -15,10 +15,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel
-@Inject constructor(
+class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-//    private val checkAutoLoginUseCase: CheckAuoLoginUseCase,
     private val userSessionRepository: UserSessionRepository,
     private val saveSessionUseCase: SaveSessionUseCase
 ) : BaseViewModel<LoginState, LoginEvent, LoginSideEffect>(initialState = LoginState()) {
@@ -41,44 +39,22 @@ class LoginViewModel
         }
     }
 
-    fun checkAutoLogin() {
-        viewModelScope.launch {
-            val remember = userSessionRepository.getRememberMe()
-            val savedEmail = userSessionRepository.getSavedEmail()
-            val savedPassword = userSessionRepository.getSavedPassword()
-
-            updateState {
-                it.copy(
-                    rememberMe = remember,
-                    email = savedEmail ?: "",
-                    password = savedPassword ?: ""
-                )
-            }
-
-            if (remember && !savedEmail.isNullOrBlank() && !savedPassword.isNullOrBlank()) {
-                login(auto = true)
-            }
-        }
-    }
-
-    private fun login(auto: Boolean = false) {
+    private fun login() {
         val currentState = state.value
 
-        if (!auto) {
-            if (currentState.email.isBlank()) {
-                emitSideEffect(LoginSideEffect.ShowError("Email is required"))
-                return
-            }
+        if (currentState.email.isBlank()) {
+            emitSideEffect(LoginSideEffect.ShowError("Email is required"))
+            return
+        }
 
-            if (!Patterns.EMAIL_ADDRESS.matcher(currentState.email).matches()) {
-                emitSideEffect(LoginSideEffect.ShowError("Invalid email format"))
-                return
-            }
+        if (!Patterns.EMAIL_ADDRESS.matcher(currentState.email).matches()) {
+            emitSideEffect(LoginSideEffect.ShowError("Invalid email format"))
+            return
+        }
 
-            if (currentState.password.isBlank()) {
-                emitSideEffect(LoginSideEffect.ShowError("Password is required"))
-                return
-            }
+        if (currentState.password.isBlank()) {
+            emitSideEffect(LoginSideEffect.ShowError("Password is required"))
+            return
         }
 
         viewModelScope.launch {
@@ -97,6 +73,14 @@ class LoginViewModel
                     }
 
                     is Resource.Success<String> -> {
+                        if (currentState.rememberMe) {
+                            userSessionRepository.saveEmail(currentState.email)
+                            userSessionRepository.savePassword(currentState.password)
+                        } else {
+                            userSessionRepository.saveEmail("")
+                            userSessionRepository.savePassword("")
+                        }
+
                         saveSessionUseCase.invoke(
                             token = result.data,
                             rememberMe = state.value.rememberMe
@@ -106,40 +90,5 @@ class LoginViewModel
                 }
             }
         }
-
-//        viewModelScope.launch {
-//            updateState { it.copy(isLoading = true) }
-//
-//            runCatching {
-//                loginUseCase(
-//                    email = currentState.email,
-//                    password = currentState.password,
-//                    rememberMe = currentState.rememberMe
-//                )
-//            }
-//                .onSuccess {
-//
-//                    if (currentState.rememberMe) {
-//                        userSessionRepository.saveEmail(currentState.email)
-//                        userSessionRepository.savePassword(currentState.password)
-//                    } else {
-//                        userSessionRepository.saveEmail("")
-//                        userSessionRepository.savePassword("")
-//                    }
-//
-//                    emitSideEffect(LoginSideEffect.NavigateToHome)
-//                }
-//                .onFailure { error ->
-//                    if (!auto) {
-//                        emitSideEffect(
-//                            LoginSideEffect.ShowError(
-//                                error.message ?: "Login failed"
-//                            )
-//                        )
-//                    }
-//                }
-//
-//            updateState { it.copy(isLoading = false) }
-//        }
     }
 }

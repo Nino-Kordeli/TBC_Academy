@@ -15,7 +15,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -35,21 +34,17 @@ import com.example.ui.components.OutlinedTextFieldWithInlineLabel
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
-    onNavigateHome: () -> Unit,
+    onNavigateToDashboard: () -> Unit,
     onNavigateToRegister: () -> Unit,
     onShowError: (String) -> Unit
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.checkAutoLogin()
-    }
-
     BaseScreen(
         modifier = Modifier.fillMaxSize(),
         viewModel = viewModel,
         onSideEffect = { effect ->
             when (effect) {
                 LoginSideEffect.NavigateToHome ->
-                    onNavigateHome()
+                    onNavigateToDashboard()
 
                 LoginSideEffect.NavigateToRegister ->
                     onNavigateToRegister()
