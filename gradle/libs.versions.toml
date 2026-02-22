@@ -37,6 +37,7 @@ lifecycleViewmodelKtx = "2.10.0"
 firebaseAuthKtx = "24.0.1"
 workRuntimeKtx = "2.11.1"
 retrofitKotlinxSerializationConverter = "1.0.0"
+appcompat = "1.7.1"
 
 [libraries]
 # AndroidX Core
@@ -142,6 +143,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

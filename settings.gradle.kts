@@ -58,3 +58,7 @@ include(":core:model")
 
 include(":feature:add_food_details:api")
 include(":feature:add_food_details:impl")
+
+include(":feature:splash")
+include(":feature:splash:api")
+include(":feature:splash:impl")

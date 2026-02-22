@@ -15,7 +15,4 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.javax.inject)
     implementation(libs.kotlinx.serialization.json)
-
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth)
 }
