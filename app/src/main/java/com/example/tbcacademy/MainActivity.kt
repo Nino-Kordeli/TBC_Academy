@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import com.example.api.AddFoodDetailNavKey
 import com.example.api.AuthenticationNavKey
 import com.example.api.DashboardNavKey
 import com.example.api.DiaryNavKey

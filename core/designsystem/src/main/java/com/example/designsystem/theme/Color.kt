@@ -26,5 +26,6 @@ val Green = Color(0xFF188977)
 
 val VeryLightGray = Color(0xfff2f2f3)
 val MilkyPink = Color(0xfff2edf7)
+val Orange = Color(0xFFFF9800)
 
 //val PrimaryBlue = Color(0xFF0066EE)

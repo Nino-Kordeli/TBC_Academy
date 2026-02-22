@@ -106,15 +106,15 @@ fun DiaryScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     StatItem(
-                        value = "1600",
+                        value = state.goalCalories.toString(),
                         label = "Goal",
                     )
                     StatItem(
-                        value = "+",
+                        value = "-",
                         label = "",
                     )
                     StatItem(
-                        value = "0",
+                        value = state.consumedCalories.toString(),
                         label = "Food",
                     )
                     StatItem(
@@ -122,7 +122,7 @@ fun DiaryScreen(
                         label = "",
                     )
                     StatItem(
-                        value = "0",
+                        value = state.exerciseCalories.toString(),
                         label = "Exercise",
                     )
                     StatItem(
@@ -130,8 +130,9 @@ fun DiaryScreen(
                         label = "",
                     )
                     StatItem(
-                        value = "1600",
+                        value = state.remainingCalories.toString(),
                         label = "Remaining",
+                        color = if (state.remainingCalories < 0) Color.Red else PrimaryBlue
                     )
                 }
             }
@@ -186,7 +187,8 @@ fun DiaryScreen(
 fun StatItem(
     value: String,
     label: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black
 ) {
 
     Column(
@@ -195,7 +197,9 @@ fun StatItem(
     ) {
         Text(
             text = value,
-            fontSize = 18.sp
+            fontSize = 18.sp,
+            fontWeight = if (label == "Remaining") FontWeight.Bold else FontWeight.Normal,
+            color = color
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -228,14 +232,22 @@ fun FoodItem(
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = title)
+            Text(
+                text = title,
+                fontWeight = FontWeight.SemiBold
+            )
 
             Spacer(modifier = Modifier.weight(1f))
 
-            Image(
-                painterResource(R.drawable.ic_arrow_right),
-                contentDescription = ""
-            )
+            val totalCalories = foods.sumOf { it.calories }
+            if (totalCalories > 0) {
+                Text(
+                    text = "$totalCalories",
+                    fontSize = 14.sp,
+                    color = PrimaryBlue,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
 
         foods.forEach { food ->
@@ -284,10 +296,13 @@ fun FoodItem(
             Text(
                 text = "ADD FOOD",
                 color = PrimaryBlue,
+                fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.clickable {
-                    onAddFoodClick(mealType)//es atrigerebs navigacias
+                    onAddFoodClick(mealType)
                 }
             )
         }
+
+        Spacer(modifier = Modifier.height(8.dp))
     }
 }

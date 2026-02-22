@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class StepCounterRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context
+    @param: ApplicationContext private val context: Context
 ) : StepCounterRepository {
 
     private val _steps = MutableStateFlow(0)

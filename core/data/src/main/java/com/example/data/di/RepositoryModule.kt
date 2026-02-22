@@ -26,12 +26,6 @@ abstract class RepositoryModule {
         impl: AuthRepositoryImpl
     ): AuthRepository
 
-    @Binds
-    @Singleton
-    abstract fun bindFoodRepository(
-        impl: FoodRepositoryImpl
-    ): FoodRepository
-
 //    @Singleton
 //    abstract fun bindDiaryRepository(
 //        impl: DiaryRepositoryImpl

@@ -47,7 +47,7 @@ class MyApplication : Application(), Configuration.Provider {
         )
     }
 
-    private fun calculateInitialDelayToMidnight() : Long {
+    private fun calculateInitialDelayToMidnight(): Long {
         val now = Calendar.getInstance()
 
         val nextMidnight = Calendar.getInstance().apply {
@@ -59,6 +59,5 @@ class MyApplication : Application(), Configuration.Provider {
         }
 
         return nextMidnight.timeInMillis - now.timeInMillis
-
     }
 }
