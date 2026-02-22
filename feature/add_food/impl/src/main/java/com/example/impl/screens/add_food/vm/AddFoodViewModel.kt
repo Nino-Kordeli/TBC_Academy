@@ -18,9 +18,7 @@ class AddFoodViewModel @Inject constructor(
 
     override fun onEvent(event: AddFoodEvent) {
         when (event) {
-            is AddFoodEvent.Search -> {
-                searchFoods(event.query)
-            }
+            is AddFoodEvent.Search -> searchFoods(event.query)
             AddFoodEvent.FetchFoods -> fetchFoods()
         }
     }
@@ -29,15 +27,31 @@ class AddFoodViewModel @Inject constructor(
         viewModelScope.launch {
             getAllFoodsUseCase.invoke().collect { resource ->
                 when (resource) {
-                    is Resource.Error<*> -> {}
-                    is Resource.Loading<*> -> {}
-                    is Resource.Success<*> -> {
-                        updateState { it.copy(foodList = it.foodList) }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {}
+                    is Resource.Success -> {
+                        updateState { it.copy(
+                            allFoods = resource.data,
+                            foodList = resource.data
+                        )}
                     }
                 }
             }
         }
     }
+
+    private fun searchFoods(query: String) {
+        updateState { state ->
+            state.copy(
+                query = query,
+                foodList = if (query.isBlank()) state.allFoods
+                else state.allFoods.filter {
+                    it.name.contains(query, ignoreCase = true)
+                }
+            )
+        }
+    }
+}
 
     private fun searchFoods(query: String) {
 //        viewModelScope.launch {
@@ -48,4 +62,3 @@ class AddFoodViewModel @Inject constructor(
 //            updateState { it.copy(foods = result) }
 //        }
     }
-}

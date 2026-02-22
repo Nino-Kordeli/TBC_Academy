@@ -33,6 +33,7 @@ import com.example.designsystem.theme.Green
 import com.example.designsystem.theme.NeutralLightGray
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.White
+import com.example.domain.model.food.Food
 import com.example.impl.screens.add_food_details.components.IngredientMass
 import com.example.impl.screens.add_food_details.contract.AddFoodDetailsEvent
 import com.example.impl.screens.add_food_details.vm.AddFoodDetailsViewModel
@@ -40,7 +41,8 @@ import com.example.ui.base.BaseScreen
 
 @Composable
 fun AddFoodDetailsScreen(
-    viewModel: AddFoodDetailsViewModel = hiltViewModel()
+    viewModel: AddFoodDetailsViewModel = hiltViewModel(),
+    food: Food
 ) {
     BaseScreen(modifier = Modifier, viewModel = viewModel) { state, onEvent ->
         LaunchedEffect(Unit) {
@@ -95,7 +97,9 @@ fun AddFoodDetailsScreen(
 @Composable
 @Preview
 fun AddFoodDetailsScreenPreview() {
-    AddFoodDetailsScreen()
+    AddFoodDetailsScreen(
+        food = Food("", "Toast Bread", 192, 1f, 1f, 1f, true)
+    )
 }
 
 @Composable

@@ -26,4 +26,10 @@ class FoodRepositoryImpl @Inject constructor(
             it.toDomain()
         }
     }
+
+    override suspend fun searchFoods(query: String): Flow<Resource<List<Food>>> {
+        return handleResponse.apiCall { foodApi.searchFoods(query) }.asResource {
+            it.toDomain()
+        }
+    }
 }

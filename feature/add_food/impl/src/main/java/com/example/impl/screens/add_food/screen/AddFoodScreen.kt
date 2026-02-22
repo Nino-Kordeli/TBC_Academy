@@ -2,6 +2,7 @@ package com.example.impl.screens.add_food.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
@@ -64,7 +66,10 @@ fun AddFoodScreen(
                 .fillMaxSize()
                 .background(color = White)
         ) {
-            SearchField()
+            SearchField(
+                query = state.query,
+                onQueryChange = { onEvent(AddFoodEvent.Search(it)) }
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -76,18 +81,26 @@ fun AddFoodScreen(
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            SearchFoodItem()
+            LazyColumn {
+                items(state.foodList) { food ->
+                    SearchFoodItem(
+                        food = food,
+                        onFoodSelected = onFoodSelected
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
-fun SearchField() {
-    var text by remember { mutableStateOf("") }
-
+fun SearchField(
+    query: String,
+    onQueryChange: (String) -> Unit
+) {
     OutlinedTextField(
-        value = text,
-        onValueChange = { text = it },
+        value = query,
+        onValueChange = onQueryChange,
         label = { Text("Search for food") },
         shape = RoundedCornerShape(35.dp),
         modifier = Modifier
@@ -101,11 +114,14 @@ fun SearchField() {
 }
 
 @Composable
-fun SearchFoodItem() {
+fun SearchFoodItem(
+    food: Food,
+    onFoodSelected: (Food) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(14.dp)
+            .padding(horizontal = 14.dp, vertical = 6.dp)
     ) {
         Row(
             modifier = Modifier
@@ -122,29 +138,28 @@ fun SearchFoodItem() {
                     .padding(vertical = 10.dp, horizontal = 12.dp),
                 verticalArrangement = Arrangement.Top
             ) {
-                Text(text = "Toast bread")
+                Text(text = food.name)
 
                 Spacer(modifier = Modifier.height(4.dp))
-                Text(text = "192 cals, Toast bread, 1 slice")
+
+                Text(text = "${food.calories} cals · Carbs ${food.carbs}g · Protein ${food.protein}g")
             }
 
             Spacer(modifier = Modifier.weight(1f))
 
-            CircleItem()
-
-            LazyColumn() { }//TODO: aq minda mokled fooditems romlebic wamova apidan, is zeda row
+            CircleItem(onClick = { onFoodSelected(food) })
         }
     }
 }
 
 @Composable
-fun CircleItem() {
-
+fun CircleItem(onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .size(36.dp)
             .clip(CircleShape)
-            .background(color = MilkyPink),
+            .background(color = MilkyPink)
+            .clickable { onClick() },
         contentAlignment = Alignment.Center
     ) {
         Image(

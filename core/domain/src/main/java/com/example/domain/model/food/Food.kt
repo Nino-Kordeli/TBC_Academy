@@ -1,5 +1,8 @@
 package com.example.domain.model.food
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Food(
     val id: String,
     val name: String,

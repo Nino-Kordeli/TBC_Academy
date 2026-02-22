@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface FoodRepository {
     suspend fun getAllFoods(): Flow<Resource<List<Food>>>
-//    suspend fun searchFoods(query: String): List<Food>
+    suspend fun searchFoods(query: String): Flow<Resource<List<Food>>>
 //    suspend fun getFoodById(id: String): Food?
 }

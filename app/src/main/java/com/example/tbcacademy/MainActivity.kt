@@ -88,7 +88,7 @@ private fun AppNavigation() {
             DashboardNavKey.MoreNavKey,
             DashboardNavKey.SearchNavKey,
             DiaryNavKey.DiaryNavKey,
-            AddFoodDetailNavKey
+            //AddFoodDetailNavKey//es unda wavshalo ro imushaos
         )
     )
 
