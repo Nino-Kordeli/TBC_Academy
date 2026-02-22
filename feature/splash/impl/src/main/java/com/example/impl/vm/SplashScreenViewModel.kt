@@ -46,14 +46,12 @@ class SplashScreenViewModel @Inject constructor(
     private suspend fun login(email: String, password: String) {
         loginUseCase.invoke(email, password).collect { result ->
             when (result) {
-                is Resource.Error<*> -> {}
-
-                is Resource.Loading<*> -> {
-                    updateState { it.copy(isLoading = result.loading) }
-                }
-
                 is Resource.Success<String> -> {
                     handleNavigation(true)
+                }
+
+                else -> {
+                    handleNavigation(isLoggedIn = false)
                 }
             }
         }
