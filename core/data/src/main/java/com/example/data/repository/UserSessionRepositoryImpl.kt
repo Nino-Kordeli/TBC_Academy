@@ -2,6 +2,7 @@ package com.example.data.repository
 
 import com.example.data.local.SessionDataStore
 import com.example.domain.repository.UserSessionRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
@@ -35,5 +36,21 @@ class UserSessionRepositoryImpl @Inject constructor(
 
     override suspend fun getSavedPassword(): String? {
         return sessionDataStore.password.first()
+    }
+
+    override suspend fun saveName(name: String) {
+        sessionDataStore.saveName(name)
+    }
+
+    override suspend fun getName(): String? {
+        return sessionDataStore.name.first()
+    }
+
+    override suspend fun logout() {
+        sessionDataStore.clearSession()
+    }
+
+    override fun getNameFlow(): Flow<String?> {
+        return sessionDataStore.name
     }
 }

@@ -24,7 +24,7 @@ sealed class AddFoodDetailsSideEffect {
 }
 
 sealed class AddFoodDetailsEvent {
-    data class LoadFood(val food: Food) : AddFoodDetailsEvent()
+    data class LoadFood(val food: Food, val mealType: MealType) : AddFoodDetailsEvent()
     data class ServingsChanged(val servings: Int) : AddFoodDetailsEvent()
     object SaveFood : AddFoodDetailsEvent()
 }

@@ -49,7 +49,7 @@ import com.example.impl.screens.dashboard.model.CaloriesUiModel
 
 @Composable
 internal fun ProfileIcon(modifier: Modifier = Modifier) {
-    val image = painterResource(id = R.drawable.ic_launcher_background)
+    val image = painterResource(id = R.drawable.default_user_image)
 
     Image(
         painter = image,

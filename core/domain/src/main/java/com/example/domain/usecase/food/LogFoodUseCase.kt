@@ -14,6 +14,12 @@ class LogFoodUseCase @Inject constructor(
     suspend operator fun invoke(food: Food, grams: Int, mealType: MealType) {
         val multiplier = grams / 100f
 
+        val userId = userPreferencesRepository.getCurrentUserId().first()
+
+        if (userId.isNullOrBlank()) {
+            throw Exception("User not logged in")
+        }
+
         val loggedFood = LoggedFood(
             id = UUID.randomUUID().toString(),
             foodId = food.id,
@@ -23,11 +29,18 @@ class LogFoodUseCase @Inject constructor(
             carbs = food.carbs * multiplier,
             fat = food.fat * multiplier,
             protein = food.protein * multiplier,
-            timestamp = System.currentTimeMillis()
+            timestamp = System.currentTimeMillis(),
+            mealType = mealType,  // Use the passed mealType
+            userId = userId
         )
 
-        val currentFoods = userPreferencesRepository.getFoodsForMeal(mealType).first()
-        val updatedFoods = currentFoods + loggedFood
-        userPreferencesRepository.saveFoodsForMeal(mealType, updatedFoods)
+        val allFoods = userPreferencesRepository
+            .getFoodsForMeal(mealType)
+            .first()
+
+        userPreferencesRepository.saveFoodsForMeal(
+            mealType,
+            allFoods + loggedFood
+        )
     }
 }

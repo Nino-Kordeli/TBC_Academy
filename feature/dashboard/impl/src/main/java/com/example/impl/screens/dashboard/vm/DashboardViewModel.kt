@@ -10,11 +10,14 @@ import com.example.impl.screens.dashboard.model.CaloriesUiModel
 import com.example.model.MealType
 import com.example.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
+@OptIn(ExperimentalCoroutinesApi::class)
 class DashboardViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository,
     private val stepCounterRepository: StepCounterRepository
@@ -44,29 +47,31 @@ class DashboardViewModel @Inject constructor(
 
     private fun loadCaloriesData() {
         viewModelScope.launch {
-            combine(
-                userPreferencesRepository.getGoalCalories(),
-                userPreferencesRepository.getFoodsForMeal(MealType.BREAKFAST),
-                userPreferencesRepository.getFoodsForMeal(MealType.LUNCH),
-                userPreferencesRepository.getFoodsForMeal(MealType.DINNER),
-                userPreferencesRepository.getFoodsForMeal(MealType.SNACKS)
-            ) { goalCalories, breakfast, lunch, dinner, snacks ->
+            userPreferencesRepository.getCurrentUserId()
+                .flatMapLatest { userId ->
+                    combine(
+                        userPreferencesRepository.getGoalCalories(),
+                        userPreferencesRepository.getFoodsForMeal(MealType.BREAKFAST),
+                        userPreferencesRepository.getFoodsForMeal(MealType.LUNCH),
+                        userPreferencesRepository.getFoodsForMeal(MealType.DINNER),
+                        userPreferencesRepository.getFoodsForMeal(MealType.SNACKS)
+                    ) { goalCalories, breakfast, lunch, dinner, snacks ->
+                        val totalConsumed =
+                            breakfast.filter { it.userId == userId }.sumOf { it.calories } +
+                                    lunch.filter { it.userId == userId }.sumOf { it.calories } +
+                                    dinner.filter { it.userId == userId }.sumOf { it.calories } +
+                                    snacks.filter { it.userId == userId }.sumOf { it.calories }
 
-                val totalConsumed = breakfast.sumOf { it.calories } +
-                        lunch.sumOf { it.calories } +
-                        dinner.sumOf { it.calories } +
-                        snacks.sumOf { it.calories }
-
-                CaloriesUiModel(
-                    goal = goalCalories,
-                    food = totalConsumed,
-                    exercise = 0 // TODO: Add exercise tracking
-                )
-            }.collect { caloriesData ->
-                updateState {
-                    it.copy(caloriesData = caloriesData)
+                        CaloriesUiModel(
+                            goal = goalCalories,
+                            food = totalConsumed,
+                            exercise = 0
+                        )
+                    }
                 }
-            }
+                .collect { caloriesData ->
+                    updateState { it.copy(caloriesData = caloriesData) }
+                }
         }
     }
     override fun onCleared() {

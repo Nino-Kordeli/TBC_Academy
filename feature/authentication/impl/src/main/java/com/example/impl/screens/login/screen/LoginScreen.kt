@@ -1,5 +1,6 @@
 package com.example.impl.screens.login.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,6 +39,9 @@ fun LoginScreen(
     onNavigateToRegister: () -> Unit,
     onShowError: (String) -> Unit
 ) {
+
+    BackHandler() { }
+
     BaseScreen(
         modifier = Modifier.fillMaxSize(),
         viewModel = viewModel,

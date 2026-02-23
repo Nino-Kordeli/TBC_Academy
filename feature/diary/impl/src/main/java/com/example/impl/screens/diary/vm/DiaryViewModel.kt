@@ -10,7 +10,13 @@ import com.example.impl.screens.diary.contract.DiaryState
 import com.example.model.MealType
 import com.example.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -44,41 +50,64 @@ class DiaryViewModel @Inject constructor(
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun loadSavedFood() {
         viewModelScope.launch {
-            combine(
-                userPreferencesRepository.getFoodsForMeal(MealType.BREAKFAST),
-                userPreferencesRepository.getFoodsForMeal(MealType.LUNCH),
-                userPreferencesRepository.getFoodsForMeal(MealType.DINNER),
-                userPreferencesRepository.getFoodsForMeal(MealType.SNACKS)
-            ) { breakfast, lunch, dinner, snacks ->
+            userPreferencesRepository.getCurrentUserId()
+                .flatMapLatest { userId ->
+                    if (userId == null) {
+                        flowOf(null)
+                    } else {
+                        combine(
+                            foodForUser(MealType.BREAKFAST, userId),
+                            foodForUser(MealType.LUNCH, userId),
+                            foodForUser(MealType.DINNER, userId),
+                            foodForUser(MealType.SNACKS, userId)
+                        ) { breakfast, lunch, dinner, snacks ->
+                            val totalConsumed = breakfast.sumOf { it.calories } +
+                                    lunch.sumOf { it.calories } +
+                                    dinner.sumOf { it.calories } +
+                                    snacks.sumOf { it.calories }
 
-                // Convert LoggedFood to Food for UI
-                val breakfastFoods = breakfast.map { it.toFood() }
-                val lunchFoods = lunch.map { it.toFood() }
-                val dinnerFoods = dinner.map { it.toFood() }
-                val snacksFoods = snacks.map { it.toFood() }
-
-                // Calculate total consumed calories
-                val totalConsumed = breakfast.sumOf { it.calories } +
-                        lunch.sumOf { it.calories } +
-                        dinner.sumOf { it.calories } +
-                        snacks.sumOf { it.calories }
-
-                DiaryState(
-                    breakfast = breakfastFoods,
-                    lunch = lunchFoods,
-                    dinner = dinnerFoods,
-                    snacks = snacksFoods,
-                    goalCalories = state.value.goalCalories,
-                    consumedCalories = totalConsumed,
-                    exerciseCalories = 0 // TODO: Add exercise tracking
-                )
-            }.collect { newState ->
-                updateState { newState }
-            }
+                            FoodData(
+                                breakfast = breakfast.map { it.toFood() },
+                                lunch = lunch.map { it.toFood() },
+                                dinner = dinner.map { it.toFood() },
+                                snacks = snacks.map { it.toFood() },
+                                consumedCalories = totalConsumed
+                            )
+                        }
+                    }
+                }
+                .collect { foodData ->
+                    if (foodData == null) {
+                        updateState { it.copy(
+                            breakfast = emptyList(),
+                            lunch = emptyList(),
+                            dinner = emptyList(),
+                            snacks = emptyList(),
+                            consumedCalories = 0
+                        )}
+                    } else {
+                        updateState { it.copy(
+                            breakfast = foodData.breakfast,
+                            lunch = foodData.lunch,
+                            dinner = foodData.dinner,
+                            snacks = foodData.snacks,
+                            consumedCalories = foodData.consumedCalories
+                        )}
+                    }
+                }
         }
     }
+
+    private data class FoodData(
+        val breakfast: List<Food>,
+        val lunch: List<Food>,
+        val dinner: List<Food>,
+        val snacks: List<Food>,
+        val consumedCalories: Int
+    )
 
     private fun LoggedFood.toFood(): Food {
         return Food(
@@ -90,5 +119,16 @@ class DiaryViewModel @Inject constructor(
             protein = this.protein,
             isMeal = false
         )
+    }
+
+    private fun foodForUser(
+        mealType: MealType,
+        userId: String
+    ): Flow<List<LoggedFood>> {
+        return userPreferencesRepository
+            .getFoodsForMeal(mealType)
+            .map { foods ->
+                foods.filter { it.userId == userId }
+            }
     }
 }

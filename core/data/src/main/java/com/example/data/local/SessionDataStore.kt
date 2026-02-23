@@ -17,6 +17,7 @@ class SessionDataStore(private val context: Context) {
         private val REMEMBER_ME = booleanPreferencesKey("remember_me")
         private val EMAIL = stringPreferencesKey("email")
         private val PASSWORD = stringPreferencesKey("password")
+        private val NAME = stringPreferencesKey("name")
     }
 
     suspend fun saveSession(token: String, rememberMe: Boolean) {
@@ -35,6 +36,8 @@ class SessionDataStore(private val context: Context) {
     val email: Flow<String?> = context.sessionDataStore.data.map { prefs -> prefs[EMAIL] }
     val password: Flow<String?> = context.sessionDataStore.data.map { prefs -> prefs[PASSWORD] }
 
+    val name: Flow<String?> = context.sessionDataStore.data.map { prefs -> prefs[NAME] }
+
     suspend fun saveEmail(email: String) {
         context.sessionDataStore.edit { prefs -> prefs[EMAIL] = email }
     }
@@ -45,5 +48,9 @@ class SessionDataStore(private val context: Context) {
 
     suspend fun clearSession() {
         context.sessionDataStore.edit { it.clear() }
+    }
+
+    suspend fun saveName(name: String) {
+        context.sessionDataStore.edit { prefs -> prefs[NAME] = name }
     }
 }

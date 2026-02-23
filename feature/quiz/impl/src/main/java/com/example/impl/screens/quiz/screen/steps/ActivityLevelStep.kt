@@ -38,6 +38,9 @@ fun ActivityLevelStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             .background(color = White),
         horizontalAlignment = Alignment.Start
     ) {
+
+        Spacer(modifier = Modifier.height(30.dp))
+
         Text(
             text = "what is your baseline activity \nlevel?",
             fontSize = 22.sp,

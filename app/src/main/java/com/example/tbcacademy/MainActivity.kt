@@ -14,11 +14,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.example.api.AuthenticationNavKey
 import com.example.api.DashboardNavKey
 import com.example.api.DiaryNavKey
+import com.example.api.ProfileNavKey
 import com.example.api.QuizNavKey
 import com.example.api.SplashNavKey
 import com.example.core.navigation.Navigator
@@ -30,7 +32,7 @@ import com.example.impl.navigation.addFoodEntry
 import com.example.impl.navigation.diaryEntry
 import com.example.impl.navigation.homeEntry
 import com.example.impl.navigation.loginEntry
-import com.example.impl.navigation.moreNavEntry
+import com.example.impl.navigation.profileEntry
 import com.example.impl.navigation.quizEntry
 import com.example.impl.navigation.registerEntry
 import com.example.impl.navigation.searchNavEntry
@@ -48,6 +50,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             ComposeAppTheme {
                 AppNavigation()
@@ -64,10 +68,10 @@ private fun AppNavigation() {
             AuthenticationNavKey.WelcomeNavKey,
             QuizNavKey.QuizKey,
             DashboardNavKey.HomeNavKey,
-            DashboardNavKey.MoreNavKey,
             DashboardNavKey.SearchNavKey,
             DiaryNavKey.DiaryNavKey,
             SplashNavKey,
+            ProfileNavKey.ProfileNavKey
             //AddFoodDetailNavKey//es unda wavshalo ro imushaos
         )
     )
@@ -87,11 +91,11 @@ private fun AppNavigation() {
         quizEntry(navigator)
         homeEntry(navigator)
         diaryEntry(navigator)
-        moreNavEntry(navigator)
         searchNavEntry(navigator)
         addFoodEntry(navigator)
         addFoodDetailsEntry(navigator)
         splashEntry(navigator)
+        profileEntry(navigator)
     }
 
     val entries = navigationState.toEntries(entryProvider)
@@ -105,7 +109,7 @@ private fun AppNavigation() {
 
             if (
                 currentKey is DashboardNavKey.HomeNavKey ||
-                currentKey is DashboardNavKey.MoreNavKey ||
+                currentKey is ProfileNavKey.ProfileNavKey ||
                 currentKey is DashboardNavKey.SearchNavKey ||
                 currentKey is DiaryNavKey.DiaryNavKey
             ) {
@@ -113,14 +117,13 @@ private fun AppNavigation() {
                 val currentDestination = when (currentKey) {
                     is DashboardNavKey.HomeNavKey -> BottomBarDestination.Home
                     is DiaryNavKey.DiaryNavKey -> BottomBarDestination.Diary
-                    is DashboardNavKey.MoreNavKey -> BottomBarDestination.More
+                    is ProfileNavKey.ProfileNavKey -> BottomBarDestination.Profile
                     is DashboardNavKey.SearchNavKey -> BottomBarDestination.Search
                     else -> BottomBarDestination.Home
                 }
 
                 BottomBar(
                     currentDestination = currentDestination,
-                    hasSearch = currentKey is DashboardNavKey.HomeNavKey,
                     navigator = { destination ->
                         when (destination) {
                             BottomBarDestination.Home -> navigator.navigate(
@@ -128,7 +131,7 @@ private fun AppNavigation() {
                             )
 
                             BottomBarDestination.Diary -> navigator.navigate(DiaryNavKey.DiaryNavKey)
-                            BottomBarDestination.More -> navigator.navigate(DashboardNavKey.MoreNavKey)
+                            BottomBarDestination.Profile -> navigator.navigate(ProfileNavKey.ProfileNavKey)
                             BottomBarDestination.Search -> navigator.navigate(DashboardNavKey.SearchNavKey)
                         }
                     }

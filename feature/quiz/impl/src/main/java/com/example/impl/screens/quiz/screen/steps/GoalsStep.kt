@@ -39,6 +39,9 @@ fun GoalsStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             .background(color = White),
         horizontalAlignment = Alignment.Start
     ) {
+
+        Spacer(modifier = Modifier.height(30.dp))
+
         Text(
             text = "In the past, what have been the barriers to losing weight?",
             fontSize = 22.sp,

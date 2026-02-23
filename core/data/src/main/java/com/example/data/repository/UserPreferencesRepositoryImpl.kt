@@ -12,6 +12,8 @@ import com.example.domain.repository.UserPreferencesRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
 import java.util.Calendar
@@ -22,7 +24,7 @@ private val Context.userPrefsDataStore by preferencesDataStore("user_preferences
 
 @Singleton
 class UserPreferencesRepositoryImpl @Inject constructor(
-    @param: ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
     private val json: Json
 ) : UserPreferencesRepository {
 
@@ -42,17 +44,38 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         private val DINNER_FOODS = stringPreferencesKey("dinner_foods")
         private val SNACKS_FOODS = stringPreferencesKey("snacks_foods")
         private val LAST_RESET_DATE = longPreferencesKey("last_reset_date")
+        private val CURRENT_USER_ID = stringPreferencesKey("current_user_id")
     }
 
     override suspend fun saveGoalCalories(calories: Int) {
+        val userId = getCurrentUserId().first() ?: return
         dataStore.edit { prefs ->
-            prefs[GOAL_CALORIES] = calories
+            prefs[goalCaloriesKey(userId)] = calories
         }
     }
 
+    override suspend fun setCurrentUserId(userId: String?) {
+        dataStore.edit { prefs ->
+            if (userId == null) {
+                prefs.remove(CURRENT_USER_ID)
+            } else {
+                prefs[CURRENT_USER_ID] = userId
+            }
+        }
+    }
+
+    private fun goalCaloriesKey(userId: String) =
+        intPreferencesKey("goal_calories_$userId")
+
     override fun getGoalCalories(): Flow<Int> {
-        return dataStore.data.map { prefs ->
-            prefs[GOAL_CALORIES] ?: 2000
+        return getCurrentUserId().flatMapLatest { userId ->
+            if (userId == null) {
+                flowOf(2000)
+            } else {
+                dataStore.data.map { prefs ->
+                    prefs[goalCaloriesKey(userId)] ?: 2000
+                }
+            }
         }
     }
 
@@ -85,12 +108,22 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         val todayStart = getTodayStartTime()
 
         if (lastResetDate < todayStart) {
-            val list = listOf(BREAKFAST_FOODS, LUNCH_FOODS, DINNER_FOODS, SNACKS_FOODS)
+            val userId = getCurrentUserId().first() ?: return
+
+            val mealKeys = listOf(
+                MealType.BREAKFAST to BREAKFAST_FOODS,
+                MealType.LUNCH to LUNCH_FOODS,
+                MealType.DINNER to DINNER_FOODS,
+                MealType.SNACKS to SNACKS_FOODS
+            )
+
+            mealKeys.forEach { (mealType, _) ->
+                val allFoods = getFoodsForMeal(mealType).first()
+                val otherUsersFoods = allFoods.filter { it.userId != userId }
+                saveFoodsForMeal(mealType, otherUsersFoods)
+            }
 
             dataStore.edit { prefs ->
-                list.forEach { key ->
-                    prefs[key] = ""
-                }
                 prefs[LAST_RESET_DATE] = System.currentTimeMillis()
             }
         }
@@ -115,7 +148,6 @@ class UserPreferencesRepositoryImpl @Inject constructor(
 
         dataStore.edit { prefs ->
             prefs[key] = json.encodeToString<List<LoggedFood>>(foods)
-            prefs[LAST_RESET_DATE] = System.currentTimeMillis()
         }
     }
 
@@ -152,9 +184,8 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     override suspend fun clearOnlyDailyFoodLogs() {
         val list = listOf(BREAKFAST_FOODS, LUNCH_FOODS, DINNER_FOODS, SNACKS_FOODS)
         dataStore.edit { prefs ->
-            list.forEach { key ->
-                prefs[key] = ""
-            }
+            list.forEach { key -> prefs[key] = "" }
+            prefs[LAST_RESET_DATE] = System.currentTimeMillis()
         }
     }
 
@@ -162,5 +193,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         dataStore.edit { prefs ->
             prefs.clear()
         }
+    }
+
+    override fun getCurrentUserId(): Flow<String?> = dataStore.data.map { prefs ->
+        prefs[CURRENT_USER_ID]
     }
 }

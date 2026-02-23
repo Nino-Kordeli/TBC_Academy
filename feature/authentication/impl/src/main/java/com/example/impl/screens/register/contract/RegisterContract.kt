@@ -4,7 +4,8 @@ data class RegisterState(
     val email: String = "",
     val password: String = "",
     val repeatPassword: String = "",
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val name: String = ""
 )
 
 sealed interface RegisterEvent {

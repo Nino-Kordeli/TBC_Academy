@@ -2,6 +2,7 @@ package com.example.impl.screens.quiz.vm
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.UserPreferencesRepository
+import com.example.domain.usecase.user_session.SaveNameUseCase
 import com.example.impl.screens.quiz.contract.QuizEvent
 import com.example.impl.screens.quiz.contract.QuizSideEffect
 import com.example.impl.screens.quiz.contract.QuizState
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val saveNameUseCase: SaveNameUseCase
 ) : BaseViewModel<QuizState, QuizEvent, QuizSideEffect>(
     initialState = QuizState(
         currentStep = QuizStep.NAME,
@@ -169,6 +171,7 @@ class QuizViewModel @Inject constructor(
             // Quiz finished
             val calories = state.value.calculatedCalories ?: 2000
             viewModelScope.launch {
+                saveNameUseCase(state.value.name)//Saving the name
                 userPreferencesRepository.saveGoalCalories(calories)
                 userPreferencesRepository.saveUserProfile(
                     email = "",

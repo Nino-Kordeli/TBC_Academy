@@ -45,6 +45,9 @@ fun AboutYourselfStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             .fillMaxSize()
             .background(color = White)
     ) {
+
+        Spacer(modifier = Modifier.height(30.dp))
+
         Text(
             text = "Tell us a little bit about yourself",
             fontSize = 22.sp,

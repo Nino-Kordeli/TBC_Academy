@@ -12,8 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.designsystem.theme.White
 import com.example.impl.screens.quiz.components.QuizBottomBar
 import com.example.impl.screens.quiz.components.QuizProgressBar
 import com.example.impl.screens.quiz.contract.QuizEvent
@@ -34,6 +38,7 @@ fun QuizScreen(
     viewModel: QuizViewModel = hiltViewModel(),
     onNavigateToDashboard: () -> Unit
 ) {
+
     val state = viewModel.state.collectAsStateWithLifecycle().value
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -56,6 +61,9 @@ fun QuizScreen(
     }
 
     Scaffold(
+        topBar = {
+            QuizProgressBar(progress = state.progress)
+        },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         bottomBar = {
             QuizBottomBar(
@@ -67,7 +75,7 @@ fun QuizScreen(
         }
     ) { padding ->
         BaseScreen(
-            modifier = Modifier.padding(padding),
+            modifier = Modifier.padding(23.dp),
             viewModel = viewModel,
             onSideEffect = { effect ->
                 when (effect) {

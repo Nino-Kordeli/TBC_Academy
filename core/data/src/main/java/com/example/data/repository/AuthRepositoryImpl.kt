@@ -17,13 +17,6 @@ class AuthRepositoryImpl @Inject constructor(
     private val dataSource: FirebaseAuthDataSource
 ) : AuthRepository {
 
-//    override suspend fun login(email: String, password: String, rememberMe: Boolean) {
-//        val token = dataSource.login(email, password)
-//        if (rememberMe) {
-//            sessionDataStore.saveSession(token = token, rememberMe = true)
-//        }
-//    }
-
     override suspend fun login(
         email: String,
         password: String
@@ -33,11 +26,14 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun register(email: String, password: String, rememberMe: Boolean) {
-        val token = dataSource.register(email, password)
+    override suspend fun register(email: String, password: String, rememberMe: Boolean): String {
+        val userId = dataSource.register(email, password)
+
         if (rememberMe) {
-            sessionDataStore.saveSession(token = token, rememberMe = true)
+            sessionDataStore.saveSession(token = userId, rememberMe = true)
         }
+
+        return userId
     }
 
     override suspend fun logout() {

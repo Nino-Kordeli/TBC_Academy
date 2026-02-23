@@ -39,18 +39,15 @@ import com.example.designsystem.theme.White
 @Composable
 fun BottomBar(
     currentDestination: BottomBarDestination?,
-    hasSearch: Boolean,
     navigator: BottomBarNavigator
 ) {
-    val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-    val barHeight = 80.dp + bottomPadding
-    val totalHeight = if (hasSearch) 160.dp + bottomPadding else barHeight
+    val barHeight = 110.dp
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(totalHeight)
-            .background(Color.White)
+            .height(barHeight)
+            .background(Color.Transparent)
     ) {
         Image(
             painter = painterResource(R.drawable.vector_4),
@@ -58,49 +55,16 @@ fun BottomBar(
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(totalHeight)
+                .height(barHeight)
                 .align(Alignment.BottomCenter),
             colorFilter = ColorFilter.tint(PrimaryBlue)
         )
-
-        if (hasSearch) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.6f)
-                    .height(55.dp)
-                    .align(Alignment.TopCenter)
-                    .offset(y = 18.dp)
-                    .clip(RoundedCornerShape(28.dp))
-                    .background(Color.White)
-                    .clickable { navigator.onNavigate(BottomBarDestination.Search) },
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 20.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_magnifying_glass),
-                        contentDescription = null,
-                        tint = PrimaryBlue,
-                        modifier = Modifier.size(22.dp)
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text(
-                        "Search for food",
-                        color = Color.Gray,
-                        fontSize = 15.sp
-                    )
-                }
-            }
-        }
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .height(barHeight)
-                .padding(bottom = bottomPadding), // push above nav bar
+                .height(barHeight),
             verticalAlignment = Alignment.CenterVertically
         ) {
             NavigationItem(
@@ -118,10 +82,10 @@ fun BottomBar(
                 modifier = Modifier.weight(1f)
             )
             NavigationItem(
-                iconRes = R.drawable.ic_more,
-                label = "More",
-                selected = currentDestination is BottomBarDestination.More,
-                onClick = { navigator.onNavigate(BottomBarDestination.More) },
+                iconRes = R.drawable.ic_user_icon,
+                label = "Profile",
+                selected = currentDestination is BottomBarDestination.Profile,
+                onClick = { navigator.onNavigate(BottomBarDestination.Profile) },
                 modifier = Modifier.weight(1f)
             )
         }

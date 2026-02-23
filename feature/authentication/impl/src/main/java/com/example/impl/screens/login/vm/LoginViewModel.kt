@@ -72,19 +72,13 @@ class LoginViewModel @Inject constructor(
                         updateState { it.copy(isLoading = result.loading) }
                     }
 
-                    is Resource.Success<String> -> {
+                    is Resource.Success -> {
+                        userSessionRepository.saveEmail(currentState.email)
                         if (currentState.rememberMe) {
-                            userSessionRepository.saveEmail(currentState.email)
                             userSessionRepository.savePassword(currentState.password)
                         } else {
-                            userSessionRepository.saveEmail("")
                             userSessionRepository.savePassword("")
                         }
-
-                        saveSessionUseCase.invoke(
-                            token = result.data,
-                            rememberMe = state.value.rememberMe
-                        )
                         emitSideEffect(LoginSideEffect.NavigateToHome)
                     }
                 }

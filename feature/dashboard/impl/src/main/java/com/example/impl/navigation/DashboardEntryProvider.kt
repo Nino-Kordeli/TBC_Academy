@@ -19,17 +19,6 @@ fun EntryProviderScope<NavKey>.homeEntry(
     }
 }
 
-fun EntryProviderScope<NavKey>.moreNavEntry(
-    navigator: Navigator
-) {
-    entry<DashboardNavKey.MoreNavKey> {
-//        DashboardScreen(
-//            onSearchClick = {},
-//            navigator = navigator
-//        )
-    }
-}
-
 fun EntryProviderScope<NavKey>.searchNavEntry(
     navigator: Navigator
 ) {

@@ -33,6 +33,9 @@ fun BodyInfoStep(state: QuizState, onEvent: (QuizEvent) -> Unit) {
             .fillMaxSize()
             .background(color = White)
     ) {
+
+        Spacer(modifier = Modifier.height(30.dp))
+
         Text(
             text = "Just a few more questions",
             fontSize = 22.sp,

@@ -30,6 +30,9 @@ fun AccountCreatedStep(calculatedCalories: Int?) {
             .background(White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Spacer(modifier = Modifier.height(30.dp))
+
         Text(
             text = "Account Created",
             fontSize = 16.sp,

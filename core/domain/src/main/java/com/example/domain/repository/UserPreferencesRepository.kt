@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserPreferencesRepository {
     suspend fun saveGoalCalories(calories: Int)
+    suspend fun setCurrentUserId(userId: String?)
     fun getGoalCalories(): Flow<Int>
-
     suspend fun saveUserProfile(
         email: String,
         name: String?,
@@ -16,7 +16,6 @@ interface UserPreferencesRepository {
         age: Int?,
         gender: String?
     )
-
     fun getUserEmail(): Flow<String?>
     suspend fun checkAndResetDailyData()
     suspend fun saveFoodsForMeal(mealType: MealType, foods: List<LoggedFood>)
@@ -24,4 +23,5 @@ interface UserPreferencesRepository {
     suspend fun addFood(mealType: MealType, food: LoggedFood)
     suspend fun clearOnlyDailyFoodLogs()
     suspend fun clearAllUserData()
+    fun getCurrentUserId(): Flow<String?>
 }

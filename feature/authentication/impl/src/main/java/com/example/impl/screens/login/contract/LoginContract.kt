@@ -4,7 +4,9 @@ data class LoginState(
     val email: String = "",
     val password: String = "",
     val isLoading: Boolean = false,
-    val rememberMe: Boolean = false
+    val rememberMe: Boolean = false,
+    val userId: String? = null,
+    val name: String? = null
 )
 
 sealed interface LoginEvent {
