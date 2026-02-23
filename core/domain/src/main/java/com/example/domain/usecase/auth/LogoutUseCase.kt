@@ -9,7 +9,6 @@ class LogoutUseCase @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository
 ) {
     suspend operator fun invoke() {
-        userPreferencesRepository.clearOnlyDailyFoodLogs()//arvic ies aclearebs tu ara foodebs
         userPreferencesRepository.setCurrentUserId(null)
         userSessionRepository.logout()
     }

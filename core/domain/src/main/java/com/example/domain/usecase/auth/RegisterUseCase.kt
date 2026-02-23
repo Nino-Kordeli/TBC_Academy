@@ -3,6 +3,7 @@ package com.example.domain.usecase.auth
 import com.example.domain.repository.UserPreferencesRepository
 import com.example.domain.repository.UserSessionRepository
 import com.example.domain.repository.auth.AuthRepository
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class RegisterUseCase @Inject constructor(
@@ -16,13 +17,16 @@ class RegisterUseCase @Inject constructor(
         rememberMe: Boolean,
         name: String
     ) {
+        val previousUserId = userPreferencesRepository.getCurrentUserId().first()
         val userId = repository.register(email, password, rememberMe)
+
+        if (previousUserId != userId) {
+            userPreferencesRepository.clearOnlyDailyFoodLogs()
+        }
 
         userSessionRepository.saveSession(token = "", rememberMe)
         userSessionRepository.saveName(name)
         userSessionRepository.saveEmail(email)
-
-        userPreferencesRepository.clearOnlyDailyFoodLogs()
         userPreferencesRepository.setCurrentUserId(userId)
     }
 }

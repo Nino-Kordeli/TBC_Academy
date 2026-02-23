@@ -113,7 +113,7 @@
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(28.dp)
+                            .height(48.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .background(color = White)
                             .padding(end = 12.dp, start = 12.dp),
@@ -136,19 +136,24 @@
                                         onEvent(AddFoodDetailsEvent.ServingsChanged(servings - 1))
                                     }
                                 },
-                                modifier = Modifier
-                                    .size(32.dp)
-                                    .background(
-                                        color = if (servings > 1) PrimaryBlue else Color.LightGray,
-                                        shape = CircleShape
-                                    )
+                                modifier = Modifier.size(28.dp)
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.Remove,
-                                    contentDescription = "Decrease",
-                                    tint = White,
-                                    modifier = Modifier.size(16.dp)
-                                )
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .background(
+                                            color = if (servings > 1) PrimaryBlue else Color.LightGray,
+                                            shape = CircleShape
+                                        ),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Remove,
+                                        contentDescription = "Decrease",
+                                        tint = White,
+                                        modifier = Modifier.size(14.dp)
+                                    )
+                                }
                             }
 
                             Text(
@@ -162,16 +167,21 @@
                                 onClick = {
                                     onEvent(AddFoodDetailsEvent.ServingsChanged(servings + 1))
                                 },
-                                modifier = Modifier
-                                    .size(32.dp)
-                                    .background(PrimaryBlue, shape = CircleShape)
+                                modifier = Modifier.size(28.dp)
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.Add,
-                                    contentDescription = "Increase",
-                                    tint = White,
-                                    modifier = Modifier.size(16.dp)
-                                )
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .background(PrimaryBlue, shape = CircleShape),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Add,
+                                        contentDescription = "Increase",
+                                        tint = White,
+                                        modifier = Modifier.size(14.dp)
+                                    )
+                                }
                             }
                         }
                     }
@@ -210,8 +220,9 @@
                             )
                         }
 
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(24.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             IngredientMass(
                                 amount = "${carbsPerServing.roundToInt()}g",

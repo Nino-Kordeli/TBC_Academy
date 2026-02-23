@@ -5,6 +5,7 @@ import com.example.domain.repository.UserPreferencesRepository
 import com.example.domain.repository.UserSessionRepository
 import com.example.domain.repository.auth.AuthRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -19,9 +20,15 @@ class LoginUseCase @Inject constructor(
     ): Flow<Resource<String>> {
         return repository.login(email, password).onEach { resource ->
             if (resource is Resource.Success) {
-                val userId = resource.data
-                userPreferencesRepository.clearOnlyDailyFoodLogs()//es ukve wavshale meored vamateb
-                userPreferencesRepository.setCurrentUserId(userId)
+                val newUserId = resource.data
+                val previousUserId = userPreferencesRepository.getCurrentUserId().first()
+
+                if (previousUserId != null && previousUserId != newUserId) {
+                    userPreferencesRepository.clearOnlyDailyFoodLogs()
+                }
+
+                userPreferencesRepository.setCurrentUserId(newUserId)
+                userSessionRepository.saveEmail(email)
             }
         }
     }
