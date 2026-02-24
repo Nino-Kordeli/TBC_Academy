@@ -28,21 +28,14 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun register(
-        email: String,
-        password: String,
-        rememberMe: Boolean
-    ): Flow<Resource<String>> {
-        return handleRegisterResponse.apiCall {
-            val result = auth.createUserWithEmailAndPassword(email, password).await()
-            val userId = result.user?.uid ?: throw Exception("No user returned")
+    override suspend fun register(email: String, password: String, rememberMe: Boolean): String {
+        val userId = dataSource.register(email, password)
 
-            if (rememberMe) {
-                sessionDataStore.saveSession(token = userId, rememberMe = true)
-            }
-
-            result
+        if (rememberMe) {
+            sessionDataStore.saveSession(token = userId, rememberMe = true)
         }
+
+        return userId
     }
 
     override suspend fun logout() {
