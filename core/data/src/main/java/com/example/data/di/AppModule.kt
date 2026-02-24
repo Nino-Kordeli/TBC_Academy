@@ -1,6 +1,8 @@
 package com.example.data.di
 
-import com.example.data.remote.FoodApi
+import com.example.data.remote.food.FoodApi
+import com.example.data.remote.recipe.RecipeApi
+import com.example.data.remote.workout.WorkoutApi
 import com.example.data.response_handler.retrofit.HandleRetrofitResponse
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -69,5 +71,17 @@ object AppModule {
     @Singleton
     fun provideFoodApi(retrofit: Retrofit): FoodApi {
         return retrofit.create(FoodApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRecipeApi(retrofit: Retrofit): RecipeApi {
+        return retrofit.create(RecipeApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWorkoutApi(retrofit: Retrofit): WorkoutApi {
+        return retrofit.create(WorkoutApi::class.java)
     }
 }

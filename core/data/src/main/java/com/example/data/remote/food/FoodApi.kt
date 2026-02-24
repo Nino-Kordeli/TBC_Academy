@@ -1,4 +1,4 @@
-package com.example.data.remote
+package com.example.data.remote.food
 
 import com.example.data.dto.food.FoodResponseDto
 import com.example.data.dto.recipe.RecipeResponseDto
@@ -9,10 +9,4 @@ import retrofit2.http.GET
 interface FoodApi {
     @GET("foods")
     suspend fun getFoods(): Response<FoodResponseDto>
-
-    @GET("workouts")
-    suspend fun getWorkouts(): Response<WorkoutResponseDto>
-
-    @GET("recipes")
-    suspend fun getRecipes(): Response<RecipeResponseDto>
 }

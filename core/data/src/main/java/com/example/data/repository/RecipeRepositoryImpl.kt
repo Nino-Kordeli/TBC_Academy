@@ -2,7 +2,7 @@ package com.example.data.repository
 
 import com.example.common.resource.Resource
 import com.example.data.mapper.recipe.toDomain
-import com.example.data.remote.FoodApi
+import com.example.data.remote.recipe.RecipeApi
 import com.example.domain.RecipeRepository
 import com.example.domain.model.recipe.RecipeCategory
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class RecipeRepositoryImpl @Inject constructor(
-    private val recipeApi: FoodApi
+    private val recipeApi: RecipeApi
 ) : RecipeRepository {
     override fun getRecipes(): Flow<Resource<List<RecipeCategory>>> = flow {
         emit(Resource.Loading(true))
