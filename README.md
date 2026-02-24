@@ -12,6 +12,68 @@ The platform also includes a **discovery-focused experience** powered by multipl
 
 Designed using **enterprise-level Android architecture principles**, MyFitnessJourney demonstrates how modern mobile applications can integrate **background processing, hardware interaction, and modular scalability** while maintaining a clean and maintainable codebase.
 
+# Screenshots
+---
+## Splash Screen
+
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/4ed68a62-be2e-40ff-babb-50a7209cd2f8" />
+
+## Welcome Screen
+
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/60bf2585-cba8-4308-990d-f1c8925ae33d" />
+
+## Login Screen
+
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/b3794afd-4cb4-418e-8d2c-fa15ae2ee76a" />
+
+## Registration Screen
+
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/485d5f70-ed76-4330-8cc1-b73bce8b69b2" />
+
+## Quiz Pages
+
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/1a628f92-fb7d-4c1c-97a1-855768075351" />
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/0758300f-b4c2-4203-99ab-963e644d80a6" />
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/7ba0f375-8f4e-47cb-8b5f-8731619b54f9" />
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/494cdea4-637f-4016-be75-33570b1cccfb" />
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/a6091ed3-21fe-4312-8096-e79bde1e4ffb" />
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/7f83480d-e29e-400c-9cb1-959240d74daa" />
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/a7185ae0-1127-4c0d-8a08-624e8f75eb1c" />
+
+## Dashboard Screen
+
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/bde3d3e8-fb3b-47e0-a5af-cae1963cf7d0" />
+
+## Exercises Screen
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/c077699b-01f7-48e2-b3f9-e35be2009536" />
+
+## Recipes Screen
+
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/c7cc7c4d-bbf8-4c97-b447-61c8ef926e4c" />
+
+## Diary Screen
+
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/393114f5-90e7-4eab-b483-0cbb072cc60c" />
+
+## Add Food Screen
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/f6a2ca4d-2e53-4764-8784-bca57a7ee114" />
+
+## Food Nutrition Screen
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/3c5525f6-b571-4f5e-a2d4-f5c680802cb4" />
+
+## Add Food Screen with Logged Data
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/d9678cea-9709-4a34-9f54-67be2bdde4ba" />
+
+## Exercises Screen Logging
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/918d74ce-8463-4529-a19a-7d7f053ba93f" />
+
+## Dashboard Screen with Logged Data
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/68476022-b71c-4c0d-87f8-19e757ef82de" />
+
+## User Profile Screen
+<img width="465" height="1023" alt="image" src="https://github.com/user-attachments/assets/b8a15bf2-7b98-4b1f-afc3-8d540572d46c" />
+
+
 ---
 # 🛠 Tech Stack
 
@@ -19,7 +81,7 @@ Designed using **enterprise-level Android architecture principles**, MyFitnessJo
 
 • **Multi-Module Architecture** — Clean Architecture with Feature API / Implementation split enforcing strict module boundaries  
 • **Clean Architecture** — Separation of Data, Domain, and Presentation layers  
-• **MVVM + MVI-Inspired State Management** — Reactive UI with predictable state handling  
+• **MVI-Inspired State Management** — Reactive UI with predictable state handling  
 • **Repository Pattern** — Centralized data access across network and local sources  
 • **Unidirectional Data Flow (UDF)** — Immutable UI states powered by Compose  
 
@@ -33,7 +95,7 @@ Designed using **enterprise-level Android architecture principles**, MyFitnessJo
 • **Navigation Compose** — Type-safe navigation between feature modules  
 • **Coil (Compose Image Loader)** — Efficient async image loading for recipes and workouts  
 • **Custom Design System** — Modularized typography, themes, and reusable UI components  
-• **Splash Screen API** — Modern Android startup experience  
+• **Splash Screen** — Modern Android startup experience  
 • **Adaptive App Icon** — Custom launcher icon supporting all screen densities  
 
 ---
