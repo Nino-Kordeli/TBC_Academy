@@ -16,7 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.designsystem.theme.NeutralLightGray
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 
 @Composable
@@ -43,7 +43,7 @@ internal fun ItemRow(
         Text(
             text = secondaryLabel,
             fontSize = 14.sp,
-            color = PrimaryBlue
+            color = PrimaryColorPink
         )
     }
     HorizontalDivider(

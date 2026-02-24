@@ -52,7 +52,7 @@ fun QuizScreen(
         }
     }
 
-    BackHandler() {}
+    BackHandler {}
 
     Column(modifier = Modifier.fillMaxWidth()) {
         QuizProgressBar(
@@ -73,9 +73,9 @@ fun QuizScreen(
                 onBack = { viewModel.onEvent(QuizEvent.BackClicked) }
             )
         }
-    ) { _ ->
+    ) { padding ->
         BaseScreen(
-            modifier = Modifier.padding(23.dp),
+            modifier = Modifier,
             viewModel = viewModel,
             onSideEffect = { effect ->
                 when (effect) {

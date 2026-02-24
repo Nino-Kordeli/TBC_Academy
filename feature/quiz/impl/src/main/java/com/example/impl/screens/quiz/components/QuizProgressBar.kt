@@ -3,12 +3,13 @@ package com.example.impl.screens.quiz.components
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 
 @Composable
 fun QuizProgressBar(progress: Float) {
@@ -20,9 +21,10 @@ fun QuizProgressBar(progress: Float) {
     LinearProgressIndicator(
         progress = { animatedProgress.value },
         modifier = Modifier
+            .statusBarsPadding()
             .fillMaxWidth()
             .height(6.dp),
-        color = PrimaryBlue
+        color = PrimaryColorPink
     )
 }
 

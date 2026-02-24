@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.designsystem.theme.LightGray
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.impl.screens.register.contract.RegisterEvent
 import com.example.impl.screens.register.contract.RegisterSideEffect
@@ -102,7 +102,7 @@ fun RegisterScreen(
                     .padding(horizontal = 32.dp)
                     .height(40.dp),
                 colors = ButtonDefaults
-                    .buttonColors(containerColor = PrimaryBlue),
+                    .buttonColors(containerColor = PrimaryColorPink),
                 onClick = { onEvent(RegisterEvent.RegisterClicked) },
 
                 ) {
@@ -113,7 +113,7 @@ fun RegisterScreen(
 
             Text(
                 text = "Already have an account?",
-                color = PrimaryBlue,
+                color = PrimaryColorPink,
                 fontWeight = FontWeight.Bold,
                 fontSize = 15.sp,
                 modifier = Modifier.clickable {

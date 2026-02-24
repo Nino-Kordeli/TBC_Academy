@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.designsystem.R
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 
 @Composable
@@ -34,7 +34,7 @@ fun BottomBar(
         modifier = Modifier
             .fillMaxWidth()
             .height(110.dp)
-            .background(PrimaryBlue)
+            .background(PrimaryColorPink)
     ) {
         Row(
             modifier = Modifier

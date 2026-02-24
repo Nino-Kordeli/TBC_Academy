@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.Green
 import com.example.designsystem.theme.Orange
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 
 @Composable
 internal fun NutritionCircularProgress(
@@ -38,7 +38,7 @@ internal fun NutritionCircularProgress(
 
             val carbsSweep = (carbs / total) * 360f
             drawArc(
-                color = PrimaryBlue,
+                color = PrimaryColorPink,
                 startAngle = currentAngle,
                 sweepAngle = carbsSweep,
                 useCenter = false,

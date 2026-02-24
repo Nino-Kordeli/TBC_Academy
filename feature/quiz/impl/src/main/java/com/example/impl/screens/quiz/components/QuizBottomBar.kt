@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.R
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.designsystem.theme.WhiteBlue
 import com.example.impl.screens.quiz.model.QuizStep
@@ -74,7 +74,7 @@ fun QuizBottomBar(
                     .weight(1f)
                     .height(40.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = PrimaryBlue
+                    containerColor = PrimaryColorPink
                 )
             ) {
                 Text(if (isLastStep) "Finish" else "Next")

@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.designsystem.theme.LightCreamBlue
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 
 @Composable
 fun CheckboxItem(
@@ -56,7 +56,7 @@ fun CheckboxItem(
             checked = checked,
             onCheckedChange = onCheckedChange,
             colors = CheckboxDefaults.colors(
-                checkedColor = (PrimaryBlue)
+                checkedColor = (PrimaryColorPink)
             )
         )
     }

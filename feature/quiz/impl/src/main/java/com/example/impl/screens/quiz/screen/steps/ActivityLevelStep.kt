@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.designsystem.theme.LightCreamBlue
 import com.example.designsystem.theme.LightGray
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.impl.screens.quiz.contract.QuizEvent
 import com.example.impl.screens.quiz.contract.QuizState
@@ -88,7 +88,7 @@ fun SingleChoiceItem(
         modifier = modifier
             .border(
                 width = if (question.selected) 2.dp else 0.dp,
-                color = if (question.selected) PrimaryBlue else Color.Transparent,
+                color = if (question.selected) PrimaryColorPink else Color.Transparent,
                 shape = RoundedCornerShape(10.dp)
             )
             .background(LightCreamBlue, RoundedCornerShape(10.dp))
@@ -115,7 +115,7 @@ fun SingleChoiceItem(
         RadioButton(
             selected = question.selected,
             onClick = onSelect,
-            colors = RadioButtonDefaults.colors(selectedColor = PrimaryBlue)
+            colors = RadioButtonDefaults.colors(selectedColor = PrimaryColorPink)
         )
     }
 }

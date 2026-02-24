@@ -34,7 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.impl.screens.dashboard.components.DailyCaloriesCard
 import com.example.impl.screens.dashboard.components.DiscoverRow
@@ -101,7 +101,7 @@ fun DashboardScreen(
                     Text(
                         text = "My Fitness Journey",
                         fontSize = 25.sp,
-                        color = PrimaryBlue,
+                        color = PrimaryColorPink,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold
                     )

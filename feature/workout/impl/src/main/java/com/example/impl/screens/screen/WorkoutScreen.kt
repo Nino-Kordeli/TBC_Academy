@@ -1,7 +1,6 @@
 package com.example.impl.screens.screen
 
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,7 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,10 +27,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.core.navigation.Navigator
 import com.example.designsystem.theme.Black
 import com.example.designsystem.theme.LightGray
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.domain.model.workout.Exercise
 import com.example.domain.model.workout.WorkoutCategory
@@ -60,7 +57,7 @@ fun WorkoutScreen(
 
         if (state.isLoading) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(color = PrimaryBlue)
+                CircularProgressIndicator(color = PrimaryColorPink)
             }
             return@BaseScreen
         }
@@ -237,7 +234,7 @@ private fun ExerciseCard(
                     .clip(CircleShape)
                     .background(
                         if (isLogged)
-                            PrimaryBlue.copy(alpha = 0.85f)
+                            PrimaryColorPink.copy(alpha = 0.85f)
                         else
                             Color.Black.copy(alpha = 0.35f)
                     )

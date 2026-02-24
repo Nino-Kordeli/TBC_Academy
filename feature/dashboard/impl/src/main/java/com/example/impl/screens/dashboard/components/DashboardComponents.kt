@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.example.designsystem.R
 import com.example.designsystem.theme.Green
 import com.example.designsystem.theme.LightGray
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.impl.screens.dashboard.model.CaloriesUiModel
 
@@ -187,7 +187,7 @@ private fun MultiColorCircularProgress(
 
         if (consumed > 0) {
             drawArc(
-                color = if (netCalories > goal) Color(0xFFFF9800) else PrimaryBlue,
+                color = if (netCalories > goal) Color(0xFFFF9800) else PrimaryColorPink,
                 startAngle = -90f,
                 sweepAngle = 360f * netProgress.coerceIn(0f, 1f),
                 useCenter = false,
@@ -346,7 +346,7 @@ fun DiscoverRow(onWorkoutClick: () -> Unit, onRecipeClick: () -> Unit) {
                     modifier = Modifier
                         .size(44.dp)
                         .background(
-                            color = PrimaryBlue.copy(alpha = 0.12f),
+                            color = PrimaryColorPink.copy(alpha = 0.12f),
                             shape = CircleShape
                         ),
                     contentAlignment = Alignment.Center
@@ -355,7 +355,7 @@ fun DiscoverRow(onWorkoutClick: () -> Unit, onRecipeClick: () -> Unit) {
                         painter = painterResource(R.drawable.dumbbell),
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        colorFilter = ColorFilter.tint(PrimaryBlue)
+                        colorFilter = ColorFilter.tint(PrimaryColorPink)
                     )
                 }
 
@@ -392,7 +392,7 @@ fun DiscoverRow(onWorkoutClick: () -> Unit, onRecipeClick: () -> Unit) {
                     modifier = Modifier
                         .size(44.dp)
                         .background(
-                            color = PrimaryBlue.copy(alpha = 0.12f),
+                            color = PrimaryColorPink.copy(alpha = 0.12f),
                             shape = CircleShape
                         ),
                     contentAlignment = Alignment.Center
@@ -401,7 +401,7 @@ fun DiscoverRow(onWorkoutClick: () -> Unit, onRecipeClick: () -> Unit) {
                         painter = painterResource(R.drawable.ic_recipes),
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        colorFilter = ColorFilter.tint(PrimaryBlue)
+                        colorFilter = ColorFilter.tint(PrimaryColorPink)
                     )
                 }
 

@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.NavKey
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.impl.components.AnimatedDivider
 import com.example.impl.components.AnimatedDumbbell
 import com.example.impl.components.AnimatedSubtitle
@@ -56,7 +56,7 @@ private fun SplashScreenContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(PrimaryBlue),
+            .background(PrimaryColorPink),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

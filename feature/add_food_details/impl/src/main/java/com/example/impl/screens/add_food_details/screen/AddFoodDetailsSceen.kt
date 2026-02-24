@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -35,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.designsystem.theme.NeutralLightGray
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.domain.model.food.Food
 import com.example.impl.screens.add_food_details.components.IngredientMass
@@ -137,7 +136,7 @@ fun AddFoodDetailsScreen(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .background(
-                                        color = if (servings > 1) PrimaryBlue else Color.LightGray,
+                                        color = if (servings > 1) PrimaryColorPink else Color.LightGray,
                                         shape = CircleShape
                                     ),
                                 contentAlignment = Alignment.Center
@@ -155,7 +154,7 @@ fun AddFoodDetailsScreen(
                             text = servings.toString(),
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
-                            color = PrimaryBlue
+                            color = PrimaryColorPink
                         )
 
                         IconButton(
@@ -167,7 +166,7 @@ fun AddFoodDetailsScreen(
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .background(PrimaryBlue, shape = CircleShape),
+                                    .background(PrimaryColorPink, shape = CircleShape),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
@@ -240,7 +239,7 @@ fun AddFoodDetailsScreen(
                         .padding(16.dp)
                         .height(50.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = PrimaryBlue
+                        containerColor = PrimaryColorPink
                     ),
                     onClick = { onEvent(AddFoodDetailsEvent.SaveFood) }
                 ) {

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.designsystem.R
 import com.example.designsystem.theme.MilkyPink
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.VeryLightGray
 import com.example.designsystem.theme.White
 import com.example.domain.model.food.Food
@@ -104,8 +104,8 @@ fun SearchField(
             .fillMaxWidth()
             .padding(horizontal = 14.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = PrimaryBlue,
-            unfocusedBorderColor = PrimaryBlue
+            focusedBorderColor = PrimaryColorPink,
+            unfocusedBorderColor = PrimaryColorPink
         )
     )
 }

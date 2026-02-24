@@ -3,22 +3,17 @@ package com.example.impl.screens.login.screen
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -40,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.designsystem.theme.Black
 import com.example.designsystem.theme.LightGray
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.impl.screens.login.contract.LoginEvent
 import com.example.impl.screens.login.contract.LoginSideEffect
@@ -147,7 +142,7 @@ fun LoginScreen(
                     .padding(horizontal = 32.dp)
                     .height(40.dp),
                 colors = ButtonDefaults
-                    .buttonColors(containerColor = PrimaryBlue),
+                    .buttonColors(containerColor = PrimaryColorPink),
                 onClick = { onEvent(LoginEvent.LoginCLicked) }
             ) {
                 Text(text = "Log In", fontWeight = FontWeight.Bold)

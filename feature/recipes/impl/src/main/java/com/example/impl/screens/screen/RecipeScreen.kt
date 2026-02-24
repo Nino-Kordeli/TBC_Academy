@@ -34,7 +34,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.designsystem.theme.Black
 import com.example.designsystem.theme.LightGray
-import com.example.designsystem.theme.PrimaryBlue
+import com.example.designsystem.theme.PrimaryColorPink
 import com.example.designsystem.theme.White
 import com.example.domain.model.recipe.Recipe
 import com.example.domain.model.recipe.RecipeCategory
@@ -53,7 +53,7 @@ fun RecipeScreen(
 
         if (state.isLoading) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(color = PrimaryBlue)
+                CircularProgressIndicator(color = PrimaryColorPink)
             }
             return@BaseScreen
         }
@@ -197,7 +197,7 @@ private fun RecipeCard(
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    MacroChip(label = "${recipe.calories} kcal", color = PrimaryBlue)
+                    MacroChip(label = "${recipe.calories} kcal", color = PrimaryColorPink)
                     MacroChip(label = "${recipe.protein.toInt()}g protein", color = Color(0xFF4CAF50))
                     MacroChip(label = "${recipe.carbs.toInt()}g carbs", color = Color(0xFFFF9800))
                 }
