@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class StepCounterRepositoryImpl @Inject constructor(
-    @param: ApplicationContext private val context: Context
+    @param:ApplicationContext private val context: Context
 ) : StepCounterRepository {
 
     private val _steps = MutableStateFlow(0)
@@ -32,6 +32,7 @@ class StepCounterRepositoryImpl @Inject constructor(
             if (initialSteps == -1) initialSteps = totalSteps
             _steps.value = totalSteps - initialSteps
         }
+
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
     }
 

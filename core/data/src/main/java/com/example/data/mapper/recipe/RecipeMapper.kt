@@ -1,7 +1,7 @@
-package com.example.data.mapper
+package com.example.data.mapper.recipe
 
-import com.example.data.dto.RecipeCategoryDto
-import com.example.data.dto.RecipeDto
+import com.example.data.dto.recipe.RecipeCategoryDto
+import com.example.data.dto.recipe.RecipeDto
 import com.example.domain.model.recipe.Recipe
 import com.example.domain.model.recipe.RecipeCategory
 

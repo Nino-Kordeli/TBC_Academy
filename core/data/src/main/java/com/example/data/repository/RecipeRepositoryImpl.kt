@@ -1,7 +1,7 @@
 package com.example.data.repository
 
 import com.example.common.resource.Resource
-import com.example.data.mapper.toDomain
+import com.example.data.mapper.recipe.toDomain
 import com.example.data.remote.FoodApi
 import com.example.domain.RecipeRepository
 import com.example.domain.model.recipe.RecipeCategory

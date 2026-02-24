@@ -1,4 +1,4 @@
-package com.example.data.dto
+package com.example.data.dto.recipe
 
 import kotlinx.serialization.Serializable
 

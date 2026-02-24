@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.resource.Resource
 import com.example.domain.repository.UserSessionRepository
 import com.example.domain.usecase.auth.LoginUseCase
-import com.example.domain.usecase.user_session.SaveSessionUseCase
 import com.example.impl.screens.login.contract.LoginEvent
 import com.example.impl.screens.login.contract.LoginSideEffect
 import com.example.impl.screens.login.contract.LoginState
@@ -17,8 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val userSessionRepository: UserSessionRepository,
-    private val saveSessionUseCase: SaveSessionUseCase
+    private val userSessionRepository: UserSessionRepository
 ) : BaseViewModel<LoginState, LoginEvent, LoginSideEffect>(initialState = LoginState()) {
 
     override fun onEvent(event: LoginEvent) {

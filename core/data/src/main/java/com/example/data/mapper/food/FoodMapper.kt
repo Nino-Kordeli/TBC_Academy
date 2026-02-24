@@ -1,7 +1,7 @@
-package com.example.data.mapper
+package com.example.data.mapper.food
 
-import com.example.data.dto.FoodDto
-import com.example.data.dto.FoodResponseDto
+import com.example.data.dto.food.FoodDto
+import com.example.data.dto.food.FoodResponseDto
 import com.example.domain.model.food.Food
 
 fun FoodResponseDto.toDomain() = this.foods.map { it.toDomain() }

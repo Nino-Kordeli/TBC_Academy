@@ -5,5 +5,5 @@ import com.example.domain.model.workout.WorkoutCategory
 import kotlinx.coroutines.flow.Flow
 
 interface WorkoutRepository {
-    fun getWorkouts(): Flow<Resource<List<WorkoutCategory>>>
+    suspend fun getWorkouts(): Flow<Resource<List<WorkoutCategory>>>
 }
