@@ -16,6 +16,7 @@ interface UserPreferencesRepository {
         age: Int?,
         gender: String?
     )
+
     fun getUserEmail(): Flow<String?>
     suspend fun checkAndResetDailyData()
     suspend fun saveFoodsForMeal(mealType: MealType, foods: List<LoggedFood>)
@@ -24,4 +25,8 @@ interface UserPreferencesRepository {
     suspend fun clearOnlyDailyFoodLogs()
     suspend fun clearAllUserData()
     fun getCurrentUserId(): Flow<String?>
+
+    suspend fun addExerciseCalories(calories: Int)
+    fun getExerciseCalories(): Flow<Int>
+    suspend fun clearExerciseCalories()
 }

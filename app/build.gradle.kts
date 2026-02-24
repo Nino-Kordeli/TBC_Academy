@@ -53,6 +53,11 @@ dependencies {
     implementation(projects.tbcacademy.feature.splash.impl)
     implementation(projects.tbcacademy.feature.profile.api)
     implementation(projects.tbcacademy.feature.profile.impl)
+    implementation(projects.tbcacademy.feature.workout.api)
+    implementation(projects.tbcacademy.feature.workout.impl)
+    implementation(projects.tbcacademy.feature.recipes.api)
+    implementation(projects.tbcacademy.feature.recipes.impl)
+
 
     // Core modules
     implementation(projects.core.common)

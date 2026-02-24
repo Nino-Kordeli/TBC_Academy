@@ -51,21 +51,23 @@ class DashboardViewModel @Inject constructor(
                 .flatMapLatest { userId ->
                     combine(
                         userPreferencesRepository.getGoalCalories(),
-                        userPreferencesRepository.getFoodsForMeal(MealType.BREAKFAST),
-                        userPreferencesRepository.getFoodsForMeal(MealType.LUNCH),
-                        userPreferencesRepository.getFoodsForMeal(MealType.DINNER),
-                        userPreferencesRepository.getFoodsForMeal(MealType.SNACKS)
-                    ) { goalCalories, breakfast, lunch, dinner, snacks ->
-                        val totalConsumed =
+                        userPreferencesRepository.getExerciseCalories(),
+                        combine(
+                            userPreferencesRepository.getFoodsForMeal(MealType.BREAKFAST),
+                            userPreferencesRepository.getFoodsForMeal(MealType.LUNCH),
+                            userPreferencesRepository.getFoodsForMeal(MealType.DINNER),
+                            userPreferencesRepository.getFoodsForMeal(MealType.SNACKS)
+                        ) { breakfast, lunch, dinner, snacks ->
                             breakfast.filter { it.userId == userId }.sumOf { it.calories } +
                                     lunch.filter { it.userId == userId }.sumOf { it.calories } +
                                     dinner.filter { it.userId == userId }.sumOf { it.calories } +
                                     snacks.filter { it.userId == userId }.sumOf { it.calories }
-
+                        }
+                    ) { goalCalories, exerciseCalories, totalConsumed ->
                         CaloriesUiModel(
                             goal = goalCalories,
                             food = totalConsumed,
-                            exercise = 0
+                            exercise = exerciseCalories
                         )
                     }
                 }
@@ -74,9 +76,4 @@ class DashboardViewModel @Inject constructor(
                 }
         }
     }
-    override fun onCleared() {
-        super.onCleared()
-    }
 }
-
-

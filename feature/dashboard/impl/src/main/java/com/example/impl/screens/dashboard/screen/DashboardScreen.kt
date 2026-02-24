@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.api.WorkoutNavKey
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
@@ -32,10 +35,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.api.RecipesNavKey
 import com.example.core.navigation.Navigator
 import com.example.designsystem.theme.Pink40
+import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.White
 import com.example.impl.screens.dashboard.components.DailyCaloriesCard
+import com.example.impl.screens.dashboard.components.DiscoverRow
 import com.example.impl.screens.dashboard.components.ProfileIcon
 import com.example.impl.screens.dashboard.components.StepCounterRow
 import com.example.impl.screens.dashboard.vm.DashboardViewModel
@@ -76,6 +82,7 @@ fun DashboardScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .background(White)
         ) {
             Box(
@@ -98,7 +105,7 @@ fun DashboardScreen(
                     Text(
                         text = "My Fitness Journey",
                         fontSize = 25.sp,
-                        color = Pink40,
+                        color = PrimaryBlue,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold
                     )
@@ -112,7 +119,7 @@ fun DashboardScreen(
             ) {
                 Text(text = "Today", fontSize = 30.sp, fontWeight = FontWeight.Bold)
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(26.dp))
 
                 DailyCaloriesCard(data = state.caloriesData)
 
@@ -123,12 +130,28 @@ fun DashboardScreen(
                     calories = state.caloriesData.exercise
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(34.dp))
 
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     contentPadding = PaddingValues(horizontal = 0.dp)
                 ) { }
+
+                Text(text = "Discover", fontSize = 30.sp, fontWeight = FontWeight.Bold)
+
+                Spacer(modifier = Modifier.height(26.dp))
+
+                DiscoverRow(
+                    onWorkoutClick = {
+                        navigator.navigate(WorkoutNavKey.WorkoutNavKey)
+                    },
+                    onRecipeClick = {
+                        navigator.navigate(RecipesNavKey.RecipesNavKey)
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(26.dp))
+
             }
         }
     }

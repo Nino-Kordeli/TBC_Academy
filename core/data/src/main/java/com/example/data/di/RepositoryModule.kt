@@ -1,6 +1,6 @@
 package com.example.data.di
 
-import com.example.data.repository.AuthRepositoryImpl
+import com.example.data.repository.auth.AuthRepositoryImpl
 import com.example.data.repository.FoodRepositoryImpl
 import com.example.data.repository.StepCounterRepositoryImpl
 import com.example.data.repository.UserPreferencesRepositoryImpl

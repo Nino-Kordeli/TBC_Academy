@@ -64,3 +64,9 @@ include(":feature:splash:impl")
 
 include(":feature:profile:api")
 include(":feature:profile:impl")
+
+include(":feature:workout:api")
+include(":feature:workout:impl")
+
+include(":feature:recipes:api")
+include(":feature:recipes:impl")

@@ -16,7 +16,6 @@ class FoodRepositoryImpl @Inject constructor(
 ) : FoodRepository {
 
     override suspend fun getAllFoods(): Flow<Resource<List<Food>>> {
-        return handleResponse.apiCall { foodApi.getFoods() }
-            .asResource { it.toDomain() }
+        return handleResponse.apiCall { foodApi.getFoods() }.asResource { it.toDomain() }
     }
 }

@@ -55,9 +55,15 @@
             <option value="$PROJECT_DIR$/feature/quiz" />
             <option value="$PROJECT_DIR$/feature/quiz/api" />
             <option value="$PROJECT_DIR$/feature/quiz/impl" />
+            <option value="$PROJECT_DIR$/feature/recipes" />
+            <option value="$PROJECT_DIR$/feature/recipes/api" />
+            <option value="$PROJECT_DIR$/feature/recipes/impl" />
             <option value="$PROJECT_DIR$/feature/splash" />
             <option value="$PROJECT_DIR$/feature/splash/api" />
             <option value="$PROJECT_DIR$/feature/splash/impl" />
+            <option value="$PROJECT_DIR$/feature/workout" />
+            <option value="$PROJECT_DIR$/feature/workout/api" />
+            <option value="$PROJECT_DIR$/feature/workout/impl" />
           </set>
         </option>
       </GradleProjectSettings>

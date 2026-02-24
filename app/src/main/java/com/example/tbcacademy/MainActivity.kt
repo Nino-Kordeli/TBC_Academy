@@ -22,7 +22,9 @@ import com.example.api.DashboardNavKey
 import com.example.api.DiaryNavKey
 import com.example.api.ProfileNavKey
 import com.example.api.QuizNavKey
+import com.example.api.RecipesNavKey
 import com.example.api.SplashNavKey
+import com.example.api.WorkoutNavKey
 import com.example.core.navigation.Navigator
 import com.example.core.navigation.rememberNavigationState
 import com.example.core.navigation.toEntries
@@ -34,10 +36,12 @@ import com.example.impl.navigation.homeEntry
 import com.example.impl.navigation.loginEntry
 import com.example.impl.navigation.profileEntry
 import com.example.impl.navigation.quizEntry
+import com.example.impl.navigation.recipesEntry
 import com.example.impl.navigation.registerEntry
 import com.example.impl.navigation.searchNavEntry
 import com.example.impl.navigation.splashEntry
 import com.example.impl.navigation.welcomeEntry
+import com.example.impl.navigation.workoutEntry
 import com.example.ui.components.CustomSnackbar
 import com.example.ui.components.bottom_bar.BottomBar
 import com.example.ui.components.bottom_bar.BottomBarDestination
@@ -71,7 +75,9 @@ private fun AppNavigation() {
             DashboardNavKey.SearchNavKey,
             DiaryNavKey.DiaryNavKey,
             SplashNavKey,
-            ProfileNavKey.ProfileNavKey
+            ProfileNavKey.ProfileNavKey,
+            WorkoutNavKey.WorkoutNavKey,
+            RecipesNavKey.RecipesNavKey
             //AddFoodDetailNavKey//es unda wavshalo ro imushaos
         )
     )
@@ -96,6 +102,8 @@ private fun AppNavigation() {
         addFoodDetailsEntry(navigator)
         splashEntry(navigator)
         profileEntry(navigator)
+        workoutEntry(navigator)
+        recipesEntry(navigator)
     }
 
     val entries = navigationState.toEntries(entryProvider)

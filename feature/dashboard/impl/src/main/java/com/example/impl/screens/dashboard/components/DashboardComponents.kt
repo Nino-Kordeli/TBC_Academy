@@ -3,6 +3,7 @@ package com.example.impl.screens.dashboard.components
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
@@ -30,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.painter.Painter
@@ -304,6 +307,7 @@ fun StepCounterRow(
         }
     }
 }
+
 @Composable
 private fun StepCard(
     modifier: Modifier = Modifier,
@@ -323,5 +327,109 @@ private fun StepCard(
             verticalArrangement = Arrangement.SpaceBetween,
             content = content
         )
+    }
+}
+
+@Composable
+fun DiscoverRow(onWorkoutClick: () -> Unit, onRecipeClick: () -> Unit) {
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(0.dp),
+        horizontalArrangement = Arrangement.spacedBy(14.dp)
+    ) {
+
+        StepCard(
+            modifier = Modifier
+                .weight(1f)
+                .height(160.dp)
+                .clickable { onWorkoutClick() }
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .background(
+                            color = PrimaryBlue.copy(alpha = 0.12f),
+                            shape = CircleShape
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.dumbbell),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        colorFilter = ColorFilter.tint(PrimaryBlue)
+                    )
+                }
+
+                Spacer(Modifier.height(8.dp))
+
+                Text(
+                    text = "Workouts",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
+
+                Spacer(Modifier.height(4.dp))
+
+                Text(
+                    text = "Sweating is self-care",
+                    fontSize = 12.sp,
+                    color = LightGray
+                )
+            }
+        }
+
+        StepCard(
+            modifier = Modifier
+                .weight(1f)
+                .height(160.dp)
+                .clickable { onRecipeClick() }
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .background(
+                            color = PrimaryBlue.copy(alpha = 0.12f),
+                            shape = CircleShape
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_recipes),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        colorFilter = ColorFilter.tint(PrimaryBlue)
+                    )
+                }
+
+                Spacer(Modifier.height(8.dp))
+
+                Text(
+                    text = "Recipes",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
+
+                Spacer(Modifier.height(4.dp))
+
+                Text(
+                    text = "Cook, eat, log, repeat",
+                    fontSize = 12.sp,
+                    color = LightGray
+                )
+            }
+        }
     }
 }

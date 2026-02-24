@@ -1,9 +1,9 @@
-package com.example.data.repository
+package com.example.data.repository.auth
 
 import com.example.common.resource.Resource
-import com.example.data.response_handler.auth.HandleLoginResponse
 import com.example.data.datasource.FirebaseAuthDataSource
 import com.example.data.local.SessionDataStore
+import com.example.data.response_handler.auth.HandleLoginResponse
 import com.example.domain.repository.auth.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.Flow

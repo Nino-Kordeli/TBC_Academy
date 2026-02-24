@@ -67,6 +67,9 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     private fun goalCaloriesKey(userId: String) =
         intPreferencesKey("goal_calories_$userId")
 
+    private fun exerciseCaloriesKey(userId: String) =
+        intPreferencesKey("exercise_calories_$userId")
+
     override fun getGoalCalories(): Flow<Int> {
         return getCurrentUserId().flatMapLatest { userId ->
             if (userId == null) {
@@ -197,5 +200,28 @@ class UserPreferencesRepositoryImpl @Inject constructor(
 
     override fun getCurrentUserId(): Flow<String?> = dataStore.data.map { prefs ->
         prefs[CURRENT_USER_ID]
+    }
+
+    override suspend fun addExerciseCalories(calories: Int) {
+        val userId = getCurrentUserId().first() ?: return
+        dataStore.edit { prefs ->
+            val current = prefs[exerciseCaloriesKey(userId)] ?: 0
+            prefs[exerciseCaloriesKey(userId)] = current + calories
+        }
+
+    }
+
+    override fun getExerciseCalories(): Flow<Int> {
+        return getCurrentUserId().flatMapLatest { userId ->
+            if (userId == null) flowOf(0)
+            else dataStore.data.map { prefs -> prefs[exerciseCaloriesKey(userId)] ?: 0 }
+        }
+    }
+
+    override suspend fun clearExerciseCalories() {
+        val userId = getCurrentUserId().first() ?: return
+        dataStore.edit { prefs ->
+            prefs.remove(exerciseCaloriesKey(userId))
+        }
     }
 }

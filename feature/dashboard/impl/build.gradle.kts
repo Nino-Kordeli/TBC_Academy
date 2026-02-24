@@ -12,4 +12,6 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.feature.dashboard.api)
     implementation(libs.androidx.activity.compose)
+    implementation(projects.feature.workout.api)
+    implementation(projects.feature.recipes.api)
 }
