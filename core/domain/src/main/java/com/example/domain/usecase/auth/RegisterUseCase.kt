@@ -1,9 +1,12 @@
 package com.example.domain.usecase.auth
 
-import com.example.domain.repository.UserPreferencesRepository
-import com.example.domain.repository.UserSessionRepository
+import com.example.common.resource.Resource
+import com.example.domain.repository.user_preferences.UserPreferencesRepository
+import com.example.domain.repository.user_session.UserSessionRepository
 import com.example.domain.repository.auth.AuthRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class RegisterUseCase @Inject constructor(
@@ -16,17 +19,21 @@ class RegisterUseCase @Inject constructor(
         password: String,
         rememberMe: Boolean,
         name: String
-    ) {
-        val previousUserId = userPreferencesRepository.getCurrentUserId().first()
-        val userId = repository.register(email, password, rememberMe)
+    ): Flow<Resource<String>> {
+        return repository.register(email, password, rememberMe).onEach { resource ->
+            if (resource is Resource.Success) {
+                val newUserId = resource.data
+                val previousUserId = userPreferencesRepository.getCurrentUserId().first()
 
-        if (previousUserId != userId) {
-            userPreferencesRepository.clearOnlyDailyFoodLogs()
+                if (previousUserId != newUserId) {
+                    userPreferencesRepository.clearOnlyDailyFoodLogs()
+                }
+
+                userSessionRepository.saveSession(token = "", rememberMe)
+                userSessionRepository.saveName(name)
+                userSessionRepository.saveEmail(email)
+                userPreferencesRepository.setCurrentUserId(newUserId)
+            }
         }
-
-        userSessionRepository.saveSession(token = "", rememberMe)
-        userSessionRepository.saveName(name)
-        userSessionRepository.saveEmail(email)
-        userPreferencesRepository.setCurrentUserId(userId)
     }
 }

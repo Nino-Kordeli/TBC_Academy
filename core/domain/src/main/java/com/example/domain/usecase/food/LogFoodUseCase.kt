@@ -2,7 +2,7 @@ package com.example.domain.usecase.food
 
 import com.example.domain.model.food.Food
 import com.example.domain.model.food.LoggedFood
-import com.example.domain.repository.UserPreferencesRepository
+import com.example.domain.repository.user_preferences.UserPreferencesRepository
 import com.example.model.MealType
 import kotlinx.coroutines.flow.first
 import java.util.UUID
@@ -30,7 +30,7 @@ class LogFoodUseCase @Inject constructor(
             fat = food.fat * multiplier,
             protein = food.protein * multiplier,
             timestamp = System.currentTimeMillis(),
-            mealType = mealType,  // Use the passed mealType
+            mealType = mealType,
             userId = userId
         )
 

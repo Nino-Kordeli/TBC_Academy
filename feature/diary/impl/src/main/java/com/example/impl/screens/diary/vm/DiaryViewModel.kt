@@ -2,7 +2,7 @@ package com.example.impl.screens.diary.vm
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.food.LoggedFood
-import com.example.domain.repository.UserPreferencesRepository
+import com.example.domain.repository.user_preferences.UserPreferencesRepository
 import com.example.impl.screens.diary.contract.DiaryEvent
 import com.example.impl.screens.diary.contract.DiarySideEffect
 import com.example.impl.screens.diary.contract.DiaryState

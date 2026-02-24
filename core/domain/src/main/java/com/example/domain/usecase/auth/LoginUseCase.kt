@@ -1,7 +1,7 @@
 package com.example.domain.usecase.auth
 
 import com.example.common.resource.Resource
-import com.example.domain.repository.UserPreferencesRepository
+import com.example.domain.repository.user_preferences.UserPreferencesRepository
 import com.example.domain.repository.auth.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first

@@ -86,35 +86,49 @@ internal fun AnimatedTitle(visible: Boolean) {
         }
     }
 
-    AnimatedVisibility(
-        visible = titleVisible,
-        enter = slideInVertically(
-            initialOffsetY = { -40 },
-            animationSpec = tween(600, easing = FastOutSlowInEasing)
-        ) + fadeIn(animationSpec = tween(600))
-    ) {
-        Text(
-            "My Fitness",
-            fontSize = 44.sp,
-            color = White,
-            fontWeight = FontWeight.Bold
-        )
-    }
+    val titleAlpha by animateFloatAsState(
+        targetValue = if (titleVisible) 1f else 0f,
+        animationSpec = tween(600, easing = FastOutSlowInEasing),
+        label = "titleAlpha"
+    )
+    val titleOffset by animateFloatAsState(
+        targetValue = if (titleVisible) 0f else -40f,
+        animationSpec = tween(600, easing = FastOutSlowInEasing),
+        label = "titleOffset"
+    )
 
-    AnimatedVisibility(
-        visible = subtitleVisible,
-        enter = slideInVertically(
-            initialOffsetY = { 40 },
-            animationSpec = tween(600, easing = FastOutSlowInEasing)
-        ) + fadeIn(animationSpec = tween(600))
-    ) {
-        Text(
-            "Journey",
-            fontSize = 44.sp,
-            color = White,
-            fontWeight = FontWeight.Thin
-        )
-    }
+    val subtitleAlpha by animateFloatAsState(
+        targetValue = if (subtitleVisible) 1f else 0f,
+        animationSpec = tween(600, easing = FastOutSlowInEasing),
+        label = "subtitleAlpha"
+    )
+    val subtitleOffset by animateFloatAsState(
+        targetValue = if (subtitleVisible) 0f else 40f,
+        animationSpec = tween(600, easing = FastOutSlowInEasing),
+        label = "subtitleOffset"
+    )
+
+    Text(
+        "My Fitness",
+        fontSize = 44.sp,
+        color = White,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier.graphicsLayer {
+            alpha = titleAlpha
+            translationY = titleOffset
+        }
+    )
+
+    Text(
+        "Journey",
+        fontSize = 44.sp,
+        color = White,
+        fontWeight = FontWeight.Thin,
+        modifier = Modifier.graphicsLayer {
+            alpha = subtitleAlpha
+            translationY = subtitleOffset
+        }
+    )
 }
 
 @Composable
@@ -158,20 +172,25 @@ internal fun AnimatedSubtitle(visible: Boolean) {
         }
     }
 
-    AnimatedVisibility(
-        visible = subtitleVisible,
-        enter = slideInVertically(
-            initialOffsetY = { 30 },
-            animationSpec = tween(800, easing = LinearOutSlowInEasing)
-        ) + fadeIn(
-            animationSpec = tween(800)
-        )
-    ) {
-        Text(
-            text = "Fuel Your Body, Build Your Strength",
-            fontSize = 22.sp,
-            color = White,
-            fontWeight = FontWeight.W200,
-        )
-    }
+    val alpha by animateFloatAsState(
+        targetValue = if (subtitleVisible) 1f else 0f,
+        animationSpec = tween(800, easing = LinearOutSlowInEasing),
+        label = "subtitleAlpha"
+    )
+    val offset by animateFloatAsState(
+        targetValue = if (subtitleVisible) 0f else 30f,
+        animationSpec = tween(800, easing = LinearOutSlowInEasing),
+        label = "subtitleOffset"
+    )
+
+    Text(
+        text = "Fuel Your Body, Build Your Strength",
+        fontSize = 22.sp,
+        color = White,
+        fontWeight = FontWeight.W200,
+        modifier = Modifier.graphicsLayer {
+            this.alpha = alpha
+            translationY = offset
+        }
+    )
 }

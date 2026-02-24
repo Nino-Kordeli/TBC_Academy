@@ -90,7 +90,7 @@ private fun AppNavigation() {
         quizEntry(navigator)
         homeEntry(navigator)
         diaryEntry(navigator)
-        addFoodEntry(navigator)
+        addFoodEntry(navigator, snackbarController)
         addFoodDetailsEntry(navigator)
         splashEntry(navigator)
         profileEntry(navigator)

@@ -1,8 +1,8 @@
 package com.example.impl.screens.dashboard.vm
 
 import androidx.lifecycle.viewModelScope
-import com.example.domain.repository.StepCounterRepository
-import com.example.domain.repository.UserPreferencesRepository
+import com.example.domain.repository.step_counter.StepCounterRepository
+import com.example.domain.repository.user_preferences.UserPreferencesRepository
 import com.example.impl.screens.dashboard.contract.DashboardEvent
 import com.example.impl.screens.dashboard.contract.DashboardUiState
 import com.example.impl.screens.dashboard.model.CaloriesUiModel

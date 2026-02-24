@@ -2,7 +2,7 @@ package com.example.impl.screens.vm
 
 import androidx.lifecycle.viewModelScope
 import com.example.common.resource.Resource
-import com.example.domain.RecipeRepository
+import com.example.domain.repository.recipe.RecipeRepository
 import com.example.impl.screens.contract.RecipeState
 import com.example.ui.base.BaseViewModel
 import com.example.ui.base.empty_case.NoEvent

@@ -1,16 +1,16 @@
 package com.example.data.di
 
-import com.example.data.repository.FoodRepositoryImpl
-import com.example.data.repository.RecipeRepositoryImpl
-import com.example.data.repository.StepCounterRepositoryImpl
-import com.example.data.repository.UserPreferencesRepositoryImpl
-import com.example.data.repository.UserSessionRepositoryImpl
-import com.example.data.repository.WorkoutRepositoryImpl
+import com.example.data.repository.food.FoodRepositoryImpl
+import com.example.data.repository.recipe.RecipeRepositoryImpl
+import com.example.data.repository.step_counter.StepCounterRepositoryImpl
+import com.example.data.repository.user_preferences.UserPreferencesRepositoryImpl
+import com.example.data.repository.user_session.UserSessionRepositoryImpl
+import com.example.data.repository.workout.WorkoutRepositoryImpl
 import com.example.data.repository.auth.AuthRepositoryImpl
-import com.example.domain.RecipeRepository
-import com.example.domain.repository.StepCounterRepository
-import com.example.domain.repository.UserPreferencesRepository
-import com.example.domain.repository.UserSessionRepository
+import com.example.domain.repository.recipe.RecipeRepository
+import com.example.domain.repository.step_counter.StepCounterRepository
+import com.example.domain.repository.user_preferences.UserPreferencesRepository
+import com.example.domain.repository.user_session.UserSessionRepository
 import com.example.domain.repository.workout.WorkoutRepository
 import com.example.domain.repository.auth.AuthRepository
 import com.example.domain.repository.food.FoodRepository

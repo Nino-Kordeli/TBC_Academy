@@ -1,6 +1,6 @@
 package com.example.domain.usecase.exercise
 
-import com.example.domain.repository.UserPreferencesRepository
+import com.example.domain.repository.user_preferences.UserPreferencesRepository
 import javax.inject.Inject
 
 class LogExerciseUseCase @Inject constructor(

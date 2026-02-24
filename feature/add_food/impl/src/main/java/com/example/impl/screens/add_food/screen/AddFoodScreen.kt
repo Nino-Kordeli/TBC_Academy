@@ -37,6 +37,7 @@ import com.example.designsystem.theme.VeryLightGray
 import com.example.designsystem.theme.White
 import com.example.domain.model.food.Food
 import com.example.impl.screens.add_food.contract.AddFoodEvent
+import com.example.impl.screens.add_food.contract.AddFoodSideEffect
 import com.example.impl.screens.add_food.vm.AddFoodViewModel
 import com.example.model.MealType
 import com.example.ui.base.BaseScreen
@@ -45,11 +46,17 @@ import com.example.ui.base.BaseScreen
 fun AddFoodScreen(
     viewModel: AddFoodViewModel = hiltViewModel(),
     mealType: MealType,
-    onFoodSelected: (Food) -> Unit
+    onFoodSelected: (Food) -> Unit,
+    onShowError: (String) -> Unit
 ) {
     BaseScreen(
         modifier = Modifier.fillMaxSize(),
-        viewModel = viewModel
+        viewModel = viewModel,
+        onSideEffect = { sideEffect ->
+            when (sideEffect) {
+                is AddFoodSideEffect.ShowError -> onShowError(sideEffect.message)
+            }
+        }
     ) { state, onEvent ->
         Column(
             modifier = Modifier
@@ -165,6 +172,7 @@ fun CircleItem(onClick: () -> Unit) {
 fun AddFoodStepPreview() {
     AddFoodScreen(
         mealType = MealType.BREAKFAST,
-        onFoodSelected = {}
+        onFoodSelected = {},
+        onShowError = {}
     )
 }

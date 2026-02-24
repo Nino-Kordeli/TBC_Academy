@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.resource.Resource
 import com.example.domain.usecase.food.GetAllFoodUseCase
 import com.example.impl.screens.add_food.contract.AddFoodEvent
+import com.example.impl.screens.add_food.contract.AddFoodSideEffect
 import com.example.impl.screens.add_food.contract.AddFoodState
 import com.example.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddFoodViewModel @Inject constructor(
     private val getAllFoodsUseCase: GetAllFoodUseCase
-) : BaseViewModel<AddFoodState, AddFoodEvent, Nothing>(AddFoodState()) {
+) : BaseViewModel<AddFoodState, AddFoodEvent, AddFoodSideEffect>(AddFoodState()) {
 
     init {
         fetchFoods()
@@ -30,7 +31,9 @@ class AddFoodViewModel @Inject constructor(
             getAllFoodsUseCase.invoke().collect { resource ->
                 when (resource) {
                     is Resource.Loading -> {}
-                    is Resource.Error -> {}
+                    is Resource.Error -> {
+                        emitSideEffect(AddFoodSideEffect.ShowError(resource.errorMessage))
+                    }
                     is Resource.Success -> {
                         updateState {
                             it.copy(

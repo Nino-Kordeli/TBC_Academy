@@ -6,9 +6,11 @@ import com.example.api.AddFoodDetailNavKey
 import com.example.api.AddFoodNavKey
 import com.example.core.navigation.Navigator
 import com.example.impl.screens.add_food.screen.AddFoodScreen
+import com.example.ui.snackbar.SnackbarController
 
 fun EntryProviderScope<NavKey>.addFoodEntry(
-    navigator: Navigator
+    navigator: Navigator,
+    snackbarController: SnackbarController
 ) {
     entry<AddFoodNavKey> { key ->
         AddFoodScreen(
@@ -20,6 +22,9 @@ fun EntryProviderScope<NavKey>.addFoodEntry(
                         mealType = key.mealType
                     )
                 )
+            },
+            onShowError = { message ->
+                snackbarController.showError(message)
             }
         )
     }

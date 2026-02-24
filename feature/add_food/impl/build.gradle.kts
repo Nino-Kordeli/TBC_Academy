@@ -4,7 +4,8 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.add_food.impl"
+    namespace = "com.example.add_food.impl"
+    resourcePrefix = "add_food"
     testOptions.unitTests.isIncludeAndroidResources = true
 }
 

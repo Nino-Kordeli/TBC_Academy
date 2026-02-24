@@ -1,7 +1,7 @@
 package com.example.domain.usecase.auth
 
-import com.example.domain.repository.UserPreferencesRepository
-import com.example.domain.repository.UserSessionRepository
+import com.example.domain.repository.user_preferences.UserPreferencesRepository
+import com.example.domain.repository.user_session.UserSessionRepository
 import javax.inject.Inject
 
 class LogoutUseCase @Inject constructor(

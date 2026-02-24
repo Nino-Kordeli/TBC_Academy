@@ -1,6 +1,6 @@
 package com.example.domain.usecase.user_session
 
-import com.example.domain.repository.UserSessionRepository
+import com.example.domain.repository.user_session.UserSessionRepository
 import javax.inject.Inject
 
 class SaveNameUseCase @Inject constructor(

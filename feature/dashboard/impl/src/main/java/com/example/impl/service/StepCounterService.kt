@@ -7,7 +7,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.example.domain.repository.StepCounterRepository
+import com.example.domain.repository.step_counter.StepCounterRepository
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

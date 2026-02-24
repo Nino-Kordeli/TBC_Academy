@@ -3,7 +3,7 @@ package com.example.impl.screens.login.vm
 import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import com.example.common.resource.Resource
-import com.example.domain.repository.UserSessionRepository
+import com.example.domain.repository.user_session.UserSessionRepository
 import com.example.domain.usecase.auth.LoginUseCase
 import com.example.impl.screens.login.contract.LoginEvent
 import com.example.impl.screens.login.contract.LoginSideEffect
