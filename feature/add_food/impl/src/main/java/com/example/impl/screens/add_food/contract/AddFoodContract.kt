@@ -10,7 +10,3 @@ data class AddFoodState(
 sealed interface AddFoodEvent {
     data class Search(val query: String) : AddFoodEvent
 }
-
-sealed class AddFoodSideEffect {
-
-}

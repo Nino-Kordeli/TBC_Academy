@@ -38,7 +38,6 @@ import com.example.impl.navigation.profileEntry
 import com.example.impl.navigation.quizEntry
 import com.example.impl.navigation.recipesEntry
 import com.example.impl.navigation.registerEntry
-import com.example.impl.navigation.searchNavEntry
 import com.example.impl.navigation.splashEntry
 import com.example.impl.navigation.welcomeEntry
 import com.example.impl.navigation.workoutEntry
@@ -72,13 +71,11 @@ private fun AppNavigation() {
             AuthenticationNavKey.WelcomeNavKey,
             QuizNavKey.QuizKey,
             DashboardNavKey.HomeNavKey,
-            DashboardNavKey.SearchNavKey,
             DiaryNavKey.DiaryNavKey,
             SplashNavKey,
             ProfileNavKey.ProfileNavKey,
             WorkoutNavKey.WorkoutNavKey,
             RecipesNavKey.RecipesNavKey
-            //AddFoodDetailNavKey//es unda wavshalo ro imushaos
         )
     )
 
@@ -97,7 +94,6 @@ private fun AppNavigation() {
         quizEntry(navigator)
         homeEntry(navigator)
         diaryEntry(navigator)
-        searchNavEntry(navigator)
         addFoodEntry(navigator)
         addFoodDetailsEntry(navigator)
         splashEntry(navigator)
@@ -116,17 +112,15 @@ private fun AppNavigation() {
             val currentKey = navigationState.currentKey
 
             if (
-                currentKey is DashboardNavKey.HomeNavKey ||
-                currentKey is ProfileNavKey.ProfileNavKey ||
-                currentKey is DashboardNavKey.SearchNavKey ||
-                currentKey is DiaryNavKey.DiaryNavKey
+                currentKey == DashboardNavKey.HomeNavKey ||
+                currentKey == ProfileNavKey.ProfileNavKey ||
+                currentKey == DiaryNavKey.DiaryNavKey
             ) {
 
                 val currentDestination = when (currentKey) {
                     is DashboardNavKey.HomeNavKey -> BottomBarDestination.Home
                     is DiaryNavKey.DiaryNavKey -> BottomBarDestination.Diary
                     is ProfileNavKey.ProfileNavKey -> BottomBarDestination.Profile
-                    is DashboardNavKey.SearchNavKey -> BottomBarDestination.Search
                     else -> BottomBarDestination.Home
                 }
 
@@ -140,7 +134,6 @@ private fun AppNavigation() {
 
                             BottomBarDestination.Diary -> navigator.navigate(DiaryNavKey.DiaryNavKey)
                             BottomBarDestination.Profile -> navigator.navigate(ProfileNavKey.ProfileNavKey)
-                            BottomBarDestination.Search -> navigator.navigate(DashboardNavKey.SearchNavKey)
                         }
                     }
                 )

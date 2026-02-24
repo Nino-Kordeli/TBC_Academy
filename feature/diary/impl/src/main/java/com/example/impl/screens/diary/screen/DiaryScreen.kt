@@ -22,31 +22,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.api.AddFoodNavKey
-import com.example.core.navigation.Navigator
 import com.example.designsystem.R
 import com.example.designsystem.theme.MilkyPink
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.VeryLightGray
 import com.example.designsystem.theme.White
 import com.example.domain.model.food.Food
-import com.example.model.MealType
 import com.example.impl.screens.diary.vm.DiaryViewModel
+import com.example.model.MealType
 import com.example.ui.base.BaseScreen
 
 @Composable
 fun DiaryScreen(
-    navigator: Navigator,
-    viewModel: DiaryViewModel = hiltViewModel()
+    viewModel: DiaryViewModel = hiltViewModel(),
+    navigateToAddFood: (MealType) -> Unit,
 ) {
     BaseScreen(
         modifier = Modifier.fillMaxSize(),
         viewModel = viewModel
-    ) { state, onEvent ->
-        val onAddFoodClick: (MealType) -> Unit = { mealType ->
-            navigator.navigate(AddFoodNavKey(mealType))
-        }
-
+    ) { state, _ ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -148,7 +142,7 @@ fun DiaryScreen(
                         title = "Breakfast",
                         foods = state.breakfast,
                         mealType = MealType.BREAKFAST,
-                        onAddFoodClick = onAddFoodClick
+                        onAddFoodClick = { navigateToAddFood(it) }
                     )
                 }
 
@@ -157,7 +151,7 @@ fun DiaryScreen(
                         title = "Lunch",
                         foods = state.lunch,
                         mealType = MealType.LUNCH,
-                        onAddFoodClick = onAddFoodClick
+                        onAddFoodClick = { navigateToAddFood(it) }
                     )
                 }
 
@@ -166,7 +160,7 @@ fun DiaryScreen(
                         title = "Dinner",
                         foods = state.dinner,
                         mealType = MealType.DINNER,
-                        onAddFoodClick = onAddFoodClick
+                        onAddFoodClick = { navigateToAddFood(it) }
                     )
                 }
 
@@ -175,7 +169,7 @@ fun DiaryScreen(
                         title = "Snacks",
                         foods = state.snacks,
                         mealType = MealType.SNACKS,
-                        onAddFoodClick = onAddFoodClick
+                        onAddFoodClick = { navigateToAddFood(it) }
                     )
                 }
             }

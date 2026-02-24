@@ -6,7 +6,7 @@ data class WorkoutState(
     val categories: List<WorkoutCategory> = emptyList(),
     val isLoading: Boolean = false,
     val error: String? = null,
-    val loggedExerciseIds: Set<String> = emptySet() // tracks tapped exercises
+    val loggedExerciseIds: Set<String> = emptySet()
 )
 
 sealed interface WorkoutEvent {

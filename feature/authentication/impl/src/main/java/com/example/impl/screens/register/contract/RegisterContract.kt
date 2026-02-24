@@ -12,12 +12,12 @@ sealed interface RegisterEvent {
     data class EmailChanged(val value: String) : RegisterEvent
     data class PasswordChanged(val value: String) : RegisterEvent
     data class RepeatPasswordChanged(val value: String) : RegisterEvent
-    object RegisterClicked : RegisterEvent
-    object LoginClicked : RegisterEvent
+    data object RegisterClicked : RegisterEvent
+    data object LoginClicked : RegisterEvent
 }
 
 sealed interface RegisterSideEffect {
-    object NavigateToLogin : RegisterSideEffect
-    object NavigateToHome : RegisterSideEffect
+    data object NavigateToLogin : RegisterSideEffect
+    data object NavigateToHome : RegisterSideEffect
     data class ShowError(val message: String) : RegisterSideEffect
 }

@@ -46,7 +46,6 @@ fun RegisterScreen(
         },
         modifier = Modifier
     ) { state, onEvent ->
-
         Column(
             modifier = Modifier
                 .fillMaxSize()

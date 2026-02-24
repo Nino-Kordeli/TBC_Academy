@@ -8,6 +8,5 @@ class LogExerciseUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(caloriesBurnt: Int) {
         userPreferencesRepository.addExerciseCalories(caloriesBurnt)
-
     }
 }

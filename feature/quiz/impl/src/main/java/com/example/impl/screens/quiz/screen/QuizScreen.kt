@@ -73,7 +73,7 @@ fun QuizScreen(
                 onBack = { viewModel.onEvent(QuizEvent.BackClicked) }
             )
         }
-    ) { padding ->
+    ) { _ ->
         BaseScreen(
             modifier = Modifier.padding(23.dp),
             viewModel = viewModel,

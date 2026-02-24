@@ -14,9 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase
-) : BaseViewModel<RegisterState, RegisterEvent, RegisterSideEffect>(
-    initialState = RegisterState()
-) {
+) : BaseViewModel<RegisterState, RegisterEvent, RegisterSideEffect>(RegisterState()) {
 
     override fun onEvent(event: RegisterEvent) {
         when (event) {
@@ -65,7 +63,6 @@ class RegisterViewModel @Inject constructor(
             try {
                 updateState { it.copy(isLoading = true) }
 
-                // Call suspend use case properly
                 registerUseCase(
                     email = currentState.email,
                     password = currentState.password,
@@ -73,7 +70,6 @@ class RegisterViewModel @Inject constructor(
                     name = currentState.name
                 )
 
-                // email/name is complete
                 emitSideEffect(RegisterSideEffect.NavigateToHome)
             } catch (e: Exception) {
                 emitSideEffect(

@@ -6,7 +6,7 @@ import com.example.api.SplashNavKey
 import com.example.core.navigation.Navigator
 import com.example.impl.screen.SplashScreen
 
-fun EntryProviderScope<NavKey>.splashEntry(navigator: Navigator){
+fun EntryProviderScope<NavKey>.splashEntry(navigator: Navigator) {
     entry<SplashNavKey> {
         SplashScreen {
             navigator.navigateAndClearStack(it)

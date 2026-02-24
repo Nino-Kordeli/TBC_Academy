@@ -6,7 +6,7 @@ import com.example.data.mapper.workout.toDomain
 import com.example.data.remote.workout.WorkoutApi
 import com.example.data.response_handler.retrofit.HandleRetrofitResponse
 import com.example.domain.model.workout.WorkoutCategory
-import com.example.domain.repository.WorkoutRepository
+import com.example.domain.repository.workout.WorkoutRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

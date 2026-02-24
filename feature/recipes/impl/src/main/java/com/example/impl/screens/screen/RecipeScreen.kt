@@ -49,7 +49,7 @@ fun RecipeScreen(
         modifier = Modifier.fillMaxSize(),
         viewModel = viewModel,
         onSideEffect = {}
-    ) { state, onEvent ->
+    ) { state, _ ->
 
         if (state.isLoading) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

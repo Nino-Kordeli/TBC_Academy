@@ -54,8 +54,7 @@ fun LoginScreen(
     onNavigateToRegister: () -> Unit,
     onShowError: (String) -> Unit
 ) {
-
-    BackHandler() { }
+    BackHandler { }
 
     BaseScreen(
         modifier = Modifier.fillMaxSize(),
@@ -92,13 +91,13 @@ fun LoginScreen(
             Spacer(Modifier.height(84.dp))
 
             OutlinedTextFieldWithInlineLabel(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
                 value = state.email,
                 onValueChange = { onEvent(LoginEvent.EmailChanged(it)) },
                 label = "Email Address",
                 placeholder = "user@example.com",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Unspecified,
                     autoCorrectEnabled = false,

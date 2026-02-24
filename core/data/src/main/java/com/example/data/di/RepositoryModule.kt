@@ -11,7 +11,7 @@ import com.example.domain.RecipeRepository
 import com.example.domain.repository.StepCounterRepository
 import com.example.domain.repository.UserPreferencesRepository
 import com.example.domain.repository.UserSessionRepository
-import com.example.domain.repository.WorkoutRepository
+import com.example.domain.repository.workout.WorkoutRepository
 import com.example.domain.repository.auth.AuthRepository
 import com.example.domain.repository.food.FoodRepository
 import dagger.Binds

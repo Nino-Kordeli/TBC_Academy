@@ -1,4 +1,4 @@
-package com.example.domain.repository
+package com.example.domain.repository.workout
 
 import com.example.common.resource.Resource
 import com.example.domain.model.workout.WorkoutCategory

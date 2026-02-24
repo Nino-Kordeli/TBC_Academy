@@ -6,7 +6,6 @@ import android.os.Build
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.api.WorkoutNavKey
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,14 +19,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
@@ -35,9 +34,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.api.RecipesNavKey
-import com.example.core.navigation.Navigator
-import com.example.designsystem.theme.Pink40
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.White
 import com.example.impl.screens.dashboard.components.DailyCaloriesCard
@@ -50,9 +46,9 @@ import com.example.ui.base.BaseScreen
 
 @Composable
 fun DashboardScreen(
-    onSearchClick: () -> Unit,
     viewModel: DashboardViewModel = hiltViewModel(),
-    navigator: Navigator
+    onWorkoutClick: () -> Unit,
+    onRecipeClick: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -76,7 +72,7 @@ fun DashboardScreen(
         modifier = Modifier.fillMaxSize(),
         viewModel = viewModel,
         onSideEffect = { }
-    ) { state, onEvent ->
+    ) { state, _ ->
         BackHandler { }
 
         Column(
@@ -142,16 +138,11 @@ fun DashboardScreen(
                 Spacer(modifier = Modifier.height(26.dp))
 
                 DiscoverRow(
-                    onWorkoutClick = {
-                        navigator.navigate(WorkoutNavKey.WorkoutNavKey)
-                    },
-                    onRecipeClick = {
-                        navigator.navigate(RecipesNavKey.RecipesNavKey)
-                    }
+                    onWorkoutClick = onWorkoutClick,
+                    onRecipeClick = onRecipeClick
                 )
 
                 Spacer(modifier = Modifier.height(26.dp))
-
             }
         }
     }

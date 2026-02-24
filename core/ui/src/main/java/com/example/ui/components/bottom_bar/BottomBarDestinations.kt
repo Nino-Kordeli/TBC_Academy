@@ -4,5 +4,4 @@ sealed interface BottomBarDestination {
     data object Home : BottomBarDestination
     data object Diary : BottomBarDestination
     data object Profile : BottomBarDestination
-    data object Search : BottomBarDestination
 }

@@ -9,5 +9,4 @@ android {
 dependencies {
     api(projects.core.navigation)
     implementation(projects.core.domain)
-
 }

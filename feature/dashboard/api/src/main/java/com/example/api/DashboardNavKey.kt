@@ -8,12 +8,4 @@ object DashboardNavKey : NavKey {
     @Serializable
     data object HomeNavKey : NavKey
 
-    @Serializable
-    data object MoreNavKey : NavKey
-
-    @Serializable
-    data object SearchNavKey : NavKey
-
-    @Serializable
-    data class SearchResultsNavKey(val query: String) : NavKey
 }

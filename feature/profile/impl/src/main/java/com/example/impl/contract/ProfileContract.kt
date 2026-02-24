@@ -1,4 +1,4 @@
-package com.example.impl.screen
+package com.example.impl.contract
 
 data class ProfileState(
     val user: String = "",

@@ -4,11 +4,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.StepCounterRepository
 import com.example.domain.repository.UserPreferencesRepository
 import com.example.impl.screens.dashboard.contract.DashboardEvent
-import com.example.impl.screens.dashboard.contract.DashboardSideEffect
 import com.example.impl.screens.dashboard.contract.DashboardUiState
 import com.example.impl.screens.dashboard.model.CaloriesUiModel
 import com.example.model.MealType
 import com.example.ui.base.BaseViewModel
+import com.example.ui.base.empty_case.NoSideEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.combine
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository,
     private val stepCounterRepository: StepCounterRepository
-) : BaseViewModel<DashboardUiState, DashboardEvent, DashboardSideEffect>(
+) : BaseViewModel<DashboardUiState, DashboardEvent, NoSideEffect>(
     initialState = DashboardUiState()
 ) {
     init {
@@ -31,9 +31,7 @@ class DashboardViewModel @Inject constructor(
 
     override fun onEvent(event: DashboardEvent) {
         when (event) {
-            DashboardEvent.ProfileClicked -> {}
             DashboardEvent.GetGoalCalories -> loadCaloriesData()
-            DashboardEvent.StartStepCounting -> {}
         }
     }
 

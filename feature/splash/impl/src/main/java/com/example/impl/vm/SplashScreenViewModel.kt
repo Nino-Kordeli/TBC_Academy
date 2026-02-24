@@ -6,10 +6,10 @@ import com.example.api.DashboardNavKey
 import com.example.common.resource.Resource
 import com.example.domain.repository.UserSessionRepository
 import com.example.domain.usecase.auth.LoginUseCase
-import com.example.impl.contract.SplashScreenEvent
 import com.example.impl.contract.SplashScreenSideEffect
-import com.example.impl.contract.SplashScreenState
 import com.example.ui.base.BaseViewModel
+import com.example.ui.base.empty_case.NoEvent
+import com.example.ui.base.empty_case.NoState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,10 +19,9 @@ import javax.inject.Inject
 class SplashScreenViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val userSessionRepository: UserSessionRepository
-) : BaseViewModel<SplashScreenState, SplashScreenEvent, SplashScreenSideEffect>(
-    SplashScreenState()
+) : BaseViewModel<NoState, NoEvent, SplashScreenSideEffect>(
+    NoState
 ) {
-
     init {
         checkAutoLogin()
     }

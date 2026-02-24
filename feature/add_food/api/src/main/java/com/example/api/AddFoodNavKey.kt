@@ -1,8 +1,8 @@
 package com.example.api
 
 import androidx.navigation3.runtime.NavKey
-import kotlinx.serialization.Serializable
 import com.example.model.MealType
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class AddFoodNavKey(

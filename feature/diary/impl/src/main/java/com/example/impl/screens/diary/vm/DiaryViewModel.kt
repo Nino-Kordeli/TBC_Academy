@@ -1,19 +1,19 @@
 package com.example.impl.screens.diary.vm
 
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.food.Food
 import com.example.domain.model.food.LoggedFood
 import com.example.domain.repository.UserPreferencesRepository
 import com.example.impl.screens.diary.contract.DiaryEvent
 import com.example.impl.screens.diary.contract.DiarySideEffect
 import com.example.impl.screens.diary.contract.DiaryState
+import com.example.impl.screens.diary.mapper.toFood
+import com.example.impl.screens.diary.model.FoodModel
 import com.example.model.MealType
 import com.example.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -23,9 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DiaryViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository
-) : BaseViewModel<DiaryState, DiaryEvent, DiarySideEffect>(
-    initialState = DiaryState()
-) {
+) : BaseViewModel<DiaryState, DiaryEvent, DiarySideEffect>(DiaryState()) {
 
     init {
         checkAndReset()
@@ -69,7 +67,7 @@ class DiaryViewModel @Inject constructor(
                                     dinner.sumOf { it.calories } +
                                     snacks.sumOf { it.calories }
 
-                            FoodData(
+                            FoodModel(
                                 breakfast = breakfast.map { it.toFood() },
                                 lunch = lunch.map { it.toFood() },
                                 dinner = dinner.map { it.toFood() },
@@ -81,44 +79,28 @@ class DiaryViewModel @Inject constructor(
                 }
                 .collect { foodData ->
                     if (foodData == null) {
-                        updateState { it.copy(
-                            breakfast = emptyList(),
-                            lunch = emptyList(),
-                            dinner = emptyList(),
-                            snacks = emptyList(),
-                            consumedCalories = 0
-                        )}
+                        updateState {
+                            it.copy(
+                                breakfast = emptyList(),
+                                lunch = emptyList(),
+                                dinner = emptyList(),
+                                snacks = emptyList(),
+                                consumedCalories = 0
+                            )
+                        }
                     } else {
-                        updateState { it.copy(
-                            breakfast = foodData.breakfast,
-                            lunch = foodData.lunch,
-                            dinner = foodData.dinner,
-                            snacks = foodData.snacks,
-                            consumedCalories = foodData.consumedCalories
-                        )}
+                        updateState {
+                            it.copy(
+                                breakfast = foodData.breakfast,
+                                lunch = foodData.lunch,
+                                dinner = foodData.dinner,
+                                snacks = foodData.snacks,
+                                consumedCalories = foodData.consumedCalories
+                            )
+                        }
                     }
                 }
         }
-    }
-
-    private data class FoodData(
-        val breakfast: List<Food>,
-        val lunch: List<Food>,
-        val dinner: List<Food>,
-        val snacks: List<Food>,
-        val consumedCalories: Int
-    )
-
-    private fun LoggedFood.toFood(): Food {
-        return Food(
-            id = this.foodId,
-            name = this.name,
-            calories = this.calories,
-            carbs = this.carbs,
-            fat = this.fat,
-            protein = this.protein,
-            isMeal = false
-        )
     }
 
     private fun foodForUser(

@@ -7,7 +7,3 @@ data class RecipeState(
     val isLoading: Boolean = false,
     val error: String? = null
 )
-
-sealed interface RecipeEvent
-
-sealed interface RecipeSideEffect

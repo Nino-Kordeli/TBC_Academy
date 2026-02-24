@@ -47,7 +47,7 @@ fun WelcomeScreen(
             }
         },
         modifier = Modifier
-    ) { state, onEvent ->
+    ) { _, onEvent ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -130,7 +130,6 @@ fun WelcomeScreen(
             }
 
             Spacer(Modifier.height(34.dp))
-
         }
     }
 }

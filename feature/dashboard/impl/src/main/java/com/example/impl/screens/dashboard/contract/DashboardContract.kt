@@ -11,12 +11,6 @@ data class DashboardUiState(
     val steps: Int = 0
 )
 
-sealed class DashboardSideEffect {
-    data object DashboardToCalories : DashboardSideEffect()
-}
-
 sealed class DashboardEvent {
-    data object ProfileClicked : DashboardEvent()
     data object GetGoalCalories : DashboardEvent()
-    data object StartStepCounting : DashboardEvent()
 }

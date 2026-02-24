@@ -1,4 +1,4 @@
-package com.example.impl.screen.profile
+package com.example.impl.screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -31,35 +31,31 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.api.AuthenticationNavKey
-import com.example.core.navigation.Navigator
 import com.example.designsystem.R
 import com.example.designsystem.theme.PrimaryBlue
 import com.example.designsystem.theme.PrimaryPink
 import com.example.designsystem.theme.White
-import com.example.impl.screen.ProfileEvent
-import com.example.impl.screen.ProfileSideEffect
-import com.example.impl.screen.vm.ProfileViewModel
+import com.example.impl.contract.ProfileEvent
+import com.example.impl.contract.ProfileSideEffect
+import com.example.impl.vm.ProfileViewModel
 import com.example.ui.base.BaseScreen
 
 @Composable
 fun ProfileScreen(
-    navigator: Navigator,
-    viewModel: ProfileViewModel = hiltViewModel()
+    viewModel: ProfileViewModel = hiltViewModel(),
+    onNavigateToLogin: () -> Unit
 ) {
     BaseScreen(
         modifier = Modifier.fillMaxSize(),
         viewModel = viewModel,
         onSideEffect = { effect ->
             when (effect) {
-                ProfileSideEffect.NavigateToLogin -> {
-                    navigator.navigate(AuthenticationNavKey.LoginNavKey)
-                }
+                ProfileSideEffect.NavigateToLogin -> onNavigateToLogin()
             }
         }
     ) { state, onEvent ->
 
-        BackHandler() { }
+        BackHandler { }
 
         Column(
             modifier = Modifier
@@ -85,9 +81,18 @@ fun ProfileScreen(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(painter = painterResource(R.drawable.ic_mail), contentDescription = "", Modifier.size(26.dp))
+                Image(
+                    painter = painterResource(R.drawable.ic_mail),
+                    contentDescription = "",
+                    Modifier.size(26.dp)
+                )
                 Spacer(modifier = Modifier.width(6.dp))
-                Text(text = state.email, color = White, fontSize = 22.sp, fontWeight = FontWeight.W300)
+                Text(
+                    text = state.email,
+                    color = White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.W300
+                )
             }
 
             Spacer(modifier = Modifier.height(120.dp))
@@ -95,8 +100,10 @@ fun ProfileScreen(
             GlassButton(
                 text = "Logout",
                 icon = ImageVector.vectorResource(R.drawable.ic_logout),
-                onClick = { onEvent(ProfileEvent.LogoutCLicked) }, // just send event
-                modifier = Modifier.width(180.dp).height(70.dp)
+                onClick = { onEvent(ProfileEvent.LogoutCLicked) },
+                modifier = Modifier
+                    .width(180.dp)
+                    .height(70.dp)
             )
         }
     }
