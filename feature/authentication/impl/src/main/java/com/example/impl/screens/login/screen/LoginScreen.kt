@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -137,26 +138,6 @@ fun LoginScreen(
                     }
                 }
             )
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            ) {
-                Checkbox(
-                    checked = state.rememberMe,
-                    onCheckedChange = { checked ->
-                        onEvent(LoginEvent.RememberMeChanged(checked))
-                    },
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Remember me",
-                    color = LightGray,
-                    fontSize = 14.sp
-                )
-            }
 
             Spacer(Modifier.height(40.dp))
 
@@ -172,16 +153,7 @@ fun LoginScreen(
                 Text(text = "Log In", fontWeight = FontWeight.Bold)
             }
 
-            Spacer(Modifier.height(20.dp))
-
-            Text(
-                text = "Forgot password?",
-                color = PrimaryBlue,
-                fontWeight = FontWeight.Bold,
-                fontSize = 15.sp
-            )
-
-            Spacer(Modifier.height(50.dp))
+            Spacer(Modifier.height(30.dp))
 
             Text(
                 text = "OR",

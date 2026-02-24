@@ -34,7 +34,7 @@ fun SplashScreen(
 ) {
     BaseScreen(
         viewModel = viewmodel,
-        modifier = Modifier,
+        applySystemBarsPadding = false,
         onSideEffect = { effect ->
             when (effect) {
                 is SplashScreenSideEffect.Navigate -> onNavigate(effect.navKey)

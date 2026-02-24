@@ -171,7 +171,7 @@ internal fun AnimatedSubtitle(visible: Boolean) {
             text = "Fuel Your Body, Build Your Strength",
             fontSize = 22.sp,
             color = White,
-            fontWeight = FontWeight.W300
+            fontWeight = FontWeight.W200,
         )
     }
 }

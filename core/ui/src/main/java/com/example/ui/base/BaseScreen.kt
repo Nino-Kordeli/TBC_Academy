@@ -1,5 +1,8 @@
 package com.example.ui.base
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -8,8 +11,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun <State, Event, SideEffect> BaseScreen(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     viewModel: BaseViewModel<State, Event, SideEffect>,
+    applySystemBarsPadding: Boolean = true,
     onSideEffect: (SideEffect) -> Unit = {},
     content: @Composable (
         state: State,
@@ -24,6 +28,13 @@ fun <State, Event, SideEffect> BaseScreen(
         }
     }
 
-    content(state, viewModel::onEvent)
-}
+    val resolvedModifier = if (applySystemBarsPadding) {
+        modifier.statusBarsPadding()
+    } else {
+        modifier
+    }
 
+    Box(modifier = resolvedModifier) {
+        content(state, viewModel::onEvent)
+    }
+}

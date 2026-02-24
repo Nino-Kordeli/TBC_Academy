@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -46,7 +47,6 @@ fun WelcomeScreen(
                 WelcomeSideEffect.NavigateToRegister -> onRegisterClick()
             }
         },
-        modifier = Modifier
     ) { _, onEvent ->
         Column(
             modifier = Modifier
@@ -85,7 +85,7 @@ fun WelcomeScreen(
                 text = "Ready to reach your goals?\nStart tracking your progress now!",
                 textAlign = TextAlign.Center,
                 fontSize = 24.sp,
-                modifier = Modifier.padding(22.dp)
+                modifier = Modifier.padding(horizontal = 22.dp)
             )
 
             Spacer(Modifier.weight(1f))

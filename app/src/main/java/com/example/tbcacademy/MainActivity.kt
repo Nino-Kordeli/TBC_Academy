@@ -3,9 +3,9 @@ package com.example.tbcacademy
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -13,8 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.view.WindowCompat
+import androidx.compose.ui.graphics.Color
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.example.api.AuthenticationNavKey
@@ -25,6 +24,7 @@ import com.example.api.QuizNavKey
 import com.example.api.RecipesNavKey
 import com.example.api.SplashNavKey
 import com.example.api.WorkoutNavKey
+import com.example.core.navigation.NavigationState
 import com.example.core.navigation.Navigator
 import com.example.core.navigation.rememberNavigationState
 import com.example.core.navigation.toEntries
@@ -49,12 +49,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
+        enableEdgeToEdge()
         setContent {
             ComposeAppTheme {
                 AppNavigation()
@@ -80,7 +77,6 @@ private fun AppNavigation() {
     )
 
     val navigator = remember(navigationState) { Navigator(navigationState) }
-
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val snackbarController = remember(snackbarHostState, scope) {
@@ -105,40 +101,9 @@ private fun AppNavigation() {
     val entries = navigationState.toEntries(entryProvider)
 
     Scaffold(
-        modifier = Modifier.systemBarsPadding(),
+        containerColor = Color.Transparent,
         contentWindowInsets = WindowInsets(0),
-        bottomBar = {
-
-            val currentKey = navigationState.currentKey
-
-            if (
-                currentKey == DashboardNavKey.HomeNavKey ||
-                currentKey == ProfileNavKey.ProfileNavKey ||
-                currentKey == DiaryNavKey.DiaryNavKey
-            ) {
-
-                val currentDestination = when (currentKey) {
-                    is DashboardNavKey.HomeNavKey -> BottomBarDestination.Home
-                    is DiaryNavKey.DiaryNavKey -> BottomBarDestination.Diary
-                    is ProfileNavKey.ProfileNavKey -> BottomBarDestination.Profile
-                    else -> BottomBarDestination.Home
-                }
-
-                BottomBar(
-                    currentDestination = currentDestination,
-                    navigator = { destination ->
-                        when (destination) {
-                            BottomBarDestination.Home -> navigator.navigate(
-                                DashboardNavKey.HomeNavKey
-                            )
-
-                            BottomBarDestination.Diary -> navigator.navigate(DiaryNavKey.DiaryNavKey)
-                            BottomBarDestination.Profile -> navigator.navigate(ProfileNavKey.ProfileNavKey)
-                        }
-                    }
-                )
-            }
-        },
+        bottomBar = { BottomBarContent(navigationState, navigator) },
         snackbarHost = {
             SnackbarHost(snackbarHostState) { data ->
                 CustomSnackbar(
@@ -157,8 +122,25 @@ private fun AppNavigation() {
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    ComposeAppTheme {}
+private fun BottomBarContent(navigationState: NavigationState, navigator: Navigator) {
+    val currentKey = navigationState.currentKey
+
+    val currentDestination = when (currentKey) {
+        is DashboardNavKey.HomeNavKey -> BottomBarDestination.Home
+        is DiaryNavKey.DiaryNavKey -> BottomBarDestination.Diary
+        is ProfileNavKey.ProfileNavKey -> BottomBarDestination.Profile
+        else -> return
+    }
+
+    BottomBar(
+        currentDestination = currentDestination,
+        navigator = { destination ->
+            when (destination) {
+                BottomBarDestination.Home -> navigator.navigate(DashboardNavKey.HomeNavKey)
+                BottomBarDestination.Diary -> navigator.navigate(DiaryNavKey.DiaryNavKey)
+                BottomBarDestination.Profile -> navigator.navigate(ProfileNavKey.ProfileNavKey)
+            }
+        }
+    )
 }
